@@ -1,4 +1,4 @@
-import { mongoose } from "./Users";
+import { mongoose } from "../server";
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const notesSchema = new mongoose.Schema(

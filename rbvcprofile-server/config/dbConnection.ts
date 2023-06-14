@@ -1,14 +1,25 @@
-const mongoose = require("mongoose");
+import { mongoose } from "../server";
+
 
 const dbConnector = async () => {
   try {
-    await mongoose.connect(
-      "mongodb://rbvcprofile:r4f431@localhost:27017/?authSource=admin"
-    );
-    //process.env.DATABASE_URI
+    await mongoose.connect(process.env.DATABASE_URI);
   } catch (err) {
     console.log(err);
   }
 };
 
 module.exports = dbConnector;
+
+// "mongodb://rbvcprofile:r4f431@localhost:27017/?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000"
+// process.env.DATABASE_URI
+// "mongodb://rbvcprofile:rbvcprofile@localhost:27017/?authSource=admin"
+
+
+// const dbConnector = () =>  {mongoose
+//     .connect(
+//       "mongodb://rafaelbvc:r4f431@localhost:27017/?maxPoolSize=20&w=majority"
+//     )
+//     .then(() => console.log("connected"))
+//     .catch((err) => console.log(err));
+//   }
