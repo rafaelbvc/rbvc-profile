@@ -1,4 +1,4 @@
-import {mongoose} from "../server"
+const mongooseUsers = require("mongoose")
 
 const usersSchema = new mongoose.Schema(
     {
@@ -19,7 +19,7 @@ const usersSchema = new mongoose.Schema(
         required: false,
     messages: [{
         type: String,
-        default: "Notes"
+        default: "Messages"
     }]
     },
     active: {
@@ -32,4 +32,4 @@ const usersSchema = new mongoose.Schema(
 }
 )
 
-exports.module = mongoose.module("Users", usersSchema)
+exports.module = mongooseUsers.module("Users", usersSchema)

@@ -1,7 +1,7 @@
-import { mongoose } from "../server";
+const mongooseMessages = require("mongoose")
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 
-const notesSchema = new mongoose.Schema(
+const messagesSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -26,10 +26,10 @@ const notesSchema = new mongoose.Schema(
   }
 );
 
-notesSchema.plugin(AutoIncrement, {
-  inc_field: "notesSeq",
-  id: "notesId",
+messagesSchema.plugin(AutoIncrement, {
+  inc_field: "messagesSeq",
+  id: "messagessId",
   start_seq: 500,
 });
 
-exports.module = mongoose.module("Notes", notesSchema);
+exports.module = mongooseMessages.module("Messages", messagesSchema);
