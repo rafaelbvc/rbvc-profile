@@ -1,11 +1,10 @@
-import express from "express";
-import { path } from "../server";
+const expressRoot = require("express")
+const pathRoot = require("path")
+const routerRoot = expressRoot.Router();
 
-const router = express.Router();
 
-
-router.get("^/$|/index(.html)?", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "views", "index.html"))
+routerRoot.get("^/$|/index(.html)?", (req, res) => {
+    res.sendFile(pathRoot.join(__dirname, "..", "views", "index.html"))
 })
 
-module.exports = router
+module.exports = routerRoot

@@ -1,24 +1,25 @@
 require("dotenv").config();
-export const express = require("express");
-export const server = express();
-export const path = require("path");
-const errorHandler = require("./middleware/errorHandler");
+const express = require("express");
+const server = express();
+const path = require("path");
+const errorHandlerServer = require("./middleware/errorHandler");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const corsOptions = require("./config/corsOptions");
+const corsOptionsServer = require("./config/corsOptions");
 const dbConnectorMongo = require("./config/dbConnection");
-export const mongoose = require("mongoose");
-const { logger } = require("./middleware/logger");
-const { logEvents } = require("./middleware/logger");
+const mongoose = require("mongoose");
+const  logEventsServer  = require("./middleware/loggerEvents");
+const  loggerServer  = require("./middleware/logger");
 const PORT = process.env.PORT || 5030;
 
 console.log(process.env.NODE_ENV);
 
 dbConnectorMongo();
 
-server.use(logger);
 
-server.use(cors(corsOptions));
+server.use(loggerServer);
+
+server.use(cors(corsOptionsServer));
 
 server.use(express.json());
 
@@ -27,6 +28,7 @@ server.use(cookieParser());
 server.use("/", express.static(path.join(__dirname, "public")));
 
 server.use("/", require("./routes/root"));
+server.use("/users", require("./routes/userRoutes"))
 
 server.all("*", (req, res) => {
   res.status(404);
@@ -39,7 +41,7 @@ server.all("*", (req, res) => {
   }
 });
 
-server.use(errorHandler);
+server.use(errorHandlerServer);
 
 mongoose.connection.once("open", () => {
   console.log("Mongo Container Connected");
@@ -48,7 +50,7 @@ mongoose.connection.once("open", () => {
 
 mongoose.connection.on("error", (err) => {
   console.log(err);
-  logEvents(
+  logEventsServer(
     `${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`,
     "mongoErrLog.log"
   );
