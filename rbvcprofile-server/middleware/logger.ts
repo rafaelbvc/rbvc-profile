@@ -1,11 +1,10 @@
-const loggerPath = require("path")
-const logLoggerEvents = require("./loggerEvents")
+import logEvents from "./loggerEvents";
 
 
 const logger = (req, res, next) => {
-    logLoggerEvents(`${req.method}\t${req.url}\t${req.headers.origin}`, "reqLog.log");
-  console.log(`${req.method} ${req.logLoggerEvents}`);
+    logEvents(`${req.method}\t${req.url}\t${req.headers.origin}`, "reqLog.log");
+  console.log(`${req.method} ${req.logEvents}`);
   next();
 };
 
-module.exports = logger
+export default logger

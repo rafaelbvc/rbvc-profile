@@ -1,19 +1,19 @@
-const pathLogger = require("path")
-const { format } = require("date-fns");
-const { v4: uuid } = require("uuid");
-const fs = require("fs");
-const fsPromises = require("fs").promises;
+import path from "path";
+import { format } from "date-fns";
+import { v4 as uuid } from "uuid";
+import fs from "fs";
+import { promises as fsp } from "fs";
 
 const logEvents = async (message, logFileName) => {
   const dateTime = `${format(new Date(), "yyyyMMdd\tHH:mm:ss")}`;
   const logItem = `${dateTime}\t${uuid()}\t${message}\n`;
 
   try {
-    if (!fs.existsSync(pathLogger.join(__dirname, "..", "logs"))) {
-      await fsPromises.mkdir(pathLogger.join(__dirname, "..", "logs"));
+    if (!fs.existsSync(path.join(__dirname, "..", "logs"))) {
+      await fsp.mkdir(path.join(__dirname, "..", "logs"));
     }
-    await fsPromises.appendFile(
-      pathLogger.join(__dirname, "..", "logs", logFileName),
+    await fsp.appendFile(
+      path.join(__dirname, "..", "logs", logFileName),
       logItem
     );
   } catch (err) {
@@ -23,8 +23,8 @@ const logEvents = async (message, logFileName) => {
 
 // const logger = (req, res, next) => {
 //   logEvents(`${req.method}\t${req.url}\t${req.headers.origin}`, "reqLog.log");
-//   console.log(`${req.method} ${req.pathLogger}`);
+//   console.log(`${req.method} ${req.path}`);
 //   next();
 // };
 
-module.exports =  logEvents;
+export default logEvents;

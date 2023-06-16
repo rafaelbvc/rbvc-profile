@@ -1,10 +1,11 @@
 const usersController = require("../models/Users");
 const messagesController = require("../models/Messages");
-const bcryptUsers = require("bcrypt");
+// const bcryptUsers = require("bcrypt");
+import bcrypt from "bcrypt"
 const assyncHandlerUsers = require("express-async-handler");
 
 // get All Users - Get - Private
-const getUsersController = assyncHandlerUsers(async (req, res) => {
+export const getUsers = assyncHandlerUsers(async (req, res) => {
   const users = await usersController.find().select("-password").lean();
   if (!users?.length) {
     return res.status(400).json({ message: "No users found!" });
@@ -13,7 +14,7 @@ const getUsersController = assyncHandlerUsers(async (req, res) => {
 });
 
 // create User - Post - Private
-const createUserController = assyncHandlerUsers(async (req, res) => {
+export const createUser = assyncHandlerUsers(async (req, res) => {
   const { firstName, lastName, password, email, phone } = req.body;
 
   // has data?
@@ -30,7 +31,7 @@ const createUserController = assyncHandlerUsers(async (req, res) => {
   }
 
   // bcrypt password
-  const hashedPassword = await bcryptUsers.hash(password, 10); //salt rounds
+  const hashedPassword = await bcrypt.hash(password, 10); //salt rounds
   const userObject = {
     firstName,
     lastName,
@@ -51,7 +52,7 @@ const createUserController = assyncHandlerUsers(async (req, res) => {
 });
 
 // upadte a User - Patch - Private
-const updateUserController = assyncHandlerUsers(async (req, res) => {
+export const updateUser = assyncHandlerUsers(async (req, res) => {
   const { id, firstName, lastName, email, phone, password, active } = req.body;
 
   // check data
@@ -88,7 +89,7 @@ const updateUserController = assyncHandlerUsers(async (req, res) => {
 
   if (password) {
     //hash password
-    usersController.password = await bcryptUsers.hash(password, 10); //salt rounds
+    usersController.password = await bcrypt.hash(password, 10); //salt rounds
   }
 
   const updateUser = await usersController.save();
@@ -106,7 +107,7 @@ const updateUserController = assyncHandlerUsers(async (req, res) => {
 });
 
 // delete a User - Delete - Private
-const deleteUserController = assyncHandlerUsers(async (req, res) => {
+export const deleteUser = assyncHandlerUsers(async (req, res) => {
   const { id } = req.body;
 
   if (!id) {
@@ -130,9 +131,9 @@ const deleteUserController = assyncHandlerUsers(async (req, res) => {
   res.json(reply);
 });
 
-module.exports = {
-  getUsersController,
-  createUserController,
-  updateUserController,
-  deleteUserController,
-};
+// module.exports = {
+//   getUsers,
+//   createUser,
+//   updateUser,
+//   deleteUser,
+// };
