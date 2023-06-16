@@ -1,4 +1,4 @@
-const { logEventsError } = require("./logger");
+const  logEventsError  = require("./loggerEvents");
 
 const errorHandler = (err, req, res, next) => {
   logEventsError(
