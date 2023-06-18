@@ -1,15 +1,15 @@
-const mongooseConector = require("mongoose")
+import mongoose from "mongoose";
 
 
 const dbConnector = async () => {
   try {
-    await mongooseConector.connect(process.env.DATABASE_URI);
+    await mongoose.connect(process.env.DATABASE_URI);
   } catch (err) {
     console.log(err);
   }
 };
 
-module.exports = dbConnector;
+export default dbConnector;
 
 // "mongodb://rbvcprofile:r4f431@localhost:27017/?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000"
 // process.env.DATABASE_URI
