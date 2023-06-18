@@ -7,7 +7,7 @@ import cors from "cors";
 import corsOptions from "./config/corsOptions";
 import dbConnector from "./config/dbConnection";
 import mongoose from "mongoose";
-import logEvents from "./middleware/loggerEvents";
+import logEvents from "./middleware/logEvents";
 import logger from "./middleware/logger";
 
 dotenv.config();

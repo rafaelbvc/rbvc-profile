@@ -1,8 +1,11 @@
 // const mongooseMessages = require("mongoose")
 import mongoose from "mongoose";
+
 const AutoIncrement = require("mongoose-sequence")(mongoose);
 
-const messagesSchema = new mongoose.Schema(
+const { Schema } = mongoose;
+
+const messagesSchema = new Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -33,9 +36,12 @@ messagesSchema.plugin(AutoIncrement, {
   start_seq: 500,
 });
 
-module.exports = mongoose.model("Messages", messagesSchema);
+const Messages = mongoose.model("Messages", messagesSchema);
 
-
+module.exports = {
+  Messages,
+  messagesSchema,
+};
 
 // import mongoose, { Schema } from "mongoose";
 // import Inc from "mongoose-sequence"
@@ -43,7 +49,6 @@ module.exports = mongoose.model("Messages", messagesSchema);
 // import { IMessages } from "../interfaces/IMessages";
 
 // // const AutoIncrement = require("mongoose-sequence")(Inc)
-
 
 // // const MessagesSchema = new mongoose.Schema(
 //   const MessagesSchema = new Schema(

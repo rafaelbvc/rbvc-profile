@@ -1,4 +1,4 @@
-import logEvents from "./loggerEvents";
+import logEvents from "./logEvents";
 
 
 const logger = (req, res, next) => {

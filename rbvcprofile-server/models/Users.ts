@@ -1,6 +1,7 @@
-const mongooseUsers = require("mongoose");
+import mongoose from "mongoose";
+const { Schema } = mongoose;
 
-const usersSchema = new mongooseUsers.Schema(
+const usersSchema = new Schema(
   {
     firstName: {
       type: String,
@@ -19,13 +20,14 @@ const usersSchema = new mongooseUsers.Schema(
       required: false,
     },
     password: {
-        type: String,
-        required: false,
-      },
+      type: String,
+      required: false,
+    },
     messages: [
       {
         type: String,
-        default: "Messages",
+        required: false,
+        ref: "Messages"
       },
     ],
     active: {
@@ -38,9 +40,9 @@ const usersSchema = new mongooseUsers.Schema(
   }
 );
 
-module.exports = mongooseUsers.model("Users", usersSchema);
+const Users = mongoose.model("Users", usersSchema);
 
-
+module.exports = Users;
 
 // // const mongooseUsers = require("mongoose");
 // import mongoose, { Schema } from "mongoose";
