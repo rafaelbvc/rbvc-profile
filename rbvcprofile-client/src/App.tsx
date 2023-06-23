@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import Public from "./components/Public";
 import Login from "./components/Login";
 import SignedInLayout from "./components/SignedInLayout";
+import Public from "./components/Public";
 
 function App() {
   return (

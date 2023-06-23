@@ -2,13 +2,14 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,tsx,jsx}"],
   theme: {
-    extend: {
+    extend: {},
+    colors: {
+      darkBlue: "#003366",
+      darkPurple: "#642764",
+      dtBgMainColor: "#F8F8FF",
+      dBlack: "#000",
+      dWhite: "#FFFFFF",
     },
-      colors: {
-        darkBlue: "#003366",
-        darkPurple: "#642764",
-        dtBgMainColor: "#F8F8FF",
-      },
     fontFamily: {
       roboto: ["Roboto", "sans-serif"],
       poppins: ["Poppins", "sans-serif"],

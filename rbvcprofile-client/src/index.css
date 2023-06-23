@@ -27,3 +27,24 @@
     rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+
+.containerE {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: purple;
+  overflow: hidden;
+}
+
+.contentE {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  /* height: auto; */
+  height: 20px;
+  cursor: pointer;
+  background-color: black;
+  z-index: 999;
+}
