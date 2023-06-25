@@ -9,6 +9,7 @@ module.exports = {
       dtBgMainColor: "#F8F8FF",
       dBlack: "#000",
       dWhite: "#FFFFFF",
+      dGrayTitle: "#b6b6b6",
     },
     fontFamily: {
       roboto: ["Roboto", "sans-serif"],

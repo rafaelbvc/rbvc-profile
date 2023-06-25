@@ -29,22 +29,13 @@
 }
 
 .containerE {
-  display: flex;
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-color: purple;
-  overflow: hidden;
+  @apply flex relative w-[100%] h-full bg-dtBgMainColor overflow-hidden box-border;
 }
 
 .contentE {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200px;
-  /* height: auto; */
-  height: 20px;
-  cursor: pointer;
-  background-color: black;
-  z-index: 999;
+  @apply absolute flex-row top-0 left-0 px-4 w-[160px] h-[26px] cursor-pointer  bg-dGrayTitle z-50;
+}
+
+.pMenus {
+  @apply border-b-[0.1rem] mb-1;
 }
