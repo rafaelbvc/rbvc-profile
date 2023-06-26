@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "./navBar/NavBar";
-import useVisible from "../hooks/useVisible";
+
 
 const Layout = () => {
   return (

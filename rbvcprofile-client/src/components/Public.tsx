@@ -1,16 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 import useDraggable from "../hooks/useDraggable";
-
-type TVisible = {
-  profile: string;
-  visitors: string;
-};
+import { useVisibilityContext } from "../contexts/VisibilityContext";
 
 const Public = () => {
-  const [visible, setVisible] = useState<TVisible>({
-    profile: "hidden",
-    visitors: "hidden",
-  });
+  const { pvisibility, vvisibility } = useVisibilityContext();
 
   const draggableRef1 = useRef(null);
   const draggableRef2 = useRef(null);
@@ -20,14 +13,6 @@ const Public = () => {
     handleMouseDown,
     handleMouseMove,
   } = useDraggable();
-
-  const handleProfile = (data: string) => {
-    setVisible({ ...visible, profile: data });
-  };
-
-  const handleVisitors = (data: string) => {
-    setVisible({ ...visible, visitors: data });
-  };
 
   useEffect(() => {
     if (draggableRef1.current) {
@@ -46,15 +31,13 @@ const Public = () => {
       }
     };
   }, []);
-  console.log(visible.profile, "p - V ", visible.visitors);
-
   return (
     <div className="container rounded-lg flex flex-col h-screen">
       <div className="h-10" />
       <div className="containerE rounded-lg box-content font-roboto ">
         <div
           ref={draggableRef1}
-          className={`contentE ${visible.profile}`}
+          className={`contentE ${pvisibility}`}
           onMouseDown={(e) => handleMouseDown(e, 0)}
           onMouseMove={(e) => handleMouseMove(e, 0)}
         >
@@ -68,7 +51,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef2}
-          className={`contentE ${visible.visitors}`}
+          className={`contentE ${vvisibility}`}
           onMouseDown={(e) => handleMouseDown(e, 1)}
           onMouseMove={(e) => handleMouseMove(e, 1)}
         >
@@ -80,22 +63,6 @@ const Public = () => {
           </div>
         </div>
       </div>
-      <button
-        onClick={() => {
-          handleProfile("");
-          handleVisitors("");
-        }}
-      >
-        click
-      </button>
-      <button
-        onClick={() => {
-          handleProfile("hidden");
-          handleVisitors("hidden");
-        }}
-      >
-        hide
-      </button>
     </div>
   );
 };

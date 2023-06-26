@@ -1,12 +1,14 @@
-
-
-
+import { useVisibilityContext } from "../../contexts/VisibilityContext";
 
 const ProfileCollapsedBtn = (props) => {
-  const { widthSVG, fillColor } = props;
+  const { widthSVG, fillColor, onClick } = props;
+
+  const {setPVisibilityState} = useVisibilityContext()
+
+  console.log(onClick,"propopop")
 
   return (
-    <div className="animate-bounce">
+    <button className="animate-bounce" onClick={onClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -26,7 +28,7 @@ const ProfileCollapsedBtn = (props) => {
           </g>
         </g>
       </svg>
-    </div>
+    </button>
   );
 };
 
