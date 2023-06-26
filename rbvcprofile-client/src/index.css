@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .mainLayout {
+  @apply ""
+} */
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(-4%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.rotate-315 {
+  --tw-rotate: -45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.containerE {
+  @apply flex relative w-[100%] h-full bg-dtBgMainColor overflow-hidden box-border;
+}
+
+.contentE {
+  @apply absolute flex-row top-0 left-0 px-4 w-[160px] h-[26px] cursor-pointer  bg-dGrayTitle z-50;
+}
+
+.pMenus {
+  @apply border-b-[0.1rem] mb-1;
+}
