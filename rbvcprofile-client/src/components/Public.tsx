@@ -1,12 +1,18 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import useDraggable from "../hooks/useDraggable";
 import { useVisibilityContext } from "../contexts/VisibilityContext";
+import VisitorMenu from "./menus/VisitorMenu";
+import ProfileMenu from "./menus/ProfileMenu";
+import AboutMeScreen from "./screens/AboutMeScreen";
 
 const Public = () => {
   const { pvisibility, vvisibility } = useVisibilityContext();
 
   const draggableRef1 = useRef(null);
   const draggableRef2 = useRef(null);
+
+  const draggableRef3 = useRef(null);
+
   const {
     registerElement,
     unregisterElement,
@@ -22,6 +28,10 @@ const Public = () => {
       registerElement(draggableRef2.current);
     }
 
+    if (draggableRef3.current) {
+      registerElement(draggableRef3.current);
+    }
+
     return () => {
       if (draggableRef1.current) {
         unregisterElement(draggableRef1.current);
@@ -29,38 +39,41 @@ const Public = () => {
       if (draggableRef2.current) {
         unregisterElement(draggableRef2.current);
       }
+
+      if (draggableRef3.current) {
+        unregisterElement(draggableRef3.current);
+      }
     };
-  }, []);
+  }, [vvisibility, pvisibility]);
   return (
-    <div className="container rounded-lg flex flex-col h-screen">
-      <div className="h-10" />
-      <div className="containerE rounded-lg box-content font-roboto ">
+    <div className="container flex flex-col h-screen">
+      <div className="h-[5rem]" />
+      <div className="containerE box-content h-full">
         <div
           ref={draggableRef1}
-          className={`contentE ${pvisibility}`}
+          className={`contentE ${pvisibility} top-0`}
           onMouseDown={(e) => handleMouseDown(e, 0)}
           onMouseMove={(e) => handleMouseMove(e, 0)}
         >
-          <div className="grid-cols-5">
-            <p className="text-dWhite mb-1 ">Profile</p>
-            <p className="pMenus">About Me</p>
-            <p className="pMenus">Portifolio</p>
-            <p className="pMenus">Contact</p>
-            <p className="pMenus">Hire Me</p>
-          </div>
+          <ProfileMenu />
         </div>
         <div
           ref={draggableRef2}
-          className={`contentE ${vvisibility}`}
+          className={`contentE ${vvisibility} ${
+            pvisibility === " hidden" ? "top-0" : "top-[40px] bottom-0"
+          }`}
           onMouseDown={(e) => handleMouseDown(e, 1)}
           onMouseMove={(e) => handleMouseMove(e, 1)}
         >
-          <div className="grid-cols-4 ">
-            <p className="text-dWhite mb-1 ">Get Started</p>
-            <p className="pMenus">Sign In</p>
-            <p className="pMenus">Sign Up</p>
-            <p className="pMenus">Comments</p>
-          </div>
+          <VisitorMenu />
+        </div>
+        <div
+          ref={draggableRef3}
+          className="absolute top-80 z-50"
+          onMouseDown={(e) => handleMouseDown(e, 2)}
+          onMouseMove={(e) => handleMouseMove(e, 2)}
+        >
+          <AboutMeScreen />
         </div>
       </div>
     </div>

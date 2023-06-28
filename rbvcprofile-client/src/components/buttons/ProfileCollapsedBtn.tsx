@@ -1,11 +1,5 @@
-import { useVisibilityContext } from "../../contexts/VisibilityContext";
-
 const ProfileCollapsedBtn = (props) => {
   const { widthSVG, fillColor, onClick } = props;
-
-  const {setPVisibilityState} = useVisibilityContext()
-
-  console.log(onClick,"propopop")
 
   return (
     <button className="animate-bounce" onClick={onClick}>

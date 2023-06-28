@@ -1,31 +1,12 @@
-// import { useVisibilityContext } from "../../contexts/VisibilityContext";
-
-// const GetStartedCollapsedBtn = ({prop}) => {
-//   const { setVVisibilityState } = useVisibilityContext();
-
-//   return (
-//     <button
-//       onClick={() => setVVisibilityState(prop)}
-//       className="flex self-center font-roboto text-lg sm:text-xl text-bold "
-//     >
-//       Get Started
-//     </button>
-//   );
-// };
-
-// export default GetStartedCollapsedBtn;
-
-import { useVisibilityContext } from "../../contexts/VisibilityContext";
-
 const GetStartedCollapsedBtn = ({onClick}) => {
-  const { setVVisibilityState } = useVisibilityContext();
 
   return (
     <button
       onClick={onClick}
-      className="flex self-center font-roboto text-lg sm:text-xl text-bold "
+      className="flex self-center flex-nowrap"
     >
-      Get Started
+     <p className="whitespace-nowrap font-popins text-xl font-semibold">Get</p> 
+     <p className="whitespace-nowrap font-popins text-xl font-semibold text-dGolden ml-1">Started</p>
     </button>
   );
 };
