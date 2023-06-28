@@ -4,12 +4,12 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      darkBlue: "#003366",
-      darkPurple: "#642764",
-      dtBgMainColor: "#F8F8FF",
+      dtBgMainColor: "#FCFCFF",
       dBlack: "#000",
       dWhite: "#FFFFFF",
       dGrayTitle: "#b6b6b6",
+      dBgButtonsHover:"#D9E2E5",
+      dGolden: "#CAAA6C"
     },
     fontFamily: {
       roboto: ["Roboto", "sans-serif"],
