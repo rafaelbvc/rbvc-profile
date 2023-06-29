@@ -5,9 +5,9 @@ const DefaultBtn = (props) => {
 
   const [isVisible, setVisible] = useState(false);
 
-  useEffect(() => {
-    setVisible(hiddenBtn);
-  }, [hiddenBtn, onClick]);
+  // useEffect(() => {
+  //   setVisible(hiddenBtn);
+  // }, [hiddenBtn, onClick]);
 
   return (
     <>
