@@ -1,11 +1,17 @@
+import { useEffect } from "react";
+import { useVisibilityContext } from "../../contexts/VisibilityContext";
+import DragCloseMenu from "../menus/DragCloseMenu";
+
 const AboutMeScreen = () => {
+  const { setAboutVisibilityState } = useVisibilityContext();
+
   return (
     <>
-      <p className="min-w-[21rem] max-w-[39.5rem] text-sm w-full text-end cursor-pointer">
-        dragme
-      </p>
-      <div className="min-w-[21rem] max-w-[39.5rem] bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] w-full" />
-      <div className="container flex flex-col min-w-[21rem] max-w-[39.5rem]  mx-1 p-2">
+      <DragCloseMenu
+        textHeader={"about me"}
+        onClick={() => setAboutVisibilityState(" hidden")}
+      />
+      <div className="container flex flex-col min-w-[21rem] max-w-[39.5rem] p-2">
         <div className="text-justify">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae,
           tempore sequi quis aspernatur labore aliquid. Recusandae amet sapiente

@@ -1,17 +1,32 @@
+import { useRef } from "react";
+import { useVisibilityContext } from "../../contexts/VisibilityContext";
 import DefaultBtn from "../buttons/DefaultBtn";
+import DragCloseMenu from "./DragCloseMenu";
 
 const VisitorMenu = () => {
+  const { setVVisibilityState } = useVisibilityContext();
+
+  const ref = useRef(null)
+
+  const handleHome = () => {
+    ref.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <>
-      <p className="min-w-[21rem] max-w-[39.5rem] text-sm w-full text-end cursor-pointer">
-        dragme
-      </p>
-      <div className="min-w-[21rem] max-w-[39.5rem] bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] w-full" />
+    <span ref={ref}/>
+    <div className="flex flex-col w-fit">
+      <DragCloseMenu
+        textHeader={"visitors"}
+        onClick={() => setVVisibilityState(" hidden")}
+      />
       <div className="conainer flex min-w-[21rem] max-w-[39.5rem] justify-around">
+        <DefaultBtn textBtn="Home" styleBtn=" self-center " onClick={handleHome}/>
         <DefaultBtn textBtn="Sign In" styleBtn=" self-center " />
         <DefaultBtn textBtn="Sign Up" styleBtn=" self-center" />
         <DefaultBtn textBtn="Comments" styleBtn="self-center " />
       </div>
+    </div>
     </>
   );
 };

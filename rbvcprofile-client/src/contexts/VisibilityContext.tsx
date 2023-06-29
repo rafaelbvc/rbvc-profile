@@ -4,8 +4,16 @@ import { createContext } from "react";
 interface IVisibilityContext {
   vvisibility: string;
   pvisibility: string;
+  aboutVisibility: string;
+  contactVisibility: string;
+  portifolioVisibility: string;
+  hireVisibility: string;
   setVVisibilityState: (vvisibility: string) => void;
   setPVisibilityState: (pvisibility: string) => void;
+  setAboutVisibilityState: (aboutVisibility: string) => void;
+  setContactVisibilityState: (contactVisibility: string) => void;
+  setPortifolioVisibilityState: (portifolioVisibility: string) => void;
+  setHireVisibilityState: (hireVisibility: string) => void;
 }
 
 interface IVisibilityProvider {
@@ -15,8 +23,14 @@ interface IVisibilityProvider {
 export const VisibilityContext = createContext({} as IVisibilityContext);
 
 export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
-  const [vvisibility, setVVisibility] = useState<string>("hidden");
-  const [pvisibility, setPVisibility] = useState<string>("hidden");
+  const [vvisibility, setVVisibility] = useState<string>(" hidden");
+  const [pvisibility, setPVisibility] = useState<string>(" hidden");
+  const [aboutVisibility, setAboutVisibility] = useState<string>(" hidden");
+  const [contactVisibility, setContactVisibility] = useState<string>(" hidden");
+  const [portifolioVisibility, setPortifolioVisibility] = useState<string>(" hidden");
+  const [hireVisibility, setHireVisibility] = useState<string>(" hidden")
+    
+
 
   function setVVisibilityState(vvisibility: string) {
     setVVisibility(vvisibility);
@@ -26,13 +40,37 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
     setPVisibility(pvisibility);
   }
 
+  function setAboutVisibilityState(aboutVisibility: string) {
+    setAboutVisibility(aboutVisibility);
+  }
+
+  function setContactVisibilityState(contactVisibility: string) {
+    setContactVisibility(contactVisibility);
+  }
+
+  function setPortifolioVisibilityState(portifolioVisibility: string) {
+    setPortifolioVisibility(portifolioVisibility);
+  }
+
+  function setHireVisibilityState(hireVisibility: string) {
+    setHireVisibility(hireVisibility);
+  }
+
   return (
     <VisibilityContext.Provider
       value={{
         vvisibility,
         pvisibility,
+        aboutVisibility,
+        contactVisibility,
+        portifolioVisibility,
+        hireVisibility,
         setVVisibilityState,
         setPVisibilityState,
+        setAboutVisibilityState,
+        setContactVisibilityState,
+        setPortifolioVisibilityState,
+        setHireVisibilityState,
       }}
     >
       {children}
