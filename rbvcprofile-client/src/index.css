@@ -33,7 +33,7 @@
 }
 
 .contentE {
-  @apply absolute justify-around  left-0  flex-row   w-[338px] h-[32px] cursor-pointer z-50;
+  @apply absolute justify-around  left-0  flex-row   w-[338px] h-[32px] cursor-pointer z-30;
 }
 
 .pMenus {

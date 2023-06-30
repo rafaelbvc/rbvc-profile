@@ -8,6 +8,7 @@ module.exports = {
       dBlack: "#000",
       dWhite: "#FFFFFF",
       dGrayTitle: "#b6b6b6",
+      dGrayBGScreens: "RGB(220,220,220, 0.05)",
       dBgButtonsHover:"#D9E2E5",
       dGolden: "#CAAA6C"
     },

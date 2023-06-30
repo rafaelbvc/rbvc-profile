@@ -9,7 +9,7 @@ const NavBar = () => {
     useVisibilityContext();
 
   return (
-    <nav className="container fixed  flex justify-between h-[5rem] w-full bg-dtBgMainColor px-2  z-50 ">
+    <nav className="container fixed  flex justify-between h-[5rem] w-full bg-dtBgMainColor px-2 z-50 ">
       {/*personal secction */}
       <RBVCLogoBtn
         onClick={() => setPVisibilityState(handleVisibility(pvisibility))}

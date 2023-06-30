@@ -97,7 +97,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef3}
-          className="absolute z-50"
+          className="absolute z-20 top-[6rem]"
           onMouseDown={(e) => handleMouseDown(e, 2)}
           onMouseMove={(e) => handleMouseMove(e, 2)}
         >
@@ -107,7 +107,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef4}
-          className="absolute   z-50 "
+          className="absolute   z-20  top-[20rem]"
           onMouseDown={(e) => handleMouseDown(e, 3)}
           onMouseMove={(e) => handleMouseMove(e, 3)}
         >
@@ -117,7 +117,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef5}
-          className="absolute   z-50 "
+          className="absolute   z-20  top-[30rem]"
           onMouseDown={(e) => handleMouseDown(e, 4)}
           onMouseMove={(e) => handleMouseMove(e, 4)}
         >
@@ -127,7 +127,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef6}
-          className="absolute   z-50 "
+          className="absolute   z-20   top-[40rem]"
           onMouseDown={(e) => handleMouseDown(e, 5)}
           onMouseMove={(e) => handleMouseMove(e, 5)}
         >
