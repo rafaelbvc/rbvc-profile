@@ -4,7 +4,7 @@ const DragCloseMenu = (props) => {
   return (
     <>
       <div className="container flex min-w-[21rem] max-w-[39.5rem] justify-between">
-        <p className="pl-2 text-sm  cursor-pointer">dragme</p>
+        <p className="pl-2 text-sm  cursor-pointer text-dGolden">dragme</p>
         <p className="text-sm whitespace-nowrap animate-bounce">{textHeader}</p>
         <button onClick={onClick} className="pr-2 text-sm ">
           close

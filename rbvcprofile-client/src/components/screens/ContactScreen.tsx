@@ -15,13 +15,32 @@ const ContactScreen = () => {
         textHeader={"contact"}
         onClick={() => setContactVisibilityState(" hidden")}
       />
-      <div className="container flex flex-row min-w-[21rem] max-w-[39.5rem] p-2">
-        <YoutubeLogo widthSVG="60px" />
-        <DiscordLogo widthSVG="60px" />
-        <WhatsAppLogo widthSVG="60px" />
-        <LinkedInLogo widthSVG="60px" />
-        <EmailLogo widthSVG="60px" />
+      <div className="container flex flex-row justify-between min-w-[21rem] max-w-[39.5rem] p-1 gap-2">
+        <div>Rusa blabla</div>
+        <div>
+          <div className="flex items-center gap-2 my-2">
+            <p className="font-poppins font-mid">Youtube, Soon... </p>
+            <YoutubeLogo width="3rem" />
+          </div>
+          <div className="flex items-center gap-2 my-2 justify-between">
+            <p className="font-poppins">Youtube</p>
+            <DiscordLogo width="3rem" />
+          </div>
+          <div className="flex items-center gap-2 my-2 justify-between">
+            <p className="font-poppins">Youtube</p>
+            <WhatsAppLogo width="3rem" />
+          </div>
+          <div className="flex items-center gap-2 my-2 justify-between">
+            <p className="font-poppins">Youtube</p>
+            <LinkedInLogo width="3rem" />
+          </div>
+          <div className="flex items-center gap-2 my-2 justify-between">
+            <p className="font-poppins">Youtube</p>
+            <EmailLogo width="3rem" />
+          </div>
+        </div>
       </div>
+      <div className="min-w-[21rem] max-w-[39.5rem] bg-gradient-to-r from-dGolden via-dGolden to-dBlack h-[1px]" />
     </>
   );
 };
