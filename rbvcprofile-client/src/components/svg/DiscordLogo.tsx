@@ -1,8 +1,7 @@
-const DiscordLogo = ({widthSVG}, {heightSVG}) => {
+const DiscordLogo = ({width}) => {
   return (
     <svg
-      width={widthSVG}
-      height={heightSVG}
+      width={width}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 294334 333333"
       shapeRendering="geometricPrecision"

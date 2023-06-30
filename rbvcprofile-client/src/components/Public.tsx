@@ -74,7 +74,7 @@ const Public = () => {
     };
   }, [vvisibility, pvisibility, aboutVisibility, contactVisibility, hireVisibility]);
   return (
-    <div className="container flex flex-col h-full min-h-screen ">
+    <div className="container flex flex-col h-fill min-h-screen ">
       <div className="h-[5rem]" />
       <div className="containerE h-full min-h-screen ">
         <div
