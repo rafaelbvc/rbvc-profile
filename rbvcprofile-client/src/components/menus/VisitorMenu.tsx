@@ -6,28 +6,31 @@ import DragCloseMenu from "./DragCloseMenu";
 const VisitorMenu = () => {
   const { setVVisibilityState } = useVisibilityContext();
 
-  const ref = useRef(null)
+  const ref = useRef(null);
 
   const handleHome = () => {
-    ref.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <>
-    <span ref={ref}/>
-    <div className="flex flex-col w-fit">
+    <div className=" flex flex-col">
+      <span ref={ref} className="top-[5rem]" />
       <DragCloseMenu
         textHeader={"visitors"}
         onClick={() => setVVisibilityState(" hidden")}
+        className={` lg:ml-[1rem] xl:ml-[1.2rem] 2xl:ml-[1.54rem]`}
       />
-      <div className="conainer flex min-w-[21rem] max-w-[39.5rem] justify-around">
-        <DefaultBtn textBtn="Home" styleBtn=" self-center " onClick={handleHome}/>
-        <DefaultBtn textBtn="Sign In" styleBtn=" self-center " />
+      <div className="grid grid-cols-4 bg-dGrayBGScreens  rounded">
+        <DefaultBtn
+          textBtn="Home"
+          styleBtn=" self-center "
+          onClick={handleHome}
+        />
+        <DefaultBtn textBtn="Sign In" styleBtn=" self-center" />
         <DefaultBtn textBtn="Sign Up" styleBtn=" self-center" />
         <DefaultBtn textBtn="Comments" styleBtn="self-center " />
       </div>
     </div>
-    </>
   );
 };
 

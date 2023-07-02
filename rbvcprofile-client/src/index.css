@@ -9,7 +9,7 @@
 @keyframes bounce {
   0%,
   100% {
-    transform: translateY(-4%);
+    transform: translateY(-6%);
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
   50% {
@@ -28,8 +28,13 @@
     scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.text-xxs {
+  font-size: 0.55rem;
+  line-height: 0.75rem;
+}
+
 .containerE {
-  @apply flex relative w-[100%] h-full bg-dtBgMainColor overflow-hidden box-border;
+  @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
 }
 
 .contentE {

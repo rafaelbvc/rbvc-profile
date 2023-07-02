@@ -5,7 +5,7 @@ import VisitorMenu from "./menus/VisitorMenu";
 import ProfileMenu from "./menus/ProfileMenu";
 import AboutMeScreen from "./screens/AboutMeScreen";
 import ContactScreen from "./screens/ContactScreen";
-import ProtifolioScreen from "./screens/ProtifolioScreen";
+import PortifolioScreen from "./screens/PortifolioScreen";
 import HireScreen from "./screens/HireScreen";
 
 const Public = () => {
@@ -72,14 +72,20 @@ const Public = () => {
         unregisterElement(draggableRef6.current);
       }
     };
-  }, [vvisibility, pvisibility, aboutVisibility, contactVisibility, hireVisibility]);
+  }, [
+    vvisibility,
+    pvisibility,
+    aboutVisibility,
+    contactVisibility,
+    hireVisibility,
+  ]);
   return (
-    <div className="container flex flex-col h-fill min-h-screen ">
+    <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
       <div className="h-[5rem]" />
-      <div className="containerE h-full min-h-screen ">
+      <div className="containerE box-content">
         <div
           ref={draggableRef1}
-          className={`contentE ${pvisibility} top-0 `}
+          className={`contentE ${pvisibility} top-[5rem] `}
           onMouseDown={(e) => handleMouseDown(e, 0)}
           onMouseMove={(e) => handleMouseMove(e, 0)}
         >
@@ -88,7 +94,7 @@ const Public = () => {
         <div
           ref={draggableRef2}
           className={`contentE ${vvisibility} ${
-            pvisibility === " hidden" ? "top-0" : "top-[48px] bottom-0"
+            pvisibility === " hidden" ? "top-[7rem]" : "top-[9rem] bottom-0"
           }`}
           onMouseDown={(e) => handleMouseDown(e, 1)}
           onMouseMove={(e) => handleMouseMove(e, 1)}
@@ -97,7 +103,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef3}
-          className="absolute z-20 top-[6rem]"
+          className="absolute z-20 top-[11rem]"
           onMouseDown={(e) => handleMouseDown(e, 2)}
           onMouseMove={(e) => handleMouseMove(e, 2)}
         >
@@ -107,7 +113,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef4}
-          className="absolute   z-20  top-[20rem]"
+          className="absolute   z-20  top-[11rem]"
           onMouseDown={(e) => handleMouseDown(e, 3)}
           onMouseMove={(e) => handleMouseMove(e, 3)}
         >
@@ -117,17 +123,17 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef5}
-          className="absolute   z-20  top-[30rem]"
+          className="absolute   z-20  top-[11rem]"
           onMouseDown={(e) => handleMouseDown(e, 4)}
           onMouseMove={(e) => handleMouseMove(e, 4)}
         >
           <div className={`${portifolioVisibility}`}>
-            <ProtifolioScreen />
+            <PortifolioScreen />
           </div>
         </div>
         <div
           ref={draggableRef6}
-          className="absolute   z-20   top-[40rem]"
+          className="absolute   z-20   top-[11rem]"
           onMouseDown={(e) => handleMouseDown(e, 5)}
           onMouseMove={(e) => handleMouseMove(e, 5)}
         >

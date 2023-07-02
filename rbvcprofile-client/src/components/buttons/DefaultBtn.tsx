@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import  {  useEffect, useState } from "react";
 
 const DefaultBtn = (props) => {
   const { urlBtn, textBtn, onClick, hiddenBtn, styleBtn } = props;
 
   const [isVisible, setVisible] = useState(false);
 
-  // useEffect(() => {
-  //   setVisible(hiddenBtn);
-  // }, [hiddenBtn, onClick]);
+  useEffect(() => {
+    setVisible(hiddenBtn);
+  }, [hiddenBtn, onClick]);
 
   return (
     <>
       <div
-        className={` md:w-[5rem] lg:w-[5.64rem] p-1 cursor-pointer   lg:mx-4 xl:mx-5  2xl:mx-6 ${styleBtn}`}
+        className={` md:w-[5rem] lg:w-[5.64rem] p-1 cursor-pointer lg:mx-4 xl:mx-5  2xl:mx-6 ${styleBtn}`}
         onClick={onClick}
         hidden={isVisible}
       >
