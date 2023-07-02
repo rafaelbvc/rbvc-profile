@@ -2,36 +2,38 @@ import { useRef } from "react";
 import { useVisibilityContext } from "../../contexts/VisibilityContext";
 import DefaultBtn from "../buttons/DefaultBtn";
 import DragCloseMenu from "./DragCloseMenu";
+import { handleVisibility } from "../../utils/visibilityHandler";
 
 const VisitorMenu = () => {
-  const { setVVisibilityState } = useVisibilityContext();
-
-  const ref = useRef(null);
-
-  const handleHome = () => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const {
+    setVVisibilityState,
+    settingsVisibility,
+    setSettingsVisibilityState,
+  } = useVisibilityContext();
 
   return (
-    <div className=" flex flex-col">
-      <span ref={ref} className="top-[5rem]" />
+    <div className="grid grid-rows-1">
       <DragCloseMenu
         textHeader={"visitors"}
         onClick={() => setVVisibilityState(" hidden")}
-        className={` lg:ml-[1rem] xl:ml-[1.2rem] 2xl:ml-[1.54rem]`}
+        className={`flex flex-col w-full lg:ml-[1rem] xl:ml-[1.2rem] 2xl:ml-[1.54rem] `}
       />
-      <div className="grid grid-cols-4 bg-dGrayBGScreens  rounded">
+      <div className="flex flex-row justify-between bg-dGrayBGScreens 2xl:pl-[1.5rem]  rounded gap-1 ">
         <DefaultBtn
-          textBtn="Home"
-          styleBtn=" self-center "
-          onClick={handleHome}
+          textBtn="Settings"
+          styleBtn=" self-center"
+          onClick={() =>
+            setSettingsVisibilityState(handleVisibility(settingsVisibility))
+          }
         />
         <DefaultBtn textBtn="Sign In" styleBtn=" self-center" />
         <DefaultBtn textBtn="Sign Up" styleBtn=" self-center" />
-        <DefaultBtn textBtn="Comments" styleBtn="self-center " />
+        <DefaultBtn textBtn="Comments" styleBtn=" self-center " />
       </div>
     </div>
   );
 };
 
 export default VisitorMenu;
+
+// flex flex-wrap

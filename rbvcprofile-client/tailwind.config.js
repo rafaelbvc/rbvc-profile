@@ -9,8 +9,9 @@ module.exports = {
       dWhite: "#FFFFFF",
       dGrayTitle: "#b6b6b6",
       dGrayBGScreens: "RGB(220,220,220, 0.05)",
-      dBgButtonsHover:"#D9E2E5",
-      dGolden: "#CAAA6C"
+      dBgButtonsHover: "#D9E2E5",
+      dGolden: "#CAAA6C",
+      dGoldenAlpha: "rgb(202,170,108, 0.4)"
     },
     fontFamily: {
       roboto: ["Roboto", "sans-serif"],
@@ -19,5 +20,3 @@ module.exports = {
   },
   plugins: [],
 };
-
-
