@@ -65,10 +65,12 @@ export const updateUser = assyncHandler(async (req, res) => {
   if (!id || !firstName || !lastName || !email || typeof active !== "boolean") {
     return res
       .status(400)
-      .json({ message: "All required fileds need to be filled" });
+      .json({ message: "All required fields need to be filled" });
   }
 
+
   const userUpdate = await Users.findById(id).exec();
+  console.log(userUpdate, "essabudega")
 
   if (!userUpdate) {
     return res.status(400).json({ massage: "User not found" }); //to:do error handling!
@@ -80,7 +82,7 @@ export const updateUser = assyncHandler(async (req, res) => {
   //   .exec();
   const duplicatedUpdate = await Users.findOne({ email }).lean().exec();
   // allow update for same id //.toString()
-  if (duplicatedUpdate && duplicatedUpdate?._id.toString() !== id) {
+  if (duplicatedUpdate && duplicatedUpdate?._id.toString() === id.toString()) {
     return res.status(409).json({ message: "Duplicated email" });
   }
 

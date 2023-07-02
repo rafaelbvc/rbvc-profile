@@ -7,6 +7,7 @@ import AboutMeScreen from "./screens/AboutMeScreen";
 import ContactScreen from "./screens/ContactScreen";
 import PortifolioScreen from "./screens/PortifolioScreen";
 import HireScreen from "./screens/HireScreen";
+import SettingsScreen from "./screens/SettingsScreen";
 
 const Public = () => {
   const {
@@ -16,6 +17,7 @@ const Public = () => {
     contactVisibility,
     portifolioVisibility,
     hireVisibility,
+    settingsVisibility,
   } = useVisibilityContext();
 
   const draggableRef1 = useRef(null);
@@ -24,6 +26,7 @@ const Public = () => {
   const draggableRef4 = useRef(null);
   const draggableRef5 = useRef(null);
   const draggableRef6 = useRef(null);
+  const draggableRef7 = useRef(null);
 
   const {
     registerElement,
@@ -51,6 +54,9 @@ const Public = () => {
     if (draggableRef6.current) {
       registerElement(draggableRef6.current);
     }
+    if (draggableRef7.current) {
+      registerElement(draggableRef7.current);
+    }
 
     return () => {
       if (draggableRef1.current) {
@@ -71,6 +77,9 @@ const Public = () => {
       if (draggableRef6.current) {
         unregisterElement(draggableRef6.current);
       }
+      if (draggableRef7.current) {
+        unregisterElement(draggableRef7.current);
+      }
     };
   }, [
     vvisibility,
@@ -78,6 +87,7 @@ const Public = () => {
     aboutVisibility,
     contactVisibility,
     hireVisibility,
+    settingsVisibility,
   ]);
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
@@ -139,6 +149,16 @@ const Public = () => {
         >
           <div className={`${hireVisibility}`}>
             <HireScreen />
+          </div>
+        </div>
+        <div
+          ref={draggableRef7}
+          className="absolute z-20 top-[16rem]"
+          onMouseDown={(e) => handleMouseDown(e, 6)}
+          onMouseMove={(e) => handleMouseMove(e, 6)}
+        >
+          <div className={`${settingsVisibility}`}>
+            <SettingsScreen />
           </div>
         </div>
       </div>

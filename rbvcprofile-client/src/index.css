@@ -33,6 +33,10 @@
   line-height: 0.75rem;
 }
 
+.border-1 {
+    border-width: 1px;
+}
+
 .containerE {
   @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
 }
