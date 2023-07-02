@@ -1,17 +1,17 @@
 const DragCloseMenu = (props) => {
-  const { onClick, textHeader } = props;
+  const { onClick, textHeader, className } = props;
 
   return (
-    <>
-      <div className="container flex min-w-[21rem] max-w-[39.5rem] justify-between">
-        <p className="pl-2 text-sm  cursor-pointer text-dGolden">dragme</p>
-        <p className="text-sm whitespace-nowrap animate-bounce">{textHeader}</p>
-        <button onClick={onClick} className="pr-2 text-sm ">
-          close
-        </button>
+    <div className={className}>
+      <div className="container flex min-w-[21rem] max-w-[39.5rem] justify-between  cursor-pointer">
+        <p className="pl-2  text-dGolden text-xxs font-bold">DRAGME</p>
+        <p className="text-xxs font-bold whitespace-nowrap animate-bounce uppercase">{textHeader}</p>
+        <p onClick={onClick} className="pr-2 text-xxs font-bold">
+          CLOSE
+        </p>
       </div>
-      <div className="min-w-[21rem] max-w-[39.5rem] bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] w-full mt-[-0.15rem]" />
-    </>
+      <div className="min-w-[21rem] max-w-[39.5rem] bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] mt-[-0.15rem]" />
+    </div>
   );
 };
 

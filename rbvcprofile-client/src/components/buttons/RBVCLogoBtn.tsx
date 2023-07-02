@@ -12,7 +12,7 @@ const RBVCLogoBtn = ({ onClick }) => {
   }, [wwidth]);
 
   return (
-    <button className="flex " onClick={onClick} disabled={disableC}>
+    <button className="flex pr-1" onClick={onClick} disabled={disableC}>
       <RbvcLogo />
       <div className={`self-center cursor-pointer flex-nowrap`}>
         <p className="font-popins font-semibold mb-[-0.35rem] tracking-wider whitespace-nowrap">

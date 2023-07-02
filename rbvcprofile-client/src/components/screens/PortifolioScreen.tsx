@@ -2,7 +2,7 @@ import { useVisibilityContext } from "../../contexts/VisibilityContext";
 import DragCloseMenu from "../menus/DragCloseMenu";
 import UnderBConstructionSVG from "../svg/UnderBConstructionSVG";
 
-const ProtifolioScreen = () => {
+const PortifolioScreen = () => {
   const { setPortifolioVisibilityState } = useVisibilityContext();
 
   return (
@@ -11,7 +11,7 @@ const ProtifolioScreen = () => {
         textHeader="portifolio"
         onClick={() => setPortifolioVisibilityState(" hidden")}
       />
-      <div className="container flex flex-col  min-w-[21rem] max-w-[39.5rem] p-2">
+      <div className="container flex flex-col bg-dGrayBGScreens rounded items-center  min-w-[21rem] max-w-[39.5rem] p-2">
         <p className="text-right font-poppins text-dGrayTitle mb-2">
           Sorry, this area is under construction... Soon...
         </p>
@@ -21,4 +21,4 @@ const ProtifolioScreen = () => {
   );
 };
 
-export default ProtifolioScreen;
+export default PortifolioScreen;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useVisibilityContext } from "../../contexts/VisibilityContext";
 import DragCloseMenu from "../menus/DragCloseMenu";
 import PhotoMyProfileA from "./aboutMePhotos/PhotoMyProfileA.jpg";
@@ -30,7 +30,7 @@ const AboutMeScreen = () => {
         textHeader={"about"}
         onClick={() => setAboutVisibilityState(" hidden")}
       />
-      <div className="container flex bg-dGrayBGScreens  flex-col min-w-[21rem] max-w-[39.5rem] mb-1  p-1">
+      <div className="container flex bg-dGrayBGScreens  rounded  flex-col min-w-[21rem] max-w-[39.5rem] mb-1  p-1">
         <div className="flex flex-col items-center  md:flex-row">
           <div className={`${bigIMG ? "max-w-[21rem]" : "w-[12.5rem]"}`}>
             <img
@@ -141,7 +141,7 @@ const AboutMeScreen = () => {
           </p>
         </div>
       </div>
-      <div className="min-w-[21rem] max-w-[39.5rem] bg-gradient-to-r from-dGolden via-dGolden to-dBlack h-[1px]" />
+      <div className="min-w-[21rem] mb-2 max-w-[39.5rem] bg-gradient-to-r from-dGolden via-dGolden to-dBlack h-[1px]" />
     </>
   );
 };
