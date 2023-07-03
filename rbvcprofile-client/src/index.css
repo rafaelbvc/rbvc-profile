@@ -37,6 +37,10 @@
     border-width: 1px;
 }
 
+textarea {
+  resize: none;
+}
+
 .containerE {
   @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
 }

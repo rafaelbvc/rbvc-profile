@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useVisibilityContext } from "../../contexts/VisibilityContext";
+import { useEffect, useState } from "react";
+import { useVisibilityContext } from "../../contexts/useVisibilityContext";
 import DragCloseMenu from "../menus/DragCloseMenu";
 import StatusIcon from "../svg/statusIcon";
 import DefaultBtn from "../buttons/DefaultBtn";
@@ -12,12 +12,31 @@ const SettingsScreen = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = async (data) => {
+    console.log(data);
+  };
+
+  //fields
+  // const watchData = watch();
+  // console.log(watchData);
 
   const { setSettingsVisibilityState } = useVisibilityContext();
 
   const [statusColor, setStatusColor] = useState("#00FF00");
   const [readInput, setReadInput] = useState(false);
+  const [dateNow, setDateNow] = useState("");
+
+  const handleTime = () => {
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    const isosDate = today.toISOString().slice(0, 10);
+    setDateNow(isosDate);
+  };
+
+  useEffect(() => {
+    handleTime();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -26,10 +45,10 @@ const SettingsScreen = () => {
         onClick={() => setSettingsVisibilityState(" hidden")}
       />
 
-      <div className="flex flex-row justify-around  mt-1 px-1">
-        <p className="font-poppins font-normal text-sm self-center">{`STATUS: ${""}`}</p>
+      <div className="flex flex-row justify-between   mt-1 px-1">
+        <p className="font-poppins text-sm self-center">{`STATUS: ${""}`}</p>
         <StatusIcon width="1.5rem" fillColor={statusColor} />
-        <p className="text-dGolden">28/Junho/2049</p>
+        <p className="text-dGolden text-end">{dateNow}</p>
       </div>
       <div className="flex flex-wrap md:flex-nowrap">
         <div className="flex flex-col">
@@ -45,9 +64,12 @@ const SettingsScreen = () => {
             placeholder="First Name"
             className=" px-1 border-1 border-dGoldenAlpha rounded"
             readOnly={readInput}
-            onChange={(e) => e.target.value}
             defaultValue={""}
-            {...register("firstName")}
+            {...register("firstName", {
+              required: true,
+              maxLength: 14,
+              minLength: 3,
+            })}
           />
         </div>
 
@@ -60,12 +82,15 @@ const SettingsScreen = () => {
           </label>
           <input
             id="PhoneInput"
-            type="text"
+            type="tel"
             placeholder="Phone"
             className="px-1 border-1 border-dGoldenAlpha rounded"
             readOnly={readInput}
             defaultValue={""}
-            {...register("phone")}
+            {...register("phone", {
+              // pattern: /([0-9]{2,3})?(([0-9]{2}))([0-9]{4,5})([0-9]{4})/,
+              required: true,
+            })}
           />
         </div>
       </div>
@@ -84,7 +109,11 @@ const SettingsScreen = () => {
           className="px-1 border-1 border-dGoldenAlpha rounded"
           readOnly={readInput}
           defaultValue={""}
-          {...register("LastName")}
+          {...register("lastName", {
+            required: true,
+            maxLength: 20,
+            minLength: 3,
+          })}
         />
         <div />
       </div>
@@ -102,7 +131,13 @@ const SettingsScreen = () => {
           className="px-1 border-1 border-dGoldenAlpha rounded"
           readOnly={readInput}
           defaultValue={""}
-          {...register("email")}
+          {...register("email", {
+            // pattern:
+            //   /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/,
+            required: true,
+            // maxLength: 20,
+            // minLength: 3,
+          })}
         />
       </div>
       <div className="flex flex-wrap md:flex-nowrap">
@@ -120,7 +155,11 @@ const SettingsScreen = () => {
             className="px-1 border-1 border-dGoldenAlpha rounded"
             readOnly={readInput}
             defaultValue={""}
-            {...register("password")}
+            {...register("password", {
+              pattern:
+                /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+              required: true,
+            })}
           />
         </div>
         <div className="flex flex-col">
@@ -131,6 +170,7 @@ const SettingsScreen = () => {
             Created At
           </label>
           <input
+            defaultValue={""}
             readOnly
             className="px-1 border-1 border-dGoldenAlpha rounded"
           />
@@ -139,9 +179,12 @@ const SettingsScreen = () => {
       <div className="mt-1 ml-5">
         <DefaultBtn textBtn="messages" className="w-[200px]" />
         <DefaultBtn textBtn="edit" onClick={() => setReadInput(false)} />
-        <DefaultBtn textBtn="save" onClick={() => setReadInput(true)} />
+        <DefaultBtn
+          textBtn="save"
+          type="submit"
+          onClick={() => setReadInput(true)}
+        />
       </div>
-      <input type="submit" />
       <div className="bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] " />
     </form>
   );
@@ -161,3 +204,10 @@ export default SettingsScreen;
 //timeNow - no useEffect
 
 //edit //salvar ---state editavel
+
+//password
+// The password length must be greater than or equal to 8
+// The password must contain one or more uppercase characters
+// The password must contain one or more lowercase characters
+// The password must contain one or more numeric values
+// The password must contain one or more special characters

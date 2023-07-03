@@ -1,4 +1,4 @@
-import { useVisibilityContext } from "../../contexts/VisibilityContext";
+import { useVisibilityContext } from "../../contexts/useVisibilityContext";
 import DragCloseMenu from "../menus/DragCloseMenu";
 import AdressLogo from "../svg/AdressLogo";
 import DiscordLogo from "../svg/DiscordLogo";

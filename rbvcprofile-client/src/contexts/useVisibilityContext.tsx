@@ -9,6 +9,7 @@ interface IVisibilityContext {
   portifolioVisibility: string;
   hireVisibility: string;
   settingsVisibility: string;
+  visitorsMessagesVisibility: string;
   setVVisibilityState: (vvisibility: string) => void;
   setPVisibilityState: (pvisibility: string) => void;
   setAboutVisibilityState: (aboutVisibility: string) => void;
@@ -16,6 +17,9 @@ interface IVisibilityContext {
   setPortifolioVisibilityState: (portifolioVisibility: string) => void;
   setHireVisibilityState: (hireVisibility: string) => void;
   setSettingsVisibilityState: (settingsVisibility: string) => void;
+  setVisitorsMessageVisibilityState: (
+    visitorsMessagesVisibility: string
+  ) => void;
 }
 
 interface IVisibilityProvider {
@@ -29,11 +33,13 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
   const [pvisibility, setPVisibility] = useState<string>(" hidden");
   const [aboutVisibility, setAboutVisibility] = useState<string>(" hidden");
   const [contactVisibility, setContactVisibility] = useState<string>(" hidden");
-  const [portifolioVisibility, setPortifolioVisibility] = useState<string>(" hidden");
-  const [hireVisibility, setHireVisibility] = useState<string>(" hidden")
-  const [settingsVisibility, setSettingsVisibility] = useState<string>(" hidden")
-    
-
+  const [portifolioVisibility, setPortifolioVisibility] =
+    useState<string>(" hidden");
+  const [hireVisibility, setHireVisibility] = useState<string>(" hidden");
+  const [settingsVisibility, setSettingsVisibility] =
+    useState<string>(" hidden");
+  const [visitorsMessagesVisibility, setVisitorsMessagesVisibility] =
+    useState<string>(" hidden");
 
   function setVVisibilityState(vvisibility: string) {
     setVVisibility(vvisibility);
@@ -59,8 +65,13 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
     setHireVisibility(hireVisibility);
   }
 
-  function setSettingsVisibilityState(settingsVisibility: string){
+  function setSettingsVisibilityState(settingsVisibility: string) {
     setSettingsVisibility(settingsVisibility);
+  }
+  function setVisitorsMessageVisibilityState(
+    visitorsMessagesVisibility: string
+  ) {
+    setVisitorsMessagesVisibility(visitorsMessagesVisibility);
   }
 
   return (
@@ -73,6 +84,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         portifolioVisibility,
         hireVisibility,
         settingsVisibility,
+        visitorsMessagesVisibility,
         setVVisibilityState,
         setPVisibilityState,
         setAboutVisibilityState,
@@ -80,6 +92,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         setPortifolioVisibilityState,
         setHireVisibilityState,
         setSettingsVisibilityState,
+        setVisitorsMessageVisibilityState,
       }}
     >
       {children}

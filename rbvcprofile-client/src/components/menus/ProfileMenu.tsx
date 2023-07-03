@@ -1,4 +1,4 @@
-import { useVisibilityContext } from "../../contexts/VisibilityContext";
+import { useVisibilityContext } from "../../contexts/useVisibilityContext";
 import DefaultBtn from "../buttons/DefaultBtn";
 import DragCloseMenu from "./DragCloseMenu";
 import { handleVisibility } from "../../utils/visibilityHandler";

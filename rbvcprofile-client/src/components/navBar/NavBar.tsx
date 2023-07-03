@@ -1,5 +1,5 @@
 import GetStartedCollapsedBtn from "../buttons/GetStartedCollapsedBtn";
-import { useVisibilityContext } from "../../contexts/VisibilityContext";
+import { useVisibilityContext } from "../../contexts/useVisibilityContext";
 import ProfileMenu from "../menus/ProfileMenu";
 import RBVCLogoBtn from "../buttons/RBVCLogoBtn";
 import { handleVisibility } from "../../utils/visibilityHandler";

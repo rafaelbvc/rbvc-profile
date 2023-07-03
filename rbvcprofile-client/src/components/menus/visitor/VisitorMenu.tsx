@@ -1,14 +1,16 @@
 import { useRef } from "react";
-import { useVisibilityContext } from "../../contexts/VisibilityContext";
-import DefaultBtn from "../buttons/DefaultBtn";
-import DragCloseMenu from "./DragCloseMenu";
-import { handleVisibility } from "../../utils/visibilityHandler";
+import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
+import DefaultBtn from "../../buttons/DefaultBtn";
+import DragCloseMenu from "../DragCloseMenu";
+import { handleVisibility } from "../../../utils/visibilityHandler";
 
 const VisitorMenu = () => {
   const {
-    setVVisibilityState,
     settingsVisibility,
+    visitorsMessagesVisibility,
+    setVVisibilityState,
     setSettingsVisibilityState,
+    setVisitorsMessageVisibilityState,
   } = useVisibilityContext();
 
   return (
@@ -28,7 +30,15 @@ const VisitorMenu = () => {
         />
         <DefaultBtn textBtn="Sign In" styleBtn=" self-center" />
         <DefaultBtn textBtn="Sign Up" styleBtn=" self-center" />
-        <DefaultBtn textBtn="Comments" styleBtn=" self-center " />
+        <DefaultBtn
+          textBtn="Messages"
+          styleBtn=" self-center"
+          onClick={() =>
+            setVisitorsMessageVisibilityState(
+              handleVisibility(visitorsMessagesVisibility)
+            )
+          }
+        />
       </div>
     </div>
   );

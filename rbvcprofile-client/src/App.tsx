@@ -3,7 +3,7 @@ import Layout from "./components/Layout";
 import Login from "./components/Login";
 import SignedInLayout from "./components/SignedInLayout";
 import Public from "./components/Public";
-import VisibilityContext from "./contexts/VisibilityContext";
+import VisibilityContext from "./contexts/useVisibilityContext";
 
 function App() {
   return (
