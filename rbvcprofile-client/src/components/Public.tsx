@@ -1,13 +1,14 @@
 import { useRef, useEffect } from "react";
 import useDraggable from "../hooks/useDraggable";
-import { useVisibilityContext } from "../contexts/VisibilityContext";
-import VisitorMenu from "./menus/VisitorMenu";
+import { useVisibilityContext } from "../contexts/useVisibilityContext";
+import VisitorMenu from "./menus/visitor/VisitorMenu";
 import ProfileMenu from "./menus/ProfileMenu";
 import AboutMeScreen from "./screens/AboutMeScreen";
 import ContactScreen from "./screens/ContactScreen";
 import PortifolioScreen from "./screens/PortifolioScreen";
 import HireScreen from "./screens/HireScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import VisitorMessages from "./screens/messages/VisitorMessages";
 
 const Public = () => {
   const {
@@ -18,7 +19,10 @@ const Public = () => {
     portifolioVisibility,
     hireVisibility,
     settingsVisibility,
+    visitorsMessagesVisibility,
   } = useVisibilityContext();
+
+  // const homeRef = useRef(null);
 
   const draggableRef1 = useRef(null);
   const draggableRef2 = useRef(null);
@@ -27,6 +31,7 @@ const Public = () => {
   const draggableRef5 = useRef(null);
   const draggableRef6 = useRef(null);
   const draggableRef7 = useRef(null);
+  const draggableRef8 = useRef(null);
 
   const {
     registerElement,
@@ -57,6 +62,9 @@ const Public = () => {
     if (draggableRef7.current) {
       registerElement(draggableRef7.current);
     }
+    if (draggableRef8.current) {
+      registerElement(draggableRef8.current);
+    }
 
     return () => {
       if (draggableRef1.current) {
@@ -80,6 +88,9 @@ const Public = () => {
       if (draggableRef7.current) {
         unregisterElement(draggableRef7.current);
       }
+      if (draggableRef8.current) {
+        unregisterElement(draggableRef8.current);
+      }
     };
   }, [
     vvisibility,
@@ -88,14 +99,16 @@ const Public = () => {
     contactVisibility,
     hireVisibility,
     settingsVisibility,
+    visitorsMessagesVisibility,
   ]);
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
       <div className="h-[5rem]" />
       <div className="containerE box-content">
+        {/* <div  ref={homeRef} className="top-[6rem]"/> */}
         <div
           ref={draggableRef1}
-          className={`contentE ${pvisibility} top-[5rem] `}
+          className={`contentE ${pvisibility} top-[5.5rem] `}
           onMouseDown={(e) => handleMouseDown(e, 0)}
           onMouseMove={(e) => handleMouseMove(e, 0)}
         >
@@ -104,7 +117,7 @@ const Public = () => {
         <div
           ref={draggableRef2}
           className={`contentE ${vvisibility} ${
-            pvisibility === " hidden" ? "top-[7rem]" : "top-[9rem] bottom-0"
+            pvisibility === " hidden" ? "top-[7.5rem]" : "top-[9.5rem]"
           }`}
           onMouseDown={(e) => handleMouseDown(e, 1)}
           onMouseMove={(e) => handleMouseMove(e, 1)}
@@ -113,7 +126,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef3}
-          className="absolute z-20 top-[11rem]"
+          className="absolute z-40 top-[11rem]"
           onMouseDown={(e) => handleMouseDown(e, 2)}
           onMouseMove={(e) => handleMouseMove(e, 2)}
         >
@@ -123,7 +136,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef4}
-          className="absolute   z-20  top-[11rem]"
+          className="absolute   z-40  top-[20rem]"
           onMouseDown={(e) => handleMouseDown(e, 3)}
           onMouseMove={(e) => handleMouseMove(e, 3)}
         >
@@ -133,7 +146,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef5}
-          className="absolute   z-20  top-[11rem]"
+          className="absolute   z-40  top-[11rem]"
           onMouseDown={(e) => handleMouseDown(e, 4)}
           onMouseMove={(e) => handleMouseMove(e, 4)}
         >
@@ -143,7 +156,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef6}
-          className="absolute   z-20   top-[11rem]"
+          className="absolute   z-40   top-[11rem]"
           onMouseDown={(e) => handleMouseDown(e, 5)}
           onMouseMove={(e) => handleMouseMove(e, 5)}
         >
@@ -153,12 +166,22 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef7}
-          className="absolute z-20 top-[16rem]"
+          className="absolute z-40 top-[16rem]"
           onMouseDown={(e) => handleMouseDown(e, 6)}
           onMouseMove={(e) => handleMouseMove(e, 6)}
         >
           <div className={`${settingsVisibility}`}>
             <SettingsScreen />
+          </div>
+        </div>
+        <div
+          ref={draggableRef8}
+          className="absolute z-40 top-[15rem]"
+          onMouseDown={(e) => handleMouseDown(e, 7)}
+          onMouseMove={(e) => handleMouseMove(e, 7)}
+        >
+          <div className={`${visitorsMessagesVisibility}`}>
+            <VisitorMessages />
           </div>
         </div>
       </div>

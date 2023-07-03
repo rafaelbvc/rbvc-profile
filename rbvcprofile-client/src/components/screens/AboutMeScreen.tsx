@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useVisibilityContext } from "../../contexts/VisibilityContext";
+
 import DragCloseMenu from "../menus/DragCloseMenu";
 import PhotoMyProfileA from "./aboutMePhotos/PhotoMyProfileA.jpg";
 import MongoDBLogo from "../svg/MongoDBLogo";
@@ -10,6 +10,8 @@ import ReactLogo from "../svg/ReactLogo";
 import JavaScriptLogo from "../svg/JavaScriptLogo";
 import TailwindCSSLogo from "../svg/TailwindCSSLogo";
 import TypeScriptLogo from "../svg/TypeScriptLogo";
+import { useVisibilityContext } from "../../contexts/useVisibilityContext";
+
 
 const AboutMeScreen = () => {
   const { setAboutVisibilityState } = useVisibilityContext();
