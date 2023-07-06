@@ -55,25 +55,29 @@ export const createUser = assyncHandler(async (req, res) => {
 
 // upadte a User - Patch - Private
 export const updateUser = assyncHandler(async (req, res) => {
-  const { id, firstName, lastName, email, phone, password, messages, active} =
+  const { id, firstName, lastName, email, phone, password, messages, active } =
     req.body;
 
   // check data
   // has data?
   // !email ||
   // !password ||
-  if (!id || !firstName || !lastName || !email || typeof active !== "boolean") {
+  //  || typeof active !== "boolean"
+  if (!id || !firstName || !lastName || !email) {
     return res
       .status(400)
       .json({ message: "All required fields need to be filled" });
   }
 
-
   const userUpdate = await Users.findById(id).exec();
-  console.log(userUpdate, "essabudega")
 
   if (!userUpdate) {
     return res.status(400).json({ massage: "User not found" }); //to:do error handling!
+  }
+  //409
+
+  if (typeof active !== "boolean") {
+    return res.status(400).json({ message: "Data inconsistency" });
   }
 
   // duplicate data?
@@ -87,18 +91,18 @@ export const updateUser = assyncHandler(async (req, res) => {
   }
 
   (userUpdate.firstName = firstName),
-  (userUpdate.lastName = lastName),
-  (userUpdate.email = email),
-  (userUpdate.phone = phone),
-  (userUpdate.messages = messages),
-  (userUpdate.active = active);
+    (userUpdate.lastName = lastName),
+    (userUpdate.email = email),
+    (userUpdate.phone = phone),
+    (userUpdate.messages = messages),
+    (userUpdate.active = active);
 
   if (password) {
     //hash password
     userUpdate.password = await bcrypt.hash(password, 10); //salt rounds
   }
 
-  const updateUserId = await userUpdate.save()
+  const updateUserId = await userUpdate.save();
   // console.log(userUpdate.password, "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
   // const updatedUser = await userUpdate;
   // const updateUserId =  updatedUser();

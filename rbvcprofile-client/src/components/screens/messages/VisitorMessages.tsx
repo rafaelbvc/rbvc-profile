@@ -12,11 +12,11 @@ const VisitorMessages = () => {
         onClick={() => setVisitorsMessageVisibilityState(" hidden")}
       />
       <div className="flex flex-col min-w-[21rem]">
-        <div className="flex justify-between gap-4">
+        <div className="flex justify-between gap-4 mt-1">
           <p className="font-poppins self-center">username &nbsp; lastname</p>
           <p className="font-poppins self-center text-dGolden">lastLogin</p>
         </div>
-        <div className="mt-2 flex flex-col">
+        <div className="mt-1 flex flex-col">
           <input
             placeholder="title"
             className="px-1 mb-1 font-poppings  text-base border-1 border-dGoldenAlpha rounded min-w-[21rem]"
