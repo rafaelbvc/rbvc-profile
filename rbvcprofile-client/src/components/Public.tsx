@@ -117,7 +117,7 @@ const Public = () => {
         <div
           ref={draggableRef2}
           className={`contentE ${vvisibility} ${
-            pvisibility === " hidden" ? "top-[7.5rem]" : "top-[9.5rem]"
+            pvisibility === " hidden" ? "top-[5.5rem]" : "top-[7.5rem]"
           }`}
           onMouseDown={(e) => handleMouseDown(e, 1)}
           onMouseMove={(e) => handleMouseMove(e, 1)}
@@ -126,7 +126,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef3}
-          className="absolute z-40 top-[11rem]"
+          className="absolute z-40 top-[9rem]"
           onMouseDown={(e) => handleMouseDown(e, 2)}
           onMouseMove={(e) => handleMouseMove(e, 2)}
         >
@@ -136,7 +136,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef4}
-          className="absolute   z-40  top-[20rem]"
+          className="absolute   z-40  top-[9rem]"
           onMouseDown={(e) => handleMouseDown(e, 3)}
           onMouseMove={(e) => handleMouseMove(e, 3)}
         >
@@ -146,7 +146,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef5}
-          className="absolute   z-40  top-[11rem]"
+          className="absolute   z-40  top-[9rem]"
           onMouseDown={(e) => handleMouseDown(e, 4)}
           onMouseMove={(e) => handleMouseMove(e, 4)}
         >
@@ -156,7 +156,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef6}
-          className="absolute   z-40   top-[11rem]"
+          className="absolute   z-40   top-[9rem]"
           onMouseDown={(e) => handleMouseDown(e, 5)}
           onMouseMove={(e) => handleMouseMove(e, 5)}
         >
@@ -166,7 +166,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef7}
-          className="absolute z-40 top-[16rem]"
+          className="absolute z-40 top-[9rem]"
           onMouseDown={(e) => handleMouseDown(e, 6)}
           onMouseMove={(e) => handleMouseMove(e, 6)}
         >
@@ -176,7 +176,7 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef8}
-          className="absolute z-40 top-[15rem]"
+          className="absolute z-40 top-[9rem]"
           onMouseDown={(e) => handleMouseDown(e, 7)}
           onMouseMove={(e) => handleMouseMove(e, 7)}
         >

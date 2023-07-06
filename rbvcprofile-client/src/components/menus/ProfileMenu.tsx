@@ -33,7 +33,7 @@ const ProfileMenu = () => {
         />
       </div>
 
-      <div className="flex justify-between bg-dGrayBGScreens rounded">
+      <div className="flex justify-between bg-dtBgMainColor rounded">
         <DefaultBtn
           textBtn="Home"
           styleBtn=" self-center "

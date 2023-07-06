@@ -1,4 +1,4 @@
-import  {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const DefaultBtn = (props) => {
   const { urlBtn, textBtn, onClick, hiddenBtn, styleBtn, className } = props;
@@ -12,7 +12,7 @@ const DefaultBtn = (props) => {
   return (
     <>
       <button
-        className={` md:w-[5rem] lg:w-[5.64rem] p-1 cursor-pointer lg:mx-4 xl:mx-5  2xl:mx-3 ${styleBtn}`}
+        className={` md:w-[5rem] lg:w-[5.64rem] p-1 cursor-pointer lg:mx-3 ${styleBtn}`}
         onClick={onClick}
         hidden={isVisible}
         // disabled={isAuth}

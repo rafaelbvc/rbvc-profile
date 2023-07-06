@@ -5,10 +5,9 @@ import StatusIcon from "../svg/statusIcon";
 import DefaultBtn from "../buttons/DefaultBtn";
 import { useForm } from "react-hook-form";
 import { handleVisibility } from "../../utils/visibilityHandler";
-import SettingsScreenData from "./SettingsScreenData";
 import { useGetUsersQuery } from "../menus/visitor/visitorApiSlice";
 
-const SettingsScreen = (  ) => {
+const SettingsScreenk = () => {
   const {
     register,
     handleSubmit,
@@ -16,31 +15,27 @@ const SettingsScreen = (  ) => {
     formState: { errors },
   } = useForm();
 
-  const {
-    userData: users,
-    isError,
-    error,
-    loading,
-    isLoading,
-    isSucess,
-  } = useGetUsersQuery();
-
-  const [dataUsers, setDataUsers] = useState();
-  const [dataError, setDataError] = useState();
-  const [renderData, setRenderData] = useState<[]>();
-  console.log(renderData)
-
-  const handleUsers = () => {
-    if (users){
-      setRenderData(users)
-    }
-  }
-
-
-
   const onSubmit = async (data) => {
     console.log(data);
   };
+
+  const {
+    data: users,
+    isLoading,
+    isSucess,
+    isError,
+    error,
+  } = useGetUsersQuery();
+
+
+
+  // let content
+
+  // if (isLo)
+
+  //fields
+  // const watchData = watch();
+  // console.log(watchData);
 
   const {
     setSettingsVisibilityState,
@@ -70,84 +65,9 @@ const SettingsScreen = (  ) => {
     }
   };
 
-  // console.log({ userId });
-
   useEffect(() => {
     handleTime();
-    handleUsers();
-
-    // .then((datas) => console.log(datas[0].firstName))
-    // console.log(data[0].firstName)
-
-    // fetch("http://localhost:5030/users")
-    //   .then((res) => res.json())
-    //   .then((data: any) =>
-    //     data.map((data) => {
-    //       const dataUserss = (
-    //         <ul key={data._id}>
-    //           <li>
-    //             <p>{data.firstName}</p>
-    //             <p>{data.astName}</p>
-    //             <p>{data.phone}</p>
-    //             <p>{data.email}</p>
-    //             <p>{data.active}</p>
-    //           </li>
-    //         </ul>
-    //       );
-
-    //       // data.map((dataUserss: any) => usersArr.push(dataUserss));
-    //       console.log(dataUserss, "dataUsers");
-    //       if (dataUserss) {
-
-    //         // setDataUsers();
-    //       }
-    //     })
-    //   );
-
-    // fetch("http://localhost:5030/users")
-    //   .then((res) => res.json())
-    //   .then((data: any) =>
-    //     setRenderData(
-    //       <ul key={data[7]._id}>
-    //         <li>
-    //           <p>{data[7].firstName}</p>
-    //           <p>{data[7].lastName}</p>
-    //           <p>{data[7].phone}</p>
-    //           <p>{data[7].email}</p>
-    //           <p>{data[7].active}</p>
-    //         </li>
-    //       </ul>
-
-    // );
-    // .then((datas) => {const dataUsers:any = <ul><li key={datas._id}>{datas.firstName}</li></ul>; setRenderData(dataUsers)}
-    // ).catch((e) => console.log(e));
-    // datas.map((_ids, firstName) => {
-    //   <ul>
-    //     <li key={_ids}>{firstName}</li>
-    //   </ul>;
-    // })
-    // )
-
-    // .then((data) => {
-    //   setRenderData(
-    //     data.map((ids: any, items: any) => (
-    //       <ul key={ids}>
-    //         {items.map((_id, firstName, lastName) => (
-    //           <li key={_id}>{firstName}</li>
-    //         ))}
-    //       </ul>
-    //     ))
-    //   );
-    //   setDataUsers(data);
-    // })
-    // .catch((e) => setDataError(e));
-    // console.log(dataError);
-    // console.log(dataUsers, "fafeffDATA");
   }, []);
-
-  // console.log(dataError, "dataetwgwgrgrg");
-  // console.log(dataUsers, "dataeusersrsrsrs");
-  // console.log(renderData, "rendergwgrgrg");
 
   return (
     <>
@@ -320,13 +240,12 @@ const SettingsScreen = (  ) => {
           />
         </div>
         <div className="bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] " />
-        {renderData}
       </form>
     </>
   );
 };
 
-export default SettingsScreen;
+export default SettingsScreenk;
 
 //firstName  + 3 letras - 16                                         //only-read
 //lastName   + 3 letras - 30
@@ -347,34 +266,3 @@ export default SettingsScreen;
 // The password must contain one or more lowercase characters
 // The password must contain one or more numeric values
 // The password must contain one or more special characters
-
-// const {
-//   data: users,
-//   isLoading,
-//   isSucess,
-//   isError,
-//   error,
-// } = useGetUsersQuery();
-
-// let content;
-
-// if (isLoading) content = <p>Loading...</p>;
-// console.log(isLoading, ":gwregrgrrgg");
-
-// if (isError) {
-//   content = (
-//     <p className={isError ? "errorrrr" : "offfeeeescrenn"}>
-//       {error?.data?.message}
-//     </p>
-//   );
-//   console.log(isError, "24g3gg5g345g34g34g345g345");
-// }
-
-// if (isSucess) {
-//   const { ids } = users;
-
-//   const rendering = ids?.length
-//     ? ids.map((userId) => <div key={userId}>{<ul>{userId}</ul>}</div>)
-//     : null;
-
-// }
