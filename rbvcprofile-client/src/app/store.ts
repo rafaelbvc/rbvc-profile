@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./api/apiSlice";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
@@ -10,6 +10,6 @@ const store = configureStore({
   devTools: true,
 });
 //
-export type RootState = ReturnType<typeof store.getState>
+// export type RootState = ReturnType<typeof store.getState>
 
-export default store
+// export default store

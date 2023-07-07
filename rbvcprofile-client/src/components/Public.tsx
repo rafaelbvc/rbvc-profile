@@ -1,14 +1,15 @@
 import { useRef, useEffect } from "react";
 import useDraggable from "../hooks/useDraggable";
 import { useVisibilityContext } from "../contexts/useVisibilityContext";
-import VisitorMenu from "./menus/visitor/VisitorMenu";
+import VisitorMenu from "./menus/VisitorMenu";
 import ProfileMenu from "./menus/ProfileMenu";
 import AboutMeScreen from "./screens/AboutMeScreen";
 import ContactScreen from "./screens/ContactScreen";
 import PortifolioScreen from "./screens/PortifolioScreen";
-import HireScreen from "./screens/HireScreen";
-import SettingsScreen from "./screens/SettingsScreen";
 import VisitorMessages from "./screens/messages/VisitorMessages";
+import HireScreen from "./screens/HireScreen";
+import SettingsScreenData from "./screens/visitors/SettingsScreenData";
+import SettingsScreen from "./screens/visitors/SettingsScreen";
 
 const Public = () => {
   const {
@@ -103,8 +104,8 @@ const Public = () => {
   ]);
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
-      <div className="h-[5rem]" />
-      <div className="containerE box-content">
+      {/* <div className="h-[5rem] w-screen" /> */}
+      <div className="containerE box-content mt-[5rem]">
         {/* <div  ref={homeRef} className="top-[6rem]"/> */}
         <div
           ref={draggableRef1}
@@ -117,7 +118,7 @@ const Public = () => {
         <div
           ref={draggableRef2}
           className={`contentE ${vvisibility} ${
-            pvisibility === " hidden" ? "top-[5.5rem]" : "top-[7.5rem]"
+            pvisibility === " hidden" ? "top-[5.5rem]" : "top-[8.5rem]"
           }`}
           onMouseDown={(e) => handleMouseDown(e, 1)}
           onMouseMove={(e) => handleMouseMove(e, 1)}
@@ -171,7 +172,7 @@ const Public = () => {
           onMouseMove={(e) => handleMouseMove(e, 6)}
         >
           <div className={`${settingsVisibility}`}>
-            <SettingsScreen />
+            <SettingsScreen/>
           </div>
         </div>
         <div

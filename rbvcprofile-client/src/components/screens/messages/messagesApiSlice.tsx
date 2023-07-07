@@ -5,7 +5,7 @@ const messagesAdapter: any = createEntityAdapter({});
 
 const initialState: any = messagesAdapter.getInitialState();
 
-const messagesApiSlice: any = apiSlice.injectEndpoints({
+export const messagesApiSlice: any = apiSlice.injectEndpoints({
   endpoints: (builder: any) => ({
     getMessages: (builder: any) => ({
       query: () => "/messages",
@@ -31,7 +31,6 @@ const messagesApiSlice: any = apiSlice.injectEndpoints({
     }),
   }),
 });
-export default messagesApiSlice;
 
 export const {useGetMessagesQuery}: any = messagesApiSlice;
 
@@ -40,12 +39,12 @@ export const selectMessagesResult: any =
 
 const selectMessagesData: any = createSelector(
   selectMessagesResult,
-  (messagesResult) => messagesResult.data
+  messagesResult => messagesResult.data
 );
 
 export const {
   selectAll: selectAllMessages,
-  selectById: selectMessagesById,
-  selectIds: selectMessagesIds,
-} = messagesAdapter.getSelectors((state) => selectMessagesData(state)) ??
-initialState;
+  selectById: selectMessageById,
+  selectIds: selectMessageIds,
+} = messagesAdapter.getSelectors(state => selectMessagesData(state) ??
+initialState);
