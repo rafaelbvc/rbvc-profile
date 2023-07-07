@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
 import StatusIcon from "../../svg/statusIcon";
 import DefaultBtn from "../../buttons/DefaultBtn";
-//----
 import { selectUserById, useGetUsersQuery } from "./visitorApiSlice";
 import { useForm } from "react-hook-form";
 import { handleVisibility } from "../../../utils/visibilityHandler";
-import { useSelector } from "react-redux";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 
 const SettingsScreen = () => {
-  // const user = useSelector((state) => selectUserById(state, userId));
 
   const { setSettingsVisibilityState } = useVisibilityContext();
 
@@ -19,46 +16,16 @@ const SettingsScreen = () => {
   const [dateNow, setDateNow] = useState("");
   const [activeStatus, setActiveStatus] = useState(true); //status
 
-  const [dataUsers, setDataUsers] = useState();
+  const [dataUsers, setDataUsers] = useState<any>();
 
   const { data } = useGetUsersQuery();
 
   const handleData = () => {
     if (data) {
-      setDataUsers(data);
+      setDataUsers(data.entities["648b8aa93107216e8579c62e"]);
     }
   };
 
-  const arr: any = {
-    entities: [
-      {
-        _id: "wfwffwef",
-        firstName: "wfwfwef",
-      },
-    ],
-    ids: { indice: "dado" },
-  };
-
-  
-
-  // console.log(arr, "dddddddddd")
-
-  // console.log(dataUsers);
-
-  // const {entities, ids } = arr
-
-  // console.log(arr.entities)
-
-  // const j = arr.entities
-  // const addf = j.map((x,ids):any => <div key={ids}>{x.map(({firstName}:any)  => <div>{firstName}</div>)}</div>)
-
-
-  // const arrData = Object.keys(arr).map(i => JSON.parse(arr[Number(i)]))
-  // console.log(arrData)
-
-  // const arrDatas = arrData.map()
-
-  // console.log(arrData)
 
   const {
     register,
@@ -90,36 +57,13 @@ const SettingsScreen = () => {
       setStatusColor("#00FF00");
     }
   };
-  // console.log(dataUsers);
 
-  // const usersArr = dataUsers.map(():any => { <div key={_id}>{firstName}</div>})
 
   useEffect(() => {
     handleTime();
     handleData();
-
-    ///-------------
-    //   fetch("http://localhost:5030/users")
-    //     .then((res) => res.json())
-    //     .then((data: any) => {
-    //       const renderUsers = data;
-    //       const renderUser: any = (
-    //         <ul key={data[7]._id}>
-    //           <li>
-    //             <p>{data[7].firstName}</p>
-    //             <p>{data[7].lastName}</p>
-    //             <p>{data[7].phone}</p>
-    //             <p>{data[7].email}</p>
-    //             <p>{data[7].active}</p>
-    //           </li>
-    //         </ul>
-    //       );
-    //       setDataUsers(renderUsers);
-    //     })
-    //     .catch((e) => console.log(e));
   }, [data]);
 
-  // if (user) {
   return (
     <>
       <DragCloseMenu
@@ -158,7 +102,7 @@ const SettingsScreen = () => {
               type="text"
               className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
               readOnly={readOrEditInput}
-              value={"ff" ? "ff" : "First Name"}
+              value={dataUsers ? dataUsers.firstName : "First Name"}
               {...register("firstName", {
                 required: true,
                 maxLength: 14,
@@ -179,7 +123,7 @@ const SettingsScreen = () => {
               type="tel"
               className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
               readOnly={readOrEditInput}
-              // value={user.phone ? user.phone : "Last Name"}
+              value={dataUsers ? dataUsers.phone : "Last Name"}
               {...register("phone", {
                 // pattern: /([0-9]{2,3})?(([0-9]{2}))([0-9]{4,5})([0-9]{4})/,
                 required: true,
@@ -200,7 +144,7 @@ const SettingsScreen = () => {
             type="text"
             className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
             readOnly={readOrEditInput}
-            // value={user.lastName ? user.lastName : "Last Name"}
+            value={dataUsers ? dataUsers.lastName : "Last Name"}
             {...register("lastName", {
               required: true,
               maxLength: 20,
@@ -221,7 +165,7 @@ const SettingsScreen = () => {
             type="text"
             className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
             readOnly={readOrEditInput}
-            // value={user.email ? user.email : "E-mail"}
+            value={dataUsers ? dataUsers.email : "E-mail"}
             {...register("email", {
               // pattern:
               //   /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/,
@@ -245,7 +189,7 @@ const SettingsScreen = () => {
               type="text"
               className="mx-1  px-1 border-1 border-dGoldenAlpha rounded"
               readOnly={readOrEditInput}
-              // value={user.password ? user.password : "Password"}
+              value={dataUsers ? dataUsers.password : "Password"}
               {...register("password", {
                 pattern:
                   /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
@@ -262,7 +206,7 @@ const SettingsScreen = () => {
             </label>
             <input
               disabled
-              // value={user.createdAt ? user.createdAt : "Created At"}
+              value={dataUsers ? dataUsers.createdAt : "Created At"}
               readOnly
               className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
             />
@@ -319,33 +263,3 @@ export default SettingsScreen;
 // The password must contain one or more numeric values
 // The password must contain one or more special characters
 
-// const {
-//   data: users,
-//   isLoading,
-//   isSucess,
-//   isError,
-//   error,
-// } = useGetUsersQuery();
-
-// let content;
-
-// if (isLoading) content = <p>Loading...</p>;
-// console.log(isLoading, ":gwregrgrrgg");
-
-// if (isError) {
-//   content = (
-//     <p className={isError ? "errorrrr" : "offfeeeescrenn"}>
-//       {error?.data?.message}
-//     </p>
-//   );
-//   console.log(isError, "24g3gg5g345g34g34g345g345");
-// }
-
-// if (isSucess) {
-//   const { ids } = users;
-
-//   const rendering = ids?.length
-//     ? ids.map((userId) => <div key={userId}>{<ul>{userId}</ul>}</div>)
-//     : null;
-
-// }
