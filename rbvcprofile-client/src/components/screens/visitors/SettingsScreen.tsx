@@ -1,13 +1,65 @@
 import { useEffect, useState } from "react";
-import { useVisibilityContext } from "../../contexts/useVisibilityContext";
-import DragCloseMenu from "../menus/DragCloseMenu";
-import StatusIcon from "../svg/statusIcon";
-import DefaultBtn from "../buttons/DefaultBtn";
+import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
+import StatusIcon from "../../svg/statusIcon";
+import DefaultBtn from "../../buttons/DefaultBtn";
+//----
+import { selectUserById, useGetUsersQuery } from "./visitorApiSlice";
 import { useForm } from "react-hook-form";
-import { handleVisibility } from "../../utils/visibilityHandler";
-import { useGetUsersQuery } from "../menus/visitor/visitorApiSlice";
+import { handleVisibility } from "../../../utils/visibilityHandler";
+import { useSelector } from "react-redux";
+import DragCloseMenu from "../../menus/DragCloseMenu";
 
-const SettingsScreenk = () => {
+const SettingsScreen = () => {
+  // const user = useSelector((state) => selectUserById(state, userId));
+
+  const { setSettingsVisibilityState } = useVisibilityContext();
+
+  const [statusColor, setStatusColor] = useState("#00FF00");
+  const [readOrEditInput, setReadOrEditInput] = useState(false); //editbuton
+  const [dateNow, setDateNow] = useState("");
+  const [activeStatus, setActiveStatus] = useState(true); //status
+
+  const [dataUsers, setDataUsers] = useState();
+
+  const { data } = useGetUsersQuery();
+
+  const handleData = () => {
+    if (data) {
+      setDataUsers(data);
+    }
+  };
+
+  const arr: any = {
+    entities: [
+      {
+        _id: "wfwffwef",
+        firstName: "wfwfwef",
+      },
+    ],
+    ids: { indice: "dado" },
+  };
+
+  
+
+  // console.log(arr, "dddddddddd")
+
+  // console.log(dataUsers);
+
+  // const {entities, ids } = arr
+
+  // console.log(arr.entities)
+
+  // const j = arr.entities
+  // const addf = j.map((x,ids):any => <div key={ids}>{x.map(({firstName}:any)  => <div>{firstName}</div>)}</div>)
+
+
+  // const arrData = Object.keys(arr).map(i => JSON.parse(arr[Number(i)]))
+  // console.log(arrData)
+
+  // const arrDatas = arrData.map()
+
+  // console.log(arrData)
+
   const {
     register,
     handleSubmit,
@@ -19,34 +71,8 @@ const SettingsScreenk = () => {
     console.log(data);
   };
 
-  const {
-    data: users,
-    isLoading,
-    isSucess,
-    isError,
-    error,
-  } = useGetUsersQuery();
-
-
-
-  // let content
-
-  // if (isLo)
-
-  //fields
-  // const watchData = watch();
-  // console.log(watchData);
-
-  const {
-    setSettingsVisibilityState,
-    setVisitorsMessageVisibilityState,
-    visitorsMessagesVisibility,
-  } = useVisibilityContext();
-
-  const [statusColor, setStatusColor] = useState("#00FF00");
-  const [readInput, setReadInput] = useState(false);
-  const [dateNow, setDateNow] = useState("");
-  const [activeStatus, setActiveStatus] = useState(true);
+  const { setVisitorsMessageVisibilityState, visitorsMessagesVisibility } =
+    useVisibilityContext();
 
   const handleTime = () => {
     const timeElapsed = Date.now();
@@ -64,18 +90,42 @@ const SettingsScreenk = () => {
       setStatusColor("#00FF00");
     }
   };
+  // console.log(dataUsers);
+
+  // const usersArr = dataUsers.map(():any => { <div key={_id}>{firstName}</div>})
 
   useEffect(() => {
     handleTime();
-  }, []);
+    handleData();
 
+    ///-------------
+    //   fetch("http://localhost:5030/users")
+    //     .then((res) => res.json())
+    //     .then((data: any) => {
+    //       const renderUsers = data;
+    //       const renderUser: any = (
+    //         <ul key={data[7]._id}>
+    //           <li>
+    //             <p>{data[7].firstName}</p>
+    //             <p>{data[7].lastName}</p>
+    //             <p>{data[7].phone}</p>
+    //             <p>{data[7].email}</p>
+    //             <p>{data[7].active}</p>
+    //           </li>
+    //         </ul>
+    //       );
+    //       setDataUsers(renderUsers);
+    //     })
+    //     .catch((e) => console.log(e));
+  }, [data]);
+
+  // if (user) {
   return (
     <>
       <DragCloseMenu
         textHeader="user settings"
         onClick={() => setSettingsVisibilityState(" hidden")}
       />
-
       <div className="flex flex-row justify-between   mt-1 px-1">
         <button onClick={handleActiveStatus} className="flex">
           <StatusIcon width="1.5rem" fillColor={statusColor} />
@@ -106,10 +156,9 @@ const SettingsScreenk = () => {
             <input
               id="FirstNameInput"
               type="text"
-              placeholder="First Name"
               className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
-              readOnly={readInput}
-              defaultValue={""}
+              readOnly={readOrEditInput}
+              value={"ff" ? "ff" : "First Name"}
               {...register("firstName", {
                 required: true,
                 maxLength: 14,
@@ -128,10 +177,9 @@ const SettingsScreenk = () => {
             <input
               id="PhoneInput"
               type="tel"
-              placeholder="Phone"
               className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
-              readOnly={readInput}
-              defaultValue={""}
+              readOnly={readOrEditInput}
+              // value={user.phone ? user.phone : "Last Name"}
               {...register("phone", {
                 // pattern: /([0-9]{2,3})?(([0-9]{2}))([0-9]{4,5})([0-9]{4})/,
                 required: true,
@@ -150,10 +198,9 @@ const SettingsScreenk = () => {
           <input
             id="LastNameInput"
             type="text"
-            placeholder="Last Name"
             className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
-            readOnly={readInput}
-            defaultValue={""}
+            readOnly={readOrEditInput}
+            // value={user.lastName ? user.lastName : "Last Name"}
             {...register("lastName", {
               required: true,
               maxLength: 20,
@@ -172,10 +219,9 @@ const SettingsScreenk = () => {
           <input
             id="EmailInput"
             type="text"
-            placeholder="E-mail"
             className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
-            readOnly={readInput}
-            defaultValue={""}
+            readOnly={readOrEditInput}
+            // value={user.email ? user.email : "E-mail"}
             {...register("email", {
               // pattern:
               //   /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/,
@@ -193,13 +239,13 @@ const SettingsScreenk = () => {
             >
               Password
             </label>
+            {/* todo unhash if loggeind hash to path */}
             <input
               id="PasswordInput"
               type="text"
-              placeholder="Password"
               className="mx-1  px-1 border-1 border-dGoldenAlpha rounded"
-              readOnly={readInput}
-              defaultValue={""}
+              readOnly={readOrEditInput}
+              // value={user.password ? user.password : "Password"}
               {...register("password", {
                 pattern:
                   /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
@@ -216,7 +262,7 @@ const SettingsScreenk = () => {
             </label>
             <input
               disabled
-              defaultValue={""}
+              // value={user.createdAt ? user.createdAt : "Created At"}
               readOnly
               className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
             />
@@ -232,20 +278,26 @@ const SettingsScreenk = () => {
               )
             }
           />
-          <DefaultBtn textBtn="edit" onClick={() => setReadInput(false)} />
+          <DefaultBtn
+            textBtn="edit"
+            onClick={() => setReadOrEditInput(false)}
+          />
           <DefaultBtn
             textBtn="save"
             type="submit"
-            onClick={() => setReadInput(true)}
+            onClick={() => setReadOrEditInput(true)}
           />
         </div>
-        <div className="bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] " />
       </form>
+      {/* //dddd */}
+      <footer className="bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] " />
+      <div></div>
     </>
   );
+  // } else return null;
 };
 
-export default SettingsScreenk;
+export default SettingsScreen;
 
 //firstName  + 3 letras - 16                                         //only-read
 //lastName   + 3 letras - 30
@@ -266,3 +318,34 @@ export default SettingsScreenk;
 // The password must contain one or more lowercase characters
 // The password must contain one or more numeric values
 // The password must contain one or more special characters
+
+// const {
+//   data: users,
+//   isLoading,
+//   isSucess,
+//   isError,
+//   error,
+// } = useGetUsersQuery();
+
+// let content;
+
+// if (isLoading) content = <p>Loading...</p>;
+// console.log(isLoading, ":gwregrgrrgg");
+
+// if (isError) {
+//   content = (
+//     <p className={isError ? "errorrrr" : "offfeeeescrenn"}>
+//       {error?.data?.message}
+//     </p>
+//   );
+//   console.log(isError, "24g3gg5g345g34g34g345g345");
+// }
+
+// if (isSucess) {
+//   const { ids } = users;
+
+//   const rendering = ids?.length
+//     ? ids.map((userId) => <div key={userId}>{<ul>{userId}</ul>}</div>)
+//     : null;
+
+// }

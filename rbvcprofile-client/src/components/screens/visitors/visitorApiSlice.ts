@@ -5,7 +5,7 @@ const usersAdapter: any = createEntityAdapter({});
 
 const initialState: any = usersAdapter.getInitialState();
 
-const usersApiSlice = apiSlice.injectEndpoints({
+export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder: any) => ({
     getUsers: builder.query({
       query: () => "/users",
@@ -14,7 +14,7 @@ const usersApiSlice = apiSlice.injectEndpoints({
       },
       keepUnusedDataFor: 5,
       transformResponse: (responseData: any) => {
-        const loadedUsers = responseData.map((user) => {
+        const loadedUsers = responseData.map(user => {
           user.id = user._id;
           return user;
         });
@@ -27,29 +27,27 @@ const usersApiSlice = apiSlice.injectEndpoints({
               type: "User",
               id: "LIST",
             },
-            ...result.ids.map((id) => ({ type: "User", id })),
+            ...result.ids.map(id => ({ type: "User", id })),
           ];
         } else return [{ type: "User", id: "LIST" }];
       },
     }),
   }),
 });
-export default usersApiSlice;
 
-export const {useGetUsersQuery} = usersApiSlice;
+export const { useGetUsersQuery } = usersApiSlice
 
-export const selectUsersResult =
-  usersApiSlice.endpoints.getUsers.select();
+export const selectUsersResult = usersApiSlice.endpoints.getUsers.select();
 
 const selectUsersData = createSelector(
   selectUsersResult,
-  (usersResult) => usersResult.data
+  usersResult => usersResult.data
 );
 
 export const {
   selectAll: selectAllUsers,
-  selectById: selectUsersById,
+  selectById: selectUserById,
   selectIds: selectUserIds,
 } = usersAdapter.getSelectors(
-  (state) => selectUsersData(state) ?? initialState
+  state => selectUsersData(state) ?? initialState
 );

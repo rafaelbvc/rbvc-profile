@@ -1,7 +1,7 @@
-import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
-import DefaultBtn from "../../buttons/DefaultBtn";
-import DragCloseMenu from "../DragCloseMenu";
-import { handleVisibility } from "../../../utils/visibilityHandler";
+import { useVisibilityContext } from "../../contexts/useVisibilityContext";
+import DefaultBtn from "../buttons/DefaultBtn";
+import DragCloseMenu from "./DragCloseMenu";
+import { handleVisibility } from "../../utils/visibilityHandler";
 
 const VisitorMenu = () => {
   const {
