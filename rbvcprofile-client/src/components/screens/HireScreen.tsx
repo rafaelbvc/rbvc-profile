@@ -1,4 +1,5 @@
 import { useVisibilityContext } from "../../contexts/useVisibilityContext";
+import FooterBar from "../FooterBar";
 import DragCloseMenu from "../menus/DragCloseMenu";
 import UnderConstructionSVG from "../svg/UnderConstructionSVG";
 
@@ -17,6 +18,7 @@ const HireScreen = () => {
         </p>
         <UnderConstructionSVG widthSVG="400px" />
       </div>
+      <FooterBar />
     </>
   );
 };

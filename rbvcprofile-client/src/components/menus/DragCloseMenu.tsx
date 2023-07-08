@@ -2,7 +2,7 @@ const DragCloseMenu = (props) => {
   const { onClick, textHeader, className } = props;
 
   return (
-    <div className={className}>
+    <div className={`${className} min-w-[21rem]`}>
       <div className=" flex  justify-between  cursor-pointer">
         <p className="pl-2  text-dGolden text-xxs font-bold">DRAGME</p>
         <p className="text-xxs font-bold whitespace-nowrap animate-bounce uppercase">
