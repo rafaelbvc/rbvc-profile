@@ -1,4 +1,5 @@
 import { useVisibilityContext } from "../../contexts/useVisibilityContext";
+import FooterBar from "../FooterBar";
 import DragCloseMenu from "../menus/DragCloseMenu";
 import UnderBConstructionSVG from "../svg/UnderBConstructionSVG";
 
@@ -17,6 +18,7 @@ const PortifolioScreen = () => {
         </p>
         <UnderBConstructionSVG widthSVG="90%" />
       </div>
+      <FooterBar />
     </>
   );
 };

@@ -7,19 +7,10 @@ import { useForm } from "react-hook-form";
 import { handleVisibility } from "../../../utils/visibilityHandler";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 import CircleLoader from "../../loadingSpinners/CircleLoader";
-
+import FooterBar from "../../FooterBar";
 
 const SettingsScreen = () => {
   const { setSettingsVisibilityState } = useVisibilityContext();
-
-  const [statusColor, setStatusColor] = useState("#00FF00");
-  const [readOrEditInput, setReadOrEditInput] = useState(false); //editbuton
-  const [dateNow, setDateNow] = useState("");
-  const [activeStatus, setActiveStatus] = useState(true); //status
-  const [loadingStatus, setLoadingStatus] = useState("");
-
-  const [dataUsers, setDataUsers] = useState<any>();
-  const [errorStatus, setErrorStatus] = useState<any>();
 
   const {
     data: usersById,
@@ -29,17 +20,29 @@ const SettingsScreen = () => {
     error,
   } = useGetUsersQuery();
 
+  const [statusColor, setStatusColor] = useState("#00FF00");
+  const [readOrEditInput, setReadOrEditInput] = useState(false); //editbuton
+  const [dateNow, setDateNow] = useState("");
+  const [activeStatus, setActiveStatus] = useState(true); //status
+  const [loadingStatus, setLoadingStatus] = useState<any>(isLoading);
+
+  const [dataUsers, setDataUsers] = useState<any>();
+  const [errorStatus, setErrorStatus] = useState<any>();
+
+
   const handleUserDataById = () => {
-    if (isLoading) {
-      setLoadingStatus("Loading...");
-    } else if (isError) {
+    setDataUsers(usersById?.entities["648ce22b7a824a5fe1c03f12"]);
+    if (usersById === undefined || isLoading) {
+      setLoadingStatus(true);
+    } else if (errorStatus) {
       setErrorStatus(error);
-    } else if (isSucess) {
-      setDataUsers(usersById.entities["648b8aa93107216e8579c62e"]);
+    } else {
+      setLoadingStatus(false);
     }
   };
 
   const {
+    reset,
     register,
     handleSubmit,
     watch,
@@ -49,6 +52,9 @@ const SettingsScreen = () => {
   const onSubmit = async (data) => {
     console.log(data);
   };
+
+  // const onWatch = watch();
+  // console.log(onWatch);
 
   const { setVisitorsMessageVisibilityState, visitorsMessagesVisibility } =
     useVisibilityContext();
@@ -71,8 +77,8 @@ const SettingsScreen = () => {
   };
 
   useEffect(() => {
-    handleTime();
     handleUserDataById();
+    handleTime();
   }, [usersById, loadingStatus, errorStatus]);
 
   return (
@@ -103,7 +109,7 @@ const SettingsScreen = () => {
       {loadingStatus ? (
         <CircleLoader isLoading={loadingStatus} />
       ) : errorStatus ? (
-        <p>{errorStatus}</p>
+        <p>{isError}</p>
       ) : (
         <>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -120,7 +126,7 @@ const SettingsScreen = () => {
                   type="text"
                   className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
                   readOnly={readOrEditInput}
-                  value={dataUsers ? dataUsers.firstName : "First Name"}
+                  value={dataUsers ? dataUsers?.firstName : "First Name"}
                   {...register("firstName", {
                     required: true,
                     maxLength: 14,
@@ -209,8 +215,8 @@ const SettingsScreen = () => {
                   readOnly={readOrEditInput}
                   value={dataUsers ? dataUsers.password : "Password"}
                   {...register("password", {
-                    pattern:
-                      /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+                    // pattern:
+                    //   /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
                     required: true,
                   })}
                 />
@@ -230,7 +236,7 @@ const SettingsScreen = () => {
                 />
               </div>
             </div>
-            <div className="mt-1 ml-5">
+            <menu className="mt-1 ml-5">
               <DefaultBtn
                 textBtn="messages"
                 className="w-[200px]"
@@ -249,9 +255,9 @@ const SettingsScreen = () => {
                 type="submit"
                 onClick={() => setReadOrEditInput(true)}
               />
-            </div>
+            </menu>
           </form>
-          <footer className="bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] " />
+          <FooterBar />
         </>
       )}
     </>

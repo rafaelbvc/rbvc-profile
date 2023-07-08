@@ -11,6 +11,7 @@ import JavaScriptLogo from "../svg/JavaScriptLogo";
 import TailwindCSSLogo from "../svg/TailwindCSSLogo";
 import TypeScriptLogo from "../svg/TypeScriptLogo";
 import { useVisibilityContext } from "../../contexts/useVisibilityContext";
+import FooterBar from "../FooterBar";
 
 
 const AboutMeScreen = () => {
@@ -105,7 +106,7 @@ const AboutMeScreen = () => {
                 <br />• Experience with Git and DevOps
               </p>
             </div>
-            <div className="min-w-[21rem] my-2 max-w-[39.5rem] bg-gradient-to-r from-dGolden via-dGolden to-dBlack h-[1px]" />
+            <FooterBar />
           </div>
         </div>
         <div>
@@ -122,7 +123,7 @@ const AboutMeScreen = () => {
             Store
           </p>
         </div>
-        <div className="min-w-[21rem] max-w-[39.5rem] bg-gradient-to-r my-2 from-dGolden via-dGolden to-dBlack h-[1px]" />
+        <FooterBar />
         <div>
           <p className="text-justify justify-end font-poppins mt-2 pl-2">
             Cadmus Soluções em TI Software Developer | November 2021 - April
@@ -133,7 +134,7 @@ const AboutMeScreen = () => {
             <br />• Deployment and migration
           </p>
         </div>
-        <div className="min-w-[21rem] max-w-[39.5rem] my-2 bg-gradient-to-r from-dGolden via-dGolden to-dBlack h-[1px]" />
+        <FooterBar />
         <div>
           <p className="text-justify justify-end font-poppins mt-2 pl-2">
             Autonomous February 2015 - April 2018 (3 years 3 months)
@@ -143,7 +144,7 @@ const AboutMeScreen = () => {
           </p>
         </div>
       </div>
-      <div className="min-w-[21rem] mb-2 max-w-[39.5rem] bg-gradient-to-r from-dGolden via-dGolden to-dBlack h-[1px]" />
+      <FooterBar />
     </>
   );
 };
