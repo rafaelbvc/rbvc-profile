@@ -1,8 +1,5 @@
-const statusIcon = ({width, fillColor}) => {
-
-
-
-
+const statusIcon = ({ width, fillColor }) => {
+  console.log(width, fillColor);
 
   return (
     <svg

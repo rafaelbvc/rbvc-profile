@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
-import DragCloseMenu from "./menus/DragCloseMenu";
-import { useVisibilityContext } from "../contexts/useVisibilityContext";
-import StatusIcon from "./svg/statusIcon";
-import FooterBar from "./FooterBar";
-import DefaultBtn from "./buttons/DefaultBtn";
 import { useForm } from "react-hook-form";
-import { ISignInSignUpScreen } from "../interfaces/ISignInSignUpScreen";
-
+import { ISignInSignUpScreen } from "../../../interfaces/ISignInSignUpScreen";
+import { formatISODate, timeNow } from "../../../utils/handleTime";
+import {
+  activateStatusTextHandler,
+  activeStatusColorHandler,
+  activeStatusIconColorHandler,
+  activeStatusTextHandler,
+} from "../../../utils/activeStatusHandler";
+import DragCloseMenu from "../../menus/DragCloseMenu";
+import StatusIcon from "../../svg/StatusIcon";
+import FooterBar from "../../FooterBar";
+import DefaultBtn from "../../buttons/DefaultBtn";
+import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const {
-    statusColor,
-    handleActiveStatus,
     activeStatus,
     loadingState,
     handleSubmitF,
-    users,
     filledData,
+    visitorScreenType,
   } = props;
 
   const {
@@ -30,20 +34,28 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const { setSignInSignUpVisibilityState, signInSignUpVisibility } =
     useVisibilityContext();
 
+  const [users, setUsers] = useState<any>(filledData);
   const [isAuth, setIsAuth] = useState<boolean>(false);
-  const [dateNow, setDateNow] = useState("");
-  const [readOrEditInput, setReadOrEditInput] = useState(false); //editbuton
+  const [readOrEditInput, setReadOrEditInput] = useState(false);
+  const [activation, setActivation] = useState<boolean>(activeStatus);
 
-  const handleTime = () => {
-    const timeElapsed = Date.now();
-    const today = new Date(timeElapsed);
-    const isosDate = today.toISOString().slice(0, 10);
-    setDateNow(isosDate);
+  const handleUsers = () => {
+    setUsers(filledData);
+  };
+
+  const handleActiveStatus = () => {
+    if (activeStatus) {
+      setActivation(true);
+    } else {
+      setActivation(false);
+    }
   };
 
   useEffect(() => {
-    handleTime();
-  }, []);
+    timeNow();
+    handleActiveStatus();
+    handleUsers();
+  }, [activeStatus, users]);
 
   return (
     <>
@@ -51,31 +63,36 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
         textHeader="user settings"
         onClick={() => setSignInSignUpVisibilityState(" hidden")}
       />
-      <div className="flex flex-row justify-between   mt-1 px-1">
-        <button onClick={()=> handleActiveStatus} className="flex">
-          <StatusIcon width="1.5rem" fillColor={statusColor} />
+      <header className="flex flex-row justify-between   mt-1 px-1">
+        <button onClick={() => handleActiveStatus()} className="flex">
+          <StatusIcon
+            width="1.5rem"
+            fillColor={activeStatusIconColorHandler(activeStatus)}
+          />
           <p className="text-sm self-center">
-            &nbsp; {activeStatus ? "INACTIVATE" : "ACTIVATE"}
+            &nbsp; {activateStatusTextHandler(activation)}
           </p>
         </button>
         <div className="flex ">
           <p className="font-poppins text-sm self-center">STATUS: &nbsp;</p>
           <p
-            className={`font-poppins text-sm self-center text-left ${
-              activeStatus ? " text-sActive" : "text-sInactive"
-            }`}
-          >{`${activeStatus ? "ACTIVE" : "INACTIVE"}`}</p>
+            className={`font-poppins text-sm self-center text-left ${activeStatusColorHandler(
+              activation
+            )}`}
+          >
+            {activeStatusTextHandler(activation)}
+          </p>
         </div>
 
-        <p className="text-dGolden text-end">{dateNow}</p>
-      </div>
+        <p className="text-dGolden text-end">{timeNow()}</p>
+      </header>
 
       <form onSubmit={handleSubmit(filledData)}>
         <div className="flex flex-wrap md:flex-nowrap">
           <div className="flex flex-col">
             <label
               htmlFor="FirstNameInput"
-              className="px-1 whitespace-nowrap text-sm"
+              className="vLabels"
             >
               First Name
             </label>
@@ -84,7 +101,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               type="text"
               className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
               readOnly={readOrEditInput}
-              value={users ? users?.firstName : "First Name"}
+              placeholder="First Name"
+              value={users?.firstName}
               {...register("firstName", {
                 required: true,
                 maxLength: 14,
@@ -96,7 +114,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           <div className="flex flex-col">
             <label
               htmlFor="PhoneInput"
-              className="px-1 whitespace-nowrap  text-sm"
+              className="vLabels"
             >
               Phone
             </label>
@@ -105,7 +123,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               type="tel"
               className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
               readOnly={readOrEditInput}
-              value={users ? users.phone : "Last Name"}
+              placeholder="Phone"
+              value={users?.phone}
               {...register("phone", {
                 // pattern: /([0-9]{2,3})?(([0-9]{2}))([0-9]{4,5})([0-9]{4})/,
                 required: true,
@@ -117,7 +136,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
         <div className="flex flex-col">
           <label
             htmlFor="LastNameInput"
-            className=" mt-1 px-1 whitespace-nowrap  text-sm"
+            className="vLabels"
           >
             Last Name
           </label>
@@ -126,7 +145,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             type="text"
             className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
             readOnly={readOrEditInput}
-            value={users ? users.lastName : "Last Name"}
+            placeholder="Last Name"
+            value={users?.lastName}
             {...register("lastName", {
               required: true,
               maxLength: 20,
@@ -138,7 +158,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
         <div className="flex flex-col">
           <label
             htmlFor="EmailInput"
-            className=" mt-1 px-1 whitespace-nowrap  text-sm"
+            className="vLabels"
           >
             E-mail
           </label>
@@ -147,7 +167,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             type="text"
             className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
             readOnly={readOrEditInput}
-            value={users ? users.email : "E-mail"}
+            placeholder="E-mail"
+            value={users?.email}
             {...register("email", {
               // pattern:
               //   /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/,
@@ -161,7 +182,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           <div className="flex flex-col">
             <label
               htmlFor="PasswordInput"
-              className="mx-1 mt-1 px-1 whitespace-nowrap  text-sm"
+              className="vLabels"
             >
               Password
             </label>
@@ -171,7 +192,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               type="text"
               className="mx-1  px-1 border-1 border-dGoldenAlpha rounded"
               readOnly={readOrEditInput}
-              value={users ? users.password : "Password"}
+              placeholder="Password"
+              value={users?.password}
               {...register("password", {
                 // pattern:
                 //   /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
@@ -182,15 +204,16 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           <div className="flex flex-col">
             <label
               htmlFor="PasswordInput"
-              className=" mt-1 px-1 whitespace-nowrap  text-sm"
+              className="vLabels"
             >
               Created At
             </label>
             <input
               disabled
-              value={users ? users.createdAt : "Created At"}
+              placeholder="Created At"
+              value={formatISODate(users?.createdAt)}
               readOnly
-              className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
+              className="mx-1 px-1 text-right border-1 border-dGoldenAlpha rounded"
             />
           </div>
         </div>
