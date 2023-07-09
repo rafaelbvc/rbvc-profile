@@ -1,7 +1,10 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../app/api/apiSlice";
 
-const messagesAdapter: any = createEntityAdapter({});
+const messagesAdapter: any = createEntityAdapter({
+  sortComparer: (a: any, b: any) =>
+    a.completed === b.completed ? 0 : a.completed ? 1 : -1,
+});
 
 const initialState: any = messagesAdapter.getInitialState();
 
@@ -29,22 +32,56 @@ export const messagesApiSlice: any = apiSlice.injectEndpoints({
         } else return [{ type: "Message", id: "LIST" }];
       },
     }),
+    addNewMessage: builder.mutation({
+      query: (initialMessage) => ({
+        url: "/messages",
+        method: "POST",
+        body: {
+          ...initialMessage,
+        },
+      }),
+      invalidateTags: [{ type: "Message", id: "LIST" }],
+    }),
+    updateMessage: builder.mutation({
+      query: (initialMessage) => ({
+        url: "/messages",
+        type: "PATCH",
+        doby: {
+          ...initialMessage,
+        },
+      }),
+      invalidateTags: (result, error, arg) => [{ type: "Message", id: arg.id }],
+    }),
+    deleteMessage: builder.mutation({
+      query: ({ id }) => ({
+        url: "/messages",
+        type: "DELETE",
+        body: { id },
+      }),
+      invalidateTags: (result, error, arg) => [{ type: "Message", id: arg.id }],
+    }),
   }),
 });
 
-export const {useGetMessagesQuery}: any = messagesApiSlice;
+export const {
+  useGetMessagesQuery,
+  useAddNewMessageMutation,
+  useUpdateMessageMutation,
+  useDeleteMessageMutation,
+}: any = messagesApiSlice;
 
 export const selectMessagesResult: any =
   messagesApiSlice.endpoints.getMessages.select();
 
 const selectMessagesData: any = createSelector(
   selectMessagesResult,
-  messagesResult => messagesResult.data
+  (messagesResult) => messagesResult.data
 );
 
 export const {
   selectAll: selectAllMessages,
   selectById: selectMessageById,
   selectIds: selectMessageIds,
-} = messagesAdapter.getSelectors(state => selectMessagesData(state) ??
-initialState);
+} = messagesAdapter.getSelectors(
+  (state) => selectMessagesData(state) ?? initialState
+);

@@ -8,7 +8,11 @@ interface IVisibilityContext {
   contactVisibility: string;
   portifolioVisibility: string;
   hireVisibility: string;
-  settingsVisibility: string;
+
+
+  signInSignUpVisibility: string;
+
+
   visitorsMessagesVisibility: string;
   setVVisibilityState: (vvisibility: string) => void;
   setPVisibilityState: (pvisibility: string) => void;
@@ -16,7 +20,10 @@ interface IVisibilityContext {
   setContactVisibilityState: (contactVisibility: string) => void;
   setPortifolioVisibilityState: (portifolioVisibility: string) => void;
   setHireVisibilityState: (hireVisibility: string) => void;
-  setSettingsVisibilityState: (settingsVisibility: string) => void;
+
+  setSignInSignUpVisibilityState: (signInSignUpVisibility: string) => void;
+
+
   setVisitorsMessageVisibilityState: (
     visitorsMessagesVisibility: string
   ) => void;
@@ -36,7 +43,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
   const [portifolioVisibility, setPortifolioVisibility] =
     useState<string>(" hidden");
   const [hireVisibility, setHireVisibility] = useState<string>(" hidden");
-  const [settingsVisibility, setSettingsVisibility] =
+  const [signInSignUpVisibility, setSignInSignUpVisibility] =
     useState<string>(" hidden");
   const [visitorsMessagesVisibility, setVisitorsMessagesVisibility] =
     useState<string>(" hidden");
@@ -65,8 +72,8 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
     setHireVisibility(hireVisibility);
   }
 
-  function setSettingsVisibilityState(settingsVisibility: string) {
-    setSettingsVisibility(settingsVisibility);
+  function setSignInSignUpVisibilityState(signInSignUpVisibility: string) {
+    setSignInSignUpVisibility(signInSignUpVisibility);
   }
   function setVisitorsMessageVisibilityState(
     visitorsMessagesVisibility: string
@@ -83,7 +90,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         contactVisibility,
         portifolioVisibility,
         hireVisibility,
-        settingsVisibility,
+        signInSignUpVisibility,
         visitorsMessagesVisibility,
         setVVisibilityState,
         setPVisibilityState,
@@ -91,7 +98,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         setContactVisibilityState,
         setPortifolioVisibilityState,
         setHireVisibilityState,
-        setSettingsVisibilityState,
+        setSignInSignUpVisibilityState,
         setVisitorsMessageVisibilityState,
       }}
     >
