@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import useDraggable from "../hooks/useDraggable";
 import { useVisibilityContext } from "../contexts/useVisibilityContext";
 import VisitorMenu from "./menus/VisitorMenu";
@@ -6,9 +6,10 @@ import ProfileMenu from "./menus/ProfileMenu";
 import AboutMeScreen from "./screens/AboutMeScreen";
 import ContactScreen from "./screens/ContactScreen";
 import PortifolioScreen from "./screens/PortifolioScreen";
-import VisitorMessages from "./screens/messages/VisitorMessages";
+import VisitorMessages from "./screens/visitors/messages/VisitorMessages";
 import HireScreen from "./screens/HireScreen";
 import SettingsScreen from "./screens/visitors/SettingsScreen";
+import { TVisitorScreenKind } from "../types/TVisitorScreenKind";
 
 const Public = () => {
   const {
@@ -21,6 +22,9 @@ const Public = () => {
     signInSignUpVisibility,
     visitorsMessagesVisibility,
   } = useVisibilityContext();
+
+  const [visitorScreenKind, setVisitorScreenKind] =
+    useState<TVisitorScreenKind>();
 
   // const homeRef = useRef(null);
 
@@ -171,7 +175,7 @@ const Public = () => {
           onMouseMove={(e) => handleMouseMove(e, 6)}
         >
           <div className={`${signInSignUpVisibility}`}>
-            <SettingsScreen/>
+            <SettingsScreen />
           </div>
         </div>
         <div

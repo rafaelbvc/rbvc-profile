@@ -9,9 +9,7 @@ interface IVisibilityContext {
   portifolioVisibility: string;
   hireVisibility: string;
 
-
   signInSignUpVisibility: string;
-
 
   visitorsMessagesVisibility: string;
   setVVisibilityState: (vvisibility: string) => void;
@@ -22,7 +20,6 @@ interface IVisibilityContext {
   setHireVisibilityState: (hireVisibility: string) => void;
 
   setSignInSignUpVisibilityState: (signInSignUpVisibility: string) => void;
-
 
   setVisitorsMessageVisibilityState: (
     visitorsMessagesVisibility: string

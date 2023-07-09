@@ -9,7 +9,7 @@
 @keyframes bounce {
   0%,
   100% {
-    transform: translateY(-6%);
+    transform: translateY(-7%);
     animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
   }
   50% {
@@ -33,6 +33,11 @@
   line-height: 0.75rem;
 }
 
+.text-xms {
+  font-size: 0.7rem;
+  line-height: 0.9rem;
+}
+
 .border-1 {
   border-width: 1px;
 }
@@ -40,6 +45,7 @@
 textarea {
   resize: none;
 }
+
 
 .containerE {
   @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
@@ -53,3 +59,9 @@ textarea {
 .pMenus {
   @apply border-b-[0.1rem] mb-1;
 }
+
+.vLabels {
+  @apply mx-1 mt-2 px-1 whitespace-nowrap text-xms font-poppins;
+}
+
+
