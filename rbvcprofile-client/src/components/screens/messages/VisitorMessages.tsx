@@ -2,16 +2,26 @@ import { useEffect, useState } from "react";
 import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
 import DefaultBtn from "../../buttons/DefaultBtn";
 import DragCloseMenu from "../../menus/DragCloseMenu";
-import { useGetUsersQuery } from "../visitors/visitorApiSlice";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FooterBar from "../../FooterBar";
+import { useUserDataContext } from "../../../contexts/useUserDataContext";
+import CircleLoader from "../../loadingSpinners/CircleLoader";
 
 const VisitorMessages = () => {
   const { setVisitorsMessageVisibilityState } = useVisibilityContext();
 
-  const { data: usersById } = useGetUsersQuery();
-  const [users, setUsers] = useState(usersById);
+  const { userData, sucessState, errorType, loadingState } =
+    useUserDataContext();
+
+  console.log(userData);
+
+  const [users, setUsers] = useState<any>();
   const [readOrEditInput, setReadOrEditInput] = useState(false);
+
+  const handleUsers = async () => {
+    const data = await userData?.entities["648b8ab03107216e8579c631"];
+    setUsers(data);
+  };
 
   const {
     reset,
@@ -23,24 +33,20 @@ const VisitorMessages = () => {
 
   const onSubmit: SubmitHandler<any> = (data) => {
     const datas = data;
-    if (!datas.lenght) {
+    if (!datas) {
       console.log("noff data", errors);
-    } else if (errors !== undefined || errors.lenght) {
+    } else if (errors !== undefined || errors) {
       console.log("erros de erros", errors);
     }
     console.log(datas, "fwefwefedatasubmit");
   };
 
-  // const messagesWatch = watch();
-  // console.log(messagesWatch);
-
-  const handleUsers = () => {
-    setUsers(usersById?.entities["648b8ab03107216e8579c631"]);
-  };
+  const messagesWatch = watch();
+  console.log(messagesWatch);
 
   useEffect(() => {
     handleUsers();
-  }, [users]);
+  }, [loadingState]);
 
   return (
     <>
@@ -55,46 +61,55 @@ const VisitorMessages = () => {
           </p>
           <p className="font-poppins self-center text-dGolden">lastUpdate</p>
         </div>
-        <form className="mt-1 flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-          <input
-            // defaultValue={"title"}
-            placeholder="title"
-            className="px-1 mb-1 font-poppings  text-base border-1 border-dGoldenAlpha rounded min-w-[21rem]"
-            type="text"
-            readOnly={readOrEditInput}
-            {...register("titleMessage", { maxLength: 30, min: 6 })}
-          />
-          <textarea
-            // defaultValue={"type your message here..."}
-            id="TextMessage"
-            placeholder="type your message here..."
-            className="px-1 font-poppings  text-base border-1 border-dGoldenAlpha rounded min-w-[21rem]"
-            maxLength={5000}
-            rows={10}
-            spellCheck={true}
-            readOnly={readOrEditInput}
-            wrap="hard"
-            {...register("textMessage")}
-          />
-          <menu className="justify-between">
-            <DefaultBtn
-              textBtn="edit"
-              onClick={() => setReadOrEditInput(false)}
-            />
-            <DefaultBtn
-              textBtn="save"
-              onClick={() => setReadOrEditInput(true)}
-            />
-            <DefaultBtn
-              textBtn="reset"
-              onClick={() => {
-                reset();
-                setReadOrEditInput(false);
-              }}
-            />
-            <DefaultBtn textBtn="submit" type="subimt" />
-          </menu>
-        </form>
+        <>
+          {loadingState ? (
+            <CircleLoader isLoading={loadingState} />
+          ) : (
+            <form
+              className="mt-1 flex flex-col"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <input
+                // defaultValue={"title"}
+                placeholder="title"
+                className="px-1 mb-1 font-poppings  text-base border-1 border-dGoldenAlpha rounded min-w-[21rem]"
+                type="text"
+                readOnly={readOrEditInput}
+                {...register("titleMessage", { maxLength: 30, min: 6 })}
+              />
+              <textarea
+                // defaultValue={"type your message here..."}
+                id="TextMessage"
+                placeholder="type your message here..."
+                className="px-1 font-poppings  text-base border-1 border-dGoldenAlpha rounded min-w-[21rem]"
+                maxLength={5000}
+                rows={10}
+                spellCheck={true}
+                readOnly={readOrEditInput}
+                wrap="hard"
+                {...register("textMessage")}
+              />
+              <menu className="justify-between">
+                <DefaultBtn
+                  textBtn="edit"
+                  onClick={() => setReadOrEditInput(false)}
+                />
+                <DefaultBtn
+                  textBtn="save"
+                  onClick={() => setReadOrEditInput(true)}
+                />
+                <DefaultBtn
+                  textBtn="reset"
+                  onClick={() => {
+                    reset();
+                    setReadOrEditInput(false);
+                  }}
+                />
+                <DefaultBtn textBtn="submit" type="subimt" />
+              </menu>
+            </form>
+          )}
+        </>
       </div>
       <FooterBar />
     </>

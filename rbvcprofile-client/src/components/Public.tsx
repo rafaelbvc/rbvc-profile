@@ -8,7 +8,6 @@ import ContactScreen from "./screens/ContactScreen";
 import PortifolioScreen from "./screens/PortifolioScreen";
 import VisitorMessages from "./screens/messages/VisitorMessages";
 import HireScreen from "./screens/HireScreen";
-import SettingsScreenData from "./screens/visitors/SettingsScreenData";
 import SettingsScreen from "./screens/visitors/SettingsScreen";
 
 const Public = () => {
@@ -19,7 +18,7 @@ const Public = () => {
     contactVisibility,
     portifolioVisibility,
     hireVisibility,
-    settingsVisibility,
+    signInSignUpVisibility,
     visitorsMessagesVisibility,
   } = useVisibilityContext();
 
@@ -99,7 +98,7 @@ const Public = () => {
     aboutVisibility,
     contactVisibility,
     hireVisibility,
-    settingsVisibility,
+    signInSignUpVisibility,
     visitorsMessagesVisibility,
   ]);
   return (
@@ -171,7 +170,7 @@ const Public = () => {
           onMouseDown={(e) => handleMouseDown(e, 6)}
           onMouseMove={(e) => handleMouseMove(e, 6)}
         >
-          <div className={`${settingsVisibility}`}>
+          <div className={`${signInSignUpVisibility}`}>
             <SettingsScreen/>
           </div>
         </div>
