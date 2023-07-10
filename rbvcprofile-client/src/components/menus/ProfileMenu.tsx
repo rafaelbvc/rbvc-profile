@@ -3,6 +3,7 @@ import DefaultBtn from "../buttons/DefaultBtn";
 import DragCloseMenu from "./DragCloseMenu";
 import { handleVisibility } from "../../utils/visibilityHandler";
 import { useEffect, useRef } from "react";
+import FooterBar from "../FooterBar";
 
 const ProfileMenu = () => {
   const {

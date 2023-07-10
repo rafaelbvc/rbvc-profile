@@ -10,6 +10,7 @@ import VisitorMessages from "./screens/visitors/messages/VisitorMessages";
 import HireScreen from "./screens/HireScreen";
 import SettingsScreen from "./screens/visitors/SettingsScreen";
 import { TVisitorScreenKind } from "../types/TVisitorScreenKind";
+import SignInScreen from "./screens/visitors/SignInScreen";
 
 const Public = () => {
   const {
@@ -21,12 +22,11 @@ const Public = () => {
     hireVisibility,
     signInSignUpVisibility,
     visitorsMessagesVisibility,
+    signInVisibility,
   } = useVisibilityContext();
 
-  const [visitorScreenKind, setVisitorScreenKind] =
-    useState<TVisitorScreenKind>();
-
-  // const homeRef = useRef(null);
+  // const [visitorScreenKind, setVisitorScreenKind] =
+  //   useState<TVisitorScreenKind>();
 
   const draggableRef1 = useRef(null);
   const draggableRef2 = useRef(null);
@@ -36,6 +36,7 @@ const Public = () => {
   const draggableRef6 = useRef(null);
   const draggableRef7 = useRef(null);
   const draggableRef8 = useRef(null);
+  const draggableRef9 = useRef(null);
 
   const {
     registerElement,
@@ -69,6 +70,9 @@ const Public = () => {
     if (draggableRef8.current) {
       registerElement(draggableRef8.current);
     }
+    if (draggableRef9.current) {
+      registerElement(draggableRef9.current);
+    }
 
     return () => {
       if (draggableRef1.current) {
@@ -95,6 +99,9 @@ const Public = () => {
       if (draggableRef8.current) {
         unregisterElement(draggableRef8.current);
       }
+      if (draggableRef9.current) {
+        unregisterElement(draggableRef9.current);
+      }
     };
   }, [
     vvisibility,
@@ -104,12 +111,11 @@ const Public = () => {
     hireVisibility,
     signInSignUpVisibility,
     visitorsMessagesVisibility,
+    signInVisibility,
   ]);
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
-      {/* <div className="h-[5rem] w-screen" /> */}
       <div className="containerE box-content mt-[5rem]">
-        {/* <div  ref={homeRef} className="top-[6rem]"/> */}
         <div
           ref={draggableRef1}
           className={`contentE ${pvisibility} top-[5.5rem] `}
@@ -130,27 +136,27 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef3}
-          className="absolute z-40 top-[9rem]"
+          className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 2)}
           onMouseMove={(e) => handleMouseMove(e, 2)}
         >
-          <div className={`${aboutVisibility}`}>
+          <div className={aboutVisibility}>
             <AboutMeScreen />
           </div>
         </div>
         <div
           ref={draggableRef4}
-          className="absolute   z-40  top-[9rem]"
+          className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 3)}
           onMouseMove={(e) => handleMouseMove(e, 3)}
         >
-          <div className={`${contactVisibility}`}>
+          <div className={contactVisibility}>
             <ContactScreen />
           </div>
         </div>
         <div
           ref={draggableRef5}
-          className="absolute   z-40  top-[9rem]"
+          className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 4)}
           onMouseMove={(e) => handleMouseMove(e, 4)}
         >
@@ -160,32 +166,42 @@ const Public = () => {
         </div>
         <div
           ref={draggableRef6}
-          className="absolute   z-40   top-[9rem]"
+          className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 5)}
           onMouseMove={(e) => handleMouseMove(e, 5)}
         >
-          <div className={`${hireVisibility}`}>
+          <div className={hireVisibility}>
             <HireScreen />
           </div>
         </div>
         <div
           ref={draggableRef7}
-          className="absolute z-40 top-[9rem]"
+          className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 6)}
           onMouseMove={(e) => handleMouseMove(e, 6)}
         >
-          <div className={`${signInSignUpVisibility}`}>
+          <div className={signInSignUpVisibility}>
             <SettingsScreen />
           </div>
         </div>
         <div
           ref={draggableRef8}
-          className="absolute z-40 top-[9rem]"
+          className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 7)}
           onMouseMove={(e) => handleMouseMove(e, 7)}
         >
-          <div className={`${visitorsMessagesVisibility}`}>
+          <div className={visitorsMessagesVisibility}>
             <VisitorMessages />
+          </div>
+        </div>
+        <div
+          ref={draggableRef9}
+          className={`vDraggables`}
+          onMouseDown={(e) => handleMouseDown(e, 8)}
+          onMouseMove={(e) => handleMouseMove(e, 8)}
+        >
+          <div className={signInVisibility}>
+            <SignInScreen />
           </div>
         </div>
       </div>

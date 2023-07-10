@@ -99,7 +99,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             <input
               id="FirstNameInput"
               type="text"
-              className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
+              className="vInputs"
               readOnly={readOrEditInput}
               placeholder="First Name"
               value={users?.firstName}
@@ -121,7 +121,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             <input
               id="PhoneInput"
               type="tel"
-              className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
+              className="vInputs"
               readOnly={readOrEditInput}
               placeholder="Phone"
               value={users?.phone}
@@ -143,7 +143,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           <input
             id="LastNameInput"
             type="text"
-            className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
+            className="vInputs"
             readOnly={readOrEditInput}
             placeholder="Last Name"
             value={users?.lastName}
@@ -165,7 +165,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           <input
             id="EmailInput"
             type="text"
-            className="mx-1 px-1 border-1 border-dGoldenAlpha rounded"
+            className="vInputs"
             readOnly={readOrEditInput}
             placeholder="E-mail"
             value={users?.email}
@@ -190,7 +190,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             <input
               id="PasswordInput"
               type="text"
-              className="mx-1  px-1 border-1 border-dGoldenAlpha rounded"
+              className="vInputs"
               readOnly={readOrEditInput}
               placeholder="Password"
               value={users?.password}
@@ -213,7 +213,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               placeholder="Created At"
               value={formatISODate(users?.createdAt)}
               readOnly
-              className="mx-1 px-1 text-right border-1 border-dGoldenAlpha rounded"
+              className="vInputs text-right"
             />
           </div>
         </div>

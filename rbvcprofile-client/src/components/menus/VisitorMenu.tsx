@@ -2,14 +2,17 @@ import { useVisibilityContext } from "../../contexts/useVisibilityContext";
 import DefaultBtn from "../buttons/DefaultBtn";
 import DragCloseMenu from "./DragCloseMenu";
 import { handleVisibility } from "../../utils/visibilityHandler";
+import FooterBar from "../FooterBar";
 
 const VisitorMenu = () => {
   const {
     signInSignUpVisibility,
     visitorsMessagesVisibility,
+    signInVisibility,
     setVVisibilityState,
     setSignInSignUpVisibilityState,
     setVisitorsMessageVisibilityState,
+    setSignInVisibilityState,
   } = useVisibilityContext();
 
   return (
@@ -29,7 +32,13 @@ const VisitorMenu = () => {
             )
           }
         />
-        <DefaultBtn textBtn="Sign In" styleBtn=" self-center" />
+        <DefaultBtn
+          textBtn="Sign In"
+          styleBtn=" self-center"
+          onClick={() =>
+            setSignInVisibilityState(handleVisibility(signInVisibility))
+          }
+        />
         <DefaultBtn textBtn="Sign Up" styleBtn=" self-center" />
         <DefaultBtn
           textBtn="Messages"

@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .mainLayout {
-  @apply ""
-} */
-
 @keyframes bounce {
   0%,
   100% {
@@ -46,14 +42,13 @@ textarea {
   resize: none;
 }
 
-
 .containerE {
   @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
 }
 
 /* mt-[5rem] - test */
 .contentE {
-  @apply absolute justify-around  left-0 flex-row   w-screen  max-w-[28.75rem] h-[2rem] cursor-pointer z-30;
+  @apply absolute justify-around  left-0 flex-row   w-screen  max-w-[28.75rem] h-[2rem] cursor-pointer z-50;
 }
 
 .pMenus {
@@ -64,4 +59,10 @@ textarea {
   @apply mx-1 mt-2 px-1 whitespace-nowrap text-xms font-poppins;
 }
 
+.vDraggables {
+  @apply absolute z-40 top-[9rem];
+}
 
+.vInputs {
+  @apply mx-1 px-1 border-1 border-dGoldenAlpha rounded;
+}

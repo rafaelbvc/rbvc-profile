@@ -8,22 +8,20 @@ interface IVisibilityContext {
   contactVisibility: string;
   portifolioVisibility: string;
   hireVisibility: string;
-
   signInSignUpVisibility: string;
-
   visitorsMessagesVisibility: string;
+  signInVisibility: string;
   setVVisibilityState: (vvisibility: string) => void;
   setPVisibilityState: (pvisibility: string) => void;
   setAboutVisibilityState: (aboutVisibility: string) => void;
   setContactVisibilityState: (contactVisibility: string) => void;
   setPortifolioVisibilityState: (portifolioVisibility: string) => void;
   setHireVisibilityState: (hireVisibility: string) => void;
-
   setSignInSignUpVisibilityState: (signInSignUpVisibility: string) => void;
-
   setVisitorsMessageVisibilityState: (
     visitorsMessagesVisibility: string
   ) => void;
+  setSignInVisibilityState: (signInVisibility: string) => void;
 }
 
 interface IVisibilityProvider {
@@ -44,6 +42,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
     useState<string>(" hidden");
   const [visitorsMessagesVisibility, setVisitorsMessagesVisibility] =
     useState<string>(" hidden");
+  const [signInVisibility, setSignInVisibility] = useState<string>(" hidden");
 
   function setVVisibilityState(vvisibility: string) {
     setVVisibility(vvisibility);
@@ -77,6 +76,9 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
   ) {
     setVisitorsMessagesVisibility(visitorsMessagesVisibility);
   }
+  function setSignInVisibilityState(signInVisibility: string) {
+    setSignInVisibility(signInVisibility);
+  }
 
   return (
     <VisibilityContext.Provider
@@ -89,6 +91,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         hireVisibility,
         signInSignUpVisibility,
         visitorsMessagesVisibility,
+        signInVisibility,
         setVVisibilityState,
         setPVisibilityState,
         setAboutVisibilityState,
@@ -97,6 +100,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         setHireVisibilityState,
         setSignInSignUpVisibilityState,
         setVisitorsMessageVisibilityState,
+        setSignInVisibilityState,
       }}
     >
       {children}
