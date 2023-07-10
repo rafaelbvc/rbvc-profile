@@ -11,8 +11,8 @@ const SettingsScreen = () => {
   const [activeStatus, setActiveStatus] = useState<boolean>(); //status
   const [isLoading, setIsLoading] = useState<boolean>();
 
-  const handleUsers = () => {
-    const data = userData?.entities["648b8ab03107216e8579c631"];
+  const handleUsers = async () => {
+    const data = await userData?.entities["648b8ab03107216e8579c631"];
     // todo bring the Authed user
     setUsers(data);
   };
@@ -55,8 +55,6 @@ const SettingsScreen = () => {
 };
 
 export default SettingsScreen;
-
-
 
 //phone  mascara validado pais area e formato Mobile
 //password  *** hash
