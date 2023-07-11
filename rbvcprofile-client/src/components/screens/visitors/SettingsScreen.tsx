@@ -1,41 +1,56 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useUserDataContext } from "../../../contexts/useUserDataContext";
 import SignInSignUpScreen from "./SignInSignUpScreen";
 import CircleLoader from "../../loadingSpinners/CircleLoader";
+import DragCloseMenu from "../../menus/DragCloseMenu";
+import FooterBar from "../../FooterBar";
+import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
+import StatusIcon from "../../svg/StatusIcon";
+import {
+  activateStatusTextHandler,
+  activeStatusColorHandler,
+  activeStatusIconColorHandler,
+  activeStatusTextHandler,
+} from "../../../utils/activeStatusHandler";
+import { timeNow } from "../../../utils/handleTime";
 
 const SettingsScreen = () => {
-  const { userData, loadingState, errorType, sucessState } =
-    useUserDataContext();
+  const { userData, loadingState, errorType } = useUserDataContext();
 
-  const [users, setUsers] = useState<any>();
-  const [activeStatus, setActiveStatus] = useState<boolean>(); //status
-  const [isLoading, setIsLoading] = useState<boolean>();
+  const data = useMemo(
+    () => userData?.entities["648b8ab03107216e8579c631"],
+    [userData]
+  ); // todo bring the Authed user
 
-  const handleUsers = async () => {
-    const data = await userData?.entities["648b8ab03107216e8579c631"];
-    // todo bring the Authed user
-    setUsers(data);
+  const { setSettingsVisibilityState } = useVisibilityContext();
+
+  const [users, setUsers] = useState<any>(data);
+  const [activeStatus, setActiveStatus] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const handleUsers = (dataUsers) => {
+    setUsers(dataUsers);
   };
 
   const handleActiveStatus = () => {
-    const active = users?.active;
-    setActiveStatus(active);
+    const active = users.active;
+    if (active !== undefined && active) {
+      setActiveStatus(active);
+    } else if (!active) {
+      setActiveStatus(false);
+    } else return;
   };
 
-  const handleLoading = () => {
-    setIsLoading(loadingState);
+  const handleLoading = (loadState) => {
+    setIsLoading(loadState);
   };
 
-  const renderContent = loadingState ? (
+  const renderContent = isLoading ? (
     <CircleLoader isLoading={isLoading} />
   ) : errorType ? (
     <p>{`Unfortunately we got that problem ${errorType}`}</p>
   ) : (
-    <SignInSignUpScreen
-      activeStatus={activeStatus}
-      loadingState={loadingState}
-      filledData={users}
-    />
+    <SignInSignUpScreen filledData={users} />
   );
 
   // const onSubmit = async (data) => {
@@ -46,12 +61,43 @@ const SettingsScreen = () => {
   // console.log(onWatch);
 
   useEffect(() => {
-    handleActiveStatus();
-    handleUsers();
-    handleLoading();
-  }, [loadingState, errorType, sucessState]);
+    handleLoading(loadingState);
+    handleUsers(data);
+  }, [loadingState, data]);
+  return (
+    <>
+      <DragCloseMenu
+        textHeader="visitor settings"
+        onClick={() => setSettingsVisibilityState(" hidden")}
+      />
+      <header className="flex flex-row justify-between   mt-1 px-1">
+        <button onClick={() => handleActiveStatus()} className="flex">
+          <StatusIcon
+            width="1.5rem"
+            fillColor={activeStatusIconColorHandler(activeStatus)}
+          />
+          <p className="text-sm self-center">
+            &nbsp; {activateStatusTextHandler(activeStatus)}
+          </p>
+        </button>
+        <div className="flex ">
+          <p className="font-poppins text-sm self-center">STATUS: &nbsp;</p>
+          <p
+            className={`font-poppins text-sm self-center text-left ${activeStatusColorHandler(
+              activeStatus
+            )}`}
+          >
+            {activeStatusTextHandler(activeStatus)}
+          </p>
+        </div>
 
-  return <>{renderContent}</>;
+        <p className="text-dGolden text-end">{timeNow()}</p>
+      </header>
+
+      {renderContent}
+      <FooterBar />
+    </>
+  );
 };
 
 export default SettingsScreen;
