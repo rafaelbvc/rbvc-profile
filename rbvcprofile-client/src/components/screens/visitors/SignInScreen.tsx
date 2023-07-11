@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
-import { handleVisibility } from "../../../utils/visibilityHandler";
 import FooterBar from "../../FooterBar";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 import DefaultBtn from "../../buttons/DefaultBtn";
@@ -29,7 +28,6 @@ const SignInScreen = () => {
         <input
           type="text"
           className="vInputs"
-          required
           id="EmailValidationInput"
           {...register("emailValidation", {
             // pattern:
@@ -46,7 +44,6 @@ const SignInScreen = () => {
         <input
           type="text"
           className="vInputs"
-          required
           id="PasswordValidationInput"
           {...register("passwordValidation", {
             // pattern:

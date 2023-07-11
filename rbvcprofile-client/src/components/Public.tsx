@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import useDraggable from "../hooks/useDraggable";
 import { useVisibilityContext } from "../contexts/useVisibilityContext";
 import VisitorMenu from "./menus/VisitorMenu";
@@ -9,8 +9,8 @@ import PortifolioScreen from "./screens/PortifolioScreen";
 import VisitorMessages from "./screens/visitors/messages/VisitorMessages";
 import HireScreen from "./screens/HireScreen";
 import SettingsScreen from "./screens/visitors/SettingsScreen";
-import { TVisitorScreenKind } from "../types/TVisitorScreenKind";
 import SignInScreen from "./screens/visitors/SignInScreen";
+import SignUpScreen from "./screens/visitors/SignUpScreen";
 
 const Public = () => {
   const {
@@ -20,23 +20,25 @@ const Public = () => {
     contactVisibility,
     portifolioVisibility,
     hireVisibility,
-    signInSignUpVisibility,
+    settingsVisibility,
     visitorsMessagesVisibility,
     signInVisibility,
+    signUpVisibility,
   } = useVisibilityContext();
 
   // const [visitorScreenKind, setVisitorScreenKind] =
   //   useState<TVisitorScreenKind>();
 
-  const draggableRef1 = useRef(null);
-  const draggableRef2 = useRef(null);
-  const draggableRef3 = useRef(null);
-  const draggableRef4 = useRef(null);
-  const draggableRef5 = useRef(null);
-  const draggableRef6 = useRef(null);
-  const draggableRef7 = useRef(null);
-  const draggableRef8 = useRef(null);
-  const draggableRef9 = useRef(null);
+  const draggableRef1 = useRef<HTMLDivElement>(null);
+  const draggableRef2 = useRef<HTMLDivElement>(null);
+  const draggableRef3 = useRef<HTMLDivElement>(null);
+  const draggableRef4 = useRef<HTMLDivElement>(null);
+  const draggableRef5 = useRef<HTMLDivElement>(null);
+  const draggableRef6 = useRef<HTMLDivElement>(null);
+  const draggableRef7 = useRef<HTMLDivElement>(null);
+  const draggableRef8 = useRef<HTMLDivElement>(null);
+  const draggableRef9 = useRef<HTMLDivElement>(null);
+  const draggableRef10 = useRef<HTMLDivElement>(null);
 
   const {
     registerElement,
@@ -73,7 +75,9 @@ const Public = () => {
     if (draggableRef9.current) {
       registerElement(draggableRef9.current);
     }
-
+    if (draggableRef10.current) {
+      registerElement(draggableRef10.current);
+    }
     return () => {
       if (draggableRef1.current) {
         unregisterElement(draggableRef1.current);
@@ -102,17 +106,12 @@ const Public = () => {
       if (draggableRef9.current) {
         unregisterElement(draggableRef9.current);
       }
+      if (draggableRef10.current) {
+        unregisterElement(draggableRef10.current);
+      }
     };
-  }, [
-    vvisibility,
-    pvisibility,
-    aboutVisibility,
-    contactVisibility,
-    hireVisibility,
-    signInSignUpVisibility,
-    visitorsMessagesVisibility,
-    signInVisibility,
-  ]);
+  }, []);
+
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
       <div className="containerE box-content mt-[5rem]">
@@ -180,7 +179,7 @@ const Public = () => {
           onMouseDown={(e) => handleMouseDown(e, 6)}
           onMouseMove={(e) => handleMouseMove(e, 6)}
         >
-          <div className={signInSignUpVisibility}>
+          <div className={settingsVisibility}>
             <SettingsScreen />
           </div>
         </div>
@@ -202,6 +201,16 @@ const Public = () => {
         >
           <div className={signInVisibility}>
             <SignInScreen />
+          </div>
+        </div>
+        <div
+          ref={draggableRef10}
+          className={`vDragables`}
+          onMouseDown={(e) => handleMouseDown(e, 9)}
+          onMouseMove={(e) => handleMouseMove(e, 9)}
+        >
+          <div className={signUpVisibility}>
+            <SignUpScreen />
           </div>
         </div>
       </div>
