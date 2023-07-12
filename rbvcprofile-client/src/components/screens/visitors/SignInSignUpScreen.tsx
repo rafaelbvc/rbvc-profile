@@ -5,7 +5,7 @@ import { formatISODate } from "../../../utils/handleTime";
 import DefaultBtn from "../../buttons/DefaultBtn";
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
-  const { filledData } = props;
+  const { filledData, editVisitor, visitorData } = props;
 
   const {
     // reset,
@@ -16,11 +16,13 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   } = useForm();
 
   const [users, setUsers] = useState<any>(filledData);
-  const [readOrEditInput, setReadOrEditInput] = useState(false);
+  const [readOrEditInput, setReadOrEditInput] = useState<boolean>(editVisitor);
 
   const handleUsers = (userData) => {
     setUsers(userData);
   };
+
+  console.log(editVisitor, "editvisitor");
 
   useEffect(() => {
     handleUsers(filledData);
@@ -134,26 +136,6 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             />
           </div>
         </div>
-        <menu className="mt-1 ml-5">
-          <DefaultBtn
-            textBtn="messages"
-            className="w-[200px]"
-            // onClick={() =>
-            //   setVisitorsMessageVisibilityState(
-            //     handleVisibility(visitorsMessagesVisibility)
-            //   )
-            // } todo
-          />
-          <DefaultBtn
-            textBtn="edit"
-            onClick={() => setReadOrEditInput(false)}
-          />
-          <DefaultBtn
-            textBtn="save"
-            type="submit"
-            onClick={() => setReadOrEditInput(true)}
-          />
-        </menu>
       </form>
     </>
   );

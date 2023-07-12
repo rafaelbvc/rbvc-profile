@@ -45,6 +45,8 @@ const VisitorMessages = () => {
   // const messagesWatch = watch();
   // console.log(messagesWatch);
 
+  const renderContent = 
+
   useEffect(() => {
     handleUsers();
   }, [loadingState, userData]);
@@ -96,17 +98,13 @@ const VisitorMessages = () => {
                   onClick={() => setReadOrEditInput(false)}
                 />
                 <DefaultBtn
-                  textBtn="save"
-                  onClick={() => setReadOrEditInput(true)}
-                />
-                <DefaultBtn
                   textBtn="reset"
                   onClick={() => {
                     reset();
                     setReadOrEditInput(false);
                   }}
                 />
-                <DefaultBtn textBtn="submit" type="subimt" />
+                <DefaultBtn textBtn="create" type="subimt" />
               </menu>
             </form>
           )}
