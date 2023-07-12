@@ -1,9 +1,8 @@
-import { useRef, useEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import useDraggable from "../hooks/useDraggable";
 import { useVisibilityContext } from "../contexts/useVisibilityContext";
 import VisitorMenu from "./menus/VisitorMenu";
 import ProfileMenu from "./menus/ProfileMenu";
-import AboutMeScreen from "./screens/AboutMeScreen";
 import ContactScreen from "./screens/ContactScreen";
 import PortifolioScreen from "./screens/PortifolioScreen";
 import VisitorMessages from "./screens/visitors/messages/VisitorMessages";
@@ -11,6 +10,7 @@ import HireScreen from "./screens/HireScreen";
 import SettingsScreen from "./screens/visitors/SettingsScreen";
 import SignInScreen from "./screens/visitors/SignInScreen";
 import SignUpScreen from "./screens/visitors/SignUpScreen";
+import AboutMeContainer from "./AboutMeContainer";
 
 const Public = () => {
   const {
@@ -24,6 +24,7 @@ const Public = () => {
     visitorsMessagesVisibility,
     signInVisibility,
     signUpVisibility,
+    pdfVisibility
   } = useVisibilityContext();
 
   // const [visitorScreenKind, setVisitorScreenKind] =
@@ -58,7 +59,7 @@ const Public = () => {
     handleMouseMove,
   } = useDraggable();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (draggableRef1Current) {
       registerElement(draggableRef1Current);
     }
@@ -136,7 +137,6 @@ const Public = () => {
     draggableRef10Current,
   ]);
 
-  console.log(signUpVisibility, "visibi")
 
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
@@ -166,7 +166,7 @@ const Public = () => {
           onMouseMove={(e) => handleMouseMove(e, 2)}
         >
           <div className={aboutVisibility}>
-            <AboutMeScreen />
+            <AboutMeContainer />
           </div>
         </section>
         <section
