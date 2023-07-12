@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { ForwardRefRenderFunction, forwardRef, useState } from "react";
 import DragCloseMenu from "../menus/DragCloseMenu";
 import PhotoMyProfileA from "./aboutMePhotos/PhotoMyProfileA.jpg";
 import MongoDBLogo from "../svg/MongoDBLogo";
@@ -14,7 +13,8 @@ import { useVisibilityContext } from "../../contexts/useVisibilityContext";
 import FooterBar from "../FooterBar";
 
 
-const AboutMeScreen = () => {
+const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (props,ref) => {
+
   const { setAboutVisibilityState } = useVisibilityContext();
 
   const [bigIMG, setBigIMG] = useState<boolean>(false);
@@ -28,7 +28,7 @@ const AboutMeScreen = () => {
   };
 
   return (
-    <>
+    <div ref={ref}>
       <DragCloseMenu
         textHeader={"about"}
         onClick={() => setAboutVisibilityState(" hidden")}
@@ -47,13 +47,13 @@ const AboutMeScreen = () => {
               }`}
               onClick={() => handleBigImg(bigIMG)}
             />
-            <div className="mr-0 flex mb-1 justify-center">
+            <title className="mr-0 flex mb-1 justify-center">
               <p className=" font-poppins font-bold my-5">Skills &</p>
               <p className=" font-poppins text-dGolden font-bold my-5">
                 &nbsp; Tools
               </p>
-            </div>
-            <div className="flex justify-center flex-row flex-wrap gap-4">
+            </title>
+            <section className="flex justify-center flex-row flex-wrap gap-4">
               <JavaScriptLogo width={"5rem"} />
               <MongoDBLogo width={"5rem"} />
               <NextLogo width={"5rem"} />
@@ -62,41 +62,44 @@ const AboutMeScreen = () => {
               <ReactLogo width={"5rem"} />
               <TailwindCSSLogo width={"5rem"} />
               <TypeScriptLogo width={"5rem"} />
-            </div>
+            </section>
           </div>
           <div className="p-1">
-            <div className="mr-0 flex mb-1 justify-end">
+            <title className="mr-0 flex mb-1 justify-end">
               <p className=" font-poppins font-bold">Full Stack </p>
               <p className=" font-poppins text-dGolden font-bold">
                 &nbsp; Developer
               </p>
-            </div>
-            <p className="text-justify font-poppins mt-2 pl-2">
-              As a ReactJS, NodeJS and Next, Full-stack developer, I have a
-              strong background in building full-fledged web applications. With
-              advanced knowledge in React, I can create interactive and
-              responsive user interfaces while integrating with backend APIs and
-              services. Leveraging NextJS, I optimize performance and rendering,
-              ensuring a high-quality user experience. I have experience working
-              in agile teams, collaborating effectively to deliver projects on
-              time and within requirements. I tackle complex technical
-              challenges and find innovative solutions for specific problems.
-              Furthermore, I stay up-to-date with the latest development
-              practices, actively participating in communities and constantly
-              seeking to expand my technical expertise. I am passionate about
-              learning and applying new technologies, ensuring that my work
-              aligns with the latest industry trends. I am available for
-              challenging opportunities as a React, NodeJS and NextJS,
-              Full-stack developer, and I am excited to contribute to project
-              success with my experience and skills.
-            </p>
-            <div className="mr-0 flex mb-1 justify-end">
+            </title>
+            <section>
+              <p className="text-justify font-poppins mt-2 pl-2">
+                As a ReactJS, NodeJS and Next, Full-stack developer, I have a
+                strong background in building full-fledged web applications.
+                With advanced knowledge in React, I can create interactive and
+                responsive user interfaces while integrating with backend APIs
+                and services. Leveraging NextJS, I optimize performance and
+                rendering, ensuring a high-quality user experience. I have
+                experience working in agile teams, collaborating effectively to
+                deliver projects on time and within requirements. I tackle
+                complex technical challenges and find innovative solutions for
+                specific problems. Furthermore, I stay up-to-date with the
+                latest development practices, actively participating in
+                communities and constantly seeking to expand my technical
+                expertise. I am passionate about learning and applying new
+                technologies, ensuring that my work aligns with the latest
+                industry trends. I am available for challenging opportunities as
+                a React, NodeJS and NextJS, Full-stack developer, and I am
+                excited to contribute to project success with my experience and
+                skills.
+              </p>
+            </section>
+            <title className="mr-0 flex mb-1 justify-end">
               <p className=" font-poppins font-bold">Work </p>
               <p className=" font-poppins text-dGolden font-bold">
                 &nbsp; Experience
               </p>
-            </div>
-            <div>
+            </title>
+            <section>
               <p className="text-justify justify-end font-poppins mt-2 pl-2">
                 RBVC Soluções Tecnológicas Freelance Web Developer | May 2023 -
                 Present (1 month)
@@ -105,11 +108,11 @@ const AboutMeScreen = () => {
                 and FullStack <br />• Knowledge of SQL and NoSQL databases
                 <br />• Experience with Git and DevOps
               </p>
-            </div>
+            </section>
             <FooterBar />
           </div>
         </div>
-        <div>
+        <section>
           <p className="text-justify justify-end font-poppins mt-2 pl-2">
             MeuCompromisso Fullstack & Mobile Developer | May 2022 - May 2023 (1
             year 1 month)
@@ -122,9 +125,9 @@ const AboutMeScreen = () => {
             <br />• Publishing on-demand in Production, Play Store, and App
             Store
           </p>
-        </div>
+        </section>
         <FooterBar />
-        <div>
+        <section>
           <p className="text-justify justify-end font-poppins mt-2 pl-2">
             Cadmus Soluções em TI Software Developer | November 2021 - April
             2022 (6 months)
@@ -133,7 +136,7 @@ const AboutMeScreen = () => {
             <br />• JUnit for functional testing
             <br />• Deployment and migration
           </p>
-        </div>
+        </section>
         <FooterBar />
         <div>
           <p className="text-justify justify-end font-poppins mt-2 pl-2">
@@ -145,8 +148,8 @@ const AboutMeScreen = () => {
         </div>
       </div>
       <FooterBar />
-    </>
+    </div>
   );
 };
 
-export default AboutMeScreen;
+export default forwardRef(AboutMeScreen);
