@@ -5,10 +5,10 @@ import { formatISODate } from "../../../utils/handleTime";
 import DefaultBtn from "../../buttons/DefaultBtn";
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
-  const { filledData, editVisitor, visitorNewData } = props;
+  const { filledData, editVisitor, visitorNewData, resetForm, submitForm } = props;
 
   const {
-    // reset,
+    reset,
     register,
     handleSubmit,
     // watch,
@@ -18,11 +18,20 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const [users, setUsers] = useState<any>(filledData);
   const [readOrEditInput, setReadOrEditInput] = useState<boolean>(editVisitor);
 
+  // const tracking = watch()
+  // console.log(tracking,"observando o formulario")
+
   const handleUsers = (userData) => {
     setUsers(userData);
   };
 
-  console.log(editVisitor, "editvisitor");
+  useEffect(()=>{
+    handleSubmit(filledData);
+  },[submitForm])
+
+  useEffect(() => {
+    reset();
+  }, [resetForm]);
 
   useEffect(() => {
     handleUsers(filledData);
@@ -30,7 +39,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(filledData)}>
+      <form >
         <div className="flex flex-wrap md:flex-nowrap">
           <div className="flex flex-col">
             <label htmlFor="FirstNameInput" className="vLabels">

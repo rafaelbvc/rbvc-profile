@@ -137,7 +137,6 @@ const Public = () => {
     draggableRef10Current,
   ]);
 
-  console.log(signUpVisibility, "visibi");
 
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">

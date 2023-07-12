@@ -35,11 +35,11 @@ const VisitorMessages = () => {
   const onSubmit: SubmitHandler<any> = (data) => {
     const datas = data;
     if (!datas) {
-      console.log("noff data", errors);
+      console.log("No data", errors);
     } else if (errors !== undefined || errors) {
-      console.log("erros de erros", errors);
+      console.log("Errors", errors);
     }
-    console.log(datas, "fwefwefedatasubmit");
+    console.log(datas, "Users Data");
   };
 
   // const messagesWatch = watch();

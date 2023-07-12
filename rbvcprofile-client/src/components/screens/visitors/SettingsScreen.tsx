@@ -55,7 +55,6 @@ const SettingsScreen = () => {
     }
   };
 
-  console.log(editVisitor, "sett");
 
   const renderContent = isLoading ? (
     <CircleLoader isLoading={isLoading} />
