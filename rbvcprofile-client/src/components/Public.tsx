@@ -40,6 +40,17 @@ const Public = () => {
   const draggableRef9 = useRef<HTMLDivElement>(null);
   const draggableRef10 = useRef<HTMLDivElement>(null);
 
+  const draggableRef1Current = draggableRef1.current;
+  const draggableRef2Current = draggableRef2.current;
+  const draggableRef3Current = draggableRef3.current;
+  const draggableRef4Current = draggableRef4.current;
+  const draggableRef5Current = draggableRef5.current;
+  const draggableRef6Current = draggableRef6.current;
+  const draggableRef7Current = draggableRef7.current;
+  const draggableRef8Current = draggableRef8.current;
+  const draggableRef9Current = draggableRef9.current;
+  const draggableRef10Current = draggableRef10.current;
+
   const {
     registerElement,
     unregisterElement,
@@ -48,82 +59,95 @@ const Public = () => {
   } = useDraggable();
 
   useEffect(() => {
-    if (draggableRef1.current) {
-      registerElement(draggableRef1.current);
+    if (draggableRef1Current) {
+      registerElement(draggableRef1Current);
     }
-    if (draggableRef2.current) {
-      registerElement(draggableRef2.current);
+    if (draggableRef2Current) {
+      registerElement(draggableRef2Current);
     }
-    if (draggableRef3.current) {
-      registerElement(draggableRef3.current);
+    if (draggableRef3Current) {
+      registerElement(draggableRef3Current);
     }
-    if (draggableRef4.current) {
-      registerElement(draggableRef4.current);
+    if (draggableRef4Current) {
+      registerElement(draggableRef4Current);
     }
-    if (draggableRef5.current) {
-      registerElement(draggableRef5.current);
+    if (draggableRef5Current) {
+      registerElement(draggableRef5Current);
     }
-    if (draggableRef6.current) {
-      registerElement(draggableRef6.current);
+    if (draggableRef6Current) {
+      registerElement(draggableRef6Current);
     }
-    if (draggableRef7.current) {
-      registerElement(draggableRef7.current);
+    if (draggableRef7Current) {
+      registerElement(draggableRef7Current);
     }
-    if (draggableRef8.current) {
-      registerElement(draggableRef8.current);
+    if (draggableRef8Current) {
+      registerElement(draggableRef8Current);
     }
-    if (draggableRef9.current) {
-      registerElement(draggableRef9.current);
-    }
-    if (draggableRef10.current) {
-      registerElement(draggableRef10.current);
+    // if (draggableRef9Current) {
+    //   registerElement(draggableRef9Current);
+    // }
+    if (draggableRef10Current) {
+      registerElement(draggableRef10Current);
     }
     return () => {
-      if (draggableRef1.current) {
-        unregisterElement(draggableRef1.current);
+      if (draggableRef1Current) {
+        unregisterElement(draggableRef1Current);
       }
-      if (draggableRef2.current) {
-        unregisterElement(draggableRef2.current);
+      if (draggableRef2Current) {
+        unregisterElement(draggableRef2Current);
       }
-      if (draggableRef3.current) {
-        unregisterElement(draggableRef3.current);
+      if (draggableRef3Current) {
+        unregisterElement(draggableRef3Current);
       }
-      if (draggableRef4.current) {
-        unregisterElement(draggableRef4.current);
+      if (draggableRef4Current) {
+        unregisterElement(draggableRef4Current);
       }
-      if (draggableRef5.current) {
-        unregisterElement(draggableRef5.current);
+      if (draggableRef5Current) {
+        unregisterElement(draggableRef5Current);
       }
-      if (draggableRef6.current) {
-        unregisterElement(draggableRef6.current);
+      if (draggableRef6Current) {
+        unregisterElement(draggableRef6Current);
       }
-      if (draggableRef7.current) {
-        unregisterElement(draggableRef7.current);
+      if (draggableRef7Current) {
+        unregisterElement(draggableRef7Current);
       }
-      if (draggableRef8.current) {
-        unregisterElement(draggableRef8.current);
+      if (draggableRef8Current) {
+        unregisterElement(draggableRef8Current);
       }
-      if (draggableRef9.current) {
-        unregisterElement(draggableRef9.current);
-      }
-      if (draggableRef10.current) {
-        unregisterElement(draggableRef10.current);
+      // if (draggableRef9Current) {
+      //   unregisterElement(draggableRef9Current);
+      // }
+      if (draggableRef10Current) {
+        unregisterElement(draggableRef10Current);
       }
     };
-  }, []);
+  }, [
+    registerElement,
+    unregisterElement,
+    draggableRef1Current,
+    draggableRef2Current,
+    draggableRef3Current,
+    draggableRef4Current,
+    draggableRef5Current,
+    draggableRef6Current,
+    draggableRef7Current,
+    draggableRef8Current,
+    // draggableRef9Current,
+    draggableRef10Current,
+  ]);
 
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
       <div className="containerE box-content mt-[5rem]">
-        <div
+        <section
           ref={draggableRef1}
           className={`contentE ${pvisibility} top-[5.5rem] `}
           onMouseDown={(e) => handleMouseDown(e, 0)}
           onMouseMove={(e) => handleMouseMove(e, 0)}
         >
           <ProfileMenu />
-        </div>
-        <div
+        </section>
+        <section
           ref={draggableRef2}
           className={`contentE ${vvisibility} ${
             pvisibility === " hidden" ? "top-[5.5rem]" : "top-[8.5rem]"
@@ -132,8 +156,8 @@ const Public = () => {
           onMouseMove={(e) => handleMouseMove(e, 1)}
         >
           <VisitorMenu />
-        </div>
-        <div
+        </section>
+        <section
           ref={draggableRef3}
           className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 2)}
@@ -142,8 +166,8 @@ const Public = () => {
           <div className={aboutVisibility}>
             <AboutMeScreen />
           </div>
-        </div>
-        <div
+        </section>
+        <section
           ref={draggableRef4}
           className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 3)}
@@ -152,8 +176,8 @@ const Public = () => {
           <div className={contactVisibility}>
             <ContactScreen />
           </div>
-        </div>
-        <div
+        </section>
+        <section
           ref={draggableRef5}
           className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 4)}
@@ -162,8 +186,8 @@ const Public = () => {
           <div className={`${portifolioVisibility}`}>
             <PortifolioScreen />
           </div>
-        </div>
-        <div
+        </section>
+        <section
           ref={draggableRef6}
           className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 5)}
@@ -172,8 +196,8 @@ const Public = () => {
           <div className={hireVisibility}>
             <HireScreen />
           </div>
-        </div>
-        <div
+        </section>
+        <section
           ref={draggableRef7}
           className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 6)}
@@ -182,8 +206,8 @@ const Public = () => {
           <div className={settingsVisibility}>
             <SettingsScreen />
           </div>
-        </div>
-        <div
+        </section>
+        <section
           ref={draggableRef8}
           className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 7)}
@@ -192,8 +216,8 @@ const Public = () => {
           <div className={visitorsMessagesVisibility}>
             <VisitorMessages />
           </div>
-        </div>
-        <div
+        </section>
+        {/* <section
           ref={draggableRef9}
           className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 8)}
@@ -202,17 +226,17 @@ const Public = () => {
           <div className={signInVisibility}>
             <SignInScreen />
           </div>
-        </div>
-        <div
+        </section> */}
+        <section
           ref={draggableRef10}
           className={`vDragables`}
-          onMouseDown={(e) => handleMouseDown(e, 9)}
-          onMouseMove={(e) => handleMouseMove(e, 9)}
+          onMouseDown={(e) => handleMouseDown(e, 8)}
+          onMouseMove={(e) => handleMouseMove(e, 8)}
         >
           <div className={signUpVisibility}>
             <SignUpScreen />
           </div>
-        </div>
+        </section>
       </div>
     </div>
   );

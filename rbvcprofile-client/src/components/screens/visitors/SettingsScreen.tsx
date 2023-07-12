@@ -13,6 +13,7 @@ import {
   activeStatusTextHandler,
 } from "../../../utils/activeStatusHandler";
 import { timeNow } from "../../../utils/handleTime";
+import DefaultBtn from "../../buttons/DefaultBtn";
 
 const SettingsScreen = () => {
   const { userData, loadingState, errorType } = useUserDataContext();
@@ -27,6 +28,7 @@ const SettingsScreen = () => {
   const [users, setUsers] = useState<any>(data);
   const [activeStatus, setActiveStatus] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [editVisitor, setEditVisitorData] = useState<boolean>(true);
 
   const handleUsers = (dataUsers) => {
     setUsers(dataUsers);
@@ -45,12 +47,22 @@ const SettingsScreen = () => {
     setIsLoading(loadState);
   };
 
+  const handleEditData = () => {
+    if (editVisitor) {
+      setEditVisitorData(false);
+    } else {
+      setEditVisitorData(true);
+    }
+  };
+
+  console.log(editVisitor, "sett");
+
   const renderContent = isLoading ? (
     <CircleLoader isLoading={isLoading} />
   ) : errorType ? (
     <p>{`Unfortunately we got that problem ${errorType}`}</p>
   ) : (
-    <SignInSignUpScreen filledData={users} />
+    <SignInSignUpScreen filledData={users} editVisitor={editVisitor} />
   );
 
   // const onSubmit = async (data) => {
@@ -95,6 +107,19 @@ const SettingsScreen = () => {
       </header>
 
       {renderContent}
+      <menu className="mt-1 ml-5">
+        <DefaultBtn
+          textBtn="messages"
+          className="w-[200px]"
+          // onClick={() =>
+          //   setVisitorsMessageVisibilityState(
+          //     handleVisibility(visitorsMessagesVisibility)
+          //   )
+          // } todo
+        />
+        <DefaultBtn textBtn="edit" onClick={() => handleEditData} />
+        <DefaultBtn textBtn="save" type="submit" onClick={handleEditData} />
+      </menu>
       <FooterBar />
     </>
   );
