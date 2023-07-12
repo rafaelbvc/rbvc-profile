@@ -5,7 +5,7 @@ import { formatISODate } from "../../../utils/handleTime";
 import DefaultBtn from "../../buttons/DefaultBtn";
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
-  const { filledData, editVisitor, visitorData } = props;
+  const { filledData, editVisitor, visitorNewData } = props;
 
   const {
     // reset,

@@ -83,9 +83,9 @@ const Public = () => {
     if (draggableRef8Current) {
       registerElement(draggableRef8Current);
     }
-    // if (draggableRef9Current) {
-    //   registerElement(draggableRef9Current);
-    // }
+    if (draggableRef9Current) {
+      registerElement(draggableRef9Current);
+    }
     if (draggableRef10Current) {
       registerElement(draggableRef10Current);
     }
@@ -114,9 +114,9 @@ const Public = () => {
       if (draggableRef8Current) {
         unregisterElement(draggableRef8Current);
       }
-      // if (draggableRef9Current) {
-      //   unregisterElement(draggableRef9Current);
-      // }
+      if (draggableRef9Current) {
+        unregisterElement(draggableRef9Current);
+      }
       if (draggableRef10Current) {
         unregisterElement(draggableRef10Current);
       }
@@ -132,9 +132,11 @@ const Public = () => {
     draggableRef6Current,
     draggableRef7Current,
     draggableRef8Current,
-    // draggableRef9Current,
+    draggableRef9Current,
     draggableRef10Current,
   ]);
+
+  console.log(signUpVisibility, "visibi")
 
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
@@ -217,7 +219,7 @@ const Public = () => {
             <VisitorMessages />
           </div>
         </section>
-        {/* <section
+        <section
           ref={draggableRef9}
           className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 8)}
@@ -226,12 +228,12 @@ const Public = () => {
           <div className={signInVisibility}>
             <SignInScreen />
           </div>
-        </section> */}
+        </section>
         <section
           ref={draggableRef10}
-          className={`vDragables`}
-          onMouseDown={(e) => handleMouseDown(e, 8)}
-          onMouseMove={(e) => handleMouseMove(e, 8)}
+          className={`vDraggables`}
+          onMouseDown={(e) => handleMouseDown(e, 9)}
+          onMouseMove={(e) => handleMouseMove(e, 9)}
         >
           <div className={signUpVisibility}>
             <SignUpScreen />
