@@ -18,7 +18,7 @@ const RBVCLogoBtn = ({ onClick }) => {
         <p className="font-popins font-semibold mb-[-0.35rem] tracking-wider whitespace-nowrap">
           RAFAEL VENDRAMINI
         </p>
-        <p className="font-popins text-dGolden text-sm whitespace-nowrap">
+        <p className="font-popins text-dGolden text-sm whitespace-nowrap pl-1">
           RBVC Soluções Tecnológicas
         </p>
       </div>

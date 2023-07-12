@@ -8,25 +8,22 @@ interface IVisibilityContext {
   contactVisibility: string;
   portifolioVisibility: string;
   hireVisibility: string;
-
-
-  signInSignUpVisibility: string;
-
-
+  settingsVisibility: string;
   visitorsMessagesVisibility: string;
+  signInVisibility: string;
+  signUpVisibility: string;
   setVVisibilityState: (vvisibility: string) => void;
   setPVisibilityState: (pvisibility: string) => void;
   setAboutVisibilityState: (aboutVisibility: string) => void;
   setContactVisibilityState: (contactVisibility: string) => void;
   setPortifolioVisibilityState: (portifolioVisibility: string) => void;
   setHireVisibilityState: (hireVisibility: string) => void;
-
-  setSignInSignUpVisibilityState: (signInSignUpVisibility: string) => void;
-
-
+  setSettingsVisibilityState: (settingsVisibility: string) => void;
   setVisitorsMessageVisibilityState: (
     visitorsMessagesVisibility: string
   ) => void;
+  setSignInVisibilityState: (signInVisibility: string) => void;
+  setSignUpVisibilityState: (signUpVisibility: string) => void;
 }
 
 interface IVisibilityProvider {
@@ -43,10 +40,12 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
   const [portifolioVisibility, setPortifolioVisibility] =
     useState<string>(" hidden");
   const [hireVisibility, setHireVisibility] = useState<string>(" hidden");
-  const [signInSignUpVisibility, setSignInSignUpVisibility] =
+  const [settingsVisibility, setSettingsVisibility] =
     useState<string>(" hidden");
   const [visitorsMessagesVisibility, setVisitorsMessagesVisibility] =
     useState<string>(" hidden");
+  const [signInVisibility, setSignInVisibility] = useState<string>(" hidden");
+  const [signUpVisibility, setSignUpVisibility] = useState<string>(" hidden");
 
   function setVVisibilityState(vvisibility: string) {
     setVVisibility(vvisibility);
@@ -72,13 +71,19 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
     setHireVisibility(hireVisibility);
   }
 
-  function setSignInSignUpVisibilityState(signInSignUpVisibility: string) {
-    setSignInSignUpVisibility(signInSignUpVisibility);
+  function setSettingsVisibilityState(settingsVisibility: string) {
+    setSettingsVisibility(settingsVisibility);
   }
   function setVisitorsMessageVisibilityState(
     visitorsMessagesVisibility: string
   ) {
     setVisitorsMessagesVisibility(visitorsMessagesVisibility);
+  }
+  function setSignInVisibilityState(signInVisibility: string) {
+    setSignInVisibility(signInVisibility);
+  }
+  function setSignUpVisibilityState(signUpVisibility: string) {
+    setSignUpVisibility(signUpVisibility);
   }
 
   return (
@@ -90,16 +95,20 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         contactVisibility,
         portifolioVisibility,
         hireVisibility,
-        signInSignUpVisibility,
+        settingsVisibility,
         visitorsMessagesVisibility,
+        signInVisibility,
+        signUpVisibility,
         setVVisibilityState,
         setPVisibilityState,
         setAboutVisibilityState,
         setContactVisibilityState,
         setPortifolioVisibilityState,
         setHireVisibilityState,
-        setSignInSignUpVisibilityState,
+        setSettingsVisibilityState,
         setVisitorsMessageVisibilityState,
+        setSignInVisibilityState,
+        setSignUpVisibilityState,
       }}
     >
       {children}

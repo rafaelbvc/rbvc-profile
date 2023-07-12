@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
-import DefaultBtn from "../../buttons/DefaultBtn";
-import DragCloseMenu from "../../menus/DragCloseMenu";
+import { useVisibilityContext } from "../../../../contexts/useVisibilityContext";
+import DefaultBtn from "../../../buttons/DefaultBtn";
+import DragCloseMenu from "../../../menus/DragCloseMenu";
 import { SubmitHandler, useForm } from "react-hook-form";
-import FooterBar from "../../FooterBar";
-import { useUserDataContext } from "../../../contexts/useUserDataContext";
-import CircleLoader from "../../loadingSpinners/CircleLoader";
+import FooterBar from "../../../FooterBar";
+import { useUserDataContext } from "../../../../contexts/useUserDataContext";
+import CircleLoader from "../../../loadingSpinners/CircleLoader";
+import { timeNow } from "../../../../utils/handleTime";
 
 const VisitorMessages = () => {
   const { setVisitorsMessageVisibilityState } = useVisibilityContext();
 
   const { userData, sucessState, errorType, loadingState } =
     useUserDataContext();
-
-  console.log(userData);
 
   const [users, setUsers] = useState<any>();
   const [readOrEditInput, setReadOrEditInput] = useState(false);
@@ -22,6 +21,8 @@ const VisitorMessages = () => {
     const data = await userData?.entities["648b8ab03107216e8579c631"];
     setUsers(data);
   };
+
+  console.log(users);
 
   const {
     reset,
@@ -41,12 +42,14 @@ const VisitorMessages = () => {
     console.log(datas, "fwefwefedatasubmit");
   };
 
-  const messagesWatch = watch();
-  console.log(messagesWatch);
+  // const messagesWatch = watch();
+  // console.log(messagesWatch);
+
+  const renderContent = 
 
   useEffect(() => {
     handleUsers();
-  }, [loadingState]);
+  }, [loadingState, userData]);
 
   return (
     <>
@@ -55,12 +58,12 @@ const VisitorMessages = () => {
         onClick={() => setVisitorsMessageVisibilityState(" hidden")}
       />
       <div className="flex flex-col min-w-[21rem]">
-        <div className="flex justify-between gap-4 mt-1">
-          <p className="font-poppins self-center">
+        <header className="flex justify-between gap-4 mt-1 px-1">
+          <p className="font-poppins">
             {users?.firstName} &nbsp; {users?.lastName}
           </p>
-          <p className="font-poppins self-center text-dGolden">lastUpdate</p>
-        </div>
+          <p className="font-poppins self-center text-dGolden">{timeNow()}</p>
+        </header>
         <>
           {loadingState ? (
             <CircleLoader isLoading={loadingState} />
@@ -95,17 +98,13 @@ const VisitorMessages = () => {
                   onClick={() => setReadOrEditInput(false)}
                 />
                 <DefaultBtn
-                  textBtn="save"
-                  onClick={() => setReadOrEditInput(true)}
-                />
-                <DefaultBtn
                   textBtn="reset"
                   onClick={() => {
                     reset();
                     setReadOrEditInput(false);
                   }}
                 />
-                <DefaultBtn textBtn="submit" type="subimt" />
+                <DefaultBtn textBtn="create" type="subimt" />
               </menu>
             </form>
           )}

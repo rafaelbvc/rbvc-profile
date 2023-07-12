@@ -5,11 +5,15 @@ import { handleVisibility } from "../../utils/visibilityHandler";
 
 const VisitorMenu = () => {
   const {
-    signInSignUpVisibility,
+    settingsVisibility,
     visitorsMessagesVisibility,
+    signInVisibility,
+    signUpVisibility,
     setVVisibilityState,
-    setSignInSignUpVisibilityState,
+    setSettingsVisibilityState,
     setVisitorsMessageVisibilityState,
+    setSignInVisibilityState,
+    setSignUpVisibilityState,
   } = useVisibilityContext();
 
   return (
@@ -24,13 +28,23 @@ const VisitorMenu = () => {
           textBtn="Settings"
           styleBtn=" self-center"
           onClick={() =>
-            setSignInSignUpVisibilityState(
-              handleVisibility(signInSignUpVisibility)
-            )
+            setSettingsVisibilityState(handleVisibility(settingsVisibility))
           }
         />
-        <DefaultBtn textBtn="Sign In" styleBtn=" self-center" />
-        <DefaultBtn textBtn="Sign Up" styleBtn=" self-center" />
+        <DefaultBtn
+          textBtn="Sign In"
+          styleBtn=" self-center"
+          onClick={() =>
+            setSignInVisibilityState(handleVisibility(signInVisibility))
+          }
+        />
+        <DefaultBtn
+          textBtn="Sign Up"
+          styleBtn=" self-center"
+          onClick={() =>
+            setSignUpVisibilityState(handleVisibility(signUpVisibility))
+          }
+        />
         <DefaultBtn
           textBtn="Messages"
           styleBtn=" self-center"

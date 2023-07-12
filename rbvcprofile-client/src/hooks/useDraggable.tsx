@@ -18,8 +18,14 @@ const useDraggable = () => {
   const handleMouseMove = (e, index) => {
     if (!elements.current[index].isClicked) return;
 
-    const nextX = e.clientX - elements.current[index].startX + elements.current[index].lastX;
-    const nextY = e.clientY - elements.current[index].startY + elements.current[index].lastY;
+    const nextX =
+      e.clientX -
+      elements.current[index].startX +
+      elements.current[index].lastX;
+    const nextY =
+      e.clientY -
+      elements.current[index].startY +
+      elements.current[index].lastY;
 
     elements.current[index].element.style.top = `${nextY}px`;
     elements.current[index].element.style.left = `${nextX}px`;
@@ -37,7 +43,9 @@ const useDraggable = () => {
   };
 
   const unregisterElement = (element) => {
-    const index = elements.current.findIndex((item) => item.element === element);
+    const index = elements.current.findIndex(
+      (item) => item.element === element
+    );
     if (index !== -1) {
       elements.current.splice(index, 1);
     }
@@ -57,7 +65,12 @@ const useDraggable = () => {
     };
   }, []);
 
-  return { registerElement, unregisterElement, handleMouseDown, handleMouseMove };
+  return {
+    registerElement,
+    unregisterElement,
+    handleMouseDown,
+    handleMouseMove,
+  };
 };
 
 export default useDraggable;

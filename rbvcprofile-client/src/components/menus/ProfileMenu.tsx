@@ -2,7 +2,7 @@ import { useVisibilityContext } from "../../contexts/useVisibilityContext";
 import DefaultBtn from "../buttons/DefaultBtn";
 import DragCloseMenu from "./DragCloseMenu";
 import { handleVisibility } from "../../utils/visibilityHandler";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 const ProfileMenu = () => {
   const {

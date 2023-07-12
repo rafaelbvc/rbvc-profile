@@ -1,9 +1,9 @@
 export interface ISignInSignUpScreen {
-  statusColor?: string;
-  handleActiveStatus?: boolean;
   activeStatus?: boolean;
-  loadingState: boolean;
-  handleSubmitF?: () => {};
+  loadingState?: boolean;
   users?: any;
-  filledData: any;
+  filledData?: any;
+  editVisitor?: boolean;
+  visitorNewData?: {};
+  handleSubmitF?: () => {};
 }

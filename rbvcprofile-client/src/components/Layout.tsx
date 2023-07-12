@@ -11,6 +11,7 @@ const Layout = () => {
       alert("fora do tamanho suportado");
     }
     return;
+    //todo minimal page with AboutOnly
   };
 
   useEffect(() => {
