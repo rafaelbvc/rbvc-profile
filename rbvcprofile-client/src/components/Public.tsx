@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 import useDraggable from "../hooks/useDraggable";
 import { useVisibilityContext } from "../contexts/useVisibilityContext";
 import VisitorMenu from "./menus/VisitorMenu";
@@ -59,7 +59,7 @@ const Public = () => {
     handleMouseMove,
   } = useDraggable();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (draggableRef1Current) {
       registerElement(draggableRef1Current);
     }

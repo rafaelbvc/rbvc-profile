@@ -1,3 +1,5 @@
+import FooterBar from "../FooterBar";
+
 const DragCloseMenu = (props) => {
   const { onClick, textHeader, className } = props;
 
@@ -12,10 +14,10 @@ const DragCloseMenu = (props) => {
           CLOSE
         </p>
       </div>
+
       <div className="bg-gradient-to-r from-dBlack via-dGolden to-dGolden h-[1px] mt-[-0.15rem]" />
     </div>
   );
 };
 
 export default DragCloseMenu;
-

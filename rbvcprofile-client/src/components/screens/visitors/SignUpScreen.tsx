@@ -31,6 +31,7 @@ const SignUpScreen = () => {
   return (
     <>
       <DragCloseMenu
+        className="mb-1"
         textHeader="sign up"
         onClick={() => setSignUpVisibilityState(" hidden")}
       />

@@ -69,7 +69,7 @@ const VisitorMessages = () => {
             <CircleLoader isLoading={loadingState} />
           ) : (
             <form
-              className="mt-1 flex flex-col"
+              className="mt-1 flex flex-col "
               onSubmit={handleSubmit(onSubmit)}
             >
               <input
@@ -92,7 +92,7 @@ const VisitorMessages = () => {
                 wrap="hard"
                 {...register("textMessage")}
               />
-              <menu className="justify-between">
+              <menu className="flex justify-between mx-1">
                 <DefaultBtn
                   textBtn="edit"
                   onClick={() => setReadOrEditInput(false)}

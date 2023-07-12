@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  box-sizing: border-box;
+}
+
 @keyframes bounce {
   0%,
   100% {
@@ -75,5 +79,9 @@ textarea {
 }
 
 .vInputs {
-  @apply mx-1 px-1 border-1 border-dGoldenAlpha rounded;
+  @apply  mx-1 px-1 border-1 border-dGoldenAlpha rounded;
+}
+
+.vInputsResponsive {
+  @apply flex flex-row md:flex-col justify-between my-1
 }
