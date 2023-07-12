@@ -4,6 +4,6 @@ export interface ISignInSignUpScreen {
   users?: any;
   filledData?: any;
   editVisitor?: boolean;
-  visitorData?: {};
+  visitorNewData?: {};
   handleSubmitF?: () => {};
 }
