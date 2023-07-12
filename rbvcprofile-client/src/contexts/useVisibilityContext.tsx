@@ -12,6 +12,7 @@ interface IVisibilityContext {
   visitorsMessagesVisibility: string;
   signInVisibility: string;
   signUpVisibility: string;
+  pdfVisibility: string;
   setVVisibilityState: (vvisibility: string) => void;
   setPVisibilityState: (pvisibility: string) => void;
   setAboutVisibilityState: (aboutVisibility: string) => void;
@@ -24,6 +25,7 @@ interface IVisibilityContext {
   ) => void;
   setSignInVisibilityState: (signInVisibility: string) => void;
   setSignUpVisibilityState: (signUpVisibility: string) => void;
+  setPdfVisibilityState: (pdfVisibility: string) => void;
 }
 
 interface IVisibilityProvider {
@@ -46,6 +48,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
     useState<string>(" hidden");
   const [signInVisibility, setSignInVisibility] = useState<string>(" hidden");
   const [signUpVisibility, setSignUpVisibility] = useState<string>(" hidden");
+  const [pdfVisibility, setPdfVisibility] = useState<string>( " hidden")
 
   function setVVisibilityState(vvisibility: string) {
     setVVisibility(vvisibility);
@@ -85,6 +88,9 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
   function setSignUpVisibilityState(signUpVisibility: string) {
     setSignUpVisibility(signUpVisibility);
   }
+  function setPdfVisibilityState(pdfVisibility: string){
+    setPdfVisibility(pdfVisibility);
+  }
 
   return (
     <VisibilityContext.Provider
@@ -99,6 +105,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         visitorsMessagesVisibility,
         signInVisibility,
         signUpVisibility,
+        pdfVisibility,
         setVVisibilityState,
         setPVisibilityState,
         setAboutVisibilityState,
@@ -109,6 +116,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         setVisitorsMessageVisibilityState,
         setSignInVisibilityState,
         setSignUpVisibilityState,
+        setPdfVisibilityState,
       }}
     >
       {children}
