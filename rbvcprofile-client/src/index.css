@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  box-sizing: border-box;
+}
+
 @keyframes bounce {
   0%,
   100% {
@@ -16,6 +20,17 @@
 .animate-bounce {
   animation: bounce 1s infinite;
 }
+
+@keyframes ping {
+    25%, 50% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+.animate-ping {
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
 
 .rotate-315 {
   --tw-rotate: -45deg;
@@ -64,5 +79,9 @@ textarea {
 }
 
 .vInputs {
-  @apply mx-1 px-1 border-1 border-dGoldenAlpha rounded;
+  @apply  mx-1 px-1 border-1 border-dGoldenAlpha rounded;
+}
+
+.vInputsResponsive {
+  @apply flex flex-row md:flex-col justify-between my-1
 }

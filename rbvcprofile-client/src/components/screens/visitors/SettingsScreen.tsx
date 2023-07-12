@@ -55,7 +55,6 @@ const SettingsScreen = () => {
     }
   };
 
-  console.log(editVisitor, "sett");
 
   const renderContent = isLoading ? (
     <CircleLoader isLoading={isLoading} />
@@ -103,11 +102,11 @@ const SettingsScreen = () => {
           </p>
         </div>
 
-        <p className="text-dGolden text-end">{timeNow()}</p>
+        <p className="text-dGolden text-end mr-1">{timeNow()}</p>
       </header>
 
       {renderContent}
-      <menu className="mt-1 ml-5">
+      <menu className="flex mt-1  justify-between mx-1">
         <DefaultBtn
           textBtn="messages"
           className="w-[200px]"

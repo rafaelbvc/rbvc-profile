@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ISignInSignUpScreen } from "../../../interfaces/ISignInSignUpScreen";
 import { formatISODate } from "../../../utils/handleTime";
-import DefaultBtn from "../../buttons/DefaultBtn";
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
-  const { filledData, editVisitor, visitorNewData } = props;
+  const { filledData, editVisitor, visitorNewData, resetForm, submitForm } =
+    props;
 
   const {
-    // reset,
+    reset,
     register,
     handleSubmit,
     // watch,
@@ -18,28 +18,37 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const [users, setUsers] = useState<any>(filledData);
   const [readOrEditInput, setReadOrEditInput] = useState<boolean>(editVisitor);
 
+  // const tracking = watch()
+  // console.log(tracking,"observando o formulario")
+
   const handleUsers = (userData) => {
     setUsers(userData);
   };
 
-  console.log(editVisitor, "editvisitor");
+  useEffect(() => {
+    handleSubmit(filledData);
+  }, [submitForm]);
+
+  useEffect(() => {
+    reset();
+  }, [resetForm]);
 
   useEffect(() => {
     handleUsers(filledData);
   }, [filledData]);
 
   return (
-    <>
-      <form onSubmit={handleSubmit(filledData)}>
-        <div className="flex flex-wrap md:flex-nowrap">
-          <div className="flex flex-col">
+    <div className="max-w-[28rem]">
+      <form>
+        <div className="flex flex-wrap  md:flex-nowrap mx-auto">
+          <div className="vInputsResponsive w-full mr-1">
             <label htmlFor="FirstNameInput" className="vLabels">
               First Name
             </label>
             <input
               id="FirstNameInput"
               type="text"
-              className="vInputs"
+              className="vInputs  max-w-[14rem]"
               readOnly={readOrEditInput}
               value={users?.firstName}
               {...register("firstName", {
@@ -50,14 +59,14 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             />
           </div>
 
-          <div className="flex flex-col">
+          <div className="vInputsResponsive w-full mr-1">
             <label htmlFor="PhoneInput" className="vLabels">
               Phone
             </label>
             <input
               id="PhoneInput"
               type="tel"
-              className="vInputs"
+              className="vInputs  max-w-[14rem]"
               readOnly={readOrEditInput}
               value={users?.phone}
               {...register("phone", {
@@ -68,7 +77,9 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           </div>
         </div>
 
-        <div className="flex flex-col">
+
+
+        <div className="flex flex-col max-w-[28rem] mx-1">
           <label htmlFor="LastNameInput" className="vLabels">
             Last Name
           </label>
@@ -86,7 +97,9 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           />
           <div />
         </div>
-        <div className="flex flex-col">
+
+
+        <div className="flex flex-col mx-1 max-w-[28rem]">
           <label htmlFor="EmailInput" className="vLabels">
             E-mail
           </label>
@@ -105,8 +118,10 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             })}
           />
         </div>
-        <div className="flex flex-wrap md:flex-nowrap">
-          <div className="flex flex-col">
+
+
+        <div className="flex justify-between flex-wrap md:flex-nowrap min-w-[20.5rem] max-w-[28rem] mx-1">
+          <div className="vInputsResponsive w-full">
             <label htmlFor="PasswordInput" className="vLabels">
               Password
             </label>
@@ -114,7 +129,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             <input
               id="PasswordInput"
               type="text"
-              className="vInputs"
+              className="vInputs  max-w-[14rem]"
               readOnly={readOrEditInput}
               value={users?.password}
               {...register("password", {
@@ -123,21 +138,19 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
                 required: true,
               })}
             />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="PasswordInput" className="vLabels">
-              Created At
-            </label>
+          </div>         
+          <div className="vInputsResponsive w-full">
+            <label className="vLabels ">Created At</label>
             <input
               disabled
               value={formatISODate(users?.createdAt)}
               readOnly
-              className="vInputs text-right"
+              className="vInputs text-right  max-w-[14rem]"
             />
           </div>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

@@ -12,8 +12,6 @@ const CircleLoader = ({ isLoading }) => {
   let [loading, setLoading] = useState<boolean>(isLoading);
   const [color] = useState("#00FF00");
 
-  console.log(isLoading, "isLoadingGGGG", loading);
-
   const handleLoading = () => {
     if (!loading) {
       setLoading(false);
