@@ -9,6 +9,6 @@ export interface ISignInSignUpScreen {
   resetForm?: boolean;
   submitForm?: boolean;
   formType?: boolean;
-  newUserForm?: any;
+  newUser?: any;
   handleSubmitF?: () => {};
 }

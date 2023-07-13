@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGetUsersQuery } from "../components/screens/visitors/visitorApiSlice";
+import { useGetUsersQuery } from "../components/screens/visitors/usersApiSlice";
 
 export const useUserDataContext = () => {
   const {
