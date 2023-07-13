@@ -1,3 +1,5 @@
+import { IUsers } from "./IUsers";
+
 export interface ISignInSignUpScreen {
   activeStatus?: boolean;
   loadingState?: boolean;
@@ -6,6 +8,7 @@ export interface ISignInSignUpScreen {
   editVisitor?: boolean;
   resetForm?: boolean;
   submitForm?: boolean;
-  visitorNewData?: {};
+  formType?: boolean;
+  newUserForm?: any;
   handleSubmitF?: () => {};
 }

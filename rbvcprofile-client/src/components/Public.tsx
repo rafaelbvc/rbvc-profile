@@ -24,7 +24,7 @@ const Public = () => {
     visitorsMessagesVisibility,
     signInVisibility,
     signUpVisibility,
-    pdfVisibility
+    pdfVisibility,
   } = useVisibilityContext();
 
   // const [visitorScreenKind, setVisitorScreenKind] =
@@ -136,7 +136,6 @@ const Public = () => {
     draggableRef9Current,
     draggableRef10Current,
   ]);
-
 
   return (
     <div className="container flex flex-col h-full bg-dtBgMainColor  relative">

@@ -7,6 +7,7 @@ import FooterBar from "../../../FooterBar";
 import { useUserDataContext } from "../../../../contexts/useUserDataContext";
 import CircleLoader from "../../../loadingSpinners/CircleLoader";
 import { timeNow } from "../../../../utils/handleTime";
+import { IUsers } from "../../../../interfaces/IUsers";
 
 const VisitorMessages = () => {
   const { setVisitorsMessageVisibilityState } = useVisibilityContext();
@@ -22,8 +23,6 @@ const VisitorMessages = () => {
     setUsers(data);
   };
 
-  console.log(users);
-
   const {
     reset,
     register,
@@ -32,7 +31,7 @@ const VisitorMessages = () => {
     formState: { errors },
   } = useForm<any>();
 
-  const onSubmit: SubmitHandler<any> = (data) => {
+  const onSubmit: SubmitHandler<IUsers> = (data) => {
     const datas = data;
     if (!datas) {
       console.log("No data", errors);
@@ -45,9 +44,7 @@ const VisitorMessages = () => {
   // const messagesWatch = watch();
   // console.log(messagesWatch);
 
-  const renderContent = 
-
-  useEffect(() => {
+  const renderContent = useEffect(() => {
     handleUsers();
   }, [loadingState, userData]);
 
