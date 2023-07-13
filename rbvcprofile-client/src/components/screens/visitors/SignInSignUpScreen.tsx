@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useCallback, useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { ISignInSignUpScreen } from "../../../interfaces/ISignInSignUpScreen";
 import { formatISODate, timeNow } from "../../../utils/handleTime";
 import { IUsers } from "../../../interfaces/IUsers";
-import { addNewUsersResult } from "./visitorApiSlice";
-// import { addNewUsersResult, useAddNewUserMutation } from "./visitorApiSlice";
+import { useAddNewUserMutation } from "./usersApiSlice";
+
+interface IInputData {
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  password: string;
+  preventDefault: () => void;
+}
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
-  const {
-    filledData,
-    editVisitor,
-    resetForm,
-    submitForm,
-    formType,
-    newUserForm,
-  } = props;
+  const { filledData, editVisitor, resetForm, submitForm, formType, newUser } =
+    props;
 
   const [users, setUsers] = useState<IUsers | any>(filledData);
   const [readOrEditInput] = useState<boolean>(editVisitor);
@@ -25,39 +27,49 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     reset,
     register,
     handleSubmit,
-    watch,
+    // watch,
     // formState: { errors },
   } = useForm();
+  // , { isLoading, isSucess, isError}
+  const [addNewUser, { error }] = useAddNewUserMutation();
 
-  const onSubmit = async (users) => {
-    console.log(users, "new user darta");
-
-    await addNewUsersResult(users);
+  const onSubmit: SubmitHandler<IInputData> = async (data) => {
+    if (!data) {
+      alert(error);
+      return;
+    }
+    await addNewUser(data);
+    reset();
   };
 
-  const tracking = watch(users);
-  console.log(tracking, "observando o formulario");
+  // const tracking = watch(users);
+  // console.log(tracking, "observando o formulario");
 
-  const handleUsers = (userData) => {
-    setUsers(userData);
-  };
+  const handleUsers = useCallback(() => {
+    if (formType) {
+      setUsers(filledData);
+    } else {
+      setUsers(newUser);
+    }
+  }, [formType, newUser, filledData]);
 
   useEffect(() => {
     if (formType) {
       handleSubmit(filledData);
     } else {
-      handleSubmit(newUserForm);
+      handleSubmit(newUser);
     }
-  }, [formSubmit]);
+  }, [formSubmit, filledData, newUser, formType, handleSubmit]);
 
   useEffect(() => {
     reset();
-  }, [resetForm]);
+  }, [resetForm, reset]);
 
   useEffect(() => {
-    handleUsers(filledData);
-  }, [filledData]);
+    handleUsers();
+  }, [filledData, newUser, handleUsers]);
 
+  //
   return (
     <div className="max-w-[28rem]">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -71,7 +83,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               type="text"
               className="vInputs"
               readOnly={readOrEditInput}
-              value={formTypes ? users?.firstName : newUserForm?.firstName}
+              value={formTypes ? users?.firstName : newUser?.firstName}
               {...register("firstName", {
                 required: true,
                 maxLength: 14,
@@ -89,9 +101,9 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               type="tel"
               className="vInputs"
               readOnly={readOrEditInput}
-              value={formTypes ? users?.phone : newUserForm?.phone}
+              value={formTypes ? users?.phone : newUser?.phone}
               {...register("phone", {
-                // pattern: /([0-9]{2,3})?(([0-9]{2}))([0-9]{4,5})([0-9]{4})/,
+                pattern: /([0-9]{2,3})?(([0-9]{2}))([0-9]{4,5})([0-9]{4})/,
                 required: true,
               })}
             />
@@ -107,7 +119,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             type="text"
             className="vInputs"
             readOnly={readOrEditInput}
-            value={formTypes ? users?.lastName : newUserForm?.lastName}
+            value={formTypes ? users?.lastName : newUser?.lastName}
             {...register("lastName", {
               required: true,
               maxLength: 20,
@@ -126,13 +138,13 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             type="text"
             className="vInputs"
             readOnly={readOrEditInput}
-            value={formTypes ? users?.email : newUserForm?.email}
+            value={formTypes ? users?.email : newUser?.email}
             {...register("email", {
-              // pattern:
-              //   /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/,
+              pattern:
+                /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/,
               required: true,
-              // maxLength: 20,
-              // minLength: 3,
+              maxLength: 20,
+              minLength: 3,
             })}
           />
         </div>
@@ -148,10 +160,10 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               type="text"
               className="vInputs"
               readOnly={readOrEditInput}
-              value={formTypes ? users?.password : newUserForm?.password}
+              value={formTypes ? users?.password : newUser?.password}
               {...register("password", {
-                // pattern:
-                //   /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+                pattern:
+                  /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
                 required: true,
               })}
             />
@@ -166,6 +178,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             />
           </div>
         </div>
+        <input type="submit" />
       </form>
     </div>
   );

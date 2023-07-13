@@ -12,7 +12,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       validateStatus: (response: any, result: any) => {
         return response.status === 200 && !result.isError;
       },
-      keepUnusedDataFor: 5,
+      keepUnusedDataFor: 60,
       transformResponse: (responseData: any) => {
         const loadedUsers = responseData.map((user) => {
           user.id = user._id;
@@ -76,9 +76,6 @@ export const {
 } = usersApiSlice;
 
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select();
-export const addNewUsersResult = usersApiSlice.endpoints.addNewUser.select();
-// export const updateUsersResult = usersApiSlice.endpoints.updateUser.select();
-// export const deleteUsersResult = usersApiSlice.endpoints.deleteUser.select();
 
 const selectUsersData = createSelector(
   selectUsersResult,
