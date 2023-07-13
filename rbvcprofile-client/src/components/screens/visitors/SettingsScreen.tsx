@@ -14,6 +14,7 @@ import {
 } from "../../../utils/activeStatusHandler";
 import { timeNow } from "../../../utils/handleTime";
 import DefaultBtn from "../../buttons/DefaultBtn";
+import { handleVisibility } from "../../../utils/visibilityHandler";
 
 const SettingsScreen = () => {
   const { userData, loadingState, errorType } = useUserDataContext();
@@ -23,7 +24,11 @@ const SettingsScreen = () => {
     [userData]
   ); // todo bring the Authed user
 
-  const { setSettingsVisibilityState } = useVisibilityContext();
+  const {
+    setSettingsVisibilityState,
+    setVisitorsMessageVisibilityState,
+    visitorsMessagesVisibility,
+  } = useVisibilityContext();
 
   const [users, setUsers] = useState<any>(data);
   const [activeStatus, setActiveStatus] = useState<boolean>(true);
@@ -47,21 +52,16 @@ const SettingsScreen = () => {
     setIsLoading(loadState);
   };
 
-  const handleEditData = () => {
-    if (editVisitor) {
-      setEditVisitorData(false);
-    } else {
-      setEditVisitorData(true);
-    }
-  };
-
-
   const renderContent = isLoading ? (
     <CircleLoader isLoading={isLoading} />
   ) : errorType ? (
     <p>{`Unfortunately we got that problem ${errorType}`}</p>
   ) : (
-    <SignInSignUpScreen filledData={users} editVisitor={editVisitor} />
+    <SignInSignUpScreen
+      filledData={users}
+      editVisitor={editVisitor}
+      formType={true}
+    />
   );
 
   // const onSubmit = async (data) => {
@@ -108,16 +108,20 @@ const SettingsScreen = () => {
       {renderContent}
       <menu className="flex mt-1  justify-between mx-1">
         <DefaultBtn
-          textBtn="messages"
+          textBtn="message"
           className="w-[200px]"
-          // onClick={() =>
-          //   setVisitorsMessageVisibilityState(
-          //     handleVisibility(visitorsMessagesVisibility)
-          //   )
-          // } todo
+          onClick={() =>
+            setVisitorsMessageVisibilityState(
+              handleVisibility(visitorsMessagesVisibility)
+            )
+          }
         />
-        <DefaultBtn textBtn="edit" onClick={() => handleEditData} />
-        <DefaultBtn textBtn="save" type="submit" onClick={handleEditData} />
+        <DefaultBtn textBtn="edit" onClick={() => setEditVisitorData(false)} />
+        <DefaultBtn
+          textBtn="save"
+          type="submit"
+          onClick={() => setEditVisitorData(true)}
+        />
       </menu>
       <FooterBar />
     </>

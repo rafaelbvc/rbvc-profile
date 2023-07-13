@@ -76,6 +76,9 @@ export const {
 } = usersApiSlice;
 
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select();
+export const addNewUsersResult = usersApiSlice.endpoints.addNewUser.select();
+// export const updateUsersResult = usersApiSlice.endpoints.updateUser.select();
+// export const deleteUsersResult = usersApiSlice.endpoints.deleteUser.select();
 
 const selectUsersData = createSelector(
   selectUsersResult,

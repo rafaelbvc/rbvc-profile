@@ -4,12 +4,14 @@ import DragCloseMenu from "../../menus/DragCloseMenu";
 import SignInSignUpScreen from "./SignInSignUpScreen";
 import DefaultBtn from "../../buttons/DefaultBtn";
 import { useState } from "react";
+import { IUsers } from "../../../interfaces/IUsers";
 
 const SignUpScreen = () => {
   const { setSignUpVisibilityState } = useVisibilityContext();
 
   const [stateForm, setStateForm] = useState<boolean>(false);
   const [submitForm, setSubmitForm] = useState<boolean>();
+
   const handleState = () => {
     setStateForm(true);
   };
@@ -18,14 +20,15 @@ const SignUpScreen = () => {
     setSubmitForm(true);
   };
 
-  const dataNewUser = {
-    firstName: "Josh",
-    lastName: "Momberg",
-    phone: "15 9988-8852",
-  };
+  const dataNewUser: IUsers = {};
 
   const renderContent = (
-    <SignInSignUpScreen visitorNewData={dataNewUser} resetForm={stateForm} />
+    <SignInSignUpScreen
+      filledData={dataNewUser}
+      resetForm={stateForm}
+      formType={false}
+      submitForm={submitForm}
+    />
   );
 
   return (
