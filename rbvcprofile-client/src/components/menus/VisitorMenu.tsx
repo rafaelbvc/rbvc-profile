@@ -17,48 +17,41 @@ const VisitorMenu = () => {
   } = useVisibilityContext();
 
   return (
-    <div className="grid grid-rows-1">
+    <section>
       <DragCloseMenu
         textHeader={"visitors"}
         onClick={() => setVVisibilityState(" hidden")}
-        className={`flex flex-col w-full lg:ml-[1rem] xl:ml-[1.2rem] 2xl:ml-[1.54rem] `}
       />
-      <div className="flex flex-row justify-between bg-dGrayBGScreens 2xl:pl-[1.5rem]  rounded gap-1 ">
+      <menu className="flex w-grow justify-between bg-dGrayBGScreens ">
         <DefaultBtn
           textBtn="Settings"
-          styleBtn=" self-center"
           onClick={() =>
             setSettingsVisibilityState(handleVisibility(settingsVisibility))
           }
         />
         <DefaultBtn
           textBtn="Sign In"
-          styleBtn=" self-center"
           onClick={() =>
             setSignInVisibilityState(handleVisibility(signInVisibility))
           }
         />
         <DefaultBtn
           textBtn="Sign Up"
-          styleBtn=" self-center"
           onClick={() =>
             setSignUpVisibilityState(handleVisibility(signUpVisibility))
           }
         />
         <DefaultBtn
           textBtn="Messages"
-          styleBtn=" self-center"
           onClick={() =>
             setVisitorsMessageVisibilityState(
               handleVisibility(visitorsMessagesVisibility)
             )
           }
         />
-      </div>
-    </div>
+      </menu>
+    </section>
   );
 };
 
 export default VisitorMenu;
-
-// flex flex-wrap

@@ -4,8 +4,9 @@ import { ISignInSignUpScreen } from "../../../interfaces/ISignInSignUpScreen";
 import { formatISODate, timeNow } from "../../../utils/handleTime";
 import { IUsers } from "../../../interfaces/IUsers";
 import { useAddNewUserMutation } from "./usersApiSlice";
-import SettingsScreenMenu from "../../menus/SettingsScreenMenu";
 import DefaultBtn from "../../buttons/DefaultBtn";
+import { handleVisibility } from "../../../utils/visibilityHandler";
+import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
 
 interface IInputData {
   firstName: string;
@@ -18,6 +19,9 @@ interface IInputData {
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const { filledData, resetForm, submitForm, formType, newUser } = props;
+
+  const { setVisitorsMessageVisibilityState, visitorsMessagesVisibility } =
+    useVisibilityContext();
 
   const [users, setUsers] = useState<IUsers | any>(filledData);
   const [readOrEditInput] = useState<boolean>(false); //todo
@@ -57,11 +61,26 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   }, [formType, newUser, filledData]);
 
   const renderMenu = formTypes ? (
-    <menu className="flex w-content justify-center sm:justify-between"><SettingsScreenMenu /><input  type="submit" value="upadate" className="pt-1 mx-10 vBtnStyle" /></menu>
+    <menu className="flex justify-between">
+      <DefaultBtn
+        textBtn="messages"
+        onClick={() =>
+          setVisitorsMessageVisibilityState(
+            handleVisibility(visitorsMessagesVisibility)
+          )
+        }
+      />
+      <DefaultBtn textBtn="edit" />
+      <input
+        type="submit"
+        value="upadate"
+        className="vSubmitForm"
+      />
+    </menu>
   ) : (
-    <menu>
+    <menu className="flex w-content justify-between mx-6 md:mx-0">
       <DefaultBtn textBtn="clear" />
-      <input type="submit" value="create" />
+      <input type="submit" value="create" className="vSubmitForm" />
     </menu>
   );
 
@@ -167,7 +186,6 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             <label htmlFor="PasswordInput" className="vLabels">
               Password
             </label>
-            {/* todo unhash if loggeind hash to path */}
             <input
               id="PasswordInput"
               type="text"

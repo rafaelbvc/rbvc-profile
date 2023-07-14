@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 html {
-  box-sizing: border-box;
+  @apply box-content;
+  @apply font-poppins;
+  @apply text-sm;
+  @apply whitespace-nowrap;
 }
+
+textarea {
+  @apply resize-none
+}
+
 
 @keyframes bounce {
   0%,
@@ -41,7 +49,7 @@ html {
 
 .text-xxs {
   font-size: 0.55rem;
-  line-height: 0.75rem;
+  line-height: 0.39rem;
 }
 
 .text-xms {
@@ -53,9 +61,7 @@ html {
   border-width: 1px;
 }
 
-textarea {
-  resize: none;
-}
+
 
 .containerE {
   @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
@@ -70,7 +76,7 @@ textarea {
 }
 
 .vLabels {
-  @apply mx-1 mt-2 px-1 whitespace-nowrap text-xms font-poppins;
+  @apply mx-1 mt-2 px-1 whitespace-nowrap text-xms;
 }
 
 .vDraggables {
@@ -86,5 +92,14 @@ textarea {
 }
 
 .vBtnStyle {
-  @apply cursor-pointer whitespace-nowrap text-sm md:text-dGrayTitle text-dGolden font-poppins hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
+  @apply cursor-pointer md:text-dGrayTitle text-dGolden hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
+}
+
+.vSubmitForm {
+  @apply mr-1 md:mr-6 pt-[0.125rem] cursor-pointer whitespace-nowrap text-sm md:text-dGrayTitle text-dGolden hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
+}
+
+.pDragCloseBar
+{
+  @apply text-xxs font-bold uppercase
 }

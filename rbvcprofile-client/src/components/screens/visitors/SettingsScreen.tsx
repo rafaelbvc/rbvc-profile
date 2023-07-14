@@ -18,7 +18,7 @@ const SettingsScreen = () => {
   const { userData, loadingState, errorType } = useUserDataContext();
 
   const data = useMemo(
-    () => userData?.entities["648b8ab03107216e8579c631"],
+    () => userData?.entities["64b0d584d0a4f8263c629f5f"],
     [userData]
   ); // todo bring the Authed user
 
@@ -81,14 +81,14 @@ const SettingsScreen = () => {
             width="1.5rem"
             fillColor={activeStatusIconColorHandler(activeStatus)}
           />
-          <p className="text-sm self-center">
+          <p className=" self-center">
             &nbsp; {activateStatusTextHandler(activeStatus)}
           </p>
         </button>
         <div className="flex ">
-          <p className="font-poppins text-sm self-center">STATUS: &nbsp;</p>
+          <p className=" self-center">STATUS: &nbsp;</p>
           <p
-            className={`font-poppins text-sm self-center text-left ${activeStatusColorHandler(
+            className={`  self-center text-left ${activeStatusColorHandler(
               activeStatus
             )}`}
           >
@@ -116,21 +116,3 @@ export default SettingsScreen;
 // The password must contain one or more numeric values
 // The password must contain one or more special characters
 
-
-      {/* <menu className="flex mt-1  justify-between mx-1">
-        <DefaultBtn
-          textBtn="message"
-          className="w-[200px]"
-          onClick={() =>
-            setVisitorsMessageVisibilityState(
-              handleVisibility(visitorsMessagesVisibility)
-            )
-          }
-        />
-        <DefaultBtn textBtn="edit" onClick={() => setEditVisitorData(false)} />
-        <DefaultBtn
-          textBtn="save"
-          type="submit"
-          onClick={() => setEditVisitorData(true)}
-        />
-      </menu> */}

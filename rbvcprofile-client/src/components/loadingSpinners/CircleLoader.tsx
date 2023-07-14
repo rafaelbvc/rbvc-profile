@@ -34,7 +34,7 @@ const CircleLoader = ({ isLoading }) => {
         ara-label="Loading Spinner"
         data-testid="loader"
       />
-      <p className="font-poppins text-center mt-2">Loading...</p>
+      <p className="text-center mt-2">Loading...</p>
       <FooterBar />
     </div>
   );

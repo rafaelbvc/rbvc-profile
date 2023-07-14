@@ -15,12 +15,12 @@ const NavBar = () => {
         onClick={() => setPVisibilityState(handleVisibility(pvisibility))}
       />
 
-      <div className="hidden md:flex">
+      <div className="hidden md:grid">
         <ProfileMenu />
       </div>
 
       {/*welcome visitor and auth secction*/}
-      <div className="self-center p-1 cursor-pointer">
+      <div className="p-1 cursor-pointer">
         <GetStartedCollapsedBtn
           onClick={() => setVVisibilityState(handleVisibility(vvisibility))}
         />
