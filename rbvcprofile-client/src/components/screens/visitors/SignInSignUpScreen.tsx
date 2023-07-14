@@ -4,6 +4,8 @@ import { ISignInSignUpScreen } from "../../../interfaces/ISignInSignUpScreen";
 import { formatISODate, timeNow } from "../../../utils/handleTime";
 import { IUsers } from "../../../interfaces/IUsers";
 import { useAddNewUserMutation } from "./usersApiSlice";
+import SettingsScreenMenu from "../../menus/SettingsScreenMenu";
+import DefaultBtn from "../../buttons/DefaultBtn";
 
 interface IInputData {
   firstName: string;
@@ -15,13 +17,14 @@ interface IInputData {
 }
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
-  const { filledData, editVisitor, resetForm, submitForm, formType, newUser } =
-    props;
+  const { filledData, resetForm, submitForm, formType, newUser } = props;
 
   const [users, setUsers] = useState<IUsers | any>(filledData);
-  const [readOrEditInput] = useState<boolean>(editVisitor);
+  const [readOrEditInput] = useState<boolean>(false); //todo
   const [formTypes] = useState<boolean>(formType); //SignUp-false - SettingsScreen-true
   const [formSubmit] = useState<boolean>(submitForm);
+
+  // cons
 
   const {
     reset,
@@ -53,6 +56,15 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     }
   }, [formType, newUser, filledData]);
 
+  const renderMenu = formTypes ? (
+    <menu className="flex w-content justify-center sm:justify-between"><SettingsScreenMenu /><input  type="submit" value="upadate" className="pt-1 mx-10 vBtnStyle" /></menu>
+  ) : (
+    <menu>
+      <DefaultBtn textBtn="clear" />
+      <input type="submit" value="create" />
+    </menu>
+  );
+
   useEffect(() => {
     if (formType) {
       handleSubmit(filledData);
@@ -74,7 +86,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     <div className="max-w-[28rem]">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-wrap  md:flex-nowrap mx-auto">
-          <div className="vInputsResponsive w-full mr-1">
+          <div className="vInputsResponsive w-full mx-1 sm:ml-1">
             <label htmlFor="FirstNameInput" className="vLabels">
               First Name
             </label>
@@ -92,7 +104,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             />
           </div>
 
-          <div className="vInputsResponsive w-full mr-1">
+          <div className="vInputsResponsive w-full mx-1 sm:mr-1">
             <label htmlFor="PhoneInput" className="vLabels">
               Phone
             </label>
@@ -103,7 +115,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               readOnly={readOrEditInput}
               value={formTypes ? users?.phone : newUser?.phone}
               {...register("phone", {
-                pattern: /([0-9]{2,3})?(([0-9]{2}))([0-9]{4,5})([0-9]{4})/,
+                pattern:
+                  /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/,
                 required: true,
               })}
             />
@@ -135,15 +148,15 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           </label>
           <input
             id="EmailInput"
-            type="text"
+            type="email"
             className="vInputs"
             readOnly={readOrEditInput}
             value={formTypes ? users?.email : newUser?.email}
             {...register("email", {
               pattern:
-                /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/,
+                /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
               required: true,
-              maxLength: 20,
+              maxLength: 40,
               minLength: 3,
             })}
           />
@@ -162,8 +175,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               readOnly={readOrEditInput}
               value={formTypes ? users?.password : newUser?.password}
               {...register("password", {
-                pattern:
-                  /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+                pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
                 required: true,
               })}
             />
@@ -178,7 +190,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             />
           </div>
         </div>
-        <input type="submit" />
+        {renderMenu}
       </form>
     </div>
   );

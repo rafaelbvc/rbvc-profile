@@ -7,11 +7,11 @@ import DefaultBtn from "../../buttons/DefaultBtn";
 const SignInScreen = () => {
   const { setSignInVisibilityState } = useVisibilityContext();
   const {
-    reset,
+    // reset,
     register,
-    handleSubmit,
-    watch,
-    formState: { errors },
+    // handleSubmit,
+    // watch,
+    // formState: { errors },
   } = useForm();
 
   return (

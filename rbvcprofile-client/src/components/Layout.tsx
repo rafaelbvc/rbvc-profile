@@ -16,7 +16,7 @@ const Layout = () => {
 
   useEffect(() => {
     handleSWidth(swidth);
-  }, []);
+  }, [swidth]);
 
   return (
     <main className="container  h-full mx-auto bg-white">

@@ -1,4 +1,3 @@
-import FooterBar from "../FooterBar";
 
 const DragCloseMenu = (props) => {
   const { onClick, textHeader, className } = props;

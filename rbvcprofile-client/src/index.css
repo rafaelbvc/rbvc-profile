@@ -22,15 +22,15 @@ html {
 }
 
 @keyframes ping {
-    25%, 50% {
-        transform: scale(1);
-        opacity: 0;
-    }
+  25%,
+  50% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 .animate-ping {
-    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
-
 
 .rotate-315 {
   --tw-rotate: -45deg;
@@ -61,7 +61,6 @@ textarea {
   @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
 }
 
-/* mt-[5rem] - test */
 .contentE {
   @apply absolute justify-around  left-0 flex-row   w-screen  max-w-[28.75rem] h-[2rem] cursor-pointer z-50;
 }
@@ -79,9 +78,13 @@ textarea {
 }
 
 .vInputs {
-  @apply  mx-1 px-1 border-1 border-dGoldenAlpha rounded;
+  @apply mx-1 px-1 border-1 border-dGoldenAlpha rounded;
 }
 
 .vInputsResponsive {
-  @apply flex flex-row md:flex-col justify-between my-1
+  @apply flex flex-row md:flex-col justify-between my-1;
+}
+
+.vBtnStyle {
+  @apply cursor-pointer whitespace-nowrap text-sm md:text-dGrayTitle text-dGolden font-poppins hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
 }
