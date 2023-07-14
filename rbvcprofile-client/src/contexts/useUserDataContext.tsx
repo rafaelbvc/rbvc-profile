@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGetUsersQuery } from "../components/screens/visitors/usersApiSlice";
 
 export const useUserDataContext = () => {
@@ -15,7 +15,7 @@ export const useUserDataContext = () => {
   const [errorsType, setErrorType] = useState(error);
   const [sucessState, setSucessState] = useState(isSucess);
 
-  const handleDataState = () => {
+  const handleDataState = useCallback(() => {
     if (isLoading) {
       setLoadingState(isLoading);
     } else if (isError) {
@@ -24,21 +24,21 @@ export const useUserDataContext = () => {
       setUserData(usersById);
       setLoadingState(false);
     }
-  };
+  }, [isLoading, error, isError, usersById]);
 
-  const handleErrorType = () => {
+  const handleErrorType = useCallback(() => {
     if (errorsType !== undefined || errorsType) {
       return `Sory we got problems ahead => ${error}`;
     }
-  };
+  }, [errorsType, error]);
 
-  const handleSucess = () => {
+  const handleSucess = useCallback(() => {
     if (!error || !isLoading) {
       setSucessState(true);
     } else {
       setSucessState(false);
     }
-  };
+  }, [error, isLoading]);
 
   const errorType = handleErrorType();
 
@@ -46,7 +46,7 @@ export const useUserDataContext = () => {
     handleDataState();
     handleErrorType();
     handleSucess();
-  }, [isLoading, error]);
+  }, [isLoading, error, handleDataState, handleErrorType, handleSucess]);
 
   return { userData, loadingState, sucessState, errorType };
 };

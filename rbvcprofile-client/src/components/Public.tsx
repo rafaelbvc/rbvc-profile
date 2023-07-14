@@ -24,7 +24,7 @@ const Public = () => {
     visitorsMessagesVisibility,
     signInVisibility,
     signUpVisibility,
-    pdfVisibility,
+    // pdfVisibility,
   } = useVisibilityContext();
 
   // const [visitorScreenKind, setVisitorScreenKind] =

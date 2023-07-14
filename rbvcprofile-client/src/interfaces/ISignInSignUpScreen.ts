@@ -5,7 +5,6 @@ export interface ISignInSignUpScreen {
   loadingState?: boolean;
   users?: any;
   filledData?: any;
-  editVisitor?: boolean;
   resetForm?: boolean;
   submitForm?: boolean;
   formType?: boolean;

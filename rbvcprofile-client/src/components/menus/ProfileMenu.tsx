@@ -17,15 +17,10 @@ const ProfileMenu = () => {
     setHireVisibilityState,
   } = useVisibilityContext();
 
-  const ref = useRef(null);
 
-  const handleFocus = () => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
-    <>
-      <span ref={ref} />
+    <div className="md:mt-6">
       <div className="md:hidden">
         <DragCloseMenu
           textHeader={"profile"}
@@ -33,11 +28,10 @@ const ProfileMenu = () => {
         />
       </div>
 
-      <div className="flex justify-between bg-dtBgMainColor rounded">
+      <div className="ml-1 sm:ml-8 md:ml-0 flex justify-between bg-dtBgMainColor rounded">
         <DefaultBtn
           textBtn="Home"
           styleBtn=" self-center "
-          onClick={handleFocus}
         />
         <DefaultBtn
           textBtn="About"
@@ -68,7 +62,7 @@ const ProfileMenu = () => {
           }
         />
       </div>
-    </>
+    </div>
   );
 };
 

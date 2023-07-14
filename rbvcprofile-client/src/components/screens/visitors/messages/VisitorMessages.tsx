@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useVisibilityContext } from "../../../../contexts/useVisibilityContext";
 import DefaultBtn from "../../../buttons/DefaultBtn";
 import DragCloseMenu from "../../../menus/DragCloseMenu";
@@ -12,22 +12,22 @@ import { IUsers } from "../../../../interfaces/IUsers";
 const VisitorMessages = () => {
   const { setVisitorsMessageVisibilityState } = useVisibilityContext();
 
-  const { userData, sucessState, errorType, loadingState } =
-    useUserDataContext();
+  // const { userData, sucessState, errorType, loadingState } =
+  const { userData, loadingState } = useUserDataContext();
 
   const [users, setUsers] = useState<any>();
   const [readOrEditInput, setReadOrEditInput] = useState(false);
 
-  const handleUsers = async () => {
+  const handleUsers = useCallback(async () => {
     const data = await userData?.entities["648b8ab03107216e8579c631"];
     setUsers(data);
-  };
+  }, [userData]);
 
   const {
     reset,
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm<any>();
 
@@ -44,9 +44,9 @@ const VisitorMessages = () => {
   // const messagesWatch = watch();
   // console.log(messagesWatch);
 
-  const renderContent = useEffect(() => {
+  useEffect(() => {
     handleUsers();
-  }, [loadingState, userData]);
+  }, [loadingState, userData, handleUsers]);
 
   return (
     <>

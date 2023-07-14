@@ -3,7 +3,7 @@ import FooterBar from "../../FooterBar";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 import SignInSignUpScreen from "./SignInSignUpScreen";
 import DefaultBtn from "../../buttons/DefaultBtn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IUsers } from "../../../interfaces/IUsers";
 
 const SignUpScreen = () => {
@@ -16,8 +16,12 @@ const SignUpScreen = () => {
     setStateForm(true);
   };
 
-  const handleSubmit = () => {
-    setSubmitForm(true);
+  const handleSubmit:any = (b) => {
+    if (b) {
+      setSubmitForm(false);
+    } else {
+      setSubmitForm(true);
+    }
   };
 
   const dataNewUser: IUsers = {};
@@ -27,9 +31,16 @@ const SignUpScreen = () => {
       filledData={dataNewUser}
       resetForm={stateForm}
       formType={false}
+      // submitForm={submitForm}
       submitForm={submitForm}
     />
   );
+
+  console.log(submitForm, "ffff")
+
+  useEffect(() => {
+    handleSubmit()
+  }, [submitForm])
 
   return (
     <>
@@ -39,10 +50,7 @@ const SignUpScreen = () => {
         onClick={() => setSignUpVisibilityState(" hidden")}
       />
       {renderContent}
-      <menu className="flex flex-row justify-between mx-1">
-        <DefaultBtn textBtn="clear" onClick={handleState} />
-        <DefaultBtn textBtn="create" onClick={handleSubmit} />
-      </menu>
+
       <FooterBar />
     </>
   );
