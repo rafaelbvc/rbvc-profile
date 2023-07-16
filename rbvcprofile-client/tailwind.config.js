@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{html,js,ts,tsx,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xm: "340px",
+      },
+    },
     colors: {
       dtBgMainColor: "#FCFCFF",
       dBlack: "#000",

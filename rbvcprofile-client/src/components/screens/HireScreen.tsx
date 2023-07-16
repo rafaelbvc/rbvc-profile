@@ -7,7 +7,7 @@ const HireScreen = () => {
   const { setHireVisibilityState } = useVisibilityContext();
 
   return (
-    <>
+    <section className="container flex flex-col max-w-[24.5rem] sm:max-w-none">
       <DragCloseMenu
         textHeader="hire me"
         onClick={() => setHireVisibilityState(" hidden")}
@@ -16,10 +16,10 @@ const HireScreen = () => {
         <p className="text-right font-poppins text-dGrayTitle">
           Sorry, this area is under construction... <br /> Soon...
         </p>
-        <UnderConstructionSVG widthSVG="400px" />
+        <UnderConstructionSVG widthSVG="23.5rem" />
       </div>
       <FooterBar />
-    </>
+    </section>
   );
 };
 

@@ -3,10 +3,10 @@ const GetStartedCollapsedBtn = ({onClick}) => {
   return (
     <button
       onClick={onClick}
-      className="flex self-center flex-nowrap"
+      className="flex"
     >
-     <p className="whitespace-nowrap font-popins text-xl font-semibold">Get</p> 
-     <p className="whitespace-nowrap font-popins text-xl font-semibold text-dGolden ml-1">Started</p>
+     <p className="text-2xl font-semibold">Get</p> 
+     <p className="text-2xl font-semibold text-dGolden ml-1">Started</p>
     </button>
   );
 };

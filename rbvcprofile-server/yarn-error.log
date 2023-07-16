@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add -D @types/express-async-handler
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add -D @types/tailwind-merge
 
 PATH: 
   C:\Users\rafae\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\rafae\bin;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Python27;C:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\Yarn\bin;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\Users\rafae\scoop\shims;C:\Users\rafae\AppData\Local\Microsoft\WindowsApps;C:\MicrosoftVSCode\bin;C:\Users\rafae\AppData\Local\Yarn\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.2\bin;C:\Users\rafae\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fexpress-async-handler: Not found
+  Error: https://registry.yarnpkg.com/@types%2ftailwind-merge: Not found
       at params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66145:18)
       at self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140890:22)
       at Request.emit (node:events:513:28)
@@ -29,7 +29,7 @@ Trace:
 npm manifest: 
   {
     "name": "rbvcprofile-server",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "main": "server.ts",
     "license": "ISC",
     "author": "Rafael Vendramini",
@@ -52,10 +52,12 @@ npm manifest:
       "mongo": "^0.1.0",
       "mongoose": "^7.2.4",
       "mongoose-sequence": "^5.3.1",
+      "tailwind-merge": "^1.13.2",
       "ts-node": "^10.9.1",
       "uuid": "^9.0.0"
     },
     "devDependencies": {
+      "@types/bcrypt": "^5.0.0",
       "@types/bson": "^4.2.0",
       "@types/cookie-parser": "^1.4.3",
       "@types/cors": "^2.8.13",
@@ -913,6 +915,13 @@ Lockfile:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
     integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
+  
+  "@types/bcrypt@^5.0.0":
+    version "5.0.0"
+    resolved "https://registry.yarnpkg.com/@types/bcrypt/-/bcrypt-5.0.0.tgz#a835afa2882d165aff5690893db314eaa98b9f20"
+    integrity sha512-agtcFKaruL8TmcvqbndlqHPSJgsolhf/qPWchFlgnW1gECTN/nKbFcoFnvKAQRFfKbh+BO6A3SWdJu9t+xF3Lw==
+    dependencies:
+      "@types/node" "*"
   
   "@types/body-parser@*":
     version "1.19.2"
@@ -2228,6 +2237,11 @@ Lockfile:
     integrity sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==
     dependencies:
       has-flag "^3.0.0"
+  
+  tailwind-merge@^1.13.2:
+    version "1.13.2"
+    resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-1.13.2.tgz#1d06c9e95ffda2320efc50ed33c65be0cda23091"
+    integrity sha512-R2/nULkdg1VR/EL4RXg4dEohdoxNUJGLMnWIQnPKL+O9Twu7Cn3Rxi4dlXkDzZrEGtR+G+psSXFouWlpTyLhCQ==
   
   tar@^6.1.11:
     version "6.1.15"

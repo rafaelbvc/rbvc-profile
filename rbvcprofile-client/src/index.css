@@ -3,7 +3,14 @@
 @tailwind utilities;
 
 html {
-  box-sizing: border-box;
+  @apply box-border;
+  @apply font-poppins;
+  @apply text-sm;
+  @apply whitespace-nowrap;
+}
+
+textarea {
+  @apply resize-none;
 }
 
 @keyframes bounce {
@@ -32,16 +39,14 @@ html {
   animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-.rotate-315 {
-  --tw-rotate: -45deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
-    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.6rem;
 }
 
 .text-xxs {
   font-size: 0.55rem;
-  line-height: 0.75rem;
+  line-height: 0.39rem;
 }
 
 .text-xms {
@@ -51,10 +56,6 @@ html {
 
 .border-1 {
   border-width: 1px;
-}
-
-textarea {
-  resize: none;
 }
 
 .containerE {
@@ -70,7 +71,7 @@ textarea {
 }
 
 .vLabels {
-  @apply mx-1 mt-2 px-1 whitespace-nowrap text-xms font-poppins;
+  @apply mx-1 mt-2 px-1 whitespace-nowrap text-xms;
 }
 
 .vDraggables {
@@ -86,5 +87,13 @@ textarea {
 }
 
 .vBtnStyle {
-  @apply cursor-pointer whitespace-nowrap text-sm md:text-dGrayTitle text-dGolden font-poppins hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
+  @apply cursor-pointer md:text-dGrayTitle text-dGolden hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
+}
+
+.vSubmitForm {
+  @apply mr-1 md:mr-6 pt-[0.125rem] cursor-pointer whitespace-nowrap text-sm md:text-dGrayTitle text-dGolden hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
+}
+
+.pDragCloseBar {
+  @apply text-xxs font-bold uppercase;
 }

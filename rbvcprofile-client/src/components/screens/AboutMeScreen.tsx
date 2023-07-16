@@ -1,4 +1,9 @@
-import { ForwardRefRenderFunction, forwardRef, useState } from "react";
+import {
+  ForwardRefRenderFunction,
+  forwardRef,
+  useCallback,
+  useState,
+} from "react";
 import DragCloseMenu from "../menus/DragCloseMenu";
 import PhotoMyProfileA from "./aboutMePhotos/PhotoMyProfileA.jpg";
 import MongoDBLogo from "../svg/MongoDBLogo";
@@ -12,28 +17,32 @@ import TypeScriptLogo from "../svg/TypeScriptLogo";
 import { useVisibilityContext } from "../../contexts/useVisibilityContext";
 import FooterBar from "../FooterBar";
 
-
-const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (props,ref) => {
-
+const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
+  props,
+  ref
+) => {
   const { setAboutVisibilityState } = useVisibilityContext();
 
   const [bigIMG, setBigIMG] = useState<boolean>(false);
 
-  const handleBigImg = (v: boolean) => {
-    if (v) {
-      setBigIMG(false);
-    } else {
-      return setBigIMG(true);
-    }
-  };
+  const handleBigImg = useCallback(
+    (v: boolean) => {
+      if (v) {
+        setBigIMG(false);
+      } else {
+        return setBigIMG(true);
+      }
+    },
+    [bigIMG]
+  );
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className="container ">
       <DragCloseMenu
-        textHeader={"about"}
+        textHeader="about"
         onClick={() => setAboutVisibilityState(" hidden")}
       />
-      <div className="container flex bg-dGrayBGScreens  rounded  flex-col min-w-[21rem] max-w-[39.5rem] mb-1  p-1">
+      <div className=" flex bg-dGrayBGScreens  rounded  flex-col min-w-[21rem] max-w-[39.5rem] mb-1  p-1">
         <div className="flex flex-col items-center  md:flex-row">
           <div className={`${bigIMG ? "max-w-[21rem]" : "w-[12.5rem]"}`}>
             <img
@@ -42,16 +51,14 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (props,ref) => {
               alt="MyProfileA"
               className={`${
                 bigIMG
-                  ? "relative border-[1px] border-dGolden min-w-[12.4rem]"
+                  ? "absolute border-[1px] border-dGolden min-w-[12.4rem]"
                   : "rounded-full bg-dtBgMainColor border-[1px] border-dGolden m-2 min-w-[12.6rem]"
               }`}
               onClick={() => handleBigImg(bigIMG)}
             />
             <title className="mr-0 flex mb-1 justify-center">
-              <p className=" font-poppins font-bold my-5">Skills &</p>
-              <p className=" font-poppins text-dGolden font-bold my-5">
-                &nbsp; Tools
-              </p>
+              <p className="  font-bold my-5">Skills &</p>
+              <p className="  text-dGolden font-bold my-5">&nbsp; Tools</p>
             </title>
             <section className="flex justify-center flex-row flex-wrap gap-4">
               <JavaScriptLogo width={"5rem"} />
@@ -64,15 +71,13 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (props,ref) => {
               <TypeScriptLogo width={"5rem"} />
             </section>
           </div>
-          <div className="p-1">
+          <div className="p-1 whitespace-normal">
             <title className="mr-0 flex mb-1 justify-end">
-              <p className=" font-poppins font-bold">Full Stack </p>
-              <p className=" font-poppins text-dGolden font-bold">
-                &nbsp; Developer
-              </p>
+              <p className="  font-bold">Full Stack </p>
+              <p className="  text-dGolden font-bold">&nbsp; Developer</p>
             </title>
             <section>
-              <p className="text-justify font-poppins mt-2 pl-2">
+              <p className="text-justify  mt-2 pl-2 ">
                 As a ReactJS, NodeJS and Next, Full-stack developer, I have a
                 strong background in building full-fledged web applications.
                 With advanced knowledge in React, I can create interactive and
@@ -94,13 +99,11 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (props,ref) => {
               </p>
             </section>
             <title className="mr-0 flex mb-1 justify-end">
-              <p className=" font-poppins font-bold">Work </p>
-              <p className=" font-poppins text-dGolden font-bold">
-                &nbsp; Experience
-              </p>
+              <p className="  font-bold">Work </p>
+              <p className="  text-dGolden font-bold">&nbsp; Experience</p>
             </title>
             <section>
-              <p className="text-justify justify-end font-poppins mt-2 pl-2">
+              <p className="text-justify justify-end mt-2 pl-2">
                 RBVC Soluções Tecnológicas Freelance Web Developer | May 2023 -
                 Present (1 month)
                 <br /> • Web development using agile methodology
@@ -113,7 +116,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (props,ref) => {
           </div>
         </div>
         <section>
-          <p className="text-justify justify-end font-poppins mt-2 pl-2">
+          <p className="text-justify justify-end mt-2 pl-2 whitespace-normal">
             MeuCompromisso Fullstack & Mobile Developer | May 2022 - May 2023 (1
             year 1 month)
             <br />• Front-end development using ReactJS and React Native
@@ -128,7 +131,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (props,ref) => {
         </section>
         <FooterBar />
         <section>
-          <p className="text-justify justify-end font-poppins mt-2 pl-2">
+          <p className="text-justify justify-end mt-2 pl-2">
             Cadmus Soluções em TI Software Developer | November 2021 - April
             2022 (6 months)
             <br />• Java development using SpringBoot
@@ -139,7 +142,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (props,ref) => {
         </section>
         <FooterBar />
         <div>
-          <p className="text-justify justify-end font-poppins mt-2 pl-2">
+          <p className="text-justify justify-end mt-2 pl-2">
             Autonomous February 2015 - April 2018 (3 years 3 months)
             <br />• Banner design
             <br />• Creation of starter sites and digital banners
@@ -147,7 +150,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (props,ref) => {
           </p>
         </div>
       </div>
-      <FooterBar />
+      <FooterBar footerStyle="mb-2" />
     </div>
   );
 };
