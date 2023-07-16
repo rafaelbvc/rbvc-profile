@@ -28,15 +28,18 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const [formTypes] = useState<boolean>(formType); //SignUp-false - SettingsScreen-true
   const [formSubmit] = useState<boolean>(submitForm);
 
-  // cons
+  const form = useForm<IInputData>();
+  const { reset, register, handleSubmit, formState, watch } = form;
+  const { errors } = formState;
 
-  const {
-    reset,
-    register,
-    handleSubmit,
-    // watch,
-    // formState: { errors },
-  } = useForm();
+  // const {
+  //   reset,
+  //   register,
+  //   handleSubmit,
+  //   // watch,
+  //   formState: { errors },
+  // } = useForm();
+
   // , { isLoading, isSucess, isError}
   const [addNewUser, { error }] = useAddNewUserMutation();
 
@@ -49,8 +52,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     reset();
   };
 
-  // const tracking = watch(users);
-  // console.log(tracking, "observando o formulario");
+  const tracking = watch()
+  console.log(tracking,errors, "observando o formulario");
 
   const handleUsers = useCallback(() => {
     if (formType) {
@@ -71,11 +74,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
         }
       />
       <DefaultBtn textBtn="edit" />
-      <input
-        type="submit"
-        value="upadate"
-        className="vSubmitForm"
-      />
+      <input type="submit" value="upadate" className="vSubmitForm" />
     </menu>
   ) : (
     <menu className="flex w-content justify-between mx-6 md:mx-0">
@@ -106,21 +105,25 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-wrap  md:flex-nowrap mx-auto">
           <div className="vInputsResponsive w-full mx-1 sm:ml-1">
-            <label htmlFor="FirstNameInput" className="vLabels">
+            <label htmlFor="firstName" className="vLabels">
               First Name
             </label>
             <input
-              id="FirstNameInput"
+              id="firstName"
               type="text"
               className="vInputs"
               readOnly={readOrEditInput}
               value={formTypes ? users?.firstName : newUser?.firstName}
               {...register("firstName", {
-                required: true,
+                required: {
+                  value: true,
+                  message: "Need to have 3 to 14 characters.",
+                },
                 maxLength: 14,
                 minLength: 3,
               })}
             />
+            {/* <p className="text-dGolden">{errors.firstName?.message}</p> */}
           </div>
 
           <div className="vInputsResponsive w-full mx-1 sm:mr-1">
@@ -134,8 +137,11 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               readOnly={readOrEditInput}
               value={formTypes ? users?.phone : newUser?.phone}
               {...register("phone", {
-                pattern:
-                  /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/,
+                pattern: {
+                  value:
+                    /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/,
+                  message: "",
+                },
                 required: true,
               })}
             />
@@ -209,6 +215,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           </div>
         </div>
         {renderMenu}
+                <p className="text-dGolden">{errors.firstName?.message}</p>
       </form>
     </div>
   );

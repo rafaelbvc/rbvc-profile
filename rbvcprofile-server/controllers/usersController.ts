@@ -86,7 +86,7 @@ export const updateUser = assyncHandler(async (req, res) => {
   //   .exec();
   const duplicatedUpdate = await Users.findOne({ email }).lean().exec();
   // allow update for same id //.toString()
-  if (duplicatedUpdate && duplicatedUpdate?._id.toString() === id.toString()) {
+  if (duplicatedUpdate && duplicatedUpdate?._id.toString() !== id.toString()) {
     return res.status(409).json({ message: "Duplicated email" });
   }
 
