@@ -13,7 +13,7 @@ const DefaultBtn = (props) => {
     <>
       <button
         type="button"
-        className={`w-[4.25rem] md:w-[5rem] lg:w-[5.5rem] p-1 mx-3 ${styleBtn}`}
+        className={`w-[3.4rem] md:w-[4.5rem] lg:w-[5.5rem] p-1 mx-3 ${styleBtn}`}
         onClick={onClick}
         hidden={isVisible}
         // disabled={isAuth}

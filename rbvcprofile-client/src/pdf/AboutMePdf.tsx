@@ -24,7 +24,7 @@ const AboutMePdf = () => {
       <ReactToPrint
         trigger={() => (
           <div className="flex justify-end w-full">
-            <button className="text-dGolden animate-ping font-poppins text-semibold text-xxs mx-[22%]  mb-[-0.75rem]">
+            <button className="text-dGolden animate-ping font-poppins text-semibold text-xxs mx-[22%]  mb-[-0.4rem]">
               PRINT
             </button>
           </div>

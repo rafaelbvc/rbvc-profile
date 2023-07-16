@@ -1,10 +1,10 @@
 import FooterBar from "../FooterBar";
 
 const DragCloseMenu = (props) => {
-  const { onClick, textHeader, className } = props;
+  const { onClick, textHeader, dragCloseMenuStyle } = props;
 
   return (
-    <div className={`${className}`}>
+    <div className={`${dragCloseMenuStyle}`}>
       <div className="flex justify-between cursor-pointer px-2">
         <p className="text-dGolden pDragCloseBar">dragme</p>
         <p className="pDragCloseBar animate-bounce">{textHeader}</p>

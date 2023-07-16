@@ -16,10 +16,12 @@ const ProfileMenu = () => {
     setHireVisibilityState,
   } = useVisibilityContext();
 
-
+  // const handleRef = () => {
+  //   c
+  // }
 
   return (
-    <section className="md:mt-6">
+    <section className="container flex flex-col max-w-[24.5rem] sm:max-w-none md:mt-[1.6rem]">
       <div className="md:hidden">
         <DragCloseMenu
           textHeader={"profile"}
@@ -27,10 +29,9 @@ const ProfileMenu = () => {
         />
       </div>
 
-      <menu>
-        <DefaultBtn
-          textBtn="Home"
-        />
+      <menu className="flex justify-between">
+        <DefaultBtn textBtn="Home" />
+
         <DefaultBtn
           textBtn="About"
           onClick={() =>

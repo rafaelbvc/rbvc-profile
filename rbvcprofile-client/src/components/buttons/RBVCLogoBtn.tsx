@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import RbvcLogo from "../svg/RbvcLogo";
 
 const RBVCLogoBtn = ({ onClick }) => {
   const [wwidth] = useState(window.innerWidth);
   const [disableC, setDisableC] = useState(false);
+
+  const logoRBVCFocusRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (wwidth >= 768) {
@@ -12,18 +14,22 @@ const RBVCLogoBtn = ({ onClick }) => {
   }, [wwidth]);
 
   return (
-    <button className="flex" onClick={onClick} disabled={disableC}>
+    <button
+      ref={logoRBVCFocusRef}
+      id="RBVCLogoBtnId"
+      className="flex"
+      onClick={onClick}
+      disabled={disableC}
+    >
       <RbvcLogo />
       <div className="self-center cursor-pointer">
-        <p className="text-start font-semibold mb-[-0.3rem] tracking-widest">
+        <p className="text-start font-semibold mb-[-0.7rem] tracking-widest">
           RAFAEL VENDRAMINI
         </p>
-        <p className="text-dGolden">
-          RBVC Soluções Tecnológicas
-        </p>
+        <p className="text-dGolden tracking-tight">RBVC Soluções Tecnológicas</p>
       </div>
     </button>
   );
 };
 
-export default RBVCLogoBtn;
+export default forwardRef(RBVCLogoBtn);

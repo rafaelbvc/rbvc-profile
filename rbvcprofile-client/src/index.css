@@ -3,16 +3,15 @@
 @tailwind utilities;
 
 html {
-  @apply box-content;
+  @apply box-border;
   @apply font-poppins;
   @apply text-sm;
   @apply whitespace-nowrap;
 }
 
 textarea {
-  @apply resize-none
+  @apply resize-none;
 }
-
 
 @keyframes bounce {
   0%,
@@ -40,11 +39,9 @@ textarea {
   animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-.rotate-315 {
-  --tw-rotate: -45deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
-    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.6rem;
 }
 
 .text-xxs {
@@ -60,8 +57,6 @@ textarea {
 .border-1 {
   border-width: 1px;
 }
-
-
 
 .containerE {
   @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
@@ -99,7 +94,6 @@ textarea {
   @apply mr-1 md:mr-6 pt-[0.125rem] cursor-pointer whitespace-nowrap text-sm md:text-dGrayTitle text-dGolden hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
 }
 
-.pDragCloseBar
-{
-  @apply text-xxs font-bold uppercase
+.pDragCloseBar {
+  @apply text-xxs font-bold uppercase;
 }
