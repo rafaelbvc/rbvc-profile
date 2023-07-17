@@ -23,13 +23,15 @@ const RBVCLogoBtn = ({ onClick }) => {
     >
       <RbvcLogo />
       <div className="self-center cursor-pointer">
-        <p className="text-start font-semibold mb-[-0.7rem] tracking-widest">
+        <p className="text-start font-semibold mb-[-0.65rem] tracking-widest">
           RAFAEL VENDRAMINI
         </p>
-        <p className="text-dGolden tracking-tight">RBVC Soluções Tecnológicas</p>
+        <p className="text-dGolden tracking-tight">
+          RBVC Soluções Tecnológicas
+        </p>
       </div>
     </button>
   );
 };
 
-export default forwardRef(RBVCLogoBtn);
+export default RBVCLogoBtn;

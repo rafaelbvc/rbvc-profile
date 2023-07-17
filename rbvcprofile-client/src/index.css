@@ -40,7 +40,7 @@ textarea {
 }
 
 .text-sm {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   line-height: 1.6rem;
 }
 
@@ -91,9 +91,13 @@ textarea {
 }
 
 .vSubmitForm {
-  @apply mr-1 md:mr-6 pt-[0.125rem] cursor-pointer whitespace-nowrap text-sm md:text-dGrayTitle text-dGolden hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
+  @apply mr-1 md:mr-6 pt-[0.125rem] cursor-pointer whitespace-nowrap  md:text-dGrayTitle text-dGolden hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
 }
 
 .pDragCloseBar {
   @apply text-xxs font-bold uppercase;
+}
+
+.pMessageErrorInputs {
+@apply text-dGolden whitespace-normal pl-2 text-justify
 }

@@ -42,8 +42,8 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
         textHeader="about"
         onClick={() => setAboutVisibilityState(" hidden")}
       />
-      <div className=" flex bg-dGrayBGScreens  rounded  flex-col min-w-[21rem] max-w-[39.5rem] mb-1  p-1">
-        <div className="flex flex-col items-center  md:flex-row">
+      <div className=" flex bg-dGrayBGScreens  rounded  flex-col min-w-[21rem] max-w-[45rem] mb-1  p-1">
+        <div className="flex flex-col items-center  sm:flex-row">
           <div className={`${bigIMG ? "max-w-[21rem]" : "w-[12.5rem]"}`}>
             <img
               src={PhotoMyProfileA}
@@ -60,7 +60,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
               <p className="  font-bold my-5">Skills &</p>
               <p className="  text-dGolden font-bold my-5">&nbsp; Tools</p>
             </title>
-            <section className="flex justify-center flex-row flex-wrap gap-4">
+            <section className="flex justify-center  flex-row flex-wrap gap-4">
               <JavaScriptLogo width={"5rem"} />
               <MongoDBLogo width={"5rem"} />
               <NextLogo width={"5rem"} />
