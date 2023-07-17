@@ -76,9 +76,9 @@ export const updateUser = assyncHandler(async (req, res) => {
   }
   //409
 
-  if (typeof active !== "boolean") {
-    return res.status(400).json({ message: "Data inconsistency" });
-  }
+  // if (typeof active !== "boolean") {
+  //   return res.status(400).json({ message: "Data inconsistency" });
+  // }
 
   // duplicate data?
   // const duplicatedUpdate = await UsersController.findOne({ email })

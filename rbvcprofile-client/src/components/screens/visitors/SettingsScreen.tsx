@@ -17,14 +17,14 @@ import { timeNow } from "../../../utils/handleTime";
 const SettingsScreen = () => {
   const { userData, loadingState, errorType } = useUserDataContext();
 
+
   const data = useMemo(
     () => userData?.entities["64b0d584d0a4f8263c629f5f"],
     [userData]
   ); // todo bring the Authed user
 
-  const {
-    setSettingsVisibilityState,
-  } = useVisibilityContext();
+  const { setSettingsVisibilityState } = useVisibilityContext();
+
 
   const [users, setUsers] = useState<any>(data);
   const [activeStatus, setActiveStatus] = useState<boolean>(true);
@@ -33,6 +33,8 @@ const SettingsScreen = () => {
   const handleUsers = (dataUsers) => {
     setUsers(dataUsers);
   };
+
+
 
   const handleActiveStatus = () => {
     const active = users.active;
@@ -106,13 +108,4 @@ const SettingsScreen = () => {
 
 export default SettingsScreen;
 
-//phone  mascara validado pais area e formato Mobile
-//password  *** hash
-
-//password
-// The password length must be greater than or equal to 8
-// The password must contain one or more uppercase characters
-// The password must contain one or more lowercase characters
-// The password must contain one or more numeric values
-// The password must contain one or more special characters
 
