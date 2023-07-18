@@ -9,7 +9,7 @@ const NavBar = () => {
     useVisibilityContext();
 
   return (
-    <nav className="container fixed  flex justify-between h-[5rem] w-full bg-dtBgMainColor px-2 z-10 ">
+    <nav className="container px-2 fixed flex justify-between h-[5rem] w-screen   bg-dtBgMainColor  z-10 ">
       {/*personal secction */}
       <RBVCLogoBtn
         onClick={() => setPVisibilityState(handleVisibility(pvisibility))}
@@ -20,7 +20,7 @@ const NavBar = () => {
       </div>
 
       {/*welcome visitor and auth secction*/}
-      <div className="self-center p-1 cursor-pointer">
+      <div className="p-1 pt-2 cursor-pointer self-center">
         <GetStartedCollapsedBtn
           onClick={() => setVVisibilityState(handleVisibility(vvisibility))}
         />

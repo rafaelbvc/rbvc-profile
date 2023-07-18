@@ -13,14 +13,12 @@ const DefaultBtn = (props) => {
     <>
       <button
         type="button"
-        className={` md:w-[5rem] lg:w-[5.64rem] p-1 cursor-pointer lg:mx-3 ${styleBtn}`}
+        className={`w-[3.4rem] md:w-[4.5rem] lg:w-[5.5rem] p-1 mx-3 ${styleBtn}`}
         onClick={onClick}
         hidden={isVisible}
         // disabled={isAuth}
       >
-        <span className="mx-auto whitespace-nowrap md:text-dGrayTitle text-dGolden font-popins text-reg hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden">
-          {textBtn}
-        </span>
+        <span className="vBtnStyle">{textBtn}</span>
       </button>
     </>
   );

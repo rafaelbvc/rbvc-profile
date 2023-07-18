@@ -7,11 +7,11 @@ import DefaultBtn from "../../buttons/DefaultBtn";
 const SignInScreen = () => {
   const { setSignInVisibilityState } = useVisibilityContext();
   const {
-    reset,
+    // reset,
     register,
-    handleSubmit,
-    watch,
-    formState: { errors },
+    // handleSubmit,
+    // watch,
+    // formState: { errors },
   } = useForm();
 
   return (
@@ -52,9 +52,7 @@ const SignInScreen = () => {
           })}
         />
         <details>
-          <summary
-            className={`${"if error TODO"} text-sm font-poppins mx-1 mt-2`}
-          >
+          <summary className={`${"if error TODO"} text-sm mx-1 mt-2`}>
             {"Error Summary"}
           </summary>
           {"kinds"}

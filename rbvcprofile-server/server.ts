@@ -32,7 +32,7 @@ server.use("/", express.static(path.join(__dirname, "public")));
 
 server.use("/", require("./routes/root"));
 server.use("/users", require("./routes/userRoutes"));
-// server.use("/messages", require("./routes/messagesRoutes"));
+server.use("/messages", require("./routes/messagesRoutes"));
 
 server.all("*", (req, res) => {
   res.status(404);
@@ -59,8 +59,3 @@ mongoose.connection.on("error", (err) => {
     "mongoErrLog.log"
   );
 });
-
-// mongoose.connection.once("open", () => {
-//   console.log("Mongo Container Connected");
-//   server.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
-// });

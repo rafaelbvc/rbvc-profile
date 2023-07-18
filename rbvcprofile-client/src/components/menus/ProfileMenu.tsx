@@ -2,7 +2,6 @@ import { useVisibilityContext } from "../../contexts/useVisibilityContext";
 import DefaultBtn from "../buttons/DefaultBtn";
 import DragCloseMenu from "./DragCloseMenu";
 import { handleVisibility } from "../../utils/visibilityHandler";
-import { useRef } from "react";
 
 const ProfileMenu = () => {
   const {
@@ -17,15 +16,12 @@ const ProfileMenu = () => {
     setHireVisibilityState,
   } = useVisibilityContext();
 
-  const ref = useRef(null);
-
-  const handleFocus = () => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // const handleRef = () => {
+  //   c
+  // }
 
   return (
-    <>
-      <span ref={ref} />
+    <section className="container flex flex-col max-w-[24.5rem] sm:max-w-none md:mt-[1.6rem]">
       <div className="md:hidden">
         <DragCloseMenu
           textHeader={"profile"}
@@ -33,42 +29,35 @@ const ProfileMenu = () => {
         />
       </div>
 
-      <div className="flex justify-between bg-dtBgMainColor rounded">
-        <DefaultBtn
-          textBtn="Home"
-          styleBtn=" self-center "
-          onClick={handleFocus}
-        />
+      <menu className="flex justify-between">
+        <DefaultBtn textBtn="Home" />
+
         <DefaultBtn
           textBtn="About"
-          styleBtn=" self-center"
           onClick={() =>
             setAboutVisibilityState(handleVisibility(aboutVisibility))
           }
         />
         <DefaultBtn
           textBtn="Portifolio"
-          styleBtn="self-center "
           onClick={() =>
             setPortifolioVisibilityState(handleVisibility(portifolioVisibility))
           }
         />
         <DefaultBtn
           textBtn="Contact"
-          styleBtn=" self-center"
           onClick={() =>
             setContactVisibilityState(handleVisibility(contactVisibility))
           }
         />
         <DefaultBtn
           textBtn="Hire"
-          styleBtn=" self-center"
           onClick={() =>
             setHireVisibilityState(handleVisibility(hireVisibility))
           }
         />
-      </div>
-    </>
+      </menu>
+    </section>
   );
 };
 

@@ -1,29 +1,32 @@
 import { useCallback, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ISignInSignUpScreen } from "../../../interfaces/ISignInSignUpScreen";
-import { formatISODate, timeNow } from "../../../utils/handleTime";
-import { IUsers } from "../../../interfaces/IUsers";
-import {
-  selectUserById,
-  useAddNewUserMutation,
-  // useDeleteUserMutation,
-  useUpdateUserMutation,
-} from "./usersApiSlice";
-import DefaultBtn from "../../buttons/DefaultBtn";
-import { handleVisibility } from "../../../utils/visibilityHandler";
-import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
-import { useSelector } from "react-redux";
+import { ISignInSignUpScreen } from "../interfaces/ISignInSignUpScreen";
+
+import { IUsers } from "../interfaces/IUsers";
+import { useVisibilityContext } from "../contexts/useVisibilityContext";
+import { useAddNewUserMutation } from "../components/screens/visitors/usersApiSlice";
+import DefaultBtn from "../components/buttons/DefaultBtn";
+import { handleVisibility } from "../utils/visibilityHandler";
+import { formatISODate, timeNow } from "../utils/handleTime";
+
 
 interface IInputData {
-  id: string;
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
   password: string;
-  active: boolean;
   preventDefault: () => void;
 }
+
+// let userPath = {
+//   firstNameStr: "",
+//   lastNameStr: "",
+//   phoneStr: "",
+//   emailStr: "",
+//   passwordStr: "",
+//   // updatedAtStr: "",
+// };
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const { filledData, resetForm, submitForm, formType, newUser } = props;
@@ -31,51 +34,47 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const { setVisitorsMessageVisibilityState, visitorsMessagesVisibility } =
     useVisibilityContext();
 
-  // const [deleteUser] = useDeleteUserMutation();
-
   const [users, setUsers] = useState<IUsers | any>(filledData);
-  const [formTypes, setFormTypes] = useState<boolean>(formType); //SignUp-false - SettingsScreen-true
+  const [readOrEditInput, setReadOrEditInput] = useState<boolean>(false); //todo // formType
+  const [formTypes] = useState<boolean>(formType); //SignUp-false - SettingsScreen-true
   const [formSubmit, setFormSubmit] = useState<boolean>(submitForm);
-  const [editUser, setEditUser] = useState<boolean>(false);
+  const [editUser, setEditUser] = useState<boolean>(false)
 
   const form = useForm<IInputData>();
   const { reset, register, handleSubmit, formState, watch } = form;
   const { errors } = formState;
 
-  // , { isLoading, isSucess, isError}
-  const [addNewUser, { error, isSucess }] = useAddNewUserMutation();
-  const [updateUser, { error: errorUpdate, isSucess: sucessUpdate }] =
-    useUpdateUserMutation();
+  // const {
+  //   firstNameStr,
+  //   lastNameStr,
+  //   phoneStr,
+  //   emailStr,
+  //   passwordStr,
+  //   updatedAtStr,
+  // } = filledData;
 
-  const userIdPath = users?.id;
-  const userById = useSelector((state) => selectUserById(state, userIdPath));
+  // , { isLoading, isSucess, isError}
+  const [addNewUser, { error }] = useAddNewUserMutation();
+
   const onSubmit: SubmitHandler<IInputData> = async (data) => {
     if (!data) {
       alert(error);
       return;
-    } else if (formType && editUser) {
-      const userById: IInputData = await selectUserById(
-        "64afe564a008d1eec567a9c6"
-      );
-      await updateUser(data, userById?.id);
-    } else if (!formType && !editUser) {
-      await addNewUser(data);
-      if (isSucess) {
-        reset();
-      } else {
-        alert("ërrou otario");
-      }
     }
+    await addNewUser(data);
+    reset();
   };
-
-  // const handleDelete = async() => {
-  //   const userByIds: IInputData = await selectUserById("64b0d584d0a4f8263c629f5f");
-  //   console.log(userByIds?.id, "usebyuid");
-  //   // await deleteUser(userById?.id);
-  // };
 
   // const tracking = watch();
   // console.log(tracking, errors, "observando o formulario");
+
+  const handleReadOrEdit = () => {
+    if (readOrEditInput) {
+      setReadOrEditInput(false);
+    } else {
+      setReadOrEditInput(true);
+    }
+  };
 
   const handleUsers = useCallback(() => {
     if (formType) {
@@ -85,8 +84,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     }
   }, [formType, newUser, filledData]);
 
-  const menuEditSettings = (
-    <menu className="flex justify-between my-1">
+  const renderMenu = formTypes || editUser ? (
+    <menu className="flex justify-between">
       <DefaultBtn
         textBtn="messages"
         onClick={() =>
@@ -98,29 +97,25 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
       <DefaultBtn
         textBtn="edit"
         onClick={() => {
+          handleReadOrEdit();
           setFormSubmit(false);
           setEditUser(true);
-          setFormTypes(false);
         }}
       />
       <input type="submit" value="upadate" className="vSubmitForm" />
-      {/* <DefaultBtn textBtn="deleteTest" onClick={() => handleDelete()} /> */}
+    </menu>
+  ) : (
+    <menu className="flex w-content justify-between mx-6 md:mx-0">
+      <DefaultBtn textBtn="clear" />
+      <input type="submit" value="create" className="vSubmitForm" />
     </menu>
   );
 
-  const renderMenu =
-    formTypes || editUser ? (
-      menuEditSettings
-    ) : (
-      <menu className="flex w-content justify-between my-1 mx-6 md:mx-0">
-        <DefaultBtn textBtn="clear" />
-        <input type="submit" value="create" className="vSubmitForm" />
-      </menu>
-    );
+  // console.log(readOrEditInput, "read or edit", usersPath.firsName, "usrs");
 
-  // useEffect(() => {
-  //   handleDelete()
-  // },[handleDelete])
+  useEffect(() => {
+    handleReadOrEdit();
+  }, [formType]);
 
   useEffect(() => {
     if (formType) {
@@ -128,7 +123,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     } else {
       handleSubmit(newUser);
     }
-  }, [formSubmit, filledData, newUser, formType, handleSubmit, userById]);
+  }, [formSubmit, filledData, newUser, formType, handleSubmit]);
 
   useEffect(() => {
     reset();
@@ -138,27 +133,12 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     handleUsers();
   }, [filledData, newUser, handleUsers]);
 
-  // console.log(userById, "userByid");
-
   //
   return (
     <div className="max-w-[28rem]">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-wrap  md:flex-nowrap mx-auto">
           <div className="vInputsResponsive w-full mx-1 sm:ml-1">
-            <input
-              className="hidden"
-              type="text"
-              id="id"
-              value={userById?._id}
-              {...register("id")}
-            />
-            <input
-              className="hidden"
-              id="active"
-              value={userById?.active}
-              {...register("active")}
-            />
             <label htmlFor="firstName" className="vLabels">
               First Name
             </label>
@@ -166,6 +146,15 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               id="firstName"
               type="text"
               className="vInputs"
+              // readOnly={readOrEditInput}
+              // onChange={(e) => setUsersPath(e.target.value)}
+              // value={
+              //   formTypes
+              //     ? users?.firstName
+              //     : newUser
+              //     ? newUser?.firstName
+              //     : usersStrr?.firsName
+              // }
               value={formTypes ? users?.firstName : newUser?.firstName}
               {...register("firstName", {
                 required: {
@@ -176,6 +165,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
                 minLength: 3,
               })}
             />
+            {/* <p className="text-dGolden">{errors.firstName?.message}</p> */}
           </div>
 
           <div className="vInputsResponsive w-full mx-1 sm:mr-1">
@@ -186,6 +176,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               id="phone"
               type="tel"
               className="vInputs"
+              // readOnly={readOrEditInput}
               value={formTypes ? users?.phone : newUser?.phone}
               {...register("phone", {
                 pattern: {
@@ -209,6 +200,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             id="lastName"
             type="text"
             className="vInputs"
+            // readOnly={readOrEditInput}
             value={formTypes ? users?.lastName : newUser?.lastName}
             {...register("lastName", {
               required: {
@@ -231,6 +223,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
             id="email"
             type="email"
             className="vInputs"
+            // readOnly={readOrEditInput}
             value={formTypes ? users?.email : newUser?.email}
             {...register("email", {
               pattern: {
@@ -256,6 +249,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               id="password"
               type="text"
               className="vInputs"
+              // readOnly={readOrEditInput}
               value={formTypes ? users?.password : newUser?.password}
               {...register("password", {
                 pattern: {

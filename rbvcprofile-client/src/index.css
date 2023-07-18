@@ -3,7 +3,14 @@
 @tailwind utilities;
 
 html {
-  box-sizing: border-box;
+  @apply box-border;
+  @apply font-poppins;
+  @apply text-sm;
+  @apply whitespace-nowrap;
+}
+
+textarea {
+  @apply resize-none;
 }
 
 @keyframes bounce {
@@ -22,26 +29,24 @@ html {
 }
 
 @keyframes ping {
-    25%, 50% {
-        transform: scale(1);
-        opacity: 0;
-    }
+  25%,
+  50% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 .animate-ping {
-    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-
-.rotate-315 {
-  --tw-rotate: -45deg;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y))
-    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
-    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+.text-sm {
+  font-size: 0.9rem;
+  line-height: 1.6rem;
 }
 
 .text-xxs {
   font-size: 0.55rem;
-  line-height: 0.75rem;
+  line-height: 0.39rem;
 }
 
 .text-xms {
@@ -53,15 +58,10 @@ html {
   border-width: 1px;
 }
 
-textarea {
-  resize: none;
-}
-
 .containerE {
   @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
 }
 
-/* mt-[5rem] - test */
 .contentE {
   @apply absolute justify-around  left-0 flex-row   w-screen  max-w-[28.75rem] h-[2rem] cursor-pointer z-50;
 }
@@ -71,7 +71,7 @@ textarea {
 }
 
 .vLabels {
-  @apply mx-1 mt-2 px-1 whitespace-nowrap text-xms font-poppins;
+  @apply mx-1 mt-2 px-1 whitespace-nowrap text-xms;
 }
 
 .vDraggables {
@@ -79,9 +79,25 @@ textarea {
 }
 
 .vInputs {
-  @apply  mx-1 px-1 border-1 border-dGoldenAlpha rounded;
+  @apply mx-1 px-1 border-1 border-dGoldenAlpha rounded;
 }
 
 .vInputsResponsive {
-  @apply flex flex-row md:flex-col justify-between my-1
+  @apply flex flex-row md:flex-col justify-between my-1;
+}
+
+.vBtnStyle {
+  @apply cursor-pointer md:text-dGrayTitle text-dGolden hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
+}
+
+.vSubmitForm {
+  @apply mr-1 md:mr-6 pt-[0.125rem] cursor-pointer whitespace-nowrap  md:text-dGrayTitle text-dGolden hover:underline  hover:underline-offset-8 hover:decoration-dBlack md:hover:decoration-dGolden;
+}
+
+.pDragCloseBar {
+  @apply text-xxs font-bold uppercase;
+}
+
+.pMessageErrorInputs {
+@apply text-dGolden whitespace-normal pl-2 text-justify
 }

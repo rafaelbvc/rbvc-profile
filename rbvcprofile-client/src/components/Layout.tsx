@@ -16,10 +16,10 @@ const Layout = () => {
 
   useEffect(() => {
     handleSWidth(swidth);
-  }, []);
+  }, [swidth]);
 
   return (
-    <main className="container  h-full mx-auto bg-white">
+    <main className="container w-screen h-full  mx-auto">
       <NavBar />
       <Outlet />
     </main>
