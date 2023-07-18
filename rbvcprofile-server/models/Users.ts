@@ -1,5 +1,17 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
+const messagesSchema = require("./Messages.ts").schema;
+
+type TMessagesSchema = {
+  // user: ObjectId,
+  title: String,
+  message: String,
+  completed: Boolean
+  timestamps: {
+    createdAt: Date,
+    updatedAt: Date,
+  } 
+}
 
 const usersSchema = new Schema(
   {
@@ -23,13 +35,8 @@ const usersSchema = new Schema(
       type: String,
       required: false,
     },
-    messages: [
-      {
-        type: String,
-        required: false,
-        ref: "Messages"
-      },
-    ],
+    messages: { type: [messagesSchema] },
+
     active: {
       type: Boolean,
       default: true,

@@ -19,7 +19,7 @@ const SettingsScreen = () => {
 
 
   const data = useMemo(
-    () => userData?.entities["64b0d584d0a4f8263c629f5f"],
+    () => userData?.entities["64afe564a008d1eec567a9c6"],
     [userData]
   ); // todo bring the Authed user
 

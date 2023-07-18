@@ -6,7 +6,7 @@ import { IUsers } from "../../../interfaces/IUsers";
 import {
   selectUserById,
   useAddNewUserMutation,
-  useDeleteUserMutation,
+  // useDeleteUserMutation,
   useUpdateUserMutation,
 } from "./usersApiSlice";
 import DefaultBtn from "../../buttons/DefaultBtn";
@@ -31,7 +31,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const { setVisitorsMessageVisibilityState, visitorsMessagesVisibility } =
     useVisibilityContext();
 
-  const [deleteUser] = useDeleteUserMutation();
+  // const [deleteUser] = useDeleteUserMutation();
 
   const [users, setUsers] = useState<IUsers | any>(filledData);
   const [formTypes, setFormTypes] = useState<boolean>(formType); //SignUp-false - SettingsScreen-true
@@ -43,33 +43,36 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const { errors } = formState;
 
   // , { isLoading, isSucess, isError}
-  const [addNewUser, { error }] = useAddNewUserMutation();
-  const [updateUser] = useUpdateUserMutation();
+  const [addNewUser, { error, isSucess }] = useAddNewUserMutation();
+  const [updateUser, { error: errorUpdate, isSucess: sucessUpdate }] =
+    useUpdateUserMutation();
 
   const userIdPath = users?.id;
   const userById = useSelector((state) => selectUserById(state, userIdPath));
   const onSubmit: SubmitHandler<IInputData> = async (data) => {
-    // console.log(userIdPath , "userID")
     if (!data) {
       alert(error);
       return;
     } else if (formType && editUser) {
-      const userById:IInputData = await selectUserById("64b0d584d0a4f8263c629f5f");
-      await updateUser( data, userById?.id);
+      const userById: IInputData = await selectUserById(
+        "64afe564a008d1eec567a9c6"
+      );
+      await updateUser(data, userById?.id);
     } else if (!formType && !editUser) {
       await addNewUser(data);
-      reset();
+      if (isSucess) {
+        reset();
+      } else {
+        alert("ërrou otario");
+      }
     }
   };
 
-  const handleDelete = async (userId) => {
-    const userById = await selectUserById("64b0d584d0a4f8263c629f5f");
-    console.log(userById, "usebyuid");
-    await deleteUser(userById);
-  };
-
-  // console.log(formType, "formtype", editUser, "edituser");
-  // console.log(userById, "userByid")
+  // const handleDelete = async() => {
+  //   const userByIds: IInputData = await selectUserById("64b0d584d0a4f8263c629f5f");
+  //   console.log(userByIds?.id, "usebyuid");
+  //   // await deleteUser(userById?.id);
+  // };
 
   // const tracking = watch();
   // console.log(tracking, errors, "observando o formulario");
@@ -83,7 +86,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   }, [formType, newUser, filledData]);
 
   const menuEditSettings = (
-    <menu className="flex justify-between">
+    <menu className="flex justify-between my-1">
       <DefaultBtn
         textBtn="messages"
         onClick={() =>
@@ -100,9 +103,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
           setFormTypes(false);
         }}
       />
-
       <input type="submit" value="upadate" className="vSubmitForm" />
-      <DefaultBtn textBtn="deleteTest" onClick={() => handleDelete(userById)} />
+      {/* <DefaultBtn textBtn="deleteTest" onClick={() => handleDelete()} /> */}
     </menu>
   );
 
@@ -110,11 +112,15 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     formTypes || editUser ? (
       menuEditSettings
     ) : (
-      <menu className="flex w-content justify-between mx-6 md:mx-0">
+      <menu className="flex w-content justify-between my-1 mx-6 md:mx-0">
         <DefaultBtn textBtn="clear" />
         <input type="submit" value="create" className="vSubmitForm" />
       </menu>
     );
+
+  // useEffect(() => {
+  //   handleDelete()
+  // },[handleDelete])
 
   useEffect(() => {
     if (formType) {
@@ -132,7 +138,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     handleUsers();
   }, [filledData, newUser, handleUsers]);
 
-  console.log(userById, "userByid")
+  // console.log(userById, "userByid");
 
   //
   return (
@@ -140,8 +146,19 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-wrap  md:flex-nowrap mx-auto">
           <div className="vInputsResponsive w-full mx-1 sm:ml-1">
-            <input type="text" id="id" value={userById?._id} {...register("id")} />
-            <input id="active" value={userById?.active} {...register("active")}/>
+            <input
+              className="hidden"
+              type="text"
+              id="id"
+              value={userById?._id}
+              {...register("id")}
+            />
+            <input
+              className="hidden"
+              id="active"
+              value={userById?.active}
+              {...register("active")}
+            />
             <label htmlFor="firstName" className="vLabels">
               First Name
             </label>
