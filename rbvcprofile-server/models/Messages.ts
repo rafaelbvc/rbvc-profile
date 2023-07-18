@@ -1,28 +1,27 @@
 // const mongooseMessages = require("mongoose")
+// const mongoose = require("mongoose")
+import { Module } from "module";
 import mongoose from "mongoose";
 
-const AutoIncrement = require("mongoose-sequence")(mongoose);
+// const AutoIncrement = require("mongoose-sequence")(mongoose);
+
 
 const { Schema } = mongoose;
 
 const messagesSchema = new Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Users",
-    },
+    // user: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true,
+    //   ref: "Users",
+    // },
     title: {
       type: String,
-      required: true,
+      required: false,
     },
     message: {
       type: String,
-      required: true,
-    },
-    completed: {
-      type: Boolean,
-      default: false,
+      required: false,
     },
   },
   {
@@ -30,18 +29,20 @@ const messagesSchema = new Schema(
   }
 );
 
-messagesSchema.plugin(AutoIncrement, {
-  inc_field: "messagesSeq",
-  id: "messagessId",
-  start_seq: 500,
-});
+// messagesSchema.plugin(AutoIncrement, {
+//   inc_field: "messagesSeq",
+//   id: "messagessId",
+//   start_seq: 500,
+// });
 
 const Messages = mongoose.model("Messages", messagesSchema);
 
-module.exports = {
-  Messages,
-  messagesSchema,
-};
+module.exports = Messages;
+
+// module.exports = {
+//   Messages,
+//   messagesSchema,
+// };
 
 // import mongoose, { Schema } from "mongoose";
 // import Inc from "mongoose-sequence"

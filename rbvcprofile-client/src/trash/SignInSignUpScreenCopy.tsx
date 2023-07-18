@@ -65,8 +65,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
     reset();
   };
 
-  const tracking = watch();
-  console.log(tracking, errors, "observando o formulario");
+  // const tracking = watch();
+  // console.log(tracking, errors, "observando o formulario");
 
   const handleReadOrEdit = () => {
     if (readOrEditInput) {

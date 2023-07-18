@@ -1,6 +1,6 @@
 const Users = require("../models/Users");
 // import {Users} from "../models/Users"
-const messagesController = require("../models/Messages");
+// const messagesController = require("../models/Messages");
 const bcrypt = require("bcrypt");
 const assyncHandler = require("express-async-handler");
 
