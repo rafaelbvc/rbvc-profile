@@ -1,6 +1,6 @@
 {
   "name": "rbvcprofile-server",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "server.ts",
   "license": "ISC",
   "author": "Rafael Vendramini",
