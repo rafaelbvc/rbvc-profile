@@ -1,13 +1,11 @@
-import mongoose from "mongoose"
+import { IMessage } from "./IMessages";
 
-export interface IUsers extends mongoose.Document {
-    firstName: string,
-    lastName: string,
-    email: string,
-    phone?: string,
-    password: string,
-    messages?: [],
-    active: boolean,
-    created_at: Date,
-    updated_at: Date
+export interface IUser extends Document {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  password: string;
+  messages?: IMessage[];
+  active: boolean;
 }

@@ -1,17 +1,5 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
-const messagesSchema = require("./Messages.ts").schema;
-
-type TMessagesSchema = {
-  // user: ObjectId,
-  title: String,
-  message: String,
-  completed: Boolean
-  timestamps: {
-    createdAt: Date,
-    updatedAt: Date,
-  } 
-}
+import mongoose, { Schema } from "mongoose";
+import { IUser } from "../interfaces/IUsers";
 
 const usersSchema = new Schema(
   {
@@ -26,6 +14,7 @@ const usersSchema = new Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     phone: {
       type: String,
@@ -33,9 +22,9 @@ const usersSchema = new Schema(
     },
     password: {
       type: String,
-      required: false,
+      required: true,
     },
-    messages: { type: [messagesSchema] },
+    messages: [{ type: Schema.Types.ObjectId, ref: "Messages" }],
 
     active: {
       type: Boolean,
@@ -47,53 +36,6 @@ const usersSchema = new Schema(
   }
 );
 
-const Users = mongoose.model("Users", usersSchema);
+const Users = mongoose.model<IUser>("Users", usersSchema);
 
-module.exports = Users;
-
-// // const mongooseUsers = require("mongoose");
-// import mongoose, { Schema } from "mongoose";
-// import { IUsers } from "../interfaces/IUsers";
-
-// // const UsersSchema = new mongoose.Schema()
-// const UsersSchema = new Schema(
-//   {
-//     firstName: {
-//       type: String,
-//       required: true,
-//     },
-//     lastName: {
-//       type: String,
-//       required: true,
-//     },
-//     email: {
-//       type: String,
-//       required: true,
-//     },
-//     phone: {
-//       type: String,
-//       required: false,
-//     },
-//     password: {
-//       type: String,
-//       required: false,
-//     },
-//     messages: [
-//       {
-//         type: String,
-//         default: "Messages",
-//       },
-//     ],
-//     active: {
-//       type: Boolean,
-//       default: true,
-//     },
-//   },
-//   {
-//     timestamps: true,
-//   }
-// );
-
-// export default  mongoose.model<IUsers>("Users", UsersSchema);
-// // export default Users;
-// // module.exports = mongoose.model("Users", UsersSchema);
+export default Users;
