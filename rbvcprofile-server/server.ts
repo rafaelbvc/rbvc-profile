@@ -59,8 +59,3 @@ mongoose.connection.on("error", (err) => {
     "mongoErrLog.log"
   );
 });
-
-// mongoose.connection.once("open", () => {
-//   console.log("Mongo Container Connected");
-//   server.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
-// });

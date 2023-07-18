@@ -1,11 +1,6 @@
-import mongoose from "mongoose";
-import { IUsers } from "./IUsers";
+import { Document } from "mongoose";
 
-export interface IMessages extends mongoose.Document {
-    user: IUsers,
-    title: string,
-    message: string,
-    completed: boolean,
-    created_at: Date,
-    updated_at: Date
+export interface IMessage extends Document {
+  title?: string;
+  message?: string;
 }
