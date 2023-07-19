@@ -1,11 +1,11 @@
 import Users from "../models/Users";
 import bcrypt from "bcrypt";
 import expressAsyncHandler from "express-async-handler";
-import { Response, Request, NextFunction } from "express";
+import { Response, Request } from "express";
 
 // get All Users - Get - Private
 export const getUsers = expressAsyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const users = await Users.find().select("-password").lean();
     if (!users?.length) {
       res.status(400).json({ message: "No users found!" });
@@ -17,7 +17,7 @@ export const getUsers = expressAsyncHandler(
 
 // create User - Post - Private
 export const createUser = expressAsyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const { firstName, lastName, password, email, phone } = req.body;
 
     // has data?
@@ -59,7 +59,7 @@ export const createUser = expressAsyncHandler(
 
 // upadte a User - Patch - Private
 export const updateUser = expressAsyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const {
       id,
       firstName,
@@ -105,7 +105,6 @@ export const updateUser = expressAsyncHandler(
       (userUpdate.lastName = lastName),
       (userUpdate.email = email),
       (userUpdate.phone = phone),
-      (userUpdate.messages = messages),
       (userUpdate.active = active);
 
     if (password) {
@@ -123,7 +122,7 @@ export const updateUser = expressAsyncHandler(
 
 // delete a User - Delete - Private
 export const deleteUser = expressAsyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const { id } = req.body;
 
     if (!id) {

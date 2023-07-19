@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 
 import { Messages } from "../models/Messages";
 import asyncHandler from "express-async-handler";
@@ -6,7 +6,7 @@ import Users from "../models/Users";
 
 // get all messages - Get - Private
 export const getMessages = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const messages = await Messages.find().lean();
     if (!messages?.length) {
       res.status(400).json({ message: "You have no messages yet..." });
@@ -16,9 +16,11 @@ export const getMessages = asyncHandler(
   }
 );
 
+
+
 //Create Message - Post - Private
 export const createMessage = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const { title, message, user } = req.body;
 
     //has data?
@@ -54,7 +56,7 @@ export const createMessage = asyncHandler(
 );
 
 export const updateMessage = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const { id, title, message, user } = req.body;
 
     if (!id || !title || !message || !user) {
@@ -85,7 +87,7 @@ export const updateMessage = asyncHandler(
 );
 
 export const deleteMessage = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const { id } = req.body;
 
     if (!id) {
