@@ -52,7 +52,8 @@ export const createUser = expressAsyncHandler(
         message: `User ${firstName} ${lastName}, has been created`,
       });
     } else {
-      res.status(400).json({ message: "Invalid data" }); //to:do error handling!
+      res.status(400).json({ message: "Invalid data" }); 
+      return //to:do error handling!
     }
   }
 );
@@ -67,7 +68,6 @@ export const updateUser = expressAsyncHandler(
       email,
       phone,
       password,
-      messages,
       active,
     } = req.body;
 
@@ -133,6 +133,7 @@ export const deleteUser = expressAsyncHandler(
     const userDelete = await Users.findById(id.toString()).exec();
     if (!userDelete) {
       res.status(400).json({ message: "User not found" });
+      return
     }
 
     const result = await userDelete.deleteOne();

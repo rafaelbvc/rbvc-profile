@@ -10,6 +10,7 @@ export const getMessages = asyncHandler(
     const messages = await Messages.find().lean();
     if (!messages?.length) {
       res.status(400).json({ message: "No messages found..." });
+      return
     }
 
 
@@ -45,6 +46,7 @@ export const createMessage = asyncHandler(
       res
         .status(405)
         .json({ message: "Creating messages is for registered members only" });
+        return
     }
 
     const messageObject = {
@@ -61,7 +63,8 @@ export const createMessage = asyncHandler(
         .status(201)
         .json({ message: `The message ${title}, has been created` });
     } else {
-      res.status(400).json({ message: "Invalid data" }); // todo error handling
+      res.status(400).json({ message: "Invalid data" });
+      return  // todo error handling
     }
   }
 );
@@ -109,6 +112,7 @@ export const deleteMessage = asyncHandler(
     const messageDelete = await Messages.findById(id.toString()).exec();
     if (!messageDelete) {
       res.status(400).json({ message: "Message not found" });
+      return
     }
 
     await messageDelete.deleteOne();
