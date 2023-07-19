@@ -9,14 +9,25 @@ export const getMessages = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     const messages = await Messages.find().lean();
     if (!messages?.length) {
-      res.status(400).json({ message: "You have no messages yet..." });
-    } else {
-      res.json(messages);
+      res.status(400).json({ message: "No messages found..." });
     }
+
+
+    // messages by user
+    const userMessages = await Promise.all(
+      messages.map(async (message) => {
+        const user = await Users.findById(message.user).lean().exec();
+        return {
+          ...message,
+          firstName: user.firstName,
+          lastName: user.lastName,
+        };
+      })
+    );
+
+    res.json(userMessages);
   }
 );
-
-
 
 //Create Message - Post - Private
 export const createMessage = asyncHandler(
