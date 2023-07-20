@@ -1,9 +1,19 @@
-import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
+import { createSelector, createEntityAdapter, EntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../app/api/apiSlice";
+import { IUsers } from "../../../interfaces/IUsers";
 
-const usersAdapter: any = createEntityAdapter({});
+// interface IUsersAdapter {
+//   usersAdapter: EntityAdapter<IUsers>
+// }
 
-const initialState: any = usersAdapter.getInitialState();
+// interface IInitialState {
+//   usersAdapter: IUsersAdapter[]
+// }
+
+
+const usersAdapter:any = createEntityAdapter({});
+
+const initialState:any = usersAdapter.getInitialState();
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder: any) => ({

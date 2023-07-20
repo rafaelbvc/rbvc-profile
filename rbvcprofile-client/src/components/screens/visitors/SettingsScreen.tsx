@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useUserDataContext } from "../../../contexts/useUserDataContext";
+import { useUserData } from "../../../hooks/useUserData";
 import SignInSignUpScreen from "./SignInSignUpScreen";
 import CircleLoader from "../../loadingSpinners/CircleLoader";
 import DragCloseMenu from "../../menus/DragCloseMenu";
@@ -15,16 +15,14 @@ import {
 import { timeNow } from "../../../utils/handleTime";
 
 const SettingsScreen = () => {
-  const { userData, loadingState, errorType } = useUserDataContext();
-
+  const { userData, userLoadingState, userErrors } = useUserData();
 
   const data = useMemo(
-    () => userData?.entities["64afe564a008d1eec567a9c6"],
+    () => userData?.entities["64b76acab91a055eb304ae00"],
     [userData]
   ); // todo bring the Authed user
 
   const { setSettingsVisibilityState } = useVisibilityContext();
-
 
   const [users, setUsers] = useState<any>(data);
   const [activeStatus, setActiveStatus] = useState<boolean>(true);
@@ -33,8 +31,6 @@ const SettingsScreen = () => {
   const handleUsers = (dataUsers) => {
     setUsers(dataUsers);
   };
-
-
 
   const handleActiveStatus = () => {
     const active = users.active;
@@ -51,13 +47,10 @@ const SettingsScreen = () => {
 
   const renderContent = isLoading ? (
     <CircleLoader isLoading={isLoading} />
-  ) : errorType ? (
-    <p>{`Unfortunately we got that problem ${errorType}`}</p>
+  ) : userErrors ? (
+    <p>{`Unfortunately we got that problem ${userErrors}`}</p>
   ) : (
-    <SignInSignUpScreen
-      filledData={users}
-      formType={true}
-    />
+    <SignInSignUpScreen filledData={users} formType={true} />
   );
 
   // const onSubmit = async (data) => {
@@ -68,9 +61,9 @@ const SettingsScreen = () => {
   // console.log(onWatch);
 
   useEffect(() => {
-    handleLoading(loadingState);
+    handleLoading(userLoadingState);
     handleUsers(data);
-  }, [loadingState, data]);
+  }, [userLoadingState, data]);
   return (
     <>
       <DragCloseMenu
@@ -107,5 +100,3 @@ const SettingsScreen = () => {
 };
 
 export default SettingsScreen;
-
-

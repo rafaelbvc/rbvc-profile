@@ -3,16 +3,18 @@ import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
 import FooterBar from "../../FooterBar";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 import DefaultBtn from "../../buttons/DefaultBtn";
+import { IInputData } from "../../../interfaces/IInputData";
 
 const SignInScreen = () => {
   const { setSignInVisibilityState } = useVisibilityContext();
-  const {
-    // reset,
-    register,
-    // handleSubmit,
-    // watch,
-    // formState: { errors },
-  } = useForm();
+  const form = useForm<IInputData>();
+  const { reset, register, handleSubmit, formState, watch } = form;
+  const { errors } = formState;
+
+
+
+
+  
 
   return (
     <>
@@ -28,13 +30,17 @@ const SignInScreen = () => {
         <input
           type="text"
           className="vInputs"
-          id="EmailValidationInput"
-          {...register("emailValidation", {
-            // pattern:
-            //   /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/,
+          id="emailSignIn"
+          {...register("email", {
+            pattern: {
+              value:
+                /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+              message: "Plase insert a valid email",
+              //change the email registered bringing the information from thebackend
+            },
             required: true,
-            // maxLength: 20,
-            // minLength: 3,
+            maxLength: 40,
+            minLength: 3,
           })}
         />
 
@@ -44,10 +50,16 @@ const SignInScreen = () => {
         <input
           type="text"
           className="vInputs"
-          id="PasswordValidationInput"
-          {...register("passwordValidation", {
-            // pattern:
-            //   /(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+          id="passwordSignIn"
+          {...register("password", {
+            pattern: {
+              value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+              message: `The password length must be greater than or equal to 8,
+            must contain one or more: uppercase characters, 
+            lowercase characters,
+            numeric values,
+            special characters`,
+            },
             required: true,
           })}
         />
@@ -60,6 +72,8 @@ const SignInScreen = () => {
         <menu className="flex justify-end min-w-[21rem]">
           <DefaultBtn textBtn={"Sign In"} />
         </menu>
+        <p className="pMessageErrorInputs">{errors.email?.message}</p>
+        <p className="pMessageErrorInputs">{errors.password?.message}</p>
       </form>
       <FooterBar />
     </>

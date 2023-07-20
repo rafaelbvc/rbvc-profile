@@ -13,17 +13,9 @@ import DefaultBtn from "../../buttons/DefaultBtn";
 import { handleVisibility } from "../../../utils/visibilityHandler";
 import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
 import { useSelector } from "react-redux";
+import { IInputData } from "../../../interfaces/IInputData";
 
-interface IInputData {
-  id: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  password: string;
-  active: boolean;
-  preventDefault: () => void;
-}
+
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const { filledData, resetForm, submitForm, formType, newUser } = props;
@@ -33,7 +25,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
 
   // const [deleteUser] = useDeleteUserMutation();
 
-  const [users, setUsers] = useState<IUsers | any>(filledData);
+  const [users, setUsers] = useState<IUsers>(filledData);
   const [formTypes, setFormTypes] = useState<boolean>(formType); //SignUp-false - SettingsScreen-true
   const [formSubmit, setFormSubmit] = useState<boolean>(submitForm);
   const [editUser, setEditUser] = useState<boolean>(false);
@@ -47,7 +39,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const [updateUser, { error: errorUpdate, isSucess: sucessUpdate }] =
     useUpdateUserMutation();
 
-  const userIdPath = users?.id;
+  const userIdPath = users?._id;
   const userById = useSelector((state) => selectUserById(state, userIdPath));
   const onSubmit: SubmitHandler<IInputData> = async (data) => {
     if (!data) {
@@ -55,15 +47,13 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
       return;
     } else if (formType && editUser) {
       const userById: IInputData = await selectUserById(
-        "64afe564a008d1eec567a9c6"
+        "64b76acab91a055eb304ae00"
       );
       await updateUser(data, userById?.id);
     } else if (!formType && !editUser) {
       await addNewUser(data);
       if (isSucess) {
         reset();
-      } else {
-        alert("ërrou otario");
       }
     }
   };
@@ -104,7 +94,6 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
         }}
       />
       <input type="submit" value="upadate" className="vSubmitForm" />
-      {/* <DefaultBtn textBtn="deleteTest" onClick={() => handleDelete()} /> */}
     </menu>
   );
 
@@ -237,7 +226,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
                 value:
                   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
                 message:
-                  "The provided email is out of parttern, or the email is already registered",
+                  "Plase insert a valid email",
                 //change the email registered bringing the information from thebackend
               },
               required: true,
