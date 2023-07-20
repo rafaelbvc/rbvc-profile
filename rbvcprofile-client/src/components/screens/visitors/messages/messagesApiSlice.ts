@@ -1,21 +1,22 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../../app/api/apiSlice";
 
-const messagesAdapter: any = createEntityAdapter({
-  sortComparer: (a: any, b: any) =>
-    a.completed === b.completed ? 0 : a.completed ? 1 : -1,
-});
+// const messagesAdapter = createEntityAdapter({
+//   sortComparer: (a: any, b: any) =>
+//     a.completed === b.completed ? 0 : a.completed ? 1 : -1,
+// });
+const messagesAdapter:any = createEntityAdapter({});
 
 const initialState: any = messagesAdapter.getInitialState();
 
-export const messagesApiSlice: any = apiSlice.injectEndpoints({
-  endpoints: (builder: any) => ({
-    getMessages: (builder: any) => ({
+export const messagesApiSlice:any = apiSlice.injectEndpoints({
+  endpoints: (builder:any) => ({
+    getMessages: builder.query({
       query: () => "/messages",
       validadeStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
-      keepUnusedDataFor: 5,
+      // keepUnusedDataFor: 5,
       transformErrorResponse: (responseData) => {
         const loadedMessages = responseData.map((message) => {
           message.id = message._id;
@@ -68,12 +69,12 @@ export const {
   useAddNewMessageMutation,
   useUpdateMessageMutation,
   useDeleteMessageMutation,
-}: any = messagesApiSlice;
+} = messagesApiSlice;
 
-export const selectMessagesResult: any =
+export const selectMessagesResult =
   messagesApiSlice.endpoints.getMessages.select();
 
-const selectMessagesData: any = createSelector(
+const selectMessagesData = createSelector(
   selectMessagesResult,
   (messagesResult) => messagesResult.data
 );
