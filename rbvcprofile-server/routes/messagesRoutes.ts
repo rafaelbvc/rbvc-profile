@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
-  getMessages,
+  // getMessages,
+  getMessageByUser,
   createMessage,
   updateMessage,
   deleteMessage,
@@ -9,7 +10,8 @@ const router = Router();
 
 router
   .route("/")
-  .get(getMessages)
+  .get(getMessageByUser)
+  // .get(getMessages)
   .post(createMessage)
   .patch(updateMessage)
   .delete(deleteMessage);

@@ -34,6 +34,7 @@ server.use("/", require("./routes/root"));
 server.use("/users", require("./routes/userRoutes"));
 server.use("/messages", require("./routes/messagesRoutes"));
 
+
 server.all("*", (req, res) => {
   res.status(404);
   if (req.accepts("html")) {

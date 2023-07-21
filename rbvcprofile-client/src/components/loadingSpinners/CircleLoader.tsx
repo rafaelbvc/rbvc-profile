@@ -13,12 +13,12 @@ const CircleLoader = ({ isLoading }) => {
   const [color] = useState("#00FF00");
 
   const handleLoading = useCallback(() => {
-    if (!loading) {
+    if (!isLoading) {
       setLoading(false);
     } else {
       setLoading(true);
     }
-  }, [loading]);
+  }, [isLoading]);
 
   useEffect(() => {
     handleLoading();
@@ -28,7 +28,7 @@ const CircleLoader = ({ isLoading }) => {
     <div className="mt-4">
       <ClipLoader
         color={color}
-        loading={!loading}
+        loading={loading}
         cssOverride={override}
         size={100}
         ara-label="Loading Spinner"
