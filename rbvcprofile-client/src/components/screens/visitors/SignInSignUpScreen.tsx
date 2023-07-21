@@ -47,7 +47,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
       return;
     } else if (formType && editUser) {
       const userById: IInputData = await selectUserById(
-        "64b76acab91a055eb304ae00"
+        "64b9cc84a2e6d5ab05596e66"
       );
       await updateUser(data, userById?.id);
     } else if (!formType && !editUser) {

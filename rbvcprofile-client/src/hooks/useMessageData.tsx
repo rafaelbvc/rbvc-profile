@@ -42,13 +42,17 @@ export const useMessageData = () => {
     }
   }, [messageError]);
 
-  useEffect(() => {}, [
+  useEffect(() => {
+    handleMessages();
+    handleSucess();
+    handleError();
+  }, [
     handleMessages,
     handleSucess,
     handleError,
     isLoading,
     error,
-    messagesByUser,
+    messagesByUserState,
   ]);
 
   return { messagesByUser, messageError, messageLoading, messageSucess };
