@@ -1,4 +1,4 @@
-export interface IInputData {
+export interface IInputUserData {
     id: string;
     firstName: string;
     lastName: string;

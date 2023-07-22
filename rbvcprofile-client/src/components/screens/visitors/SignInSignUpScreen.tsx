@@ -13,9 +13,7 @@ import DefaultBtn from "../../buttons/DefaultBtn";
 import { handleVisibility } from "../../../utils/visibilityHandler";
 import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
 import { useSelector } from "react-redux";
-import { IInputData } from "../../../interfaces/IInputData";
-
-
+import { IInputUserData } from "../../../interfaces/IInputUserData";
 
 const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const { filledData, resetForm, submitForm, formType, newUser } = props;
@@ -30,7 +28,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
   const [formSubmit, setFormSubmit] = useState<boolean>(submitForm);
   const [editUser, setEditUser] = useState<boolean>(false);
 
-  const form = useForm<IInputData>();
+  const form = useForm<IInputUserData>();
   const { reset, register, handleSubmit, formState, watch } = form;
   const { errors } = formState;
 
@@ -41,20 +39,18 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
 
   const userIdPath = users?._id;
   const userById = useSelector((state) => selectUserById(state, userIdPath));
-  const onSubmit: SubmitHandler<IInputData> = async (data) => {
+  const onSubmit: SubmitHandler<IInputUserData> = async (data) => {
     if (!data) {
       alert(error);
       return;
     } else if (formType && editUser) {
-      const userById: IInputData = await selectUserById(
-        "64b9cc84a2e6d5ab05596e66"
+      const userById: IInputUserData = await selectUserById(
+        "64b76acab91a055eb304ae00"
       );
       await updateUser(data, userById?.id);
     } else if (!formType && !editUser) {
       await addNewUser(data);
-      if (isSucess) {
-        reset();
-      }
+      reset();
     }
   };
 
@@ -225,8 +221,7 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
               pattern: {
                 value:
                   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                message:
-                  "Plase insert a valid email",
+                message: "Plase insert a valid email",
                 //change the email registered bringing the information from thebackend
               },
               required: true,

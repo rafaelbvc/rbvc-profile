@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useVisibilityContext } from "../../../../contexts/useVisibilityContext";
 import DefaultBtn from "../../../buttons/DefaultBtn";
 import DragCloseMenu from "../../../menus/DragCloseMenu";
@@ -14,6 +14,9 @@ import { useSelector } from "react-redux";
 import { selectUserById } from "../usersApiSlice";
 import { useMessageData } from "../../../../hooks/useMessageData";
 import ShowUserMessagesComponent from "./ShowUserMessagesComponent";
+import { IInputMessageData } from "../../../../interfaces/IInputMessageData";
+
+const url = "http://localhost:5030/messages/?user=64b76acab91a055eb304ae00";
 
 const VisitorMessages = () => {
   const { setVisitorsMessageVisibilityState } = useVisibilityContext();
@@ -28,17 +31,23 @@ const VisitorMessages = () => {
   const { userData, userLoadingState } = useUserData();
 
   const [users, setUsers] = useState<IUsers>();
-  const [messages, setMessages] = useState<any>(messagesByUser);
+  const [messages, setMessages] = useState<any>([]);
   const [readOrEditInput, setReadOrEditInput] = useState(false);
   const [loadingState, setLoadingState] = useState<boolean>(messageLoading);
+  const [userId, setUserId] = useState<string>();
 
   const userIdPath = users?._id;
-  const userById = useSelector((state) => selectUserById(state, userIdPath));
 
+  const handleUserById = () => {
+    setUserId(userIdPath);
+  };
+  const userById: IUsers = useSelector((state) =>
+    selectUserById(state, userIdPath)
+  );
   const handleUsers = useCallback(() => {
-    const data = userData?.entities["64b9cc84a2e6d5ab05596e66"];
+    const data = userData?.entities["64b76acab91a055eb304ae00"];
     setUsers(data);
-  }, [userData]);
+  }, [userData, userLoadingState]);
 
   const handleMessages = useCallback(async () => {
     if (messageLoading && !messageError) {
@@ -46,45 +55,50 @@ const VisitorMessages = () => {
       setLoadingState(true);
     } else if (messageError) {
       console.log(`Sory we have an issue: ${messageError}`);
+      setLoadingState(false);
     } else {
-      const data = messagesByUser;
-      // const data = messagesByUser;
-      setMessages(data);
+      setLoadingState(false);
+      fetch(url)
+        .then((data) => data.json())
+        .then((item) => setMessages(item))
+        .catch((e) => console.log(e));
     }
   }, [messagesByUser, messageError, messageLoading]);
 
   const arr = messages.map((itens: IMessages) => (
     <ShowUserMessagesComponent
-      key={itens.user}
-      title={itens.title}
-      message={itens.message}
-      createdAt={formatISODate(itens.createdAt)}
-      updatedAt={formatISODate(itens.updatedAt)}
+      key={itens?._id.toString()}
+      title={itens?.title}
+      message={itens?.message}
+      createdAt={formatISODate(itens?.createdAt)}
+      updatedAt={formatISODate(itens?.updatedAt)}
     />
   ));
-
-  console.log(messages, "getMessages");
 
   const {
     reset,
     register,
     handleSubmit,
-    // watch,
-    formState: { errors },
+    watch,
   } = useForm<IMessages>();
 
-  const onSubmit: SubmitHandler<IMessages> = async (data) => {
-    const datas = data;
+  const onSubmit: SubmitHandler<IInputMessageData> = async (data) => {
+    const datas = await data;
+    console.log(datas);
     if (!datas) {
       console.log("No data");
       return;
-    } else if (errors) {
-      console.log("Errors", errors);
-      return;
+    } 
+     else {
+      const newMessage = [{ ...datas, user: userId }];
+      const message = newMessage[0];
+      console.log(message, "im new message");
+      addNewMessage(message);
+      // reset();
     }
-    await addNewMessage(datas);
-    reset();
   };
+
+  // console.log(users._id, "im users")
 
   const renderContent = userLoadingState ? (
     <CircleLoader isLoading={userLoadingState} />
@@ -93,8 +107,8 @@ const VisitorMessages = () => {
       <input
         id="user"
         type="text"
-        className="hidden"
         value={userById?._id}
+        className="hidden"
         {...register("user")}
       />
       <input
@@ -138,18 +152,22 @@ const VisitorMessages = () => {
     <p>Sory we got an issue...</p>
   ) : (
     arr
-    // null
   );
+  // null;
 
-  // const messagesWatch = watch();
-  // console.log(messagesWatch);
+  const messagesWatch = watch();
+  console.log(messagesWatch);
   useEffect(() => {
     handleMessages();
-  }, [handleMessages, messageError, messageLoading, messagesByUser]);
+  }, [messageError, messageLoading, messagesByUser, handleMessages]);
 
   useEffect(() => {
     handleUsers();
   }, [userLoadingState, userData, handleUsers]);
+
+  useEffect(() => {
+    handleUserById();
+  }, [userById, handleUserById]);
 
   return (
     <>
