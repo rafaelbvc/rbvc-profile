@@ -16,7 +16,7 @@ export const messagesApiSlice:any = apiSlice.injectEndpoints({
       validadeStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
-      // keepUnusedDataFor: 5,
+      keepUnusedDataFor: 60,
       transformErrorResponse: (responseData) => {
         const loadedMessages = responseData.map((message) => {
           message.id = message._id;

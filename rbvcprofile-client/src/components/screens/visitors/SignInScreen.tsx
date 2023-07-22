@@ -3,11 +3,11 @@ import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
 import FooterBar from "../../FooterBar";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 import DefaultBtn from "../../buttons/DefaultBtn";
-import { IInputData } from "../../../interfaces/IInputData";
+import { IInputUserData } from "../../../interfaces/IInputUserData";
 
 const SignInScreen = () => {
   const { setSignInVisibilityState } = useVisibilityContext();
-  const form = useForm<IInputData>();
+  const form = useForm<IInputUserData>();
   const { reset, register, handleSubmit, formState, watch } = form;
   const { errors } = formState;
 

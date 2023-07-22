@@ -3,7 +3,7 @@ export interface IUsers {
   createdAt?: string;
   email?: string;
   firstName?: string;
-  id?: string;
+  // id?: string;
   lastName?: string;
   password?: string;
   phone?: string;

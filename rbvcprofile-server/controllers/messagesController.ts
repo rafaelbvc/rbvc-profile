@@ -73,13 +73,13 @@ export const createMessage = asyncHandler(
     //create and store an Message
     const createNewMessage = await Messages.create(messageObject);
 
-    if (createNewMessage) {
+    if (!createNewMessage) {
+      res.status(400).json({ message: "Invalid data" });
+      return; // todo error handling
+    } else {
       res
         .status(201)
         .json({ message: `The message ${title}, has been created` });
-    } else {
-      res.status(400).json({ message: "Invalid data" });
-      return; // todo error handling
     }
   }
 );

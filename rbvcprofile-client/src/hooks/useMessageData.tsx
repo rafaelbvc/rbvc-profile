@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useGetMessagesQuery } from "../components/screens/visitors/messages/messagesApiSlice";
 import { IMessages } from "../interfaces/IMessages";
+import { IUsers } from "../interfaces/IUsers";
+import { useUserData } from "./useUserData";
 
 export const useMessageData = () => {
   const {
@@ -10,6 +12,8 @@ export const useMessageData = () => {
     isSucess,
     data: messagesByUserState,
   } = useGetMessagesQuery();
+
+  const { userData } = useUserData();
 
   const [messagesByUser, setMessagesByUser] =
     useState<IMessages>(messagesByUserState);
@@ -50,10 +54,16 @@ export const useMessageData = () => {
     handleMessages,
     handleSucess,
     handleError,
+
     isLoading,
     error,
     messagesByUserState,
   ]);
 
-  return { messagesByUser, messageError, messageLoading, messageSucess };
+  return {
+    messagesByUser,
+    messageError,
+    messageLoading,
+    messageSucess,
+  };
 };
