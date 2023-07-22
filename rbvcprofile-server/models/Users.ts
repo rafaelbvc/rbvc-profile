@@ -24,8 +24,6 @@ const usersSchema = new Schema(
       type: String,
       required: true,
     },
-    messages: [{ type: Schema.Types.ObjectId, ref: "Messages" }],
-
     active: {
       type: Boolean,
       default: true,

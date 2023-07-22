@@ -1,24 +1,53 @@
-import { Request, Response, NextFunction } from "express";
-
+import { Request, Response } from "express";
 import { Messages } from "../models/Messages";
 import asyncHandler from "express-async-handler";
 import Users from "../models/Users";
+// import { userParam } from "../server";
 
 // get all messages - Get - Private
-export const getMessages = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    const messages = await Messages.find().lean();
-    if (!messages?.length) {
-      res.status(400).json({ message: "You have no messages yet..." });
-    } else {
-      res.json(messages);
+// export const getMessages = asyncHandler(
+//   async (req: Request, res: Response): Promise<void> => {
+//     const messages = await Messages.find().lean();
+//     if (!messages?.length) {
+//       res.status(400).json({ message: "No messages found..." });
+//       return;
+//     }
+
+//     // messages by user
+//     const userMessages = await Promise.all(
+//       messages.map(async (message) => {
+//         const user = await Users.findById(message.user).lean().exec();
+//         return {
+//           ...message,
+//           firstName: user.firstName,
+//           lastName: user.lastName,
+//         };
+//       })
+//     );
+
+//     res.json(userMessages);
+//   }
+// );
+
+//get messages by userID
+export const getMessageByUser = asyncHandler(
+  async (req: Request, res: Response): Promise<void> => {
+    const messages = await Messages.find({
+      user: req.query.user
+    })
+
+    if(!messages){
+      res.status(400).json({message: "no messages..."})
+      return
     }
-  }
+     res.json(messages);
+   } 
+
 );
 
 //Create Message - Post - Private
 export const createMessage = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const { title, message, user } = req.body;
 
     //has data?
@@ -32,6 +61,7 @@ export const createMessage = asyncHandler(
       res
         .status(405)
         .json({ message: "Creating messages is for registered members only" });
+      return;
     }
 
     const messageObject = {
@@ -43,18 +73,19 @@ export const createMessage = asyncHandler(
     //create and store an Message
     const createNewMessage = await Messages.create(messageObject);
 
-    if (createNewMessage) {
+    if (!createNewMessage) {
+      res.status(400).json({ message: "Invalid data" });
+      return; // todo error handling
+    } else {
       res
         .status(201)
         .json({ message: `The message ${title}, has been created` });
-    } else {
-      res.status(400).json({ message: "Invalid data" }); // todo error handling
     }
   }
 );
 
 export const updateMessage = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const { id, title, message, user } = req.body;
 
     if (!id || !title || !message || !user) {
@@ -85,7 +116,7 @@ export const updateMessage = asyncHandler(
 );
 
 export const deleteMessage = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  async (req: Request, res: Response): Promise<void> => {
     const { id } = req.body;
 
     if (!id) {
@@ -96,6 +127,7 @@ export const deleteMessage = asyncHandler(
     const messageDelete = await Messages.findById(id.toString()).exec();
     if (!messageDelete) {
       res.status(400).json({ message: "Message not found" });
+      return;
     }
 
     await messageDelete.deleteOne();

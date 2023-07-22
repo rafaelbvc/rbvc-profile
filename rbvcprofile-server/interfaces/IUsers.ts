@@ -1,4 +1,3 @@
-import { IMessage } from "./IMessages";
 
 export interface IUser extends Document {
   firstName: string;
@@ -6,6 +5,5 @@ export interface IUser extends Document {
   email: string;
   phone?: string;
   password: string;
-  messages?: IMessage[];
   active: boolean;
 }
