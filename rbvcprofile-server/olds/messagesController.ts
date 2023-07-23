@@ -177,3 +177,32 @@
 //     res.json(reply);
 //   }
 // );
+
+//////////////////////
+
+// import { userParam } from "../server";
+
+// get all messages - Get - Private
+// export const getMessages = asyncHandler(
+//   async (req: Request, res: Response): Promise<void> => {
+//     const messages = await Messages.find().lean();
+//     if (!messages?.length) {
+//       res.status(400).json({ message: "No messages found..." });
+//       return;
+//     }
+
+//     // messages by user
+//     const userMessages = await Promise.all(
+//       messages.map(async (message) => {
+//         const user = await Users.findById(message.user).lean().exec();
+//         return {
+//           ...message,
+//           firstName: user.firstName,
+//           lastName: user.lastName,
+//         };
+//       })
+//     );
+
+//     res.json(userMessages);
+//   }
+// );

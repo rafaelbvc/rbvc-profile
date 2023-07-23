@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { IUser } from "../interfaces/IUsers";
 
+
 const usersSchema = new Schema(
   {
     firstName: {
@@ -33,6 +34,7 @@ const usersSchema = new Schema(
     timestamps: true,
   }
 );
+
 
 const Users = mongoose.model<IUser>("Users", usersSchema);
 

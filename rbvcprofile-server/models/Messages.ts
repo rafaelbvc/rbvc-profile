@@ -3,17 +3,17 @@ import { IMessage } from "../interfaces/IMessages";
 
 const messagesSchema = new Schema(
   {
-    user: {
+    user_id: {
       type: Schema.Types.ObjectId,
       ref: "Users",
     },
     title: {
       type: String,
-      required: false,
+      required: true,
     },
     message: {
       type: String,
-      required: false,
+      required: true,
     },
   },
   {

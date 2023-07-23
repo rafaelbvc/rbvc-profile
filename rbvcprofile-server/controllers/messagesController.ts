@@ -2,38 +2,13 @@ import { Request, Response } from "express";
 import { Messages } from "../models/Messages";
 import asyncHandler from "express-async-handler";
 import Users from "../models/Users";
-// import { userParam } from "../server";
 
-// get all messages - Get - Private
-// export const getMessages = asyncHandler(
-//   async (req: Request, res: Response): Promise<void> => {
-//     const messages = await Messages.find().lean();
-//     if (!messages?.length) {
-//       res.status(400).json({ message: "No messages found..." });
-//       return;
-//     }
-
-//     // messages by user
-//     const userMessages = await Promise.all(
-//       messages.map(async (message) => {
-//         const user = await Users.findById(message.user).lean().exec();
-//         return {
-//           ...message,
-//           firstName: user.firstName,
-//           lastName: user.lastName,
-//         };
-//       })
-//     );
-
-//     res.json(userMessages);
-//   }
-// );
 
 //get messages by userID
 export const getMessageByUser = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     const messages = await Messages.find({
-      user: req.query.user
+      user_id: req.query.user
     })
 
     if(!messages){
@@ -48,16 +23,16 @@ export const getMessageByUser = asyncHandler(
 //Create Message - Post - Private
 export const createMessage = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
-    const { title, message, user } = req.body;
+    const { title, message, user_id } = req.body;
 
     //has data?
-    if (!title || !message || !user) {
+    if (!title || !message || !user_id) {
       res.status(400).json({ message: "Missing title or message ..." });
       return;
     }
 
-    const userById = await Users.findById(user).exec();
-    if (!userById || userById._id.toString() !== user.toString()) {
+    const userById = await Users.findById(user_id).exec();
+    if (!userById || userById._id.toString() !== user_id.toString()) {
       res
         .status(405)
         .json({ message: "Creating messages is for registered members only" });
@@ -65,7 +40,7 @@ export const createMessage = asyncHandler(
     }
 
     const messageObject = {
-      user,
+      user_id,
       title,
       message,
     };
@@ -86,15 +61,15 @@ export const createMessage = asyncHandler(
 
 export const updateMessage = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
-    const { id, title, message, user } = req.body;
+    const { id, title, message, user_id } = req.body;
 
-    if (!id || !title || !message || !user) {
+    if (!id || !title || !message || !user_id) {
       res.status(400).json({ message: "All fields are required" });
       return;
     }
 
     const messageUpdate = await Messages.findById(id).exec();
-    const userById = await Users.findById(user).exec();
+    const userById = await Users.findById(user_id).exec();
     if (!messageUpdate || !userById) {
       res.status(400).json({ message: "The message or user does not exist" });
       return;
