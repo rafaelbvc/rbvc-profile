@@ -8,7 +8,7 @@ import Users from "../models/Users";
 export const getMessageByUser = asyncHandler(
   async (req: Request, res: Response): Promise<void> => {
     const messages = await Messages.find({
-      user_id: req.query.user
+      user_id: req.query.user_id
     })
 
     if(!messages){

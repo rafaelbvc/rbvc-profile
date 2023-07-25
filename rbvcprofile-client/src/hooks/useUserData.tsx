@@ -40,6 +40,8 @@ export const useUserData = () => {
     }
   }, [error, isLoading]);
 
+  console.log(isLoading, "isloading");
+
   const errorType = handleErrorType();
 
   useEffect(() => {

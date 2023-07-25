@@ -21,6 +21,7 @@
 # services:
 #   rbvcprofile-server:
 #     container_name: rbvcprofile-server
+#     restart: always
 #     build:
 #       context: "./"
 #       dockerfile: Dockerfile

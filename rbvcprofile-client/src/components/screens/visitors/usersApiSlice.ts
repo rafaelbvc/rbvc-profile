@@ -1,14 +1,6 @@
 import { createSelector, createEntityAdapter, EntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../app/api/apiSlice";
-import { IUsers } from "../../../interfaces/IUsers";
 
-// interface IUsersAdapter {
-//   usersAdapter: EntityAdapter<IUsers>
-// }
-
-// interface IInitialState {
-//   usersAdapter: IUsersAdapter[]
-// }
 
 
 const usersAdapter:any = createEntityAdapter({});
