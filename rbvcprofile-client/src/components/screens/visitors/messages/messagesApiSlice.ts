@@ -1,11 +1,11 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../../app/api/apiSlice";
 
-// const messagesAdapter = createEntityAdapter({
-//   sortComparer: (a: any, b: any) =>
-//     a.completed === b.completed ? 0 : a.completed ? 1 : -1,
-// });
-const messagesAdapter:any = createEntityAdapter({});
+const messagesAdapter = createEntityAdapter({
+  sortComparer: (a: any, b: any) =>
+    a.completed === b.completed ? 0 : a.completed ? 1 : -1,
+});
+// const messagesAdapter:any = createEntityAdapter({});
 
 const initialState: any = messagesAdapter.getInitialState();
 

@@ -10,10 +10,14 @@ const messagesSchema = new Schema(
     title: {
       type: String,
       required: true,
+      min: 3,
+      max: 30
     },
     message: {
       type: String,
       required: true,
+      min:3,
+      max: 5000
     },
   },
   {

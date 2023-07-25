@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useGetMessagesQuery } from "../components/screens/visitors/messages/messagesApiSlice";
 import { IMessages } from "../interfaces/IMessages";
-import { IUsers } from "../interfaces/IUsers";
 import { useUserData } from "./useUserData";
 
 export const useMessageData = () => {
