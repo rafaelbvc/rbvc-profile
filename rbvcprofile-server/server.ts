@@ -18,7 +18,7 @@ import { authRouter } from "./routes/authRoutes";
 
 const PORT = process.env.PORT || 5030;
 
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 
 dotenv.config();
 
@@ -36,10 +36,10 @@ app.use(cookieParser());
 
 app.use("/", express.static(path.join(__dirname, "public")));
 
-app.use("/", () => rootRouter);
-app.use("/auth", () => authRouter);
-app.use("/users", () => userRoutes);
-app.use("/messages", () => messageRouter);
+app.use("/", rootRouter);
+app.use("/auth", authRouter);
+app.use("/users", userRoutes);
+app.use("/messages", messageRouter);
 
 app.all("*", (req, res) => {
   res.status(404);

@@ -24,14 +24,14 @@ export const createNewUser = async (req, res) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  // Check for duplicate username
+  // Check for duplicate email
   const duplicate = await User.findOne({ email })
     .collation({ locale: "en", strength: 2 })
     .lean()
     .exec();
 
   if (duplicate) {
-    return res.status(409).json({ message: "Duplicate username" });
+    return res.status(409).json({ message: "Duplicate email" });
   }
 
   // Hash password
