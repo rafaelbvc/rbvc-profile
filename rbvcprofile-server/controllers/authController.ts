@@ -7,7 +7,7 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: "All fields are required" });
+    return res.status(400).json({ message: "Missing email or password" });
   }
 
   const foundUser = await User.findOne({ email }).exec();
@@ -28,13 +28,15 @@ export const login = async (req, res) => {
       },
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "15m" }
+    // { expiresIn: "15m" }
+    { expiresIn: "20s" }
   );
 
   const refreshToken = jwt.sign(
     { username: foundUser.email },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "7d" }
+    // { expiresIn: "7d" }
+    { expiresIn: "1d" }
   );
 
   // Create secure cookie with refresh token

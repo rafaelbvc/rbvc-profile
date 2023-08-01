@@ -1,5 +1,9 @@
-import { rateLimit } from "express-rate-limit";
+import {
+  Options,
+  rateLimit,
+} from "express-rate-limit";
 import logEvents from "./logEvents";
+import { NextFunction } from "express";
 
 const loginLimiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
@@ -8,7 +12,7 @@ const loginLimiter = rateLimit({
     message:
       "Too many login attempts from this IP, please try again after a 60 second pause",
   },
-  handler: (req, res, next, options) => {
+  handler: (req, res, next: NextFunction, options: Options) => {
     logEvents(
       `Too Many Requests: ${options.message.message}\t${req.method}\t${req.url}\t${req.headers.origin}`,
       "errLog.log"
