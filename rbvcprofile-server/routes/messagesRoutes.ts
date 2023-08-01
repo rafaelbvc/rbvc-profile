@@ -1,17 +1,20 @@
 import { Router } from "express";
 import {
-  getMessageByUser,
-  createMessage,
-  updateMessage,
+  createNewMessages,
   deleteMessage,
+  getAllMessages,
+  updateMessage,
 } from "../controllers/messagesController";
+import verifyJWT from "../middleware/verifyJWT";
+
 const router = Router();
+router.use(verifyJWT);
 
 router
   .route("/")
-  .get(getMessageByUser)
-  .post(createMessage)
+  .get(getAllMessages)
+  .post(createNewMessages)
   .patch(updateMessage)
   .delete(deleteMessage);
 
-module.exports = router;
+export {router as messageRouter};

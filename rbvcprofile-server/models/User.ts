@@ -1,14 +1,13 @@
 import mongoose, { Schema } from "mongoose";
-import { IUser } from "../interfaces/IUsers";
+import { IUser } from "../interfaces/IUser";
 
-
-const usersSchema = new Schema(
+const userSchema = new Schema(
   {
     firstName: {
       type: String,
       required: true,
       min: 3,
-      max: 14
+      max: 14,
     },
     lastName: {
       type: String,
@@ -25,13 +24,17 @@ const usersSchema = new Schema(
       type: String,
       required: false,
       min: 7,
-      max:14
+      max: 14,
     },
     password: {
       type: String,
       required: true,
       min: 8,
-      max: 20
+      max: 20,
+    },
+    roles: {
+      type: [String],
+      default: ["Visitor"],
     },
     active: {
       type: Boolean,
@@ -43,7 +46,6 @@ const usersSchema = new Schema(
   }
 );
 
+const User = mongoose.model<IUser>("User", userSchema);
 
-const Users = mongoose.model<IUser>("Users", usersSchema);
-
-export default Users;
+export default User;

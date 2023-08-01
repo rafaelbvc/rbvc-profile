@@ -4,5 +4,6 @@ export interface IUser extends Document {
   email: string;
   phone?: string;
   password: string;
+  roles: Array<[]>;
   active: boolean;
 }
