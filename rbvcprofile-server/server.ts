@@ -1,56 +1,62 @@
 import dotenv from "dotenv";
-import express from "express";
+// require("express-async-errors");
+import "express-async-errors";
 import path from "path";
+import express from "express";
+import logger from "./middleware/logger";
+import logEvents from "./middleware/logEvents";
 import errorHandler from "./middleware/errorHandler";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import corsOptions from "./config/corsOptions";
 import dbConnector from "./config/dbConnection";
 import mongoose from "mongoose";
-import logEvents from "./middleware/logEvents";
-import logger from "./middleware/logger";
-
-dotenv.config();
-
-const server = express();
+import { userRoutes } from "./routes/userRoutes";
+import { rootRouter } from "./routes/root";
+import { messageRouter } from "./routes/messagesRoutes";
+import { authRouter } from "./routes/authRoutes";
 
 const PORT = process.env.PORT || 5030;
 
 console.log(process.env.NODE_ENV);
 
+dotenv.config();
+
+const app = express();
+
 dbConnector();
 
-server.use(logger);
+app.use(logger);
 
-server.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
-server.use(express.json());
+app.use(express.json());
 
-server.use(cookieParser());
+app.use(cookieParser());
 
-server.use("/", express.static(path.join(__dirname, "public")));
+app.use("/", express.static(path.join(__dirname, "public")));
 
-server.use("/", require("./routes/root"));
-server.use("/users", require("./routes/userRoutes"));
-server.use("/messages", require("./routes/messagesRoutes"));
+app.use("/", () => rootRouter);
+app.use("/auth", () => authRouter);
+app.use("/users", () => userRoutes);
+app.use("/messages", () => messageRouter);
 
-
-server.all("*", (req, res) => {
+app.all("*", (req, res) => {
   res.status(404);
   if (req.accepts("html")) {
     res.sendFile(path.join(__dirname, "views", "404.html"));
   } else if (req.accepts("json")) {
-    res.json({ message: "404 resource not found" });
+    res.json({ message: "404 Not Found" });
   } else {
-    res.type("text").send("404 resource not found");
+    res.type("txt").send("404 Not Found");
   }
 });
 
-server.use(errorHandler);
+app.use(errorHandler);
 
 mongoose.connection.once("open", () => {
-  console.log("Mongo Container Connected");
-  server.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
+  console.log("Connected to MongoDB");
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 });
 
 mongoose.connection.on("error", (err) => {
