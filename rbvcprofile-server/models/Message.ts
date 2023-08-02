@@ -1,9 +1,9 @@
 import mongoose, { Schema } from "mongoose";
 import { IMessage } from "../interfaces/IMessage";
-import Inc from "mongoose-sequence";
+// import Inc from "mongoose-sequence";
 
-//@ts-ignore
-const AutoIncrement = Inc(mongoose);
+// //@ts-ignore
+// const AutoIncrement = Inc(mongoose);
 
 const messageSchema = new Schema(
   {
@@ -30,12 +30,12 @@ const messageSchema = new Schema(
   }
 );
 
-// @ts-ignore
-messageSchema.plugin(AutoIncrement, {
-  inc_field: "messageId",
-  id: "MessageNums",
-  start_seq: 500,
-});
+// // @ts-ignore
+// messageSchema.plugin(AutoIncrement, {
+//   inc_field: "messageId",
+//   id: "MessageNums",
+//   start_seq: 500,
+// });
 
 const Message = mongoose.model<IMessage>("Message", messageSchema);
 
