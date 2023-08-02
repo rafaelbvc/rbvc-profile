@@ -5,12 +5,11 @@ import VisitorMenu from "./menus/VisitorMenu";
 import ProfileMenu from "./menus/ProfileMenu";
 import ContactScreen from "./screens/ContactScreen";
 import PortifolioScreen from "./screens/PortifolioScreen";
-import VisitorMessages from "./screens/visitors/messages/VisitorMessages";
-import HireScreen from "./screens/HireScreen";
-import SettingsScreen from "./screens/visitors/SettingsScreen";
-import SignInScreen from "./screens/visitors/SignInScreen";
-import SignUpScreen from "./screens/visitors/SignUpScreen";
+import VisitorMessagesScreen from "./screens/messages/VisitorMessagesScreen";
+import ShowUser from "./screens/users/ShowUser";
+import SignInScreen from "./screens/users/SignInScreen";
 import AboutMeContainer from "./AboutMeContainer";
+import HireScreen from "./screens/HireScreen";
 
 const Public = () => {
   const {
@@ -20,15 +19,11 @@ const Public = () => {
     contactVisibility,
     portifolioVisibility,
     hireVisibility,
-    settingsVisibility,
+    userVisibility,
     visitorsMessagesVisibility,
     signInVisibility,
     signUpVisibility,
-    // pdfVisibility,
   } = useVisibilityContext();
-
-  // const [visitorScreenKind, setVisitorScreenKind] =
-  //   useState<TVisitorScreenKind>();
 
   const draggableRef1 = useRef<HTMLDivElement>(null);
   const draggableRef2 = useRef<HTMLDivElement>(null);
@@ -204,8 +199,8 @@ const Public = () => {
           onMouseDown={(e) => handleMouseDown(e, 6)}
           onMouseMove={(e) => handleMouseMove(e, 6)}
         >
-          <div className={settingsVisibility}>
-            <SettingsScreen />
+          <div className={userVisibility}>
+            <ShowUser />
           </div>
         </section>
         <section
@@ -215,7 +210,7 @@ const Public = () => {
           onMouseMove={(e) => handleMouseMove(e, 7)}
         >
           <div className={visitorsMessagesVisibility}>
-            <VisitorMessages />
+            <VisitorMessagesScreen />
           </div>
         </section>
         <section
@@ -234,9 +229,7 @@ const Public = () => {
           onMouseDown={(e) => handleMouseDown(e, 9)}
           onMouseMove={(e) => handleMouseMove(e, 9)}
         >
-          <div className={signUpVisibility}>
-            <SignUpScreen />
-          </div>
+          <div className={signUpVisibility}>{/* <SignUpScreen /> */}</div>
         </section>
       </div>
     </div>

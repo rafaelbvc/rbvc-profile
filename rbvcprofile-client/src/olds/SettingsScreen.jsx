@@ -1,18 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
-import { useUserData } from "../../../hooks/useUserData";
-import SignInSignUpScreen from "./SignInSignUpScreen";
-import CircleLoader from "../../loadingSpinners/CircleLoader";
-import DragCloseMenu from "../../menus/DragCloseMenu";
-import FooterBar from "../../FooterBar";
-import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
-import StatusIcon from "../../svg/StatusIcon";
+import { useUserData } from "../hooks/useUserData";
+import SignInSignUpScreen from "../components/screens/users/SignInSignUpScreen";
+import CircleLoader from "../components/loadingSpinners/CircleLoader";
+import DragCloseMenu from "../components/menus/DragCloseMenu";
+import FooterBar from "../components/FooterBar";
+import { useVisibilityContext } from "../contexts/useVisibilityContext";
+import StatusIcon from "../components/svg/StatusIcon";
 import {
   activateStatusTextHandler,
   activeStatusColorHandler,
   activeStatusIconColorHandler,
   activeStatusTextHandler,
-} from "../../../utils/activeStatusHandler";
-import { timeNow } from "../../../utils/handleTime";
+} from "../utils/activeStatusHandler";
+import { timeNow } from "../utils/handleTime";
 
 const SettingsScreen = () => {
   const { userData, userLoadingState, userErrors } = useUserData();
@@ -22,7 +22,7 @@ const SettingsScreen = () => {
     [userData]
   ); // todo bring the Authed user
 
-  const { setSettingsVisibilityState } = useVisibilityContext();
+  const { setUserVisibilityState } = useVisibilityContext();
 
   const [users, setUsers] = useState<any>(data);
   const [activeStatus, setActiveStatus] = useState<boolean>(true);
@@ -68,7 +68,7 @@ const SettingsScreen = () => {
     <>
       <DragCloseMenu
         textHeader="visitor settings"
-        onClick={() => setSettingsVisibilityState(" hidden")}
+        onClick={() => setUserVisibilityState(" hidden")}
       />
       <header className="flex flex-row justify-between   mt-1 px-1">
         <button onClick={() => handleActiveStatus()} className="flex">

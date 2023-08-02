@@ -25,16 +25,13 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
 
   const [bigIMG, setBigIMG] = useState<boolean>(false);
 
-  const handleBigImg = useCallback(
-    (v: boolean) => {
-      if (v) {
-        setBigIMG(false);
-      } else {
-        return setBigIMG(true);
-      }
-    },
-    [bigIMG]
-  );
+  const handleBigImg = (v: boolean) => {
+    if (v) {
+      setBigIMG(false);
+    } else {
+      return setBigIMG(true);
+    }
+  };
 
   return (
     <div ref={ref} className="container ">

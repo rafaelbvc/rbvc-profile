@@ -1,11 +1,10 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
-import { apiSlice } from "../../../../app/api/apiSlice";
+import { apiSlice } from "../../../app/api/apiSlice";
 
 const messagesAdapter = createEntityAdapter({
   sortComparer: (a: any, b: any) =>
     a.completed === b.completed ? 0 : a.completed ? 1 : -1,
 });
-// const messagesAdapter:any = createEntityAdapter({});
 
 const initialState: any = messagesAdapter.getInitialState();
 
@@ -16,7 +15,7 @@ export const messagesApiSlice:any = apiSlice.injectEndpoints({
       validadeStatus: (response, result) => {
         return response.status === 200 && !result.isError;
       },
-      keepUnusedDataFor: 60,
+      // keepUnusedDataFor: 60,
       transformErrorResponse: (responseData) => {
         const loadedMessages = responseData.map((message) => {
           message.id = message._id;

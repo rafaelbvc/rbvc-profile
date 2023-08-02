@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useGetMessagesQuery } from "../components/screens/visitors/messages/messagesApiSlice";
+import { useGetMessagesQuery } from "../components/screens/messages/messagesApiSlice";
 import { IMessages } from "../interfaces/IMessages";
 import { useUserData } from "./useUserData";
 

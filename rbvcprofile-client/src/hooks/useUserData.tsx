@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useGetUsersQuery } from "../components/screens/visitors/usersApiSlice";
+import { useGetUsersQuery } from "../components/screens/users/usersApiSlice";
 
 export const useUserData = () => {
   const {
@@ -40,7 +40,7 @@ export const useUserData = () => {
     }
   }, [error, isLoading]);
 
-  console.log(isLoading, "isloading");
+  // console.log(isLoading, "isloading");
 
   const errorType = handleErrorType();
 
