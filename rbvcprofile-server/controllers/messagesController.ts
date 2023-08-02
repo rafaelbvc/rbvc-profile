@@ -1,139 +1,117 @@
-import { Request, Response } from "express";
-import { Messages } from "../models/Messages";
-import asyncHandler from "express-async-handler";
-import Users from "../models/Users";
-// import { userParam } from "../server";
+import User from "../models/User";
+import { Message } from "../models/Message";
 
-// get all messages - Get - Private
-// export const getMessages = asyncHandler(
-//   async (req: Request, res: Response): Promise<void> => {
-//     const messages = await Messages.find().lean();
-//     if (!messages?.length) {
-//       res.status(400).json({ message: "No messages found..." });
-//       return;
-//     }
+// @access Private // @route GET /messages // @desc Get all messages
+export const getAllMessages = async (req, res) => {
+  // Get all messages from MongoDB
+  const messages = await Message.find().lean();
 
-//     // messages by user
-//     const userMessages = await Promise.all(
-//       messages.map(async (message) => {
-//         const user = await Users.findById(message.user).lean().exec();
-//         return {
-//           ...message,
-//           firstName: user.firstName,
-//           lastName: user.lastName,
-//         };
-//       })
-//     );
+  // If no messages
+  if (!messages?.length) {
+    return res.status(400).json({ message: "No messages found" });
+  }
 
-//     res.json(userMessages);
-//   }
-// );
-
-//get messages by userID
-export const getMessageByUser = asyncHandler(
-  async (req: Request, res: Response): Promise<void> => {
-    const messages = await Messages.find({
-      user: req.query.user
+  // Add username to each message before sending the response
+  const messagesWithUser = await Promise.all(
+    messages.map(async (messages) => {
+      const user = await User.findById(messages.user).lean().exec();
+      return {
+        ...messages,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      };
     })
+  );
 
-    if(!messages){
-      res.status(400).json({message: "no messages..."})
-      return
-    }
-     res.json(messages);
-   } 
+  res.json(messagesWithUser);
+};
 
-);
+// @access Private // @route POST /messages // @desc Create new messages
+export const createNewMessages = async (req, res) => {
+  const { user, title, message } = req.body;
+  // console.log(user, title, message);
 
-//Create Message - Post - Private
-export const createMessage = asyncHandler(
-  async (req: Request, res: Response): Promise<void> => {
-    const { title, message, user } = req.body;
-
-    //has data?
-    if (!title || !message || !user) {
-      res.status(400).json({ message: "Missing title or message ..." });
-      return;
-    }
-
-    const userById = await Users.findById(user).exec();
-    if (!userById || userById._id.toString() !== user.toString()) {
-      res
-        .status(405)
-        .json({ message: "Creating messages is for registered members only" });
-      return;
-    }
-
-    const messageObject = {
-      user,
-      title,
-      message,
-    };
-
-    //create and store an Message
-    const createNewMessage = await Messages.create(messageObject);
-
-    if (!createNewMessage) {
-      res.status(400).json({ message: "Invalid data" });
-      return; // todo error handling
-    } else {
-      res
-        .status(201)
-        .json({ message: `The message ${title}, has been created` });
-    }
+  // Confirm data
+  if (!user || !title || !message) {
+    return res.status(400).json({ message: "All fields are required" });
   }
-);
 
-export const updateMessage = asyncHandler(
-  async (req: Request, res: Response): Promise<void> => {
-    const { id, title, message, user } = req.body;
+  //Check for duplicate title
+  const duplicate = await Message.findOne({ title })
+    .collation({ locale: "en", strength: 2 })
+    .lean()
+    .exec();
 
-    if (!id || !title || !message || !user) {
-      res.status(400).json({ message: "All fields are required" });
-      return;
-    }
-
-    const messageUpdate = await Messages.findById(id).exec();
-    const userById = await Users.findById(user).exec();
-    if (!messageUpdate || !userById) {
-      res.status(400).json({ message: "The message or user does not exist" });
-      return;
-    }
-
-    if (messageUpdate?._id.toString() !== id.toString()) {
-      res.status(409).json({ message: "Message cannot be validated" });
-      return;
-    }
-
-    (messageUpdate.title = title), (messageUpdate.message = message);
-
-    const updateMessageId = await messageUpdate.save();
-
-    res.json({
-      message: `The message ${updateMessageId.title} has been updated!`,
-    });
+  if (duplicate) {
+    return res.status(409).json({ message: "Duplicate message title" });
   }
-);
 
-export const deleteMessage = asyncHandler(
-  async (req: Request, res: Response): Promise<void> => {
-    const { id } = req.body;
+  // Create and store the new user
+  const messages = await Message.create({ user, title, message });
+  console.log(messages, "messages");
 
-    if (!id) {
-      res.status(400).json({ message: "Please provide message index" });
-      return;
-    }
-
-    const messageDelete = await Messages.findById(id.toString()).exec();
-    if (!messageDelete) {
-      res.status(400).json({ message: "Message not found" });
-      return;
-    }
-
-    await messageDelete.deleteOne();
-
-    const reply = `Message ${messageDelete.title} with id ${messageDelete._id} has been deleted`;
-
-    res.json(reply);
+  if (messages) {
+    // Created
+    return res.status(201).json({ message: "New message created" });
+  } else {
+    return res.status(400).json({ message: "Invalid message data received" });
   }
-);
+};
+
+// @access Private // @route PATCH /messages // @desc Update a message
+export const updateMessage = async (req, res) => {
+  const { id, user, title, message } = req.body;
+
+  // Confirm data
+  if (!id || !user || !title || !message) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  // Confirm messages exists to update
+  const messages = await Message.findById(id).exec();
+
+  if (!messages) {
+    return res.status(400).json({ message: "Message not found" });
+  }
+
+  // Check for duplicate title
+  const duplicate = await Message.findOne({ title })
+    .collation({ locale: "en", strength: 2 })
+    .lean()
+    .exec();
+
+  // Allow renaming of the original messages
+  if (duplicate && duplicate?._id.toString() !== id) {
+    return res.status(409).json({ message: "Duplicate message title" });
+  }
+
+  messages.title = title;
+  messages.message = message;
+
+  const updatedMessage = await messages.save();
+
+  res.json(`'${updatedMessage.title}' updated`);
+};
+
+// @access Private // @route DELETE /message // @desc Delete a message
+export const deleteMessage = async (req, res) => {
+  const { id } = req.body;
+
+  // Confirm data
+  if (!id) {
+    return res.status(400).json({ message: "Message ID required" });
+  }
+
+  // Confirm messages exists to delete
+  const message = await Message.findById(id).exec();
+
+  if (!message) {
+    return res.status(400).json({ message: "Message not found" });
+  }
+
+  const result = await message.deleteOne();
+
+  const reply = `Message '${result.title}' with ID ${result._id} deleted`;
+
+  res.json(reply);
+};

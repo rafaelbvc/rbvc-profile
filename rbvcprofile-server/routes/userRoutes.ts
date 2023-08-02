@@ -1,18 +1,20 @@
 import { Router } from "express";
 import {
-  getUsers,
-  createUser,
   updateUser,
   deleteUser,
+  getAllUsers,
+  createNewUser,
 } from "../controllers/usersController";
+import verifyJWT from "../middleware/verifyJWT";
 
 const router = Router();
+// router.use(verifyJWT);
 
 router
   .route("/")
-  .get(getUsers)
-  .post(createUser)
+  .get(getAllUsers)
+  .post(createNewUser)
   .patch(updateUser)
   .delete(deleteUser);
 
-module.exports = router;
+export { router as userRouter };

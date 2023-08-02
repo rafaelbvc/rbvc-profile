@@ -157,8 +157,9 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
                   value: true,
                   message: "The field name must contain 3 to 14 characters.",
                 },
-                maxLength: 14,
                 minLength: 3,
+                maxLength: 14,
+                
               })}
             />
           </div>
@@ -200,9 +201,9 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
                 value: true,
                 message: "The field last name must contain 3 to 14 characters.",
               },
-
-              maxLength: 20,
               minLength: 3,
+              maxLength: 30,
+              
             })}
           />
           <div />
@@ -251,6 +252,8 @@ const SignInSignUpScreen = (props: ISignInSignUpScreen) => {
                 special characters`,
                 },
                 required: true,
+                minLength: 8,
+                maxLength: 20
               })}
             />
           </div>
