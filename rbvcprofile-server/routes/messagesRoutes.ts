@@ -8,7 +8,7 @@ import {
 import verifyJWT from "../middleware/verifyJWT";
 
 const router = Router();
-router.use(verifyJWT);
+// router.use(verifyJWT);
 
 router
   .route("/")

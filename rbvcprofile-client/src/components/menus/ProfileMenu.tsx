@@ -16,10 +16,6 @@ const ProfileMenu = () => {
     setHireVisibilityState,
   } = useVisibilityContext();
 
-  // const handleRef = () => {
-  //   c
-  // }
-
   return (
     <section className="container flex flex-col max-w-[24.5rem] sm:max-w-none md:mt-[1.6rem]">
       <div className="md:hidden">

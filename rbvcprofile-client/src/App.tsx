@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import SignedInLayout from "./components/screens/visitors/SignedInLayout";
+import SignedInLayout from "./components/screens/users/SignedInLayout";
 import Public from "./components/Public";
 import VisibilityContext from "./contexts/useVisibilityContext";
 
