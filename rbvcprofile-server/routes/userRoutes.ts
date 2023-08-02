@@ -8,7 +8,7 @@ import {
 import verifyJWT from "../middleware/verifyJWT";
 
 const router = Router();
-router.use(verifyJWT);
+// router.use(verifyJWT);
 
 router
   .route("/")
@@ -17,4 +17,4 @@ router
   .patch(updateUser)
   .delete(deleteUser);
 
-export { router as userRoutes};
+export { router as userRouter };

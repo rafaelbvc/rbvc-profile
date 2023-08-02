@@ -1,18 +1,18 @@
 import User from "../models/User";
-import  {Message}  from "../models/Message";
+import { Message } from "../models/Message";
 
-// @access Private // @route GET /notes // @desc Get all notes
+// @access Private // @route GET /messages // @desc Get all messages
 export const getAllMessages = async (req, res) => {
-  // Get all notes from MongoDB
+  // Get all messages from MongoDB
   const messages = await Message.find().lean();
 
-  // If no notes
+  // If no messages
   if (!messages?.length) {
-    return res.status(400).json({ message: "No notes found" });
+    return res.status(400).json({ message: "No messages found" });
   }
 
-  // Add username to each note before sending the response
-  const notesWithUser = await Promise.all(
+  // Add username to each message before sending the response
+  const messagesWithUser = await Promise.all(
     messages.map(async (messages) => {
       const user = await User.findById(messages.user).lean().exec();
       return {
@@ -23,40 +23,42 @@ export const getAllMessages = async (req, res) => {
     })
   );
 
-  res.json(notesWithUser);
+  res.json(messagesWithUser);
 };
 
-// @access Private // @route POST /notes // @desc Create new note
+// @access Private // @route POST /messages // @desc Create new messages
 export const createNewMessages = async (req, res) => {
   const { user, title, message } = req.body;
+  // console.log(user, title, message);
 
   // Confirm data
   if (!user || !title || !message) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  // Check for duplicate title
+  //Check for duplicate title
   const duplicate = await Message.findOne({ title })
     .collation({ locale: "en", strength: 2 })
     .lean()
     .exec();
 
   if (duplicate) {
-    return res.status(409).json({ message: "Duplicate note title" });
+    return res.status(409).json({ message: "Duplicate message title" });
   }
 
   // Create and store the new user
   const messages = await Message.create({ user, title, message });
+  console.log(messages, "messages");
 
   if (messages) {
     // Created
-    return res.status(201).json({ message: "New note created" });
+    return res.status(201).json({ message: "New message created" });
   } else {
-    return res.status(400).json({ message: "Invalid note data received" });
+    return res.status(400).json({ message: "Invalid message data received" });
   }
 };
 
-// @access Private // @route PATCH /notes // @desc Update a note
+// @access Private // @route PATCH /messages // @desc Update a message
 export const updateMessage = async (req, res) => {
   const { id, user, title, message } = req.body;
 
@@ -65,11 +67,11 @@ export const updateMessage = async (req, res) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  // Confirm note exists to update
+  // Confirm messages exists to update
   const messages = await Message.findById(id).exec();
 
   if (!messages) {
-    return res.status(400).json({ message: "Note not found" });
+    return res.status(400).json({ message: "Message not found" });
   }
 
   // Check for duplicate title
@@ -78,39 +80,38 @@ export const updateMessage = async (req, res) => {
     .lean()
     .exec();
 
-  // Allow renaming of the original note
+  // Allow renaming of the original messages
   if (duplicate && duplicate?._id.toString() !== id) {
-    return res.status(409).json({ message: "Duplicate note title" });
+    return res.status(409).json({ message: "Duplicate message title" });
   }
 
-  message.user = user;
-  message.title = title;
-  message.message = message;
+  messages.title = title;
+  messages.message = message;
 
-  const updatedNote = await message.save();
+  const updatedMessage = await messages.save();
 
-  res.json(`'${updatedNote.title}' updated`);
+  res.json(`'${updatedMessage.title}' updated`);
 };
 
-// @access Private // @route DELETE /notes // @desc Delete a note
+// @access Private // @route DELETE /message // @desc Delete a message
 export const deleteMessage = async (req, res) => {
   const { id } = req.body;
 
   // Confirm data
   if (!id) {
-    return res.status(400).json({ message: "Note ID required" });
+    return res.status(400).json({ message: "Message ID required" });
   }
 
-  // Confirm note exists to delete
+  // Confirm messages exists to delete
   const message = await Message.findById(id).exec();
 
   if (!message) {
-    return res.status(400).json({ message: "Note not found" });
+    return res.status(400).json({ message: "Message not found" });
   }
 
   const result = await message.deleteOne();
 
-  const reply = `Note '${result.title}' with ID ${result._id} deleted`;
+  const reply = `Message '${result.title}' with ID ${result._id} deleted`;
 
   res.json(reply);
 };

@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-// require("express-async-errors");
 import "express-async-errors";
 import path from "path";
 import express from "express";
@@ -11,7 +10,7 @@ import cors from "cors";
 import corsOptions from "./config/corsOptions";
 import dbConnector from "./config/dbConnection";
 import mongoose from "mongoose";
-import { userRoutes } from "./routes/userRoutes";
+import { userRouter } from "./routes/userRoutes";
 import { rootRouter } from "./routes/root";
 import { messageRouter } from "./routes/messagesRoutes";
 import { authRouter } from "./routes/authRoutes";
@@ -38,7 +37,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 
 app.use("/", rootRouter);
 app.use("/auth", authRouter);
-app.use("/users", userRoutes);
+app.use("/users", userRouter);
 app.use("/messages", messageRouter);
 
 app.all("*", (req, res) => {
