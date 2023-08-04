@@ -3,9 +3,3 @@ export const ROLES = {
   Subscribed: "Subscribed",
   Admin: "Admin",
 };
-
-// export const ROLES = {
-//   Employee: "Employee",
-//   Manager: "Manager",
-//   Admin: "Admin",
-// };
