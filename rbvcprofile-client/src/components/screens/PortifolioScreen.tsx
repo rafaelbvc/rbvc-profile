@@ -9,6 +9,7 @@ const PortifolioScreen = () => {
   return (
     <>
       <DragCloseMenu
+            changeMaxW={"max-w-[29rem]"}
         textHeader="portifolio"
         onClick={() => setPortifolioVisibilityState(" hidden")}
       />

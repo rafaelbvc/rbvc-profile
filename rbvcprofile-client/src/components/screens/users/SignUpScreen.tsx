@@ -4,8 +4,6 @@ import FooterBar from "../../FooterBar";
 import DefaultBtn from "../../buttons/DefaultBtn";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
-import { useSubmit } from "react-router-dom";
-import { IUsers } from "../../../interfaces/IUsers";
 
 const SignUpScreen = () => {
   const [firstNameInput, setFirsNameInput] = useState<string>("");
@@ -44,12 +42,13 @@ const SignUpScreen = () => {
   return (
     <>
       <DragCloseMenu
-        textHeader="visitor settings"
+        changeMaxW={"max-w-[28rem]"}
+        textHeader="sign up"
         onClick={() => setSignUpVisibilityState(" hidden")}
       />
       <div className="max-w-[28rem]">
         <form>
-          <div className="flex flex-wrap  md:flex-nowrap mx-auto">
+          <div className="flex flex-wrap  md:flex-nowrap mx-auto mt-2">
             <div className="vInputsResponsive w-full mx-1 sm:ml-1">
               <label htmlFor="firstName" className="vLabels">
                 First Name
@@ -122,7 +121,7 @@ const SignUpScreen = () => {
           </div>
         </form>
       </div>
-      <menu className="w-fit mx-auto">
+      <menu className="flex justify-between mx-2">
         <DefaultBtn textBtn="reset" onClick={handleReset} />
         <DefaultBtn textBtn="submit" onClick={() => null} />
       </menu>

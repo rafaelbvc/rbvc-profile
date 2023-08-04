@@ -10,20 +10,13 @@ import {
 import { useState } from "react";
 import { formatISODate, timeNow } from "../../../utils/handleTime";
 import FooterBar from "../../FooterBar";
-import { selectUserById } from "./usersApiSlice";
 import DefaultBtn from "../../buttons/DefaultBtn";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const User = ({ userId }) => {
-  const user: any = useSelector((state) => selectUserById(state, userId));
-
-  // const flof = user.map(users => {console.log(users)})
-
   const { setUserVisibilityState } = useVisibilityContext();
   const [activeStatus, setActiveStatus] = useState<boolean>(true);
 
   const createdAt = formatISODate(userId ? userId?.createdAt : timeNow());
-  
 
   const handleActiveStatus = () => {
     const active = userId?.active;
@@ -37,7 +30,8 @@ const User = ({ userId }) => {
     return (
       <>
         <DragCloseMenu
-          textHeader="visitor settings"
+          changeMaxW={"max-w-[28rem]"}
+          textHeader="Profile"
           onClick={() => setUserVisibilityState(" hidden")}
         />
         <header className="flex flex-row justify-between   mt-1 px-1">
@@ -132,10 +126,10 @@ const User = ({ userId }) => {
             </div>
           </form>
         </div>
-        <menu className="w-fit mx-auto">
+        <menu className="flex justify-around">
           <DefaultBtn textBtn="edit" onClick={() => null} />
-          <DefaultBtn textBtn="inactivate" onClick={() => null} />
-          <DefaultBtn textBtn="message" onClick={() => null} />
+          <DefaultBtn textBtn="delete" onClick={() => null} />
+          <DefaultBtn textBtn="feed" onClick={() => null} />
         </menu>
         <FooterBar />
       </>
