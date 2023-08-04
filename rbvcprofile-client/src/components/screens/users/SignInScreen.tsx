@@ -17,7 +17,7 @@ const SignInScreen = () => {
         onClick={() => setSignInVisibilityState(" hidden")}
       />
       {/* onSubmit={"handleSubmit()"} */}
-      <form className="flex flex-col flex-wrap justify-between">
+      <form className="flex flex-col flex-wrap justify-between px-4 pt-2">
         <label htmlFor="visitorEmail" className="vLabels">
           Registered E-mail
         </label>

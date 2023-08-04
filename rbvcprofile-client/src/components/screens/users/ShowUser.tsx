@@ -29,13 +29,9 @@ const ShowUser = () => {
 
     const userId = entities["64c9c781a78ced4a937dcb82"];
 
-    console.log(userId, "fffffffffff");
-
     content = <User key={userId} userId={userId} />;
 
     // content = ids.map((ids) => <User key={ids} userId={ids} />);
-
-    console.log(content, "wfwefefe");
   }
 
   return content;

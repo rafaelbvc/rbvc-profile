@@ -17,8 +17,9 @@ const VisitorMenu = () => {
   } = useVisibilityContext();
 
   return (
-    <section className="flex flex-col max-w-[24.5rem] sm:max-w-none">
+    <section>
       <DragCloseMenu
+        changeMaxW={"max-w-[29rem]"}
         textHeader={"visitors"}
         onClick={() => setVVisibilityState(" hidden")}
       />
