@@ -2,7 +2,6 @@ import CircleLoader from "../../loadingSpinners/CircleLoader";
 import User from "./User";
 import { useGetUsersQuery } from "./usersApiSlice";
 
-
 const ShowUser = () => {
   const {
     data: users,
@@ -26,14 +25,17 @@ const ShowUser = () => {
   }
 
   if (isSuccess) {
-    const { ids } = users;
+    const { entities } = users;
 
+    const userId = entities["64c9c781a78ced4a937dcb82"];
 
-    content = <User key={ids[0]} userId={ids[0]} />;
+    console.log(userId, "fffffffffff");
 
-    console.log(content)
+    content = <User key={userId} userId={userId} />;
 
     // content = ids.map((ids) => <User key={ids} userId={ids} />);
+
+    console.log(content, "wfwefefe");
   }
 
   return content;

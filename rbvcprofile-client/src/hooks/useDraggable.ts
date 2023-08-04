@@ -3,19 +3,19 @@ import { useEffect, useRef } from "react";
 const useDraggable = () => {
   const elements = useRef([]);
 
-  const handleMouseDown = (e, index) => {
+  const handleMouseDown = (e, index:any) => {
     elements.current[index].isClicked = true;
     elements.current[index].startX = e.clientX;
     elements.current[index].startY = e.clientY;
   };
 
-  const handleMouseUp = (index) => {
+  const handleMouseUp = (index: any) => {
     elements.current[index].isClicked = false;
     elements.current[index].lastX = elements.current[index].element.offsetLeft;
     elements.current[index].lastY = elements.current[index].element.offsetTop;
   };
 
-  const handleMouseMove = (e, index) => {
+  const handleMouseMove = (e, index: any) => {
     if (!elements.current[index].isClicked) return;
 
     const nextX =
@@ -36,9 +36,9 @@ const useDraggable = () => {
       element,
       isClicked: false,
       startX: 0,
-      startY: 64,
+      startY: 80,
       lastX: 0,
-      lastY: 64,
+      lastY: 80,
     });
   };
 

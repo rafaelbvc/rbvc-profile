@@ -15,30 +15,25 @@ import DefaultBtn from "../../buttons/DefaultBtn";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
 const User = ({ userId }) => {
-  const user = useSelector((state) => selectUserById(state, userId));
-  console.log(user)
+  const user: any = useSelector((state) => selectUserById(state, userId));
 
+  // const flof = user.map(users => {console.log(users)})
 
   const { setUserVisibilityState } = useVisibilityContext();
   const [activeStatus, setActiveStatus] = useState<boolean>(true);
 
-  // const { data: user } = useGetUsersQuery();
-
-  // console.log(user.entities["64c9c781a78ced4a937dcb82"]);
-
-  // const userById = user.entities["64c9c781a78ced4a937dcb82"];
-
-  const createdAt = formatISODate(user ? user?.createdAt : timeNow());
+  const createdAt = formatISODate(userId ? userId?.createdAt : timeNow());
+  
 
   const handleActiveStatus = () => {
-    const active = user?.active;
+    const active = userId?.active;
     if (active !== undefined && active) {
       setActiveStatus(active);
     }
     setActiveStatus(false);
   };
 
-  if (!user) {
+  if (userId) {
     return (
       <>
         <DragCloseMenu
@@ -79,7 +74,7 @@ const User = ({ userId }) => {
                   type="text"
                   className="vInputs"
                   readOnly
-                  value={user?.firstName}
+                  value={userId?.firstName}
                 />
               </div>
               <div className="vInputsResponsive w-full mx-1 sm:mr-1">
@@ -90,7 +85,7 @@ const User = ({ userId }) => {
                   type="tel"
                   className="vInputs"
                   readOnly
-                  value={user?.phone}
+                  value={userId?.phone}
                 />
               </div>
             </div>
@@ -103,7 +98,7 @@ const User = ({ userId }) => {
                 type="text"
                 className="vInputs"
                 readOnly
-                value={user?.lastName}
+                value={userId?.lastName}
               />
               <div />
             </div>
@@ -111,7 +106,7 @@ const User = ({ userId }) => {
               <label htmlFor="email" className="vLabels">
                 E-mail
               </label>
-              <input type="email" className="vInputs" value={user?.email} />
+              <input type="email" className="vInputs" value={userId?.email} />
             </div>
 
             <div className="flex justify-between flex-wrap md:flex-nowrap min-w-[20.5rem] max-w-[28rem] mx-1">
@@ -119,7 +114,11 @@ const User = ({ userId }) => {
                 <label htmlFor="password" className="vLabels">
                   Password
                 </label>
-                <input type="text" className="vInputs" value={user?.password} />
+                <input
+                  type="text"
+                  className="vInputs"
+                  value={userId?.password}
+                />
               </div>
               <div className="vInputsResponsive w-full">
                 <label className="vLabels ">Created At</label>

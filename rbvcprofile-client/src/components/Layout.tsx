@@ -19,7 +19,7 @@ const Layout = () => {
   }, [swidth]);
 
   return (
-    <main className="container w-screen h-full  mx-auto">
+    <main className="container w-screen h-full  mx-auto overflow-x-hidden lg:overflow-hidden">
       <NavBar />
       <Outlet />
     </main>

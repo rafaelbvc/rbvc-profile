@@ -1,7 +1,6 @@
 import {
   ForwardRefRenderFunction,
   forwardRef,
-  useCallback,
   useState,
 } from "react";
 import DragCloseMenu from "../menus/DragCloseMenu";
@@ -34,7 +33,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
   };
 
   return (
-    <div ref={ref} className="container ">
+    <div ref={ref}>
       <DragCloseMenu
         textHeader="about"
         onClick={() => setAboutVisibilityState(" hidden")}
@@ -102,7 +101,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
             <section>
               <p className="text-justify justify-end mt-2 pl-2">
                 RBVC Soluções Tecnológicas Freelance Web Developer | May 2023 -
-                Present (1 month)
+                Present (present)
                 <br /> • Web development using agile methodology
                 <br /> • Proficient in ReactJS, React Native, NextJS, NodeJS,
                 and FullStack <br />• Knowledge of SQL and NoSQL databases
@@ -128,7 +127,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
         </section>
         <FooterBar />
         <section>
-          <p className="text-justify justify-end mt-2 pl-2">
+          <p className="text-justify justify-end mt-2 pl-2 whitespace-normal">
             Cadmus Soluções em TI Software Developer | November 2021 - April
             2022 (6 months)
             <br />• Java development using SpringBoot
@@ -139,7 +138,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
         </section>
         <FooterBar />
         <div>
-          <p className="text-justify justify-end mt-2 pl-2">
+          <p className="text-justify justify-end mt-2 pl-2 whitespace-normal">
             Autonomous February 2015 - April 2018 (3 years 3 months)
             <br />• Banner design
             <br />• Creation of starter sites and digital banners
