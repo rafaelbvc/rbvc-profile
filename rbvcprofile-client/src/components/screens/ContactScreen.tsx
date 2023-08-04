@@ -17,7 +17,7 @@ const ContactScreen = () => {
         textHeader={"contact"}
         onClick={() => setContactVisibilityState(" hidden")}
       />
-      <div className="container flex flex-col bg-dGrayBGScreens  rounded justify-between min-w-[21rem] max-w-[39.5rem] p-1 px-4 gap-1">
+      <div className="flex flex-col bg-dGrayBGScreens  rounded justify-between min-w-[21rem] max-w-[39.5rem] p-1 px-4 gap-1">
         <div className="flex items-center    justify-between">
           <YoutubeLogo width="1.5rem " className="w-[2rem] self-center" />
 

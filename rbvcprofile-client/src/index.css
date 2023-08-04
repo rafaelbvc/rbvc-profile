@@ -59,11 +59,11 @@ textarea {
 }
 
 .containerE {
-  @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor box-border;
+  @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor;
 }
 
 .contentE {
-  @apply absolute justify-around  left-0 flex-row   w-screen  max-w-[28.75rem] h-[2rem] cursor-pointer z-50;
+  @apply absolute justify-around  left-0 flex-row   w-screen  max-w-[28.75rem] h-[2rem] cursor-pointer;
 }
 
 .pMenus {
@@ -75,7 +75,7 @@ textarea {
 }
 
 .vDraggables {
-  @apply absolute z-40 top-[9rem];
+  @apply absolute top-[9rem];
 }
 
 .vInputs {
@@ -99,5 +99,5 @@ textarea {
 }
 
 .pMessageErrorInputs {
-@apply text-dGolden whitespace-normal pl-2 text-justify
+  @apply text-dGolden whitespace-normal pl-2 text-justify;
 }

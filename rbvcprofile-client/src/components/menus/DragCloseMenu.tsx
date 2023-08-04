@@ -1,5 +1,11 @@
 import FooterBar from "../FooterBar";
 
+// type TDragCloseMenu = {
+//   onClick: () => void;
+//   textHeader: string;
+//   dragCloseMenuStyle: string;
+// };
+
 const DragCloseMenu = (props) => {
   const { onClick, textHeader, dragCloseMenuStyle } = props;
 

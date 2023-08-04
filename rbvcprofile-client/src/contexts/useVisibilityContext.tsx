@@ -37,7 +37,7 @@ export const VisibilityContext = createContext({} as IVisibilityContext);
 export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
   const [vvisibility, setVVisibility] = useState<string>(" hidden");
   const [pvisibility, setPVisibility] = useState<string>(" hidden");
-  const [aboutVisibility, setAboutVisibility] = useState<string>(" hidden");
+  const [aboutVisibility, setAboutVisibility] = useState<string>(" ");
   const [contactVisibility, setContactVisibility] = useState<string>(" hidden");
   const [portifolioVisibility, setPortifolioVisibility] =
     useState<string>(" hidden");

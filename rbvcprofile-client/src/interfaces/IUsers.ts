@@ -4,7 +4,7 @@ export interface IUsers {
   password?: string;
   phone?: string;
   email?: string;
-  messages: Array<[]>;
+  messages?: Array<[]>;
   active?: boolean;
   createdAt?: string;
   updatedAt?: string;

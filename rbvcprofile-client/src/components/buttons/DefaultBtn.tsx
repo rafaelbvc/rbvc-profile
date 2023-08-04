@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
 
+// interface IDefaultBtn {
+//   textBtn: string;
+//   onClick: () => void;
+//   hiddenBtn: boolean;
+//   styleBtn: string;
+// }
+
 const DefaultBtn = (props) => {
   const { textBtn, onClick, hiddenBtn, styleBtn } = props;
 
@@ -10,17 +17,15 @@ const DefaultBtn = (props) => {
   }, [hiddenBtn, onClick]);
 
   return (
-    <>
-      <button
-        type="button"
-        className={`w-[3.4rem] md:w-[4.5rem] lg:w-[5.5rem] p-1 mx-3 ${styleBtn}`}
-        onClick={onClick}
-        hidden={isVisible}
-        // disabled={isAuth}
-      >
-        <span className="vBtnStyle">{textBtn}</span>
-      </button>
-    </>
+    <button
+      type="button"
+      className={`w-[3.4rem] md:w-[4rem] lg:w-[5.5rem] p-1 mx-3 ${styleBtn}`}
+      onClick={onClick}
+      hidden={isVisible}
+      // disabled={isAuth}
+    >
+      <span className="vBtnStyle">{textBtn}</span>
+    </button>
   );
 };
 

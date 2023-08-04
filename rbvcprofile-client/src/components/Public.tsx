@@ -10,6 +10,7 @@ import ShowUser from "./screens/users/ShowUser";
 import SignInScreen from "./screens/users/SignInScreen";
 import AboutMeContainer from "./AboutMeContainer";
 import HireScreen from "./screens/HireScreen";
+import SignUpScreen from "./screens/users/SignUpScreen";
 
 const Public = () => {
   const {
@@ -25,6 +26,7 @@ const Public = () => {
     signUpVisibility,
   } = useVisibilityContext();
 
+  const draggableRelative = useRef<HTMLDivElement>(null);
   const draggableRef1 = useRef<HTMLDivElement>(null);
   const draggableRef2 = useRef<HTMLDivElement>(null);
   const draggableRef3 = useRef<HTMLDivElement>(null);
@@ -36,17 +38,6 @@ const Public = () => {
   const draggableRef9 = useRef<HTMLDivElement>(null);
   const draggableRef10 = useRef<HTMLDivElement>(null);
 
-  const draggableRef1Current = draggableRef1.current;
-  const draggableRef2Current = draggableRef2.current;
-  const draggableRef3Current = draggableRef3.current;
-  const draggableRef4Current = draggableRef4.current;
-  const draggableRef5Current = draggableRef5.current;
-  const draggableRef6Current = draggableRef6.current;
-  const draggableRef7Current = draggableRef7.current;
-  const draggableRef8Current = draggableRef8.current;
-  const draggableRef9Current = draggableRef9.current;
-  const draggableRef10Current = draggableRef10.current;
-
   const {
     registerElement,
     unregisterElement,
@@ -55,6 +46,31 @@ const Public = () => {
   } = useDraggable();
 
   useLayoutEffect(() => {
+    if (
+      !draggableRef1 ||
+      !draggableRef2 ||
+      !draggableRef3 ||
+      !draggableRef4 ||
+      !draggableRef5 ||
+      !draggableRef6 ||
+      !draggableRef7 ||
+      !draggableRef8 ||
+      !draggableRef9 ||
+      !draggableRef10
+    )
+      return;
+
+    const draggableRef1Current = draggableRef1.current;
+    const draggableRef2Current = draggableRef2.current;
+    const draggableRef3Current = draggableRef3.current;
+    const draggableRef4Current = draggableRef4.current;
+    const draggableRef5Current = draggableRef5.current;
+    const draggableRef6Current = draggableRef6.current;
+    const draggableRef7Current = draggableRef7.current;
+    const draggableRef8Current = draggableRef8.current;
+    const draggableRef9Current = draggableRef9.current;
+    const draggableRef10Current = draggableRef10.current;
+
     if (draggableRef1Current) {
       registerElement(draggableRef1Current);
     }
@@ -120,21 +136,21 @@ const Public = () => {
   }, [
     registerElement,
     unregisterElement,
-    draggableRef1Current,
-    draggableRef2Current,
-    draggableRef3Current,
-    draggableRef4Current,
-    draggableRef5Current,
-    draggableRef6Current,
-    draggableRef7Current,
-    draggableRef8Current,
-    draggableRef9Current,
-    draggableRef10Current,
+    draggableRef1,
+    draggableRef2,
+    draggableRef3,
+    draggableRef4,
+    draggableRef5,
+    draggableRef6,
+    draggableRef7,
+    draggableRef8,
+    draggableRef9,
+    draggableRef10,
   ]);
 
   return (
-    <div className="container flex flex-col h-full bg-dtBgMainColor  relative">
-      <div className="containerE box-content mt-[5rem]">
+    <div className="flex flex-col h-full bg-dtBgMainColor  relative">
+      <div ref={draggableRelative} className="containerE mt-[5rem]">
         <section
           ref={draggableRef1}
           className={`contentE ${pvisibility} top-[5.5rem] `}
@@ -229,7 +245,9 @@ const Public = () => {
           onMouseDown={(e) => handleMouseDown(e, 9)}
           onMouseMove={(e) => handleMouseMove(e, 9)}
         >
-          <div className={signUpVisibility}>{/* <SignUpScreen /> */}</div>
+          <div className={signUpVisibility}>
+            <SignUpScreen />
+          </div>
         </section>
       </div>
     </div>

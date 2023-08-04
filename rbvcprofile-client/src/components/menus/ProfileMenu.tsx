@@ -17,7 +17,7 @@ const ProfileMenu = () => {
   } = useVisibilityContext();
 
   return (
-    <section className="container flex flex-col max-w-[24.5rem] sm:max-w-none md:mt-[1.6rem]">
+    <section className="flex flex-col max-w-[24.5rem] sm:max-w-none md:mt-[1.6rem]">
       <div className="md:hidden">
         <DragCloseMenu
           textHeader={"profile"}

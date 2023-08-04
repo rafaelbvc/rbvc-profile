@@ -17,14 +17,14 @@ const VisitorMenu = () => {
   } = useVisibilityContext();
 
   return (
-    <section className="container flex flex-col max-w-[24.5rem] sm:max-w-none">
+    <section className="flex flex-col max-w-[24.5rem] sm:max-w-none">
       <DragCloseMenu
         textHeader={"visitors"}
         onClick={() => setVVisibilityState(" hidden")}
       />
       <menu className="flex flex-grow justify-around bg-dGrayBGScreens ">
         <DefaultBtn
-        styleBtn="ml-[-0.8rem] md:ml-0"
+          styleBtn="ml-[-0.8rem] md:ml-0"
           textBtn="Profile"
           onClick={() =>
             setUserVisibilityState(handleVisibility(userVisibility))
