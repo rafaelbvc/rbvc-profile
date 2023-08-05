@@ -59,11 +59,11 @@ textarea {
 }
 
 .containerE {
-  @apply flex  w-[100%] h-full min-h-screen bg-dtBgMainColor;
+  @apply flex flex-col w-[100%] h-full min-h-screen bg-dtBgMainColor;
 }
 
 .contentE {
-  @apply absolute justify-around  left-0 flex-row   w-screen  max-w-[28.75rem] h-[2rem] cursor-pointer;
+  @apply md:absolute justify-around left-0  mt-4 w-screen  max-w-[28.75rem] h-[2rem] cursor-pointer;
 }
 
 .pMenus {
@@ -75,7 +75,7 @@ textarea {
 }
 
 .vDraggables {
-  @apply absolute top-[9rem];
+  @apply md:absolute top-[9rem]  mt-4;
 }
 
 .vInputs {
@@ -83,7 +83,7 @@ textarea {
 }
 
 .vInputsResponsive {
-  @apply flex flex-row md:flex-col justify-between my-1;
+  @apply flex flex-row sm:flex-col justify-between my-1;
 }
 
 .vBtnStyle {

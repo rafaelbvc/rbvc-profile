@@ -36,9 +36,9 @@ const useDraggable = () => {
       element,
       isClicked: false,
       startX: 0,
-      startY: 80,
+      startY: 0,
       lastX: 0,
-      lastY: 80,
+      lastY: 0,
     });
   };
 

@@ -4,7 +4,6 @@ import DefaultBtn from "../../buttons/DefaultBtn";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 
 const SignInScreen = () => {
-  
   const { setSignInVisibilityState } = useVisibilityContext();
   // const form = useForm < IInputUserData > null;
   // const { reset, register, handleSubmit, formState, watch } = form;
@@ -14,6 +13,7 @@ const SignInScreen = () => {
     <>
       <DragCloseMenu
         textHeader="sign in"
+        changeMaxW={"max-w-[45rem]"}
         onClick={() => setSignInVisibilityState(" hidden")}
       />
       {/* onSubmit={"handleSubmit()"} */}
@@ -49,7 +49,7 @@ const SignInScreen = () => {
           //   pattern: {
           //     value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
           //     message: `The password length must be greater than or equal to 8,
-          //   must contain one or more: uppercase characters, 
+          //   must contain one or more: uppercase characters,
           //   lowercase characters,
           //   numeric values,
           //   special characters`,

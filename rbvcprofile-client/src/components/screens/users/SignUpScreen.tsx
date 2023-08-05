@@ -42,38 +42,39 @@ const SignUpScreen = () => {
   return (
     <>
       <DragCloseMenu
-        changeMaxW={"max-w-[28rem]"}
+        changeMaxW={"max-w-[45rem] mb-[0.3rem]"}
         textHeader="sign up"
         onClick={() => setSignUpVisibilityState(" hidden")}
       />
-      <div className="max-w-[28rem]">
-        <form>
-          <div className="flex flex-wrap  md:flex-nowrap mx-auto mt-2">
-            <div className="vInputsResponsive w-full mx-1 sm:ml-1">
-              <label htmlFor="firstName" className="vLabels">
-                First Name
-              </label>
-              <input
-                type="text"
-                className="vInputs"
-                value={firstNameInput}
-                onChange={(e) => setFirsNameInput(e.target.value)}
-              />
-            </div>
-            <div className="vInputsResponsive w-full mx-1 sm:mr-1">
-              <label htmlFor="phone" className="vLabels">
-                Phone
-              </label>
-              <input
-                type="text"
-                className="vInputs"
-                value={phoneInput}
-                onChange={(e) => setPhoneInput(e.target.value)}
-              />
-            </div>
-          </div>
 
-          <div className="flex flex-col max-w-[28rem] mx-1">
+      <form>
+        <div className="flex flex-wrap  sm:flex-nowrap mx-auto">
+          <div className="vInputsResponsive w-full mx-1 sm:ml-1">
+            <label htmlFor="firstName" className="vLabels">
+              First Name
+            </label>
+            <input
+              type="text"
+              className="vInputs"
+              value={firstNameInput}
+              onChange={(e) => setFirsNameInput(e.target.value)}
+            />
+          </div>
+          <div className="vInputsResponsive w-full mx-1 sm:mr-1">
+            <label htmlFor="phone" className="vLabels">
+              Phone
+            </label>
+            <input
+              type="text"
+              className="vInputs"
+              value={phoneInput}
+              onChange={(e) => setPhoneInput(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-wrap  sm:flex-nowrap mx-auto">
+          <div className="vInputsResponsive w-full mx-1 sm:ml-1">
             <label htmlFor="lastName" className="vLabels">
               Last Name
             </label>
@@ -85,7 +86,7 @@ const SignUpScreen = () => {
             />
             <div />
           </div>
-          <div className="flex flex-col mx-1 max-w-[28rem]">
+          <div className="vInputsResponsive w-full mx-1 sm:ml-1">
             <label htmlFor="email" className="vLabels">
               E-mail
             </label>
@@ -96,31 +97,31 @@ const SignUpScreen = () => {
               onChange={(e) => setEmailInput(e.target.value)}
             />
           </div>
+        </div>
 
-          <div className="flex justify-between flex-wrap md:flex-nowrap min-w-[20.5rem] max-w-[28rem] mx-1">
-            <div className="vInputsResponsive w-full">
-              <label htmlFor="password" className="vLabels">
-                Password
-              </label>
-              <input
-                type="text"
-                className="vInputs"
-                value={passwordInput}
-                onChange={(e) => setPasswordInput(e.target.value)}
-              />
-            </div>
-            <div className="vInputsResponsive w-full">
-              <label className="vLabels ">Created At</label>
-              <input
-                type="text"
-                className="vInputs text-right   text-dGolden"
-                readOnly
-                value={timeNow()}
-              />
-            </div>
+        <div className="flex flex-wrap  sm:flex-nowrap mx-auto">
+          <div className="vInputsResponsive w-full mx-1 sm:ml-1">
+            <label htmlFor="password" className="vLabels">
+              Password
+            </label>
+            <input
+              type="text"
+              className="vInputs"
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+            />
           </div>
-        </form>
-      </div>
+          <div className="vInputsResponsive w-full mx-1 sm:ml-1">
+            <label className="vLabels ">Created At</label>
+            <input
+              type="text"
+              className="vInputs text-right   text-dGolden"
+              readOnly
+              value={timeNow()}
+            />
+          </div>
+        </div>
+      </form>
       <menu className="flex justify-between mx-2">
         <DefaultBtn textBtn="reset" onClick={handleReset} />
         <DefaultBtn textBtn="submit" onClick={() => null} />
