@@ -30,7 +30,7 @@ const User = ({ userId }) => {
     return (
       <>
         <DragCloseMenu
-          changeMaxW={"max-w-[28rem]"}
+          changeMaxW={"max-w-[45rem]"}
           textHeader="Profile"
           onClick={() => setUserVisibilityState(" hidden")}
         />
@@ -57,34 +57,34 @@ const User = ({ userId }) => {
 
           <p className="text-dGolden text-end mr-1">{timeNow()}</p>
         </header>
-        <div className="max-w-[28rem]">
-          <form>
-            <div className="flex flex-wrap  md:flex-nowrap mx-auto">
-              <div className="vInputsResponsive w-full mx-1 sm:ml-1">
-                <label htmlFor="firstName" className="vLabels">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  className="vInputs"
-                  readOnly
-                  value={userId?.firstName}
-                />
-              </div>
-              <div className="vInputsResponsive w-full mx-1 sm:mr-1">
-                <label htmlFor="phone" className="vLabels">
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  className="vInputs"
-                  readOnly
-                  value={userId?.phone}
-                />
-              </div>
+        <form>
+          <div className="flex flex-wrap  sm:flex-nowrap mx-auto">
+            <div className="vInputsResponsive w-full mx-1 sm:ml-1">
+              <label htmlFor="firstName" className="vLabels">
+                First Name
+              </label>
+              <input
+                type="text"
+                className="vInputs"
+                readOnly
+                value={userId?.firstName}
+              />
             </div>
+            <div className="vInputsResponsive w-full mx-1 sm:mr-1">
+              <label htmlFor="phone" className="vLabels">
+                Phone
+              </label>
+              <input
+                type="tel"
+                className="vInputs"
+                readOnly
+                value={userId?.phone}
+              />
+            </div>
+          </div>
 
-            <div className="flex flex-col max-w-[28rem] mx-1">
+          <div className="flex flex-wrap  sm:flex-nowrap mx-auto">
+            <div className="vInputsResponsive w-full mx-1 sm:ml-1">
               <label htmlFor="lastName" className="vLabels">
                 Last Name
               </label>
@@ -94,38 +94,34 @@ const User = ({ userId }) => {
                 readOnly
                 value={userId?.lastName}
               />
-              <div />
             </div>
-            <div className="flex flex-col mx-1 max-w-[28rem]">
+
+            <div className="vInputsResponsive w-full mx-1 sm:ml-1">
               <label htmlFor="email" className="vLabels">
                 E-mail
               </label>
               <input type="email" className="vInputs" value={userId?.email} />
             </div>
+          </div>
 
-            <div className="flex justify-between flex-wrap md:flex-nowrap min-w-[20.5rem] max-w-[28rem] mx-1">
-              <div className="vInputsResponsive w-full">
-                <label htmlFor="password" className="vLabels">
-                  Password
-                </label>
-                <input
-                  type="text"
-                  className="vInputs"
-                  value={userId?.password}
-                />
-              </div>
-              <div className="vInputsResponsive w-full">
-                <label className="vLabels ">Created At</label>
-                <input
-                  type="text"
-                  className="vInputs text-right   text-dGolden"
-                  readOnly
-                  value={createdAt}
-                />
-              </div>
+          <div className="flex flex-wrap  sm:flex-nowrap mx-auto">
+            <div className="vInputsResponsive w-full mx-1 sm:ml-1">
+              <label htmlFor="password" className="vLabels">
+                Password
+              </label>
+              <input type="text" className="vInputs" value={userId?.password} />
             </div>
-          </form>
-        </div>
+            <div className="vInputsResponsive w-full mx-1 sm:ml-1">
+              <label className="vLabels ">Created At</label>
+              <input
+                type="text"
+                className="vInputs text-right   text-dGolden"
+                readOnly
+                value={createdAt}
+              />
+            </div>
+          </div>
+        </form>
         <menu className="flex justify-around">
           <DefaultBtn textBtn="edit" onClick={() => null} />
           <DefaultBtn textBtn="delete" onClick={() => null} />

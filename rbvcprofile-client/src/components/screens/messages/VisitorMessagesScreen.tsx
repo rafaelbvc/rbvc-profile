@@ -9,10 +9,11 @@ const VisitorMessagesScreen = () => {
   return (
     <>
       <DragCloseMenu
+      changeMaxW={"max-w-[45rem]"}
         textHeader="Messages"
         onClick={() => setVisitorsMessageVisibilityState(" hidden")}
       />
-      <form className="mt-1 flex flex-col ">
+      <form className="mt-1 flex flex-col px-2">
         <label className="vLabels" htmlFor="title">
           Title
         </label>

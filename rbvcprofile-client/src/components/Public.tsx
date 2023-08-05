@@ -101,38 +101,6 @@ const Public = () => {
     if (draggableRef10Current) {
       registerElement(draggableRef10Current);
     }
-    return () => {
-      if (draggableRef1Current) {
-        unregisterElement(draggableRef1Current);
-      }
-      if (draggableRef2Current) {
-        unregisterElement(draggableRef2Current);
-      }
-      if (draggableRef3Current) {
-        unregisterElement(draggableRef3Current);
-      }
-      if (draggableRef4Current) {
-        unregisterElement(draggableRef4Current);
-      }
-      if (draggableRef5Current) {
-        unregisterElement(draggableRef5Current);
-      }
-      if (draggableRef6Current) {
-        unregisterElement(draggableRef6Current);
-      }
-      if (draggableRef7Current) {
-        unregisterElement(draggableRef7Current);
-      }
-      if (draggableRef8Current) {
-        unregisterElement(draggableRef8Current);
-      }
-      if (draggableRef9Current) {
-        unregisterElement(draggableRef9Current);
-      }
-      if (draggableRef10Current) {
-        unregisterElement(draggableRef10Current);
-      }
-    };
   }, [
     registerElement,
     unregisterElement,
@@ -149,9 +117,10 @@ const Public = () => {
   ]);
 
   return (
-    <div className="flex flex-col h-full bg-dtBgMainColor  relative">
+    <div className="flex flex-col h-full bg-dtBgMainColor  sm:relative">
       <div ref={draggableRelative} className="containerE mt-[5rem]">
         <section
+          id="visitorMenu"
           ref={draggableRef1}
           className={`contentE ${pvisibility} top-[5.5rem] `}
           onMouseDown={(e) => handleMouseDown(e, 0)}
@@ -255,3 +224,36 @@ const Public = () => {
 };
 
 export default Public;
+
+// return () => {
+//   if (draggableRef1Current) {
+//     unregisterElement(draggableRef1Current);
+//   }
+//   if (draggableRef2Current) {
+//     unregisterElement(draggableRef2Current);
+//   }
+//   if (draggableRef3Current) {
+//     unregisterElement(draggableRef3Current);
+//   }
+//   if (draggableRef4Current) {
+//     unregisterElement(draggableRef4Current);
+//   }
+//   if (draggableRef5Current) {
+//     unregisterElement(draggableRef5Current);
+//   }
+//   if (draggableRef6Current) {
+//     unregisterElement(draggableRef6Current);
+//   }
+//   if (draggableRef7Current) {
+//     unregisterElement(draggableRef7Current);
+//   }
+//   if (draggableRef8Current) {
+//     unregisterElement(draggableRef8Current);
+//   }
+//   if (draggableRef9Current) {
+//     unregisterElement(draggableRef9Current);
+//   }
+//   if (draggableRef10Current) {
+//     unregisterElement(draggableRef10Current);
+//   }
+// };
