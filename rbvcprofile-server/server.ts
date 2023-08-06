@@ -15,15 +15,15 @@ import { rootRouter } from "./routes/root";
 import { messageRouter } from "./routes/messagesRoutes";
 import { authRouter } from "./routes/authRoutes";
 
-const PORT = process.env.PORT || 5030;
+const PORT_DEV = process.env.PORT_DEV || 5090;
 
-// console.log(process.env.NODE_ENV);
-
-dotenv.config();
+dotenv.config({ path: ".env" });
 
 const app = express();
 
-dbConnector();
+//process.env.DATABASE_URI_PROD
+dbConnector(process.env.DATABASE_URI_PROD);
+
 
 app.use(logger);
 
@@ -55,7 +55,7 @@ app.use(errorHandler);
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  app.listen(PORT_DEV, () => console.log(`Server running on port ${PORT_DEV}`));
 });
 
 mongoose.connection.on("error", (err) => {
