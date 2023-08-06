@@ -84,7 +84,6 @@ const SignUpScreen = () => {
               value={lastNameInput}
               onChange={(e) => setLastNameInput(e.target.value)}
             />
-            <div />
           </div>
           <div className="vInputsResponsive w-full mx-1 sm:ml-1">
             <label htmlFor="email" className="vLabels">

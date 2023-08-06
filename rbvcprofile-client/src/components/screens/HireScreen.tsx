@@ -13,13 +13,13 @@ const HireScreen = () => {
         textHeader="hire me"
         onClick={() => setHireVisibilityState(" hidden")}
       />
-      <div className="flex flex-col bg-dGrayBGScreens rounded min-w-[21rem] max-w-[39.5rem] p-2">
+      <div className="flex flex-col bg-dGrayBGScreens rounded min-w-[21rem] max-w-[29rem] p-2">
         <p className="text-right font-poppins text-dGrayTitle">
           Sorry, this area is under construction... <br /> Soon...
         </p>
         <UnderConstructionSVG widthSVG="23.5rem" />
       </div>
-      <FooterBar />
+      <FooterBar footerStyle="w-[29rem]"/>
     </section>
   );
 };
