@@ -34,4 +34,4 @@
 
 ## I will implement TESTS, For this project i will make the Architeture, End to End, Functional tests after the deploy, whrong side of the community couse pessonal time issues.
 
-# I hope you enjoy and leave me an message at the GetStarted are on visitors menu!!!
+# I hope you enjoy and leave me an message at the GetStarted menu!!!
