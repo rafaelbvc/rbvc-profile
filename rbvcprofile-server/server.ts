@@ -15,7 +15,9 @@ import { rootRouter } from "./routes/root";
 import { messageRouter } from "./routes/messagesRoutes";
 import { authRouter } from "./routes/authRoutes";
 
-const PORT_DEV = process.env.PORT_DEV || 5090;
+const PORT_DEV = process.env.PORT_DEV ? Number(process.env.PORT_DEV) : 5090;
+
+console.log(PORT_DEV);
 
 dotenv.config({ path: ".env" });
 
@@ -23,7 +25,6 @@ const app = express();
 
 //process.env.DATABASE_URI_PROD
 dbConnector(process.env.DATABASE_URI_PROD);
-
 
 app.use(logger);
 
