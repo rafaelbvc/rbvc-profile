@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /olds
+/src/components/screens/auth
 
 # testing
 /coverage
