@@ -8,7 +8,7 @@
     "start": "node ./build/server.js",
     "dev": "nodemon server",
     "tetst": "exit 1",
-    "build": "tsc typescript",
+    "build": "npx typescript",
     "build-project": "tsc"
   },
   "keywords": [],
