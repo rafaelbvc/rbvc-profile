@@ -6,10 +6,12 @@
     "moduleResolution": "node",
     "allowJs": true,
     "resolveJsonModule": true,
+    "declaration": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "outDir": "./build",
   },
-  "include": ["*.ts"],
+  "include": ["*"],
   // "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }

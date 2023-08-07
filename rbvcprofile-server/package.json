@@ -9,7 +9,7 @@
     "dev": "nodemon server",
     "tetst": "exit 1",
     "build": "npx typescript",
-    "build-project": "tsc"
+    "build-project": "npx tsc"
   },
   "keywords": [],
   "dependencies": {
