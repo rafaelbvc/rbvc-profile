@@ -16,18 +16,18 @@
 #   rbvcprofile-mongo-db-bkp:
 
 
-version: '3.1'
+# version: '3.1'
 
-services:
-  rbvcprofile-server:
-    container_name: rbvcprofile-server
-    restart: always
-    build:
-      context: "./"
-      dockerfile: Dockerfile
+# services:
+#   rbvcprofile-server:
+#     container_name: rbvcprofile-server
+#     restart: always
+#     build:
+#       context: "./"
+#       dockerfile: Dockerfile
 
-    volumes:
-      - .:./app
+#     volumes:
+#       - .:./app
     
-    ports:
-      - "5030:5030"
+#     ports:
+#       - "5030:5030"
