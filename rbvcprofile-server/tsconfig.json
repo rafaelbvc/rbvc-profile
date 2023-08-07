@@ -9,9 +9,10 @@
     "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./build",
+    "outDir": "./build"
   },
-  "include": ["*"],
+  "include": ["*", "src/server.ts"],
   // "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "extends": "./tsconfig.paths.json"
 }
