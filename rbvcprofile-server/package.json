@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node ./build/server.js",
     "dev": "nodemon server",
-    "build": "tsc"
+    "tetst": "exit 1",
+    "build": "npx tsc"
   },
   "keywords": [],
   "dependencies": {
