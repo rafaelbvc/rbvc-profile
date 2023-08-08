@@ -24,7 +24,7 @@ dotenv.config({ path: ".env" });
 const app = express();
 
 //process.env.DATABASE_URI_PROD
-dbConnector(process.env.DATABASE_URI_PROD);
+dbConnector();
 
 app.use(logger);
 
