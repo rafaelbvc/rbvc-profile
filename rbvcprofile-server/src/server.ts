@@ -5,8 +5,8 @@ import express from "express";
 import logger from "./middleware/logger";
 import logEvents from "./middleware/logEvents";
 import errorHandler from "./middleware/errorHandler";
-import cookieParser from "cookie-parser";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import corsOptions from "./config/corsOptions";
 import dbConnector from "./config/dbConnection";
 import mongoose from "mongoose";
@@ -17,13 +17,10 @@ import { authRouter } from "./routes/authRoutes";
 
 const PORT_DEV = process.env.PORT_DEV ? Number(process.env.PORT_DEV) : 5090;
 
-console.log(PORT_DEV);
-
-dotenv.config({ path: ".env" });
+dotenv.config();
 
 const app = express();
 
-//process.env.DATABASE_URI_PROD
 dbConnector();
 
 app.use(logger);
