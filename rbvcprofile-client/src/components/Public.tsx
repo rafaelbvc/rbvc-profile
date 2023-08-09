@@ -122,6 +122,11 @@ const Public = () => {
         the page is under construction, some features may not work or are
         offline, sorry for the inconvenience
       </p>
+      <p className="hidden md:flex pMessageErrorInputs mx-auto">
+        the entire application is designed to be responsive, with breakpoints
+        carefully considered to ensure optimal display across various devices.
+        I've followed the mobile-first principle in designing the architecture.
+      </p>
       <div ref={draggableRelative} className="containerE mt-[5rem]">
         <section
           id="visitorMenu"
