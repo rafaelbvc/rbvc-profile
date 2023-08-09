@@ -25,6 +25,7 @@ const SignInScreen = () => {
           type="text"
           className="vInputs"
           id="emailSignIn"
+          onChange={() => null}
           // {...register("email", {
           //   pattern: {
           //     value:
@@ -45,6 +46,7 @@ const SignInScreen = () => {
           type="text"
           className="vInputs"
           id="passwordSignIn"
+          onChange={() => null}
           // {...register("password", {
           //   pattern: {
           //     value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,

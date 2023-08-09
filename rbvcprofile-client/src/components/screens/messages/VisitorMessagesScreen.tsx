@@ -9,7 +9,7 @@ const VisitorMessagesScreen = () => {
   return (
     <>
       <DragCloseMenu
-      changeMaxW={"max-w-[45rem]"}
+        changeMaxW={"max-w-[45rem]"}
         textHeader="Messages"
         onClick={() => setVisitorsMessageVisibilityState(" hidden")}
       />
@@ -21,6 +21,7 @@ const VisitorMessagesScreen = () => {
           id="title"
           className="px-1 mb-1text-base border-1 border-dGoldenAlpha rounded min-w-[21rem]"
           type="text"
+          onChange={() => null}
         />
         <label className="vLabels" htmlFor="message">
           Message
@@ -31,6 +32,7 @@ const VisitorMessagesScreen = () => {
           maxLength={5000}
           rows={10}
           spellCheck={true}
+          onChange={() => null}
         />
       </form>
       <menu className="flex justify-between mx-2">
