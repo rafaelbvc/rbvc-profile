@@ -1,5 +1,4 @@
 node_modules
 logs
 .env
-olds
-dist
+build
