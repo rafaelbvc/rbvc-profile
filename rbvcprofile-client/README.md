@@ -1,37 +1,52 @@
-# This project was made to represents my proifolium as Profile.
+# Portfolio Showcase Project
 
-### I tried to inovate the UI making the screens to be dragglable.
+Welcome to my portfolio showcase project! This project is a representation of my professional portfolio.
 
-### The whole app is responsive, all break points was reached, minimal screen width resolution (340px), with the architeture respecting the mobile first principle.
+## Introduction
 
-### PS: Auth routes is under contruction, acess level, Json Web Token and persistence the acess token.
+I've aimed to innovate the user interface by making the screens draggable, enhancing the user experience.
 
-### PS: I will refactor the whole code to best pratices... With Clean Code principle.
+The entire application is designed to be responsive, with breakpoints carefully considered to ensure optimal display across various devices. I've followed the mobile-first principle in designing the architecture.
 
-## Technologies and Tools:
+Please note that authentication routes are currently under construction. I'm implementing access control, JSON Web Tokens, and access token persistence.
+
+I plan to refactor the code according to best practices, adhering to the Clean Code principles.
+
+## Technologies and Tools
+
+This project utilizes a range of technologies and tools, including:
 
 - ReactJS
 - NodeJS
 - TypeScript
 - TailwindCSS
-- MongoDB Local
-- MongoDB Atlas
+- MongoDB (Local and Atlas)
 - Docker
-- CI/CD at Netlify
-- CI/CD at Heroku
-- Postman for tests
-- Redux Toolkit / Query
+- Continuous Integration/Continuous Deployment (CI/CD) with Netlify and Heroku
+- Postman for testing
+- Redux Toolkit / Query for state management
 
-## API Routes:
+## API Routes
 
-- /users - GET / POST / PATH / DELETE
-- /messagess - GET / POST / PATH / DELETE
-- /auth - POST - On the way
-- /auth/refresh - GET - On the way
-- /auth/logout - POST - On the way
+- `/users`: GET / POST / PUT / DELETE
+- `/messages`: GET / POST / PUT / DELETE
+- `/auth`: POST (Under development)
+- `/auth/refresh`: GET (Under development)
+- `/auth/logout`: POST (Under development)
 
-\*\* The main page is public... Context to disable components to acess and auth level
+Please note that the main page is public. I've implemented context to restrict component access based on authentication level.
 
-## I will implement TESTS, For this project i will make the Architeture, End to End, Functional tests after the deploy, whrong side of the community couse pessonal time issues.
+## Future Plans
 
-# I hope you enjoy and leave me an message at the GetStarted menu!!!
+I'm planning to implement testing for this project. Once I have the time available, I'll work on the following types of tests:
+- Architecture Testing
+- End-to-End Testing
+- Functional Testing
+
+These tests will be carried out after deployment, as currently, personal time constraints prevent me from addressing this aspect.
+
+## Get in Touch
+
+I hope you enjoy exploring my portfolio showcase! Feel free to leave me a message in the GetStarted menu.
+
+Thank you!

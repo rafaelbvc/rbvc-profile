@@ -118,6 +118,10 @@ const Public = () => {
 
   return (
     <div className="flex flex-col h-full bg-dtBgMainColor  sm:relative">
+      <p className="pMessageErrorInputs mx-auto mt-[5rem]">
+        the page is under construction, some features may not work or are
+        offline, sorry for the inconvenience
+      </p>
       <div ref={draggableRelative} className="containerE mt-[5rem]">
         <section
           id="visitorMenu"
