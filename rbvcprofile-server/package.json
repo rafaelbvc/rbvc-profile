@@ -6,9 +6,9 @@
   "author": "Rafael Vendramini",
   "scripts": {
     "start": "node ./build/server.js",
-    "dev": "nodemon server",
+    "dev": "nodemon ./src/server",
     "tetst": "exit 1",
-    "build": "tsc"
+    "build": "yarn install && tsc"
   },
   "keywords": [],
   "dependencies": {
