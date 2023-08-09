@@ -30,7 +30,7 @@
 - /auth/refresh - GET - On the way
 - /auth/logout - POST - On the way
 
-\*\* The main page is public... Context to disble components to acess and auth level
+\*\* The main page is public... Context to disable components to acess and auth level
 
 ## I will implement TESTS, For this project i will make the Architeture, End to End, Functional tests after the deploy, whrong side of the community couse pessonal time issues.
 
