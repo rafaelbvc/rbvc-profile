@@ -14,25 +14,38 @@ const ContactScreen = () => {
   return (
     <>
       <DragCloseMenu
+        dragCloseMenuStyle={"mb-2"}
+        changeMaxW={"max-w-[29rem]"}
         textHeader={"contact"}
         onClick={() => setContactVisibilityState(" hidden")}
       />
-      <div className="container flex flex-col bg-dGrayBGScreens  rounded justify-between min-w-[21rem] max-w-[39.5rem] p-1 px-4 gap-1">
-        <div className="flex items-center    justify-between">
+      <div className="flex flex-col bg-dGrayBGScreens  rounded justify-between min-w-[21rem] max-w-[39.5rem] p-1 px-4 gap-2">
+        <a
+          className="flex items-center    justify-between"
+          href="https://www.youtube.com/@rafaelvendramini2598"
+        >
           <YoutubeLogo width="1.5rem " className="w-[2rem] self-center" />
 
-          <p className="font-poppins   w-[11.25rem] text-start">ToDo</p>
+          <p className="font-poppins   w-[11.25rem] text-start">
+            @rafaelvendramini2598
+          </p>
           <p className="font-poppins  text-dGolden w-[4.1rem] text-right">
             Youtube
           </p>
-        </div>
-        <div className="flex items-center    justify-between">
+        </a>
+        <a
+          className="flex items-center    justify-between"
+          href="https://discord.com/channels/1137311403305349130/1137311404207112295 "
+          target="_blank"
+        >
           <DiscordLogo width="1.5rem " className="w-[2rem] self-center" />
-          <p className="font-poppins  w-[11.25rem] text-start">ToDo</p>
+          <p className="font-poppins  w-[11.25rem] text-start">
+            rafaelvendramini
+          </p>
           <p className="font-poppins text-dGolden w-[4.1rem] text-right">
             Discord
           </p>
-        </div>
+        </a>
 
         <a
           href="https://api.whatsapp.com/send?phone=1599825428"
@@ -86,7 +99,7 @@ const ContactScreen = () => {
           </p>
         </div>
       </div>
-      <FooterBar />
+      <FooterBar footerStyle="mt-2" />
     </>
   );
 };

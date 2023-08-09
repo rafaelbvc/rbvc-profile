@@ -3,9 +3,9 @@ module.exports = {
   content: ["./src/**/*.{html,js,ts,tsx,jsx}"],
   theme: {
     extend: {
-      screens: {
-        xm: "340px",
-      },
+      // screens: {
+      //   xm: "340px",
+      // },
     },
     colors: {
       dtBgMainColor: "#FCFCFF",

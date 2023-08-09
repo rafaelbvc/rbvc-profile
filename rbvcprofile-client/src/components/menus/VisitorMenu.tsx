@@ -5,29 +5,30 @@ import { handleVisibility } from "../../utils/visibilityHandler";
 
 const VisitorMenu = () => {
   const {
-    settingsVisibility,
+    userVisibility,
     visitorsMessagesVisibility,
     signInVisibility,
     signUpVisibility,
     setVVisibilityState,
-    setSettingsVisibilityState,
+    setUserVisibilityState,
     setVisitorsMessageVisibilityState,
     setSignInVisibilityState,
     setSignUpVisibilityState,
   } = useVisibilityContext();
 
   return (
-    <section className="container flex flex-col max-w-[24.5rem] sm:max-w-none">
+    <section>
       <DragCloseMenu
+        changeMaxW={"max-w-[29rem]"}
         textHeader={"visitors"}
         onClick={() => setVVisibilityState(" hidden")}
       />
       <menu className="flex flex-grow justify-around bg-dGrayBGScreens ">
         <DefaultBtn
-        styleBtn="ml-[-0.8rem] md:ml-0"
-          textBtn="Settings"
+          styleBtn="ml-[-0.8rem] md:ml-0"
+          textBtn="Profile"
           onClick={() =>
-            setSettingsVisibilityState(handleVisibility(settingsVisibility))
+            setUserVisibilityState(handleVisibility(userVisibility))
           }
         />
         <DefaultBtn

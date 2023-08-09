@@ -10,6 +10,6 @@ RUN yarn install
 
 COPY . .
 
-EXPOSE 5030
+EXPOSE 5090
 
 CMD ["yarn", "run", "dev"]

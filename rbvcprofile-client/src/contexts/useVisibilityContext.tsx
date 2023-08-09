@@ -8,7 +8,7 @@ interface IVisibilityContext {
   contactVisibility: string;
   portifolioVisibility: string;
   hireVisibility: string;
-  settingsVisibility: string;
+  userVisibility: string;
   visitorsMessagesVisibility: string;
   signInVisibility: string;
   signUpVisibility: string;
@@ -19,7 +19,7 @@ interface IVisibilityContext {
   setContactVisibilityState: (contactVisibility: string) => void;
   setPortifolioVisibilityState: (portifolioVisibility: string) => void;
   setHireVisibilityState: (hireVisibility: string) => void;
-  setSettingsVisibilityState: (settingsVisibility: string) => void;
+  setUserVisibilityState: (userVisibility: string) => void;
   setVisitorsMessageVisibilityState: (
     visitorsMessagesVisibility: string
   ) => void;
@@ -37,18 +37,17 @@ export const VisibilityContext = createContext({} as IVisibilityContext);
 export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
   const [vvisibility, setVVisibility] = useState<string>(" hidden");
   const [pvisibility, setPVisibility] = useState<string>(" hidden");
-  const [aboutVisibility, setAboutVisibility] = useState<string>(" hidden");
+  const [aboutVisibility, setAboutVisibility] = useState<string>(" ");
   const [contactVisibility, setContactVisibility] = useState<string>(" hidden");
   const [portifolioVisibility, setPortifolioVisibility] =
     useState<string>(" hidden");
   const [hireVisibility, setHireVisibility] = useState<string>(" hidden");
-  const [settingsVisibility, setSettingsVisibility] =
-    useState<string>(" hidden");
+  const [userVisibility, setUserVisibility] = useState<string>(" hidden");
   const [visitorsMessagesVisibility, setVisitorsMessagesVisibility] =
     useState<string>(" hidden");
   const [signInVisibility, setSignInVisibility] = useState<string>(" hidden");
   const [signUpVisibility, setSignUpVisibility] = useState<string>(" hidden");
-  const [pdfVisibility, setPdfVisibility] = useState<string>( " hidden")
+  const [pdfVisibility, setPdfVisibility] = useState<string>(" hidden");
 
   function setVVisibilityState(vvisibility: string) {
     setVVisibility(vvisibility);
@@ -74,8 +73,8 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
     setHireVisibility(hireVisibility);
   }
 
-  function setSettingsVisibilityState(settingsVisibility: string) {
-    setSettingsVisibility(settingsVisibility);
+  function setUserVisibilityState(userVisibility: string) {
+    setUserVisibility(userVisibility);
   }
   function setVisitorsMessageVisibilityState(
     visitorsMessagesVisibility: string
@@ -88,7 +87,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
   function setSignUpVisibilityState(signUpVisibility: string) {
     setSignUpVisibility(signUpVisibility);
   }
-  function setPdfVisibilityState(pdfVisibility: string){
+  function setPdfVisibilityState(pdfVisibility: string) {
     setPdfVisibility(pdfVisibility);
   }
 
@@ -101,7 +100,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         contactVisibility,
         portifolioVisibility,
         hireVisibility,
-        settingsVisibility,
+        userVisibility,
         visitorsMessagesVisibility,
         signInVisibility,
         signUpVisibility,
@@ -112,7 +111,7 @@ export const VisibilityProvider = ({ children }: IVisibilityProvider) => {
         setContactVisibilityState,
         setPortifolioVisibilityState,
         setHireVisibilityState,
-        setSettingsVisibilityState,
+        setUserVisibilityState,
         setVisitorsMessageVisibilityState,
         setSignInVisibilityState,
         setSignUpVisibilityState,

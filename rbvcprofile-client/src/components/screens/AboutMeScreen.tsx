@@ -1,9 +1,4 @@
-import {
-  ForwardRefRenderFunction,
-  forwardRef,
-  useCallback,
-  useState,
-} from "react";
+import { ForwardRefRenderFunction, forwardRef, useState } from "react";
 import DragCloseMenu from "../menus/DragCloseMenu";
 import PhotoMyProfileA from "./aboutMePhotos/PhotoMyProfileA.jpg";
 import MongoDBLogo from "../svg/MongoDBLogo";
@@ -25,20 +20,18 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
 
   const [bigIMG, setBigIMG] = useState<boolean>(false);
 
-  const handleBigImg = useCallback(
-    (v: boolean) => {
-      if (v) {
-        setBigIMG(false);
-      } else {
-        return setBigIMG(true);
-      }
-    },
-    [bigIMG]
-  );
+  const handleBigImg = (v: boolean) => {
+    if (v) {
+      setBigIMG(false);
+    } else {
+      return setBigIMG(true);
+    }
+  };
 
   return (
-    <div ref={ref} className="container ">
+    <div ref={ref}>
       <DragCloseMenu
+        changeMaxW={"max-w-[45rem]"}
         textHeader="about"
         onClick={() => setAboutVisibilityState(" hidden")}
       />
@@ -77,7 +70,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
               <p className="  text-dGolden font-bold">&nbsp; Developer</p>
             </title>
             <section>
-              <p className="text-justify  mt-2 pl-2 ">
+              <p className="text-justify  mt-2 px-1 ">
                 As a ReactJS, NodeJS and Next, Full-stack developer, I have a
                 strong background in building full-fledged web applications.
                 With advanced knowledge in React, I can create interactive and
@@ -103,9 +96,9 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
               <p className="  text-dGolden font-bold">&nbsp; Experience</p>
             </title>
             <section>
-              <p className="text-justify justify-end mt-2 pl-2">
+              <p className="text-justify justify-end mt-2 px-1">
                 RBVC Soluções Tecnológicas Freelance Web Developer | May 2023 -
-                Present (1 month)
+                Present (present)
                 <br /> • Web development using agile methodology
                 <br /> • Proficient in ReactJS, React Native, NextJS, NodeJS,
                 and FullStack <br />• Knowledge of SQL and NoSQL databases
@@ -116,7 +109,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
           </div>
         </div>
         <section>
-          <p className="text-justify justify-end mt-2 pl-2 whitespace-normal">
+          <p className="text-justify justify-end mt-2 px-1 whitespace-normal">
             MeuCompromisso Fullstack & Mobile Developer | May 2022 - May 2023 (1
             year 1 month)
             <br />• Front-end development using ReactJS and React Native
@@ -131,7 +124,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
         </section>
         <FooterBar />
         <section>
-          <p className="text-justify justify-end mt-2 pl-2">
+          <p className="text-justify justify-end mt-2 px-1 whitespace-normal">
             Cadmus Soluções em TI Software Developer | November 2021 - April
             2022 (6 months)
             <br />• Java development using SpringBoot
@@ -142,7 +135,7 @@ const AboutMeScreen: ForwardRefRenderFunction<HTMLDivElement> = (
         </section>
         <FooterBar />
         <div>
-          <p className="text-justify justify-end mt-2 pl-2">
+          <p className="text-justify justify-end mt-2 px-1 whitespace-normal">
             Autonomous February 2015 - April 2018 (3 years 3 months)
             <br />• Banner design
             <br />• Creation of starter sites and digital banners
