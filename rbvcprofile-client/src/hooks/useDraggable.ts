@@ -35,7 +35,7 @@ const useDraggable = () => {
     elements.current.push({
       element,
       isClicked: false,
-      startX: 0,
+      startX: 80,
       startY: 0,
       lastX: 0,
       lastY: 0,
