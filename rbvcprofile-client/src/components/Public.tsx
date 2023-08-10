@@ -131,7 +131,7 @@ const Public = () => {
         <section
           id="visitorMenu"
           ref={draggableRef1}
-          className={`contentE ${pvisibility} top-[5.5rem] `}
+          className={`contentE ${pvisibility} top-[5.5rem] z-10`}
           onMouseDown={(e) => handleMouseDown(e, 0)}
           onMouseMove={(e) => handleMouseMove(e, 0)}
         >
@@ -140,7 +140,9 @@ const Public = () => {
         <section
           ref={draggableRef2}
           className={`contentE ${vvisibility} ${
-            pvisibility === " hidden" ? "top-[5.5rem]" : "top-[8.5rem]"
+            pvisibility === " hidden"
+              ? "top-[5.5rem] z-10"
+              : "top-[8.5rem] z-10"
           }`}
           onMouseDown={(e) => handleMouseDown(e, 1)}
           onMouseMove={(e) => handleMouseMove(e, 1)}
