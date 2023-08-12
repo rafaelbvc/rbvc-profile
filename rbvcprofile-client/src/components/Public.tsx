@@ -27,9 +27,9 @@ const Public = () => {
   } = useVisibilityContext();
 
   const draggableRelative = useRef<HTMLDivElement>(null);
-  const draggableRef1 = useRef<HTMLDivElement>(null);
-  const draggableRef2 = useRef<HTMLDivElement>(null);
-  const draggableRef3 = useRef<HTMLDivElement>(null);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+  const visitorMenuRef = useRef<HTMLDivElement>(null);
+  const aboutMeRef = useRef<HTMLDivElement>(null);
   const draggableRef4 = useRef<HTMLDivElement>(null);
   const draggableRef5 = useRef<HTMLDivElement>(null);
   const draggableRef6 = useRef<HTMLDivElement>(null);
@@ -46,23 +46,11 @@ const Public = () => {
   } = useDraggable();
 
   useLayoutEffect(() => {
-    if (
-      !draggableRef1 ||
-      !draggableRef2 ||
-      !draggableRef3 ||
-      !draggableRef4 ||
-      !draggableRef5 ||
-      !draggableRef6 ||
-      !draggableRef7 ||
-      !draggableRef8 ||
-      !draggableRef9 ||
-      !draggableRef10
-    )
-      return;
+    if (!aboutMeRef) return;
 
-    const draggableRef1Current = draggableRef1.current;
-    const draggableRef2Current = draggableRef2.current;
-    const draggableRef3Current = draggableRef3.current;
+    const draggableRef1Current = profileMenuRef.current;
+    const draggableRef2Current = visitorMenuRef.current;
+    const draggableRef3Current = aboutMeRef.current;
     const draggableRef4Current = draggableRef4.current;
     const draggableRef5Current = draggableRef5.current;
     const draggableRef6Current = draggableRef6.current;
@@ -104,9 +92,9 @@ const Public = () => {
   }, [
     registerElement,
     unregisterElement,
-    draggableRef1,
-    draggableRef2,
-    draggableRef3,
+    profileMenuRef,
+    visitorMenuRef,
+    aboutMeRef,
     draggableRef4,
     draggableRef5,
     draggableRef6,
@@ -130,7 +118,7 @@ const Public = () => {
       <div ref={draggableRelative} className="containerE mt-[5rem]">
         <section
           id="visitorMenu"
-          ref={draggableRef1}
+          ref={profileMenuRef}
           className={`contentE ${pvisibility} top-[5.5rem] z-10`}
           onMouseDown={(e) => handleMouseDown(e, 0)}
           onMouseMove={(e) => handleMouseMove(e, 0)}
@@ -138,7 +126,7 @@ const Public = () => {
           <ProfileMenu />
         </section>
         <section
-          ref={draggableRef2}
+          ref={visitorMenuRef}
           className={`contentE ${vvisibility} ${
             pvisibility === " hidden"
               ? "top-[5.5rem] z-10"
@@ -150,7 +138,7 @@ const Public = () => {
           <VisitorMenu />
         </section>
         <section
-          ref={draggableRef3}
+          ref={aboutMeRef}
           className={`vDraggables`}
           onMouseDown={(e) => handleMouseDown(e, 2)}
           onMouseMove={(e) => handleMouseMove(e, 2)}
