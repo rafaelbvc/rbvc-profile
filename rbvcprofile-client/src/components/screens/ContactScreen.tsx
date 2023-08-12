@@ -22,7 +22,7 @@ const ContactScreen = () => {
       <div className="flex flex-col bg-dGrayBGScreens  rounded justify-between min-w-[21rem] max-w-[39.5rem] p-1 px-4 gap-2">
         <a
           className="flex items-center    justify-between"
-          href="https://www.youtube.com/@rafaelvendramini2598"
+          href="https://www.youtube.com/@rafaelvendramini2598" target="_blank"
         >
           <YoutubeLogo width="1.5rem " className="w-[2rem] self-center" />
 

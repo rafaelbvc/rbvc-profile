@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 const useDraggable = () => {
   const elements = useRef([]);
 
-  const handleMouseDown = (e, index:any) => {
+  const handleMouseDown = (e, index: any) => {
     elements.current[index].isClicked = true;
     elements.current[index].startX = e.clientX;
     elements.current[index].startY = e.clientY;
@@ -35,7 +35,7 @@ const useDraggable = () => {
     elements.current.push({
       element,
       isClicked: false,
-      startX: 80,
+      startX: 0,
       startY: 0,
       lastX: 0,
       lastY: 0,
