@@ -38,7 +38,7 @@ Please note that the main page is public. I've implemented context to restrict c
 
 ## Future Plans
 
-I'm planning to implement testing for this project. Once I have the time available, I'll work on the following types of tests:
+I'm planning to implement tests for this project. For this project for personal reasons I will do it after publishing tests for different browsers:
 - Architecture Testing
 - End-to-End Testing
 - Functional Testing

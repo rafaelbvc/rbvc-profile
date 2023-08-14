@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import CircleLoader from "../../loadingSpinners/CircleLoader";
 import User from "./User";
 import { useGetUsersQuery } from "./usersApiSlice";
@@ -17,22 +18,28 @@ const ShowUser = () => {
 
   let content: JSX.Element;
 
-  if (isLoading) {
-    content = <CircleLoader isLoading={isLoading} />;
-  }
-  if (isError) {
-    content = <p>{error?.data?.message}</p>;
-  }
+  const handleContent = () => {
+    if (isLoading) {
+      content = <CircleLoader isLoading={isLoading} />;
+    }
+    if (isError) {
+      content = <p>{error?.data?.message}</p>;
+    }
 
-  if (isSuccess) {
-    const { entities } = users;
+    if (isSuccess) {
+      const { entities } = users;
 
-    const userId = entities["64cefc01fbffa3b6dcbdbc88"];
+      const userId = entities["64cefc01fbffa3b6dcbdbc88"];
 
-    content = <User key={userId} userId={userId} />;
+      content = <User key={userId} userId={userId} />;
 
-    // content = ids.map((ids) => <User key={ids} userId={ids} />);
-  }
+      // content = ids.map((ids) => <User key={ids} userId={ids} />);
+    }
+  };
+
+  useEffect(() => {
+    handleContent();
+  }, [isLoading, users, isError]);
 
   return content;
 };

@@ -1,53 +1,48 @@
 import { useEffect, useRef } from "react";
 
 const useDraggable = () => {
-  const elements = useRef([]);
+  const elements = useRef<any[]>([]);
 
-  const handleMouseDown = (e, index:any) => {
+  const handleMouseDown = (e: React.MouseEvent<HTMLElement>, index: number) => {
     elements.current[index].isClicked = true;
     elements.current[index].startX = e.clientX;
     elements.current[index].startY = e.clientY;
   };
 
-  const handleMouseUp = (index: any) => {
+  const handleMouseUp = (index: number) => {
     elements.current[index].isClicked = false;
-    elements.current[index].lastX = elements.current[index].element.offsetLeft;
-    elements.current[index].lastY = elements.current[index].element.offsetTop;
   };
 
-  const handleMouseMove = (e, index: any) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>, index: number) => {
     if (!elements.current[index].isClicked) return;
 
-    const nextX =
-      e.clientX -
-      elements.current[index].startX +
-      elements.current[index].lastX;
-    const nextY =
-      e.clientY -
-      elements.current[index].startY +
-      elements.current[index].lastY;
+    const deltaX = e.clientX - elements.current[index].startX;
+    const deltaY = e.clientY - elements.current[index].startY;
 
-    elements.current[index].element.style.top = `${nextY}px`;
-    elements.current[index].element.style.left = `${nextX}px`;
+    const nextX = elements.current[index].lastX + deltaX;
+    const nextY = elements.current[index].lastY + deltaY;
+
+    elements.current[
+      index
+    ].element.style.transform = `translate(${nextX}px, ${nextY}px)`;
+
+    elements.current[index].lastX = nextX;
+    elements.current[index].lastY = nextY;
+
+    elements.current[index].startX = e.clientX;
+    elements.current[index].startY = e.clientY;
   };
 
-  const registerElement = (element) => {
-    elements.current.push({
-      element,
-      isClicked: false,
-      startX: 0,
-      startY: 0,
-      lastX: 0,
-      lastY: 0,
-    });
-  };
-
-  const unregisterElement = (element) => {
-    const index = elements.current.findIndex(
-      (item) => item.element === element
-    );
-    if (index !== -1) {
-      elements.current.splice(index, 1);
+  const registerElement = (element: HTMLElement | null) => {
+    if (element) {
+      elements.current.push({
+        element,
+        isClicked: false,
+        startX: 0,
+        startY: 0,
+        lastX: element.offsetLeft,
+        lastY: element.offsetTop,
+      });
     }
   };
 
@@ -58,18 +53,24 @@ const useDraggable = () => {
       });
     };
 
+    const handleGlobalMouseMove = (e: MouseEvent) => {
+      elements.current.forEach((item, index) => {
+        handleMouseMove(e as any, index);
+      });
+    };
+
     window.addEventListener("mouseup", handleGlobalMouseUp);
+    window.addEventListener("mousemove", handleGlobalMouseMove);
 
     return () => {
       window.removeEventListener("mouseup", handleGlobalMouseUp);
+      window.removeEventListener("mousemove", handleGlobalMouseMove);
     };
   }, []);
 
   return {
     registerElement,
-    unregisterElement,
     handleMouseDown,
-    handleMouseMove,
   };
 };
 
