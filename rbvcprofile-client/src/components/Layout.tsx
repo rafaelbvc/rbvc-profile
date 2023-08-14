@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "./navBar/NavBar";
 import { useEffect, useState } from "react";
+import NavBar from "./navBar/NavBar";
 
 const Layout = () => {
   const [swidth] = useState<number>(window.innerWidth);
