@@ -4,16 +4,15 @@ import FooterBar from "../../FooterBar";
 import DefaultBtn from "../../buttons/DefaultBtn";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 import ShowUser from "../users/ShowUser";
-import { useAddNewMessageMutation } from "./messagesApiSlice";
+import { messagesApiSlice, useAddNewMessageMutation } from "./messagesApiSlice";
+
 
 const VisitorMessagesScreen = () => {
   const { setVisitorsMessageVisibilityState } = useVisibilityContext();
 
   const { content, isLoading, isError, error } = ShowUser();
 
-  console.log(content, "ffffrom Messagesfff");
-
-  const { addNewMessage } = useAddNewMessageMutation();
+  const [addNewMessage] = useAddNewMessageMutation();
 
   const [message, setMessage] = useState({
     user: "",
@@ -24,6 +23,7 @@ const VisitorMessagesScreen = () => {
   const createMessage = async (e) => {
     e.preventDefault();
     console.log(message, "glotididi");
+    // await store.dispatch(addNewMessage(message));
     await addNewMessage(message);
   };
 
@@ -34,7 +34,7 @@ const VisitorMessagesScreen = () => {
         textHeader="Messages"
         onClick={() => setVisitorsMessageVisibilityState(" hidden")}
       />
-      <form className="mt-1 flex flex-col px-2" onSubmit={() => createMessage}>
+      <form className="mt-1 flex flex-col px-2" onSubmit={createMessage}>
         <label className="vLabels" htmlFor="title">
           Title
         </label>
@@ -43,7 +43,7 @@ const VisitorMessagesScreen = () => {
           className="px-1 mb-1text-base border-1 border-dGoldenAlpha rounded min-w-[21rem]"
           type="text"
           onChange={(e) =>
-            setMessage({ ...message, user: "", title: e.target.value })
+            setMessage({ ...message, user: content?.id, title: e.target.value })
           }
           value={message.title}
         />
