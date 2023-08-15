@@ -13,7 +13,7 @@ const SignInScreen = () => {
     <>
       <DragCloseMenu
         textHeader="sign in"
-        changeMaxW={"max-w-[45rem]"}
+        changeMaxW={"max-w-[32rem]"}
         onClick={() => setSignInVisibilityState(" hidden")}
       />
       {/* onSubmit={"handleSubmit()"} */}

@@ -7,50 +7,37 @@ import {
   activeStatusIconColorHandler,
   activeStatusTextHandler,
 } from "../../../utils/activeStatusHandler";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatISODate, timeNow } from "../../../utils/handleTime";
 import FooterBar from "../../FooterBar";
 import DefaultBtn from "../../buttons/DefaultBtn";
 import ShowUser from "./ShowUser";
-import { useGetUsersQuery } from "./usersApiSlice";
-import { IUsers } from "../../../interfaces/IUsers";
 import CircleLoader from "../../loadingSpinners/CircleLoader";
 
 const User = () => {
-  const content = ShowUser();
+  const { content, isLoading, isError, error } = ShowUser();
 
-  const { user } = useGetUsersQuery("usersList", {
-    selectFromResult: ({ data }) => ({
-      user: data?.entities[content[0]],
-    }),
-  });
-  
-  const [userData, setUserData] = useState<IUsers>();
   const { setUserVisibilityState } = useVisibilityContext();
   const [activeStatus, setActiveStatus] = useState<boolean>(true);
-  const createdAt = formatISODate(userData ? userData?.createdAt : timeNow());
+  const createdAt = formatISODate(content ? content?.createdAt : timeNow());
 
   const handleActiveStatus = () => {
-    const active = userData?.active;
+    const active = content?.active;
     if (active !== undefined && active) {
       setActiveStatus(active);
     }
     setActiveStatus(false);
   };
 
-  useEffect(() => {
-    if (content[0]?.length === 24) {
-      setUserData(user);
-    }
-  }, [content]);
-
-  if (content === "isLoading") {
-    return <CircleLoader isLoading={true} />;
-  } else if (content[0]?.length === 24) {
+  if (isLoading) {
+    return <CircleLoader isLoading={isLoading} />;
+  } else if (isError) {
+    return <p>{`Sory we got the ${error} issue...`}</p>;
+  } else {
     return (
       <>
         <DragCloseMenu
-          changeMaxW={"max-w-[45rem]"}
+          changeMaxW={"max-w-[32rem]"}
           textHeader="Profile"
           onClick={() => setUserVisibilityState(" hidden")}
         />
@@ -87,7 +74,7 @@ const User = () => {
                 type="text"
                 className="vInputs"
                 readOnly
-                value={userData?.firstName}
+                value={content?.firstName}
               />
             </div>
             <div className="vInputsResponsive w-full mx-1 sm:mr-1">
@@ -98,7 +85,7 @@ const User = () => {
                 type="tel"
                 className="vInputs"
                 readOnly
-                value={userData?.phone}
+                value={content?.phone}
               />
             </div>
           </div>
@@ -112,7 +99,7 @@ const User = () => {
                 type="text"
                 className="vInputs"
                 readOnly
-                value={userData?.lastName}
+                value={content?.lastName}
               />
             </div>
 
@@ -120,7 +107,7 @@ const User = () => {
               <label htmlFor="email" className="vLabels">
                 E-mail
               </label>
-              <input type="email" className="vInputs" value={userData?.email} />
+              <input type="email" className="vInputs" value={content?.email} />
             </div>
           </div>
 
@@ -132,7 +119,7 @@ const User = () => {
               <input
                 type="text"
                 className="vInputs"
-                value={userData?.password}
+                value={content?.password}
               />
             </div>
             <div className="vInputsResponsive w-full mx-1 sm:ml-1">
@@ -154,8 +141,6 @@ const User = () => {
         <FooterBar />
       </>
     );
-  } else {
-    return <p>{content}</p>;
   }
 };
 

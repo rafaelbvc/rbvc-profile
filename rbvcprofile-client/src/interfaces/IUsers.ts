@@ -8,4 +8,5 @@ export interface IUsers {
   active?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  stateData?: string;
 }
