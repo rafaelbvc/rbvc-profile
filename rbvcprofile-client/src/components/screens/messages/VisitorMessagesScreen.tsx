@@ -10,11 +10,16 @@ const VisitorMessagesScreen = () => {
   const { setVisitorsMessageVisibilityState } = useVisibilityContext();
 
   // const { data: users } = useGetUsersQuery();
-  // const { entities } = users;
-  // const userId = entities["64cefc01fbffa3b6dcbdbc88"];
+  // const userId = users.entities["64c9c781a78ced4a937dcb82"];
 
-  const [addMessage] = useAddNewMessageMutation();
-  const [message, setMessage] = useState({
+  // let arr = [];
+
+  // const userId = users.ids.map((ids) => arr.push(ids));
+
+  // console.log(arr, "fffffffffffffffffffffffffff'");
+
+  const { addMessage } = useAddNewMessageMutation();
+  const [messageState, setMessage] = useState({
     user: "",
     title: "",
     message: "",
@@ -22,7 +27,7 @@ const VisitorMessagesScreen = () => {
 
   const handleNewMessage = (e) => {
     setMessage({
-      ...message,
+      ...messageState,
       user: "",
       title: e.target.title,
       message: e.target.message,
@@ -31,9 +36,11 @@ const VisitorMessagesScreen = () => {
 
   const createMessage = async (e) => {
     e.preventDefault();
-    console.log(message, "glotididi");
-    // await addMessage(message);
+    console.log(messageState, "glotididi");
+    await addMessage(messageState);
   };
+
+  console.log(messageState, "ffff");
 
   return (
     <>
@@ -51,7 +58,7 @@ const VisitorMessagesScreen = () => {
           className="px-1 mb-1text-base border-1 border-dGoldenAlpha rounded min-w-[21rem]"
           type="text"
           onChange={handleNewMessage}
-          value={message.title}
+          value={messageState.title}
           required
         />
         <label className="vLabels" htmlFor="message">
@@ -64,7 +71,7 @@ const VisitorMessagesScreen = () => {
           rows={10}
           spellCheck={true}
           onChange={handleNewMessage}
-          value={message.message}
+          value={messageState.message}
           required
         />
         <menu className="flex justify-between mx-2">
