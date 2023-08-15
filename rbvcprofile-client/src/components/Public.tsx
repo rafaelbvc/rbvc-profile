@@ -11,6 +11,7 @@ import SignInScreen from "./screens/users/SignInScreen";
 import AboutMeContainer from "./AboutMeContainer";
 import HireScreen from "./screens/HireScreen";
 import SignUpScreen from "./screens/users/SignUpScreen";
+import User from "./screens/users/User";
 
 const Public = () => {
   const {
@@ -60,6 +61,8 @@ const Public = () => {
       }
     });
   }, [registerElement]);
+
+  console.log(userVisibility, "user visibility");
 
   return (
     <div className="flex flex-col h-full bg-dtBgMainColor  sm:relative">
@@ -133,7 +136,7 @@ const Public = () => {
           onMouseDown={(e) => handleMouseDown(e, 6)}
         >
           <div className={userVisibility}>
-            <ShowUser />
+            <User />
           </div>
         </section>
         <section

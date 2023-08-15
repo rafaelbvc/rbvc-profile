@@ -16,30 +16,19 @@ const ShowUser = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  let content: JSX.Element;
+  let content: string;
 
-  const handleContent = () => {
-    if (isLoading) {
-      content = <CircleLoader isLoading={isLoading} />;
-    }
-    if (isError) {
-      content = <p>{error?.data?.message}</p>;
-    }
+  if (isLoading) {
+    content = "isLoading";
+  }
+  if (isError) {
+    content = "Sory we got an issue";
+  }
 
-    if (isSuccess) {
-      const { entities } = users;
-
-      const userId = entities["64cefc01fbffa3b6dcbdbc88"];
-
-      content = <User key={userId} userId={userId} />;
-
-      // content = ids.map((ids) => <User key={ids} userId={ids} />);
-    }
-  };
-
-  useEffect(() => {
-    handleContent();
-  }, [isLoading, users, isError]);
+  if (isSuccess) {
+    content = users?.ids;
+  }
+  console.log(content, "werjwefuiojwei");
 
   return content;
 };
