@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import CircleLoader from "../../loadingSpinners/CircleLoader";
-import User from "./User";
+import { useCallback, useEffect } from "react";
+import { IUsers } from "../../../interfaces/IUsers";
 import { useGetUsersQuery } from "./usersApiSlice";
 
 const ShowUser = () => {
@@ -16,21 +15,23 @@ const ShowUser = () => {
     refetchOnMountOrArgChange: true,
   });
 
-  let content: string;
+  let content: IUsers;
 
   if (isLoading) {
-    content = "isLoading";
+    content = { stateData: "isLoading" };
   }
   if (isError) {
-    content = "Sory we got an issue";
+    content = { stateData: "isError" };
   }
 
   if (isSuccess) {
-    content = users?.ids;
-  }
-  console.log(content, "werjwefuiojwei");
+    const ids = users?.ids;
 
-  return content;
+    const entities = users?.entities[ids[0]];
+    content = entities;
+  }
+
+  return { content, isLoading, isError, error };
 };
 
 export default ShowUser;

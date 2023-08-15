@@ -42,7 +42,7 @@ const SignUpScreen = () => {
   return (
     <>
       <DragCloseMenu
-        changeMaxW={"max-w-[45rem] mb-[0.3rem]"}
+        changeMaxW={"max-w-[32rem] mb-[0.3rem]"}
         textHeader="sign up"
         onClick={() => setSignUpVisibilityState(" hidden")}
       />

@@ -62,8 +62,6 @@ const Public = () => {
     });
   }, [registerElement]);
 
-  console.log(userVisibility, "user visibility");
-
   return (
     <div className="flex flex-col h-full bg-dtBgMainColor  sm:relative">
       <p className="pMessageErrorInputs mx-auto mt-[5rem]">

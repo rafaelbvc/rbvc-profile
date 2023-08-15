@@ -3,53 +3,38 @@ import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
 import FooterBar from "../../FooterBar";
 import DefaultBtn from "../../buttons/DefaultBtn";
 import DragCloseMenu from "../../menus/DragCloseMenu";
+import ShowUser from "../users/ShowUser";
 import { useAddNewMessageMutation } from "./messagesApiSlice";
-import { useGetUsersQuery } from "../users/usersApiSlice";
 
 const VisitorMessagesScreen = () => {
   const { setVisitorsMessageVisibilityState } = useVisibilityContext();
 
-  // const { data: users } = useGetUsersQuery();
-  // const userId = users.entities["64c9c781a78ced4a937dcb82"];
+  const { content, isLoading, isError, error } = ShowUser();
 
-  // let arr = [];
+  console.log(content, "ffffrom Messagesfff");
 
-  // const userId = users.ids.map((ids) => arr.push(ids));
+  const { addNewMessage } = useAddNewMessageMutation();
 
-  // console.log(arr, "fffffffffffffffffffffffffff'");
-
-  const { addMessage } = useAddNewMessageMutation();
-  const [messageState, setMessage] = useState({
+  const [message, setMessage] = useState({
     user: "",
     title: "",
     message: "",
   });
 
-  const handleNewMessage = (e) => {
-    setMessage({
-      ...messageState,
-      user: "",
-      title: e.target.title,
-      message: e.target.message,
-    });
-  };
-
   const createMessage = async (e) => {
     e.preventDefault();
-    console.log(messageState, "glotididi");
-    await addMessage(messageState);
+    console.log(message, "glotididi");
+    await addNewMessage(message);
   };
-
-  console.log(messageState, "ffff");
 
   return (
     <>
       <DragCloseMenu
-        changeMaxW={"max-w-[45rem]"}
+        changeMaxW={"max-w-[32rem]"}
         textHeader="Messages"
         onClick={() => setVisitorsMessageVisibilityState(" hidden")}
       />
-      <form className="mt-1 flex flex-col px-2" onSubmit={createMessage}>
+      <form className="mt-1 flex flex-col px-2" onSubmit={() => createMessage}>
         <label className="vLabels" htmlFor="title">
           Title
         </label>
@@ -57,9 +42,10 @@ const VisitorMessagesScreen = () => {
           name="title"
           className="px-1 mb-1text-base border-1 border-dGoldenAlpha rounded min-w-[21rem]"
           type="text"
-          onChange={handleNewMessage}
-          value={messageState.title}
-          required
+          onChange={(e) =>
+            setMessage({ ...message, user: "", title: e.target.value })
+          }
+          value={message.title}
         />
         <label className="vLabels" htmlFor="message">
           Message
@@ -70,10 +56,10 @@ const VisitorMessagesScreen = () => {
           maxLength={5000}
           rows={10}
           spellCheck={true}
-          onChange={handleNewMessage}
-          value={messageState.message}
-          required
+          onChange={(e) => setMessage({ ...message, message: e.target.value })}
+          value={message.message}
         />
+        <input type="submit" />
         <menu className="flex justify-between mx-2">
           <DefaultBtn textBtn={"clear"} />
           <DefaultBtn textBtn={"board"} />
