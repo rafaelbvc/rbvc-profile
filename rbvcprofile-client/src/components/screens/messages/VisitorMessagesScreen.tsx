@@ -4,13 +4,12 @@ import FooterBar from "../../FooterBar";
 import DefaultBtn from "../../buttons/DefaultBtn";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 import ShowUser from "../users/ShowUser";
-import { messagesApiSlice, useAddNewMessageMutation } from "./messagesApiSlice";
-
+import { useAddNewMessageMutation } from "./messagesApiSlice";
 
 const VisitorMessagesScreen = () => {
   const { setVisitorsMessageVisibilityState } = useVisibilityContext();
 
-  const { content, isLoading, isError, error } = ShowUser();
+  const { content } = ShowUser();
 
   const [addNewMessage] = useAddNewMessageMutation();
 
@@ -22,9 +21,8 @@ const VisitorMessagesScreen = () => {
 
   const createMessage = async (e) => {
     e.preventDefault();
-    console.log(message, "glotididi");
-    // await store.dispatch(addNewMessage(message));
     await addNewMessage(message);
+    setMessage({ ...message, title: "", message: "" });
   };
 
   return (
@@ -59,11 +57,10 @@ const VisitorMessagesScreen = () => {
           onChange={(e) => setMessage({ ...message, message: e.target.value })}
           value={message.message}
         />
-        <input type="submit" />
         <menu className="flex justify-between mx-2">
           <DefaultBtn textBtn={"clear"} />
           <DefaultBtn textBtn={"board"} />
-          <DefaultBtn textBtn={"create"} type="submit" />
+          <DefaultBtn textBtn={"create"} typeBtn="submit" />
         </menu>
       </form>
       <FooterBar />

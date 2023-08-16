@@ -4,40 +4,35 @@ import FooterBar from "../../FooterBar";
 import DefaultBtn from "../../buttons/DefaultBtn";
 import DragCloseMenu from "../../menus/DragCloseMenu";
 import { useVisibilityContext } from "../../../contexts/useVisibilityContext";
+import { IUsers } from "../../../interfaces/IUsers";
+import { useAddNewUserMutation } from "./usersApiSlice";
 
 const SignUpScreen = () => {
-  const [firstNameInput, setFirsNameInput] = useState<string>("");
-  const [lastNameInput, setLastNameInput] = useState<string>("");
-  const [phoneInput, setPhoneInput] = useState<string>("");
-  const [emailInput, setEmailInput] = useState<string>("");
-  const [passwordInput, setPasswordInput] = useState<string>("");
+  const { setSignUpVisibilityState } = useVisibilityContext();
+  const [addNewUser] = useAddNewUserMutation();
+  const [newUser, setNewUser] = useState<IUsers>({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    password: "",
+    email: "",
+  });
 
-  // const [formData, setFormData] = useState<IUsers>({
-  //   firstName: "",
-  //   lastName: "",
-  //   password: "",
-  //   phone: "",
-  //   email: "",
-  // });
-
-  // const handleSubmit = () => {
-  //   useSubmit();
-  // };
+  const createUser = async (e) => {
+    e.preventDefault();
+    await addNewUser(newUser);
+    setNewUser({
+      ...newUser,
+      firstName: "",
+      lastName: "",
+      phone: "",
+      password: "",
+      email: "",
+    });
+  };
 
   // const validateForm = () => {
   //   const firstNameValidation = new RegExp("/([A-z],{3,14})/")
-
-  // }
-
-  const handleReset = () => {
-    setFirsNameInput("");
-    setLastNameInput("");
-    setPhoneInput("");
-    setEmailInput("");
-    setPasswordInput("");
-  };
-
-  const { setSignUpVisibilityState } = useVisibilityContext();
 
   return (
     <>
@@ -47,7 +42,7 @@ const SignUpScreen = () => {
         onClick={() => setSignUpVisibilityState(" hidden")}
       />
 
-      <form>
+      <form onSubmit={createUser}>
         <div className="flex flex-wrap  sm:flex-nowrap mx-auto">
           <div className="vInputsResponsive w-full mx-1 sm:ml-1">
             <label htmlFor="firstName" className="vLabels">
@@ -56,8 +51,10 @@ const SignUpScreen = () => {
             <input
               type="text"
               className="vInputs"
-              value={firstNameInput}
-              onChange={(e) => setFirsNameInput(e.target.value)}
+              value={newUser?.firstName}
+              onChange={(e) =>
+                setNewUser({ ...newUser, firstName: e.target.value })
+              }
             />
           </div>
           <div className="vInputsResponsive w-full mx-1 sm:mr-1">
@@ -67,8 +64,10 @@ const SignUpScreen = () => {
             <input
               type="text"
               className="vInputs"
-              value={phoneInput}
-              onChange={(e) => setPhoneInput(e.target.value)}
+              value={newUser?.phone}
+              onChange={(e) =>
+                setNewUser({ ...newUser, phone: e.target.value })
+              }
             />
           </div>
         </div>
@@ -81,8 +80,10 @@ const SignUpScreen = () => {
             <input
               type="text"
               className="vInputs"
-              value={lastNameInput}
-              onChange={(e) => setLastNameInput(e.target.value)}
+              value={newUser?.lastName}
+              onChange={(e) =>
+                setNewUser({ ...newUser, lastName: e.target.value })
+              }
             />
           </div>
           <div className="vInputsResponsive w-full mx-1 sm:ml-1">
@@ -92,8 +93,10 @@ const SignUpScreen = () => {
             <input
               type="email"
               className="vInputs"
-              value={emailInput}
-              onChange={(e) => setEmailInput(e.target.value)}
+              value={newUser?.email}
+              onChange={(e) =>
+                setNewUser({ ...newUser, email: e.target.value })
+              }
             />
           </div>
         </div>
@@ -106,8 +109,10 @@ const SignUpScreen = () => {
             <input
               type="text"
               className="vInputs"
-              value={passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
+              value={newUser?.password}
+              onChange={(e) =>
+                setNewUser({ ...newUser, password: e.target.value })
+              }
             />
           </div>
           <div className="vInputsResponsive w-full mx-1 sm:ml-1">
@@ -120,11 +125,12 @@ const SignUpScreen = () => {
             />
           </div>
         </div>
+
+        <menu className="flex justify-between mx-2">
+          <DefaultBtn textBtn="reset" onClick={""} />
+          <DefaultBtn textBtn="submit" typeBtn="submit" />
+        </menu>
       </form>
-      <menu className="flex justify-between mx-2">
-        <DefaultBtn textBtn="reset" onClick={handleReset} />
-        <DefaultBtn textBtn="submit" onClick={() => null} />
-      </menu>
       <FooterBar />
     </>
   );

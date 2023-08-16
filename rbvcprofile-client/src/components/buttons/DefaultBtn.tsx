@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 // }
 
 const DefaultBtn = (props) => {
-  const { textBtn, onClick, hiddenBtn, styleBtn } = props;
+  const { textBtn, onClick, hiddenBtn, styleBtn, typeBtn } = props;
 
   const [isVisible, setVisible] = useState(false);
 
@@ -18,7 +18,7 @@ const DefaultBtn = (props) => {
 
   return (
     <button
-      type="button"
+      type={typeBtn}
       className={`w-[3.4rem] md:w-[4rem] lg:w-[5.5rem] p-1 mx-3 ${styleBtn}`}
       onClick={onClick}
       hidden={isVisible}
