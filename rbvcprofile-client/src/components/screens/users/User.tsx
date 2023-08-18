@@ -107,7 +107,12 @@ const User = () => {
               <label htmlFor="email" className="vLabels">
                 E-mail
               </label>
-              <input type="email" className="vInputs" value={content?.email} />
+              <input
+                type="email"
+                className="vInputs"
+                readOnly
+                value={content?.email}
+              />
             </div>
           </div>
 
@@ -119,6 +124,7 @@ const User = () => {
               <input
                 type="text"
                 className="vInputs"
+                readOnly
                 value={content?.password}
               />
             </div>

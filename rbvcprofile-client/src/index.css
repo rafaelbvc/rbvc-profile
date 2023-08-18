@@ -99,5 +99,5 @@ textarea {
 }
 
 .pMessageErrorInputs {
-  @apply text-dGolden whitespace-normal pl-2 text-justify;
+  @apply text-dGolden whitespace-normal pl-2 text-center;
 }
