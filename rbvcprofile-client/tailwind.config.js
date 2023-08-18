@@ -18,6 +18,7 @@ module.exports = {
       dGoldenAlpha: "rgb(202,170,108, 0.4)",
       sActive: "#00FF00",
       sInactive: "#FF0000",
+      eRed: "#FF0000"
     },
     fontFamily: {
       roboto: ["Roboto", "sans-serif"],

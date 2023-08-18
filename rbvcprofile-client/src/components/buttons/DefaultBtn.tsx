@@ -22,7 +22,7 @@ const DefaultBtn = (props) => {
       className={`w-[3.4rem] md:w-[4rem] lg:w-[5.5rem] p-1 mx-3 ${styleBtn}`}
       onClick={onClick}
       hidden={isVisible}
-      // disabled={isAuth}
+      // disabled={disable}
     >
       <span className="vBtnStyle">{textBtn}</span>
     </button>
